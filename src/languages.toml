@@ -1,0 +1,88 @@
+[[languages]]
+name = "asm"
+
+[[languages]]
+name = "bash"
+
+[[languages]]
+name = "c"
+
+[[languages]]
+name = "c-sharp"
+aliases = ["c#", "csharp", "cs"]
+
+[[languages]]
+name = "cpp"
+aliases = ["c++", "hpp", "h++", "cc", "hh"]
+
+[[languages]]
+name = "css"
+
+[[languages]]
+name = "go"
+aliases = ["golang"]
+
+[[languages]]
+name = "haskell"
+aliases = ["hs"]
+
+[[languages]]
+name = "html"
+aliases = ["htm"]
+
+[[languages]]
+name = "java"
+
+[[languages]]
+name = "javascript"
+aliases = ["js"]
+
+[[languages]]
+name = "json"
+
+[[languages]]
+name = "julia"
+aliases = ["jl"]
+
+[[languages]]
+name = "kotlin"
+aliases = ["kt", "kts"]
+
+[[languages]]
+name = "lua"
+
+[[languages]]
+name = "ocaml"
+path = "languages/ocaml/interface"
+aliases = ["ml"]
+
+[[languages]]
+name = "php"
+
+[[languages]]
+name = "python"
+aliases = ["py"]
+
+[[languages]]
+name = "regex"
+
+[[languages]]
+name = "ruby"
+aliases = ["rb"]
+
+[[languages]]
+name = "rust"
+aliases = ["rs"]
+
+[[languages]]
+name = "scala"
+
+[[languages]]
+name = "sql"
+
+[[languages]]
+name = "toml"
+
+[[languages]]
+name = "typescript"
+path = "languages/typescript/typescript"
