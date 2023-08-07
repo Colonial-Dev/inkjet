@@ -1,88 +1,146 @@
 [[languages]]
 name = "asm"
+repo = "https://github.com/rush-rs/tree-sitter-asm"
 
 [[languages]]
 name = "bash"
+repo = "https://github.com/tree-sitter/tree-sitter-bash"
 
 [[languages]]
 name = "c"
+repo = "https://github.com/tree-sitter/tree-sitter-c"
 
 [[languages]]
 name = "c-sharp"
+repo = "https://github.com/tree-sitter/tree-sitter-c-sharp"
 aliases = ["c#", "csharp", "cs"]
 
 [[languages]]
 name = "cpp"
+repo = "https://github.com/tree-sitter/tree-sitter-cpp"
 aliases = ["c++", "hpp", "h++", "cc", "hh"]
 
 [[languages]]
 name = "css"
+repo = "https://github.com/tree-sitter/tree-sitter-css"
 
 [[languages]]
 name = "go"
+repo = "https://github.com/tree-sitter/tree-sitter-go"
 aliases = ["golang"]
 
 [[languages]]
 name = "haskell"
+repo = "https://github.com/tree-sitter/tree-sitter-haskell"
 aliases = ["hs"]
 
 [[languages]]
 name = "html"
+repo = "https://github.com/tree-sitter/tree-sitter-html"
 aliases = ["htm"]
 
 [[languages]]
 name = "java"
+repo = "https://github.com/tree-sitter/tree-sitter-java"
 
 [[languages]]
 name = "javascript"
+repo = "https://github.com/tree-sitter/tree-sitter-javascript"
 aliases = ["js"]
 
 [[languages]]
 name = "json"
+repo = "https://github.com/tree-sitter/tree-sitter-json"
 
 [[languages]]
 name = "julia"
+repo = "https://github.com/tree-sitter/tree-sitter-julia"
+command = "git clone https://github.com/tree-sitter/tree-sitter-julia languages/temp/julia && mkdir languages/temp/julia/queries"
 aliases = ["jl"]
 
 [[languages]]
 name = "kotlin"
+repo = "https://github.com/fwcd/tree-sitter-kotlin"
 aliases = ["kt", "kts"]
 
 [[languages]]
 name = "lua"
+repo = "https://github.com/tjdevries/tree-sitter-lua"
 
 [[languages]]
 name = "ocaml"
-path = "languages/ocaml/interface"
+repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
+command = '''
+set -euxo pipefail &&
+git clone https://github.com/tree-sitter/tree-sitter-ocaml languages/temp/ocaml &&
+cp languages/temp/ocaml/common/scanner.h languages/temp/ocaml/ocaml/src && 
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml/ocaml/src/scanner.c &&
+cp -r languages/temp/ocaml/ocaml/src languages/temp/ocaml
+'''
 aliases = ["ml"]
 
 [[languages]]
+name = "ocaml_interface"
+repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
+command = '''
+set -euxo pipefail &&
+git clone https://github.com/tree-sitter/tree-sitter-ocaml languages/temp/ocaml_interface &&
+cp languages/temp/ocaml_interface/common/scanner.h languages/temp/ocaml_interface/interface/src && 
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml_interface/interface/src/scanner.c &&
+cp -r languages/temp/ocaml_interface/interface/src languages/temp/ocaml_interface
+'''
+aliases = ["mli"]
+
+[[languages]]
 name = "php"
+repo = "https://github.com/tree-sitter/tree-sitter-php"
 
 [[languages]]
 name = "python"
+repo = "https://github.com/tree-sitter/tree-sitter-python"
 aliases = ["py"]
 
 [[languages]]
 name = "regex"
+repo = "https://github.com/tree-sitter/tree-sitter-regex"
 
 [[languages]]
 name = "ruby"
+repo = "https://github.com/tree-sitter/tree-sitter-ruby"
 aliases = ["rb"]
 
 [[languages]]
 name = "rust"
+repo = "https://github.com/tree-sitter/tree-sitter-rust"
 aliases = ["rs"]
 
 [[languages]]
 name = "scala"
+repo = "https://github.com/tree-sitter/tree-sitter-scala"
 
 [[languages]]
 name = "sql"
+repo = "https://github.com/DerekStride/tree-sitter-sql/tree/gh-pages"
+command = "git clone --branch gh-pages https://github.com/DerekStride/tree-sitter-sql languages/temp/sql"
+
+# Doesn't check in parser.c (extremely unhelpful)
+# [[languages]]
+# name = "swift"
+# repo = "https://github.com/alex-pinkus/tree-sitter-swift"
 
 [[languages]]
 name = "toml"
+repo = "https://github.com/tree-sitter/tree-sitter-toml"
 
 [[languages]]
 name = "typescript"
-path = "languages/typescript/typescript"
+repo = "https://github.com/tree-sitter/tree-sitter-typescript"
+# Disgusting hack to extract the non-TSX grammar, relocate the scanner header and patch the source file appropriately
+# Words cannot describe how much I hate this, but it works
+command = '''
+set -euxo pipefail &&
+git clone https://github.com/tree-sitter/tree-sitter-typescript languages/temp/typescript &&
+cp languages/temp/typescript/common/scanner.h languages/temp/typescript/typescript/src && 
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/typescript/typescript/src/scanner.c &&
+cp -r languages/temp/typescript/typescript/src languages/temp/typescript/
+'''
