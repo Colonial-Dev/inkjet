@@ -69,6 +69,9 @@ fn download_langs(languages: &[Language]) -> Result<()> {
                 &CopyOptions::new().content_only(true)
             )?;
 
+            let _ = fs::remove_file(format!("languages/{}/src/grammar.json", lang.name));
+            let _ = fs::remove_file(format!("languages/{}/src/node-types.json", lang.name));
+
             println!("Finished extracting {}.", lang.name);
 
             Ok(())
