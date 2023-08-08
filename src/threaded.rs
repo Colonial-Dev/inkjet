@@ -1,0 +1,1 @@
+//! Experimental types and tools for hassle-free multithreaded highlighting.
