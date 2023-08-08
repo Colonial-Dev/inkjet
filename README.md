@@ -1,5 +1,5 @@
 <h1 align="center">Inkjet</h1>
-<h3 align="center">A batteries-included syntax highlighting library for Rust, based on the <code>tree-sitter</code> library.</h3>
+<h3 align="center">A batteries-included syntax highlighting library for Rust, based on <code>tree-sitter</code>.</h3>
 <p align="center">
 <img src=".github/logo.png" width="256">
 </p>
@@ -22,6 +22,7 @@
 Inkjet comes bundled with support for over sixty languages, and it's easy to add more - see the FAQ section.
 
 - Ada
+- Assembly (generic)
 - Bash
 - BibTeX
 - Blueprint

@@ -37,6 +37,39 @@ pub mod ada {
     }
 }
 
+pub mod asm {
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    extern "C" {
+        pub fn tree_sitter_asm() -> Language;
+    }
+
+    pub fn config() -> HighlightConfiguration {
+        HighlightConfiguration::new(
+            unsafe { tree_sitter_asm() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).unwrap()
+    }
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/asm/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_asm() })
+                .expect("Grammar should load successfully.");
+        }
+    }
+}
+
 pub mod bash {
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
@@ -1986,6 +2019,7 @@ pub mod zig {
 
 pub enum Language {
     Ada,
+    GenericAsm,
     Bash,
     Bibtex,
     Blueprint,
@@ -2051,6 +2085,7 @@ impl Language {
     pub fn from_token(token: &str) -> Option<Self> {
         match token {
             "ada" => Some(Self::Ada),
+            "asm" => Some(Self::GenericAsm),
             "bash" => Some(Self::Bash),
             "bibtex" => Some(Self::Bibtex),
             "bib" => Some(Self::Bibtex),
@@ -2159,7 +2194,6 @@ impl Language {
             "typescript" => Some(Self::Typescript),
             "ts" => Some(Self::Typescript),
             "x86asm" => Some(Self::X86asm),
-            "asm" => Some(Self::X86asm),
             "x86" => Some(Self::X86asm),
             "yaml" => Some(Self::Yaml),
             "wgsl" => Some(Self::Wgsl),
@@ -2171,6 +2205,7 @@ impl Language {
     pub(crate) fn config(&self) -> HighlightConfiguration {
         match *self {
             Self::Ada => ada::config(),
+            Self::GenericAsm => asm::config(),
             Self::Bash => bash::config(),
             Self::Bibtex => bibtex::config(),
             Self::Blueprint => blueprint::config(),

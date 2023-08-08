@@ -3,6 +3,15 @@ name = "ada"
 repo = "https://github.com/briot/tree-sitter-ada"
 
 [[languages]]
+name = "asm"
+pretty_name = "GenericAsm"
+repo = "https://github.com/rush-rs/tree-sitter-asm"
+command = '''
+git clone https://github.com/rush-rs/tree-sitter-asm languages/temp/asm &&
+cp languages/temp/asm/queries/asm/* languages/temp/asm/queries
+'''
+
+[[languages]]
 name = "bash"
 repo = "https://github.com/tree-sitter/tree-sitter-bash"
 
@@ -295,7 +304,7 @@ aliases = ["ts"]
 [[languages]]
 name = "x86asm"
 repo = "https://github.com/bearcove/tree-sitter-x86asm"
-aliases = ["asm", "x86"]
+aliases = ["x86"]
 
 [[languages]]
 name = "yaml"
