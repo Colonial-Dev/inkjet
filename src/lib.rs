@@ -4,9 +4,7 @@
 //! 
 //! Otherwise, you can get started by...
 
-#![doc(
-    html_logo_url = "https://raw.githubusercontent.com/SomewhereOutInSpace/inkjet/master/.github/logo.png"
-)]
+#![doc(html_logo_url = "https://raw.githubusercontent.com/SomewhereOutInSpace/inkjet/master/.github/logo.png")]
 #![warn(clippy::all)]
 
 mod error;
@@ -71,7 +69,7 @@ impl Highlighter {
         Ok(())
     }
 
-    pub fn highlight_to_string<F, O>(
+    pub fn highlight_to_string<F>(
         &mut self,
         lang: Language,
         formatter: &F,
@@ -106,7 +104,7 @@ impl Clone for Highlighter {
             .copied()
             .map(|lang| {
                 let mut config = lang.config();
-                config.configure(&HIGHLIGHT_NAMES);
+                config.configure(HIGHLIGHT_NAMES);
 
                 (lang, config)
             })
@@ -134,19 +132,19 @@ impl HighlighterBuilder {
     }
 
     /// Add a language to the builder.
-    pub fn language(&mut self, lang: Language) -> &mut Self {
+    pub fn language(mut self, lang: Language) -> Self {
         self.languages.insert(lang);
         self
     }
 
     /// Add a set of languages to the builder.
-    pub fn languages(&mut self, langs: impl Iterator<Item = Language>) -> &mut Self {
+    pub fn languages(mut self, langs: impl Iterator<Item = Language>) -> Self {
         self.languages.extend(langs);
         self
     }
 
     /// Add all supported languags to the builder.
-    pub fn all_languages(&mut self) -> &mut Self {
+    pub fn all_languages(mut self) -> Self {
         todo!()
     }
 
@@ -157,7 +155,7 @@ impl HighlighterBuilder {
             .into_iter()
             .map(|lang| {
                 let mut config = lang.config();
-                config.configure(&HIGHLIGHT_NAMES);
+                config.configure(HIGHLIGHT_NAMES);
 
                 (lang, config)
             })
@@ -173,3 +171,21 @@ impl HighlighterBuilder {
 }
 
 // TODO: "easy" module/functions for quickly highlighting to HTML without having to set up a bunch of state
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn self_test() {
+        let mut hili = Highlighter::builder()
+            .language(Language::Rust)
+            .build();
+
+        hili.highlight_to_string(
+            Language::Rust,
+            &formatter::Html,
+            include_str!("lib.rs")
+        ).unwrap();
+    }
+}

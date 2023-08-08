@@ -65,6 +65,10 @@ fn download_langs(languages: &[Language]) -> Result<()> {
                 &CopyOptions::new().content_only(true),
             )?;
 
+            // Remove unneeded queries and JSON data.
+            // We discard the error because these files might not be there.
+            let _ = fs::remove_file(format!("languages/{}/queries/textobjects.scm", lang.name));
+            let _ = fs::remove_file(format!("languages/{}/queries/folds.scm", lang.name));
             let _ = fs::remove_file(format!("languages/{}/src/grammar.json", lang.name));
             let _ = fs::remove_file(format!("languages/{}/src/node-types.json", lang.name));
 
