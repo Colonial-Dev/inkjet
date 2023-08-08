@@ -1,0 +1,1913 @@
+[
+  {
+    "type": "definition",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "const",
+        "named": true
+      },
+      {
+        "type": "enum",
+        "named": true
+      },
+      {
+        "type": "interface",
+        "named": true
+      },
+      {
+        "type": "struct",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "statement",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "annotation",
+        "named": true
+      },
+      {
+        "type": "definition",
+        "named": true
+      },
+      {
+        "type": "import",
+        "named": true
+      },
+      {
+        "type": "top_level_annotation",
+        "named": true
+      },
+      {
+        "type": "unique_id_statement",
+        "named": true
+      },
+      {
+        "type": "using_directive",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_definition_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "annotation_targets",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "unique_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation_array",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "const_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation_target",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "annotation_targets",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_target",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "block_text",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "string_fragment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "boolean",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "concatenated_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "const",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_identifier",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "unique_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "const_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "const_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "const_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_text",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "concatenated_string",
+          "named": true
+        },
+        {
+          "type": "const_identifier",
+          "named": true
+        },
+        {
+          "type": "const_list",
+          "named": true
+        },
+        {
+          "type": "data",
+          "named": true
+        },
+        {
+          "type": "embedded_file",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_shorthand",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "void",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "custom_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "data",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "data_hex",
+          "named": true
+        },
+        {
+          "type": "data_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "embedded_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "enum_field",
+          "named": true
+        },
+        {
+          "type": "enum_identifier",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "unique_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "enum_member",
+          "named": true
+        },
+        {
+          "type": "field_version",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_identifier",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "field_version",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "group",
+          "named": true
+        },
+        {
+          "type": "import_path",
+          "named": true
+        },
+        {
+          "type": "interface",
+          "named": true
+        },
+        {
+          "type": "nested_enum",
+          "named": true
+        },
+        {
+          "type": "nested_struct",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "union",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "custom_type",
+          "named": true
+        },
+        {
+          "type": "list_type",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_version",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "inline_field",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "generic_identifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "custom_type",
+          "named": true
+        },
+        {
+          "type": "list_type",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "generic_parameters",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "generic_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "generics",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "generic_parameters",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "implicit_generic_parameters",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "generic_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "implicit_generics",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "implicit_generic_parameters",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "import_path",
+          "named": true
+        },
+        {
+          "type": "namespace",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import_path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "string_fragment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import_using",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "import_path",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "interface",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "enum",
+          "named": true
+        },
+        {
+          "type": "extend_type",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "interface",
+          "named": true
+        },
+        {
+          "type": "method",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "struct",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "unique_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "list_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "field_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "local_const",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_text",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "concatenated_string",
+          "named": true
+        },
+        {
+          "type": "const_identifier",
+          "named": true
+        },
+        {
+          "type": "const_list",
+          "named": true
+        },
+        {
+          "type": "data",
+          "named": true
+        },
+        {
+          "type": "embedded_file",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_shorthand",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "void",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "message",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_version",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "implicit_generics",
+          "named": true
+        },
+        {
+          "type": "method_identifier",
+          "named": true
+        },
+        {
+          "type": "method_parameters",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "return_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method_parameters",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "parameters",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "named_return_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "return_identifier",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "named_return_types",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "named_return_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "namespace",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "string_fragment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nested_enum",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "enum",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nested_struct",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "struct",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nested_union",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "union",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameters",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "primitive_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "replace_using",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "type_definition",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "return_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "named_return_types",
+          "named": true
+        },
+        {
+          "type": "unnamed_return_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "string_fragment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "unique_id",
+          "named": true
+        },
+        {
+          "type": "using_directive",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct_shorthand",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "local_const",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "top_level_annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "top_level_annotation_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "top_level_annotation_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_type_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "block_text",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "concatenated_string",
+          "named": true
+        },
+        {
+          "type": "const_identifier",
+          "named": true
+        },
+        {
+          "type": "const_list",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "data",
+          "named": true
+        },
+        {
+          "type": "embedded_file",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "namespace",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "struct_shorthand",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "void",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "union",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_version",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "union_field",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "union_field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_array",
+          "named": true
+        },
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "annotation_literal",
+          "named": true
+        },
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_identifier",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "field_version",
+          "named": true
+        },
+        {
+          "type": "generics",
+          "named": true
+        },
+        {
+          "type": "group",
+          "named": true
+        },
+        {
+          "type": "nested_union",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unique_id_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "unique_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unnamed_return_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "using_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "import_using",
+          "named": true
+        },
+        {
+          "type": "replace_using",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "$",
+    "named": false
+  },
+  {
+    "type": "$import",
+    "named": false
+  },
+  {
+    "type": "'",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "->",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "AnyPointer",
+    "named": false
+  },
+  {
+    "type": "Bool",
+    "named": false
+  },
+  {
+    "type": "Data",
+    "named": false
+  },
+  {
+    "type": "Float32",
+    "named": false
+  },
+  {
+    "type": "Float64",
+    "named": false
+  },
+  {
+    "type": "Int16",
+    "named": false
+  },
+  {
+    "type": "Int32",
+    "named": false
+  },
+  {
+    "type": "Int64",
+    "named": false
+  },
+  {
+    "type": "Int8",
+    "named": false
+  },
+  {
+    "type": "List",
+    "named": false
+  },
+  {
+    "type": "Text",
+    "named": false
+  },
+  {
+    "type": "UInt16",
+    "named": false
+  },
+  {
+    "type": "UInt32",
+    "named": false
+  },
+  {
+    "type": "UInt64",
+    "named": false
+  },
+  {
+    "type": "UInt8",
+    "named": false
+  },
+  {
+    "type": "Void",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "_type_identifier",
+    "named": true
+  },
+  {
+    "type": "`",
+    "named": false
+  },
+  {
+    "type": "annotation",
+    "named": false
+  },
+  {
+    "type": "annotation_definition_identifier",
+    "named": true
+  },
+  {
+    "type": "annotation_identifier",
+    "named": true
+  },
+  {
+    "type": "attribute",
+    "named": true
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "const",
+    "named": false
+  },
+  {
+    "type": "const_identifier",
+    "named": true
+  },
+  {
+    "type": "data_hex",
+    "named": true
+  },
+  {
+    "type": "data_string",
+    "named": true
+  },
+  {
+    "type": "embed",
+    "named": false
+  },
+  {
+    "type": "enum",
+    "named": false
+  },
+  {
+    "type": "enum_identifier",
+    "named": true
+  },
+  {
+    "type": "enum_member",
+    "named": true
+  },
+  {
+    "type": "enumerant",
+    "named": false
+  },
+  {
+    "type": "escape_sequence",
+    "named": true
+  },
+  {
+    "type": "extend_type",
+    "named": true
+  },
+  {
+    "type": "extends",
+    "named": false
+  },
+  {
+    "type": "false",
+    "named": false
+  },
+  {
+    "type": "field",
+    "named": false
+  },
+  {
+    "type": "field_identifier",
+    "named": true
+  },
+  {
+    "type": "file",
+    "named": false
+  },
+  {
+    "type": "float",
+    "named": true
+  },
+  {
+    "type": "group",
+    "named": false
+  },
+  {
+    "type": "import",
+    "named": false
+  },
+  {
+    "type": "inline_field",
+    "named": true
+  },
+  {
+    "type": "interface",
+    "named": false
+  },
+  {
+    "type": "method",
+    "named": false
+  },
+  {
+    "type": "method_identifier",
+    "named": true
+  },
+  {
+    "type": "namespace",
+    "named": false
+  },
+  {
+    "type": "number",
+    "named": true
+  },
+  {
+    "type": "param",
+    "named": false
+  },
+  {
+    "type": "param_identifier",
+    "named": true
+  },
+  {
+    "type": "property",
+    "named": true
+  },
+  {
+    "type": "return_identifier",
+    "named": true
+  },
+  {
+    "type": "string_fragment",
+    "named": true
+  },
+  {
+    "type": "struct",
+    "named": false
+  },
+  {
+    "type": "true",
+    "named": false
+  },
+  {
+    "type": "type_definition",
+    "named": true
+  },
+  {
+    "type": "type_identifier",
+    "named": true
+  },
+  {
+    "type": "union",
+    "named": false
+  },
+  {
+    "type": "unique_id",
+    "named": true
+  },
+  {
+    "type": "using",
+    "named": false
+  },
+  {
+    "type": "void",
+    "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  }
+]

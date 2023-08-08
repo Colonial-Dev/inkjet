@@ -1,14 +1,12 @@
 use std::fs::{self, File};
 use std::io::{BufWriter, Write};
 use std::path::Path;
+use std::primitive;
 use std::process::{Command, Child};
 
 use anyhow::{Result, Error};
-use fs_extra::{
-    copy_items,
-    dir::CopyOptions
-};
-
+use fs_extra::copy_items;
+use fs_extra::dir::CopyOptions;
 use phf_codegen::Map;
 use rayon::prelude::*;
 use serde::Deserialize;
@@ -32,6 +30,13 @@ fn main() -> Result<()> {
 fn download_langs(languages: &[Language]) -> Result<()> {
     fs::remove_dir_all("languages")?;
     fs::create_dir_all("languages/temp")?;
+
+    Command::new("git")
+        .arg("clone")
+        .arg("https://github.com/nvim-treesitter/nvim-treesitter")
+        .arg("languages/temp/nvim")
+        .spawn()?
+        .wait()?;
     
     languages
         .par_iter()
@@ -41,15 +46,31 @@ fn download_langs(languages: &[Language]) -> Result<()> {
         .try_for_each(|(child, lang)| -> Result<()> {
             child?.wait()?;
 
-            let from = vec![
-                format!("languages/temp/{}/src", lang.name),
-                format!("languages/temp/{}/queries", lang.name)
-            ];
+            println!("Finished downloading {}.", lang.name);
 
-            let to = format!("languages/{}", lang.name);
-            
             fs::create_dir_all(format!("languages/{}", lang.name))?;
-            copy_items(&from, to, &CopyOptions::new())?;
+            fs::create_dir_all(format!("languages/{}/queries", lang.name))?;
+            
+            copy_items(
+                &[format!("languages/temp/{}/src", lang.name)],
+                format!("languages/{}", lang.name),
+                &CopyOptions::new()
+            )?;
+            
+            let nvim_query_path = format!("languages/temp/nvim/queries/{}", lang.name);
+
+            let query_path = match Path::new(&nvim_query_path).try_exists()? {
+                false => format!("languages/temp/{}/queries", lang.name),
+                true => nvim_query_path,
+            };
+
+            copy_items(
+                &[query_path],
+                format!("languages/{}/queries", lang.name),
+                &CopyOptions::new()
+            )?;
+
+            println!("Finished extracting {}.", lang.name);
 
             Ok(())
         })?;
@@ -96,13 +117,14 @@ struct Languages {
     languages: Vec<Language>
 }
 
+
 #[derive(Debug, Deserialize)]
 struct Language {
     name: String,
     repo: String,
     #[serde(default)]
     aliases: Vec<String>,
-    command: Option<String>,
+    command: Option<String>
 }
 
 impl Language {

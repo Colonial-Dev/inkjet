@@ -64,18 +64,18 @@
 ((stable_identifier (identifier) @namespace))
 
 ((import_declaration
-  path: (identifier) @type) (#match? @type "^[A-Z]"))
-((stable_identifier (identifier) @type) (#match? @type "^[A-Z]"))
+  path: (identifier) @type) (#lua-match? @type "^[A-Z]"))
+((stable_identifier (identifier) @type) (#lua-match? @type "^[A-Z]"))
 
 (export_declaration
   path: (identifier) @namespace)
 ((stable_identifier (identifier) @namespace))
 
 ((export_declaration
-  path: (identifier) @type) (#match? @type "^[A-Z]"))
-((stable_identifier (identifier) @type) (#match? @type "^[A-Z]"))
+  path: (identifier) @type) (#lua-match? @type "^[A-Z]"))
+((stable_identifier (identifier) @type) (#lua-match? @type "^[A-Z]"))
 
-((namespace_selectors (identifier) @type) (#match? @type "^[A-Z]"))
+((namespace_selectors (identifier) @type) (#lua-match? @type "^[A-Z]"))
 
 ; method invocation
 
@@ -91,7 +91,7 @@
 
 ((call_expression
    function: (identifier) @constructor)
- (#match? @constructor "^[A-Z]"))
+ (#lua-match? @constructor "^[A-Z]"))
 
 (generic_function
   function: (identifier) @function.call)
@@ -114,7 +114,7 @@
 
 (field_expression field: (identifier) @property)
 (field_expression value: (identifier) @type
- (#match? @type "^[A-Z]"))
+ (#lua-match? @type "^[A-Z]"))
 
 (infix_expression operator: (identifier) @operator)
 (infix_expression operator: (operator_identifier) @operator)
@@ -235,25 +235,28 @@
 
 "return" @keyword.return
 
-(comment) @comment @spell
-(block_comment) @comment @spell
+[
+  (comment)
+  (block_comment)
+] @comment @spell
+
+((block_comment) @comment.documentation
+  (#lua-match? @comment.documentation "^/[*][*][^*].*[*]/$"))
 
 ;; `case` is a conditional keyword in case_block
 
 (case_block
   (case_clause ("case") @conditional))
-(indented_cases
-  (case_clause ("case") @conditional))
 
 (operator_identifier) @operator
 
-((identifier) @type (#match? @type "^[A-Z]"))
+((identifier) @type (#lua-match? @type "^[A-Z]"))
 ((identifier) @variable.builtin
- (#match? @variable.builtin "^this$"))
+ (#lua-match? @variable.builtin "^this$"))
 
 (
   (identifier) @function.builtin
-  (#match? @function.builtin "^super$")
+  (#lua-match? @function.builtin "^super$")
 )
 
 ;; Scala CLI using directives

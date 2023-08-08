@@ -1,19 +1,52 @@
 [[languages]]
-name = "asm"
-repo = "https://github.com/rush-rs/tree-sitter-asm"
+name = "ada"
+repo = "https://github.com/briot/tree-sitter-ada"
+
+[[languages]]
+name = "x86asm"
+repo = "https://github.com/bearcove/tree-sitter-x86asm"
+aliases = ["asm", "x86"]
 
 [[languages]]
 name = "bash"
 repo = "https://github.com/tree-sitter/tree-sitter-bash"
 
 [[languages]]
+name = "bibtex"
+repo = "https://github.com/latex-lsp/tree-sitter-bibtex"
+aliases = ["bib"]
+
+[[languages]]
+name = "blueprint"
+repo = "https://gitlab.com/gabmus/tree-sitter-blueprint"
+aliases = ["blp"]
+
+[[languages]]
 name = "c"
 repo = "https://github.com/tree-sitter/tree-sitter-c"
 
 [[languages]]
-name = "c-sharp"
+name = "capnp"
+repo = "https://github.com/amaanq/tree-sitter-capnp"
+
+[[languages]]
+name = "clojure"
+repo = "https://github.com/sogaiu/tree-sitter-clojure"
+aliases = ["clj", "cljc"]
+
+[[languages]]
+name = "cmake"
+repo = "https://github.com/uyha/tree-sitter-cmake"
+
+[[languages]]
+name = "c_sharp"
 repo = "https://github.com/tree-sitter/tree-sitter-c-sharp"
 aliases = ["c#", "csharp", "cs"]
+
+[[languages]]
+name = "commonlisp"
+repo = "https://github.com/theHamsta/tree-sitter-commonlisp"
+aliases = ["cl", "lisp", "common-lisp"]
 
 [[languages]]
 name = "cpp"
@@ -25,14 +58,68 @@ name = "css"
 repo = "https://github.com/tree-sitter/tree-sitter-css"
 
 [[languages]]
+name = "cue"
+repo = "https://github.com/eonpatapon/tree-sitter-cue"
+
+[[languages]]
+name = "dart"
+repo = "https://github.com/UserNobody14/tree-sitter-dart"
+
+[[languages]]
+name = "diff"
+repo = "https://github.com/the-mikedavis/tree-sitter-diff"
+
+[[languages]]
+name = "dockerfile"
+repo = "https://github.com/camdencheek/tree-sitter-dockerfile"
+aliases = ["docker"]
+
+[[languages]]
+name = "elisp"
+repo = "https://github.com/Wilfred/tree-sitter-elisp"
+aliases = ["el, emacs-lisp"]
+
+[[languages]]
+name = "elixir"
+repo = "https://github.com/elixir-lang/tree-sitter-elixir"
+aliases = ["ex", "eex", "exs", "leex"]
+
+[[languages]]
+name = "elm"
+repo = "https://github.com/elm-tooling/tree-sitter-elm"
+
+[[languages]]
+name = "erlang"
+repo = "https://github.com/WhatsApp/tree-sitter-erlang"
+aliases = ["erl", "hrl", "es", "escript"]
+
+[[languages]]
+name = "fortran"
+repo = "https://github.com/stadelmanma/tree-sitter-fortran"
+
+[[languages]]
 name = "go"
 repo = "https://github.com/tree-sitter/tree-sitter-go"
 aliases = ["golang"]
 
 [[languages]]
+name = "gdscript"
+repo = "https://github.com/PrestonKnopp/tree-sitter-gdscript"
+aliases = ["gd"]
+
+[[languages]]
+name = "glsl"
+repo = "https://github.com/theHamsta/tree-sitter-glsl"
+
+[[languages]]
 name = "haskell"
 repo = "https://github.com/tree-sitter/tree-sitter-haskell"
 aliases = ["hs"]
+
+[[language]]
+name = "hcl"
+repo = "https://github.com/MichaHoffmann/tree-sitter-hcl"
+aliases = ["terraform"]
 
 [[languages]]
 name = "html"
@@ -55,7 +142,6 @@ repo = "https://github.com/tree-sitter/tree-sitter-json"
 [[languages]]
 name = "julia"
 repo = "https://github.com/tree-sitter/tree-sitter-julia"
-command = "git clone https://github.com/tree-sitter/tree-sitter-julia languages/temp/julia && mkdir languages/temp/julia/queries"
 aliases = ["jl"]
 
 [[languages]]
@@ -64,8 +150,40 @@ repo = "https://github.com/fwcd/tree-sitter-kotlin"
 aliases = ["kt", "kts"]
 
 [[languages]]
+name = "latex"
+repo = "https://github.com/latex-lsp/tree-sitter-latex"
+aliases = ["tex"]
+
+[[languages]]
 name = "lua"
 repo = "https://github.com/tjdevries/tree-sitter-lua"
+
+[[languages]]
+name = "make"
+repo = "https://github.com/alemuller/tree-sitter-make"
+aliases = ["mk", "makefile"]
+
+[[languages]]
+name = "matlab"
+repo = "https://github.com/acristoffers/tree-sitter-matlab"
+aliases = ["m"]
+
+[[languages]]
+name = "meson"
+repo = "https://github.com/Decodetalkers/tree-sitter-meson"
+
+[[languages]]
+name = "nim"
+repo = "https://github.com/aMOPel/tree-sitter-nim"
+
+[[languages]]
+name = "nix"
+repo = "https://github.com/nix-community/tree-sitter-nix"
+
+[[languages]]
+name = "objc"
+repo = "https://github.com/jiyee/tree-sitter-objc"
+aliases = ["objective-c, objectivec, obj-c"]
 
 [[languages]]
 name = "ocaml"
@@ -92,6 +210,20 @@ cp -r languages/temp/ocaml_interface/interface/src languages/temp/ocaml_interfac
 aliases = ["mli"]
 
 [[languages]]
+name = "openscad"
+repo = "https://github.com/bollian/tree-sitter-openscad"
+aliases = ["scad"]
+
+[[languages]]
+name = "pascal"
+repo = "https://github.com/Isopod/tree-sitter-pascal"
+
+[[languages]]
+name = "perl"
+repo = "https://github.com/ganezdragon/tree-sitter-perl"
+aliases = ["pl"]
+
+[[languages]]
 name = "php"
 repo = "https://github.com/tree-sitter/tree-sitter-php"
 
@@ -99,6 +231,10 @@ repo = "https://github.com/tree-sitter/tree-sitter-php"
 name = "python"
 repo = "https://github.com/tree-sitter/tree-sitter-python"
 aliases = ["py"]
+
+[[languages]]
+name = "r"
+repo = "https://github.com/r-lib/tree-sitter-r/"
 
 [[languages]]
 name = "regex"
@@ -117,6 +253,15 @@ aliases = ["rs"]
 [[languages]]
 name = "scala"
 repo = "https://github.com/tree-sitter/tree-sitter-scala"
+
+[[languages]]
+name = "scheme"
+repo = "https://github.com/6cdh/tree-sitter-scheme"
+aliases = ["scm", "ss"]
+
+[[languages]]
+name = "scss"
+repo = "https://github.com/serenadeai/tree-sitter-scss"
 
 [[languages]]
 name = "sql"
@@ -144,3 +289,16 @@ cp languages/temp/typescript/common/scanner.h languages/temp/typescript/typescri
 sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/typescript/typescript/src/scanner.c &&
 cp -r languages/temp/typescript/typescript/src languages/temp/typescript/
 '''
+aliases = ["ts"]
+
+[[languages]]
+name = "yaml"
+repo = "https://github.com/ikatyang/tree-sitter-yaml"
+
+[[languages]]
+name = "wgsl"
+repo = "https://github.com/szebniok/tree-sitter-wgsl"
+
+[[languages]]
+name = "zig"
+repo = "https://github.com/maxxnino/tree-sitter-zig"

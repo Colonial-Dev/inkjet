@@ -1,180 +1,247 @@
-;;; Highlighting for lua
-
-;;; Builtins
 ;; Keywords
 
-[
-  (if_start)
-  (if_then)
-  (if_elseif)
-  (if_else)
-  (if_end)] @conditional
+"return" @keyword.return
 
 [
-  (for_start)
-  (for_in)
-  (for_do)
-  (for_end)] @repeat
+ "goto"
+ "in"
+ "local"
+] @keyword
 
+(break_statement) @keyword
+
+(do_statement
 [
-  (while_start)
-  (while_do)
-  (while_end)] @repeat
+  "do"
+  "end"
+] @keyword)
 
+(while_statement
 [
-  (repeat_start)
-  (repeat_until)] @repeat
+  "while"
+  "do"
+  "end"
+] @repeat)
 
+(repeat_statement
 [
-  (return_statement)
-  (module_return_statement)
-  (break_statement)] @keyword
- 
+  "repeat"
+  "until"
+] @repeat)
 
+(if_statement
+[
+  "if"
+  "elseif"
+  "else"
+  "then"
+  "end"
+] @conditional)
 
-; [
-;  "goto"
-; ] @keyword
+(elseif_statement
+[
+  "elseif"
+  "then"
+  "end"
+] @conditional)
+
+(else_statement
+[
+  "else"
+  "end"
+] @conditional)
+
+(for_statement
+[
+  "for"
+  "do"
+  "end"
+] @repeat)
+
+(function_declaration
+[
+  "function"
+  "end"
+] @keyword.function)
+
+(function_definition
+[
+  "function"
+  "end"
+] @keyword.function)
 
 ;; Operators
 
-; TODO: I think I've made a bunch of these nodes.
-;   we might be able to just use those!
-
 [
- "not"
  "and"
- "or"] @keyword.operator
+ "not"
+ "or"
+] @keyword.operator
 
 [
- "="
- "~="
- "=="
- "<="
- ">="
- "<"
- ">"
- "+"
- "-"
- "%"
- "/"
- "//"
- "*"
- "^"
- "&"
- "~"
- "|"
- ">>"
- "<<"
- ".."
- "#"]
-@operator
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  "^"
+  "#"
+  "=="
+  "~="
+  "<="
+  ">="
+  "<"
+  ">"
+  "="
+  "&"
+  "~"
+  "|"
+  "<<"
+  ">>"
+  "//"
+  ".."
+] @operator
 
+;; Punctuations
 
-
-;; Punctuation
 [
+  ";"
+  ":"
+  "::"
   ","
-  "." ] @punctuation.delimiter
+  "."
+] @punctuation.delimiter
 
 ;; Brackets
+
 [
- (left_paren)
- (right_paren)
+ "("
+ ")"
  "["
  "]"
  "{"
- "}"] @punctuation.bracket
+ "}"
+] @punctuation.bracket
 
 ;; Variables
-(identifier) @variable
-(
-  (identifier) @variable.builtin
-  (#match? @variable.builtin "self"))
 
-; (preproc_call
-;   directive: (preproc_directive) @_u
-;   argument: (_) @constant
-;   (#eq? @_u "#undef"))
+(identifier) @variable
+
+((identifier) @constant.builtin
+  (#eq? @constant.builtin "_VERSION"))
+
+((identifier) @variable.builtin
+  (#eq? @variable.builtin "self"))
+
+((identifier) @namespace.builtin
+  (#any-of? @namespace.builtin "_G" "debug" "io" "jit" "math" "os" "package" "string" "table" "utf8"))
+
+((identifier) @keyword.coroutine
+  (#eq? @keyword.coroutine "coroutine"))
+
+(variable_list
+   attribute: (attribute
+     (["<" ">"] @punctuation.bracket
+      (identifier) @attribute)))
+
+;; Labels
+
+(label_statement (identifier) @label)
+
+(goto_statement (identifier) @label)
 
 ;; Constants
-(boolean) @boolean
-(nil) @constant.builtin
-(ellipsis) @constant ;; "..."
-(local) @keyword
 
-;; Functions
-(function_call_paren) @function.bracket
+((identifier) @constant
+ (#lua-match? @constant "^[A-Z][A-Z_0-9]*$"))
+
+(vararg_expression) @constant
+
+(nil) @constant.builtin
 
 [
-  (function_start)
-  (function_end)] @keyword.function
+  (false)
+  (true)
+] @boolean
 
-(emmy_type) @type
-(emmy_literal) @string
-(emmy_parameter
- (identifier) @parameter
- description: (_)? @comment) @comment
+;; Tables
 
-(emmy_class) @comment
-(emmy_field name: (_) @property) @comment
-(emmy_function_parameter
-  name: (_) @parameter) 
+(field name: (identifier) @field)
 
-(emmy_type_dictionary_value key: (identifier) @property)
+(dot_index_expression field: (identifier) @field)
 
-(emmy_note) @comment
-(emmy_see) @comment
+(table_constructor
+[
+  "{"
+  "}"
+] @constructor)
 
-; TODO: Make the container so we can still highlight the beginning of the line
-; (emmy_eval_container) @comment
-; (_emmy_eval_container) @comment
+;; Functions
 
-(emmy_return) @comment
+(parameters (identifier) @parameter)
 
-; TODO: returns
+(function_declaration
+  name: [
+    (identifier) @function
+    (dot_index_expression
+      field: (identifier) @function)
+  ])
 
-(emmy_header) @comment
-(emmy_ignore) @comment
-(documentation_brief) @comment
+(function_declaration
+  name: (method_index_expression
+    method: (identifier) @method))
 
-(documentation_command) @comment
+(assignment_statement
+  (variable_list .
+    name: [
+      (identifier) @function
+      (dot_index_expression
+        field: (identifier) @function)
+    ])
+  (expression_list .
+    value: (function_definition)))
+
+(table_constructor
+  (field
+    name: (identifier) @function
+    value: (function_definition)))
 
 (function_call
-  [
-    ((identifier)+ @identifier . (identifier) @function.call . (function_call_paren))
-    ((identifier) @function.call.lua . (function_call_paren))])
+  name: [
+    (identifier) @function.call
+    (dot_index_expression
+      field: (identifier) @function.call)
+    (method_index_expression
+      method: (identifier) @method.call)
+  ])
 
 (function_call
-  prefix: (identifier) @function.call.lua
-  args: (string_argument) @string)
+  (identifier) @function.builtin
+  (#any-of? @function.builtin
+    ;; built-in functions in Lua 5.1
+    "assert" "collectgarbage" "dofile" "error" "getfenv" "getmetatable" "ipairs"
+    "load" "loadfile" "loadstring" "module" "next" "pairs" "pcall" "print"
+    "rawequal" "rawget" "rawlen" "rawset" "require" "select" "setfenv" "setmetatable"
+    "tonumber" "tostring" "type" "unpack" "xpcall"
+    "__add" "__band" "__bnot" "__bor" "__bxor" "__call" "__concat" "__div" "__eq" "__gc"
+    "__idiv" "__index" "__le" "__len" "__lt" "__metatable" "__mod" "__mul" "__name" "__newindex"
+    "__pairs" "__pow" "__shl" "__shr" "__sub" "__tostring" "__unm"))
 
-(function_call
- prefix: (identifier) @function.call.lua
- args: (table_argument))
+;; Others
 
-; (function [(function_name) (identifier)] @function)
-; (function ["function" "end"] @keyword.function)
-; (local_function [(function_name) (identifier)] @function)
-; (local_function ["function" "end"] @keyword.function)
-; (function_definition ["function" "end"] @keyword.function)
+(comment) @comment @spell
 
-; TODO: Do I have replacements for these.
-; (property_identifier) @property
-; (method) @method
+((comment) @comment.documentation
+  (#lua-match? @comment.documentation "^[-][-][-]"))
 
-; (function_call (identifier) @function . (arguments))
-; (function_call (field (property_identifier) @function) . (arguments))
+((comment) @comment.documentation
+  (#lua-match? @comment.documentation "^[-][-](%s?)@"))
 
-;; Parameters
-; (parameters (identifier) @parameter)
+(hash_bang_line) @preproc
 
-;; Nodes
-; (table ["{" "}"] @constructor)
-(comment) @comment
-(string) @string
 (number) @number
-; (label_statement) @label
+
+(string) @string
 
 ;; Error
 (ERROR) @error

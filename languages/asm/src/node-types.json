@@ -1,6 +1,162 @@
 [
   {
-    "type": "ident",
+    "type": "builtin",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "builtin_kw",
+          "named": true
+        },
+        {
+          "type": "operand_args",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "builtin_kw",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "builtin",
+          "named": true
+        },
+        {
+          "type": "extern",
+          "named": true
+        },
+        {
+          "type": "global",
+          "named": true
+        },
+        {
+          "type": "ins",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "objdump_disas_of_section",
+          "named": true
+        },
+        {
+          "type": "objdump_file_format",
+          "named": true
+        },
+        {
+          "type": "objdump_offset_label",
+          "named": true
+        },
+        {
+          "type": "objdump_section_label",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "shell_cmd",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "effective_addr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "register",
+          "named": true
+        },
+        {
+          "type": "segment_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "extern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "global",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "ins",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "mnemonic",
+          "named": true
+        },
+        {
+          "type": "operand_args",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "integer_literal",
     "named": true,
     "fields": {},
     "children": {
@@ -8,53 +164,7 @@
       "required": false,
       "types": [
         {
-          "type": "meta_ident",
-          "named": true
-        },
-        {
-          "type": "reg",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "instruction",
-    "named": true,
-    "fields": {
-      "kind": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "word",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "ident",
-          "named": true
-        },
-        {
-          "type": "int",
-          "named": true
-        },
-        {
-          "type": "ptr",
-          "named": true
-        },
-        {
-          "type": "string",
+          "type": "literal_offset",
           "named": true
         }
       ]
@@ -69,67 +179,63 @@
       "required": true,
       "types": [
         {
-          "type": "ident",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "meta",
-    "named": true,
-    "fields": {
-      "kind": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "meta_ident",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "ident",
+          "type": "directive",
           "named": true
         },
         {
-          "type": "int",
+          "type": "label_name",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "program",
+    "type": "label_name",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
-          "type": "instruction",
-          "named": true
-        },
-        {
-          "type": "label",
-          "named": true
-        },
-        {
-          "type": "meta",
+          "type": "identifier",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "ptr",
+    "type": "literal_offset",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "objdump_addr",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "objdump_disas_of_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "section_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "objdump_machine_code_bytes",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "objdump_offset_label",
     "named": true,
     "fields": {},
     "children": {
@@ -137,37 +243,202 @@
       "required": true,
       "types": [
         {
-          "type": "ident",
+          "type": "ins",
           "named": true
         },
         {
-          "type": "int",
+          "type": "objdump_addr",
           "named": true
         },
         {
-          "type": "reg",
+          "type": "objdump_machine_code_bytes",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "reg",
+    "type": "objdump_section_label",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "objdump_addr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "operand",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "effective_addr",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "operand_ident",
+          "named": true
+        },
+        {
+          "type": "ptr",
+          "named": true
+        },
+        {
+          "type": "register",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "width",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "operand_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "operand",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "operand_ident",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "ptr",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "section",
     "named": true,
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "word",
+          "type": "section_name",
           "named": true
         }
       ]
     }
   },
   {
+    "type": "segment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "segment_prefix",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "segment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "shell_cmd",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "shell_prompt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "width",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\n",
+    "named": false
+  },
+  {
+    "type": "\r\n",
+    "named": false
+  },
+  {
+    "type": "\"",
     "named": false
   },
   {
@@ -199,6 +470,42 @@
     "named": false
   },
   {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": "BYTE",
+    "named": false
+  },
+  {
+    "type": "DWORD",
+    "named": false
+  },
+  {
+    "type": "Disassembly of section ",
+    "named": false
+  },
+  {
+    "type": "PTR",
+    "named": false
+  },
+  {
+    "type": "QWORD",
+    "named": false
+  },
+  {
+    "type": "WORD",
+    "named": false
+  },
+  {
+    "type": "XMMWORD",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -211,23 +518,71 @@
     "named": false
   },
   {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "cs",
+    "named": false
+  },
+  {
+    "type": "db",
+    "named": false
+  },
+  {
+    "type": "dd",
+    "named": false
+  },
+  {
+    "type": "dq",
+    "named": false
+  },
+  {
+    "type": "ds",
+    "named": false
+  },
+  {
+    "type": "dw",
+    "named": false
+  },
+  {
     "type": "dword",
     "named": false
   },
   {
-    "type": "float",
+    "type": "es",
+    "named": false
+  },
+  {
+    "type": "escape_sequence",
     "named": true
   },
   {
-    "type": "int",
+    "type": "extern",
+    "named": false
+  },
+  {
+    "type": "fs",
+    "named": false
+  },
+  {
+    "type": "global",
+    "named": false
+  },
+  {
+    "type": "gs",
+    "named": false
+  },
+  {
+    "type": "info",
+    "named": false
+  },
+  {
+    "type": "mnemonic",
     "named": true
   },
   {
-    "type": "line_comment",
-    "named": true
-  },
-  {
-    "type": "meta_ident",
+    "type": "objdump_file_format",
     "named": true
   },
   {
@@ -239,19 +594,31 @@
     "named": false
   },
   {
-    "type": "rel",
+    "type": "register",
+    "named": true
+  },
+  {
+    "type": "section",
     "named": false
   },
   {
-    "type": "string",
+    "type": "section_name",
     "named": true
+  },
+  {
+    "type": "shell_prompt",
+    "named": true
+  },
+  {
+    "type": "ss",
+    "named": false
   },
   {
     "type": "word",
     "named": false
   },
   {
-    "type": "word",
-    "named": true
+    "type": "xmmword",
+    "named": false
   }
 ]
