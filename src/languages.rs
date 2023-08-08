@@ -18,7 +18,8 @@ pub mod ada {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ada/queries/highlights.scm");
@@ -51,7 +52,8 @@ pub mod asm {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/asm/queries/highlights.scm");
@@ -84,7 +86,8 @@ pub mod bash {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/bash/queries/highlights.scm");
@@ -117,7 +120,8 @@ pub mod bibtex {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/bibtex/queries/highlights.scm");
@@ -150,7 +154,8 @@ pub mod blueprint {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/blueprint/queries/highlights.scm");
@@ -183,7 +188,8 @@ pub mod c {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/c/queries/highlights.scm");
@@ -216,7 +222,8 @@ pub mod capnp {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/capnp/queries/highlights.scm");
@@ -249,7 +256,8 @@ pub mod clojure {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/clojure/queries/highlights.scm");
@@ -282,7 +290,8 @@ pub mod cmake {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cmake/queries/highlights.scm");
@@ -315,7 +324,8 @@ pub mod c_sharp {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/c_sharp/queries/highlights.scm");
@@ -348,10 +358,12 @@ pub mod commonlisp {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/commonlisp/queries/highlights.scm");
+    pub const HIGHLIGHT_QUERY: &str =
+        include_str!("../languages/commonlisp/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/commonlisp/queries/locals.scm");
 
@@ -381,7 +393,8 @@ pub mod cpp {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cpp/queries/highlights.scm");
@@ -414,7 +427,8 @@ pub mod css {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/css/queries/highlights.scm");
@@ -447,7 +461,8 @@ pub mod cue {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cue/queries/highlights.scm");
@@ -480,7 +495,8 @@ pub mod dart {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/dart/queries/highlights.scm");
@@ -513,7 +529,8 @@ pub mod diff {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/diff/queries/highlights.scm");
@@ -546,11 +563,14 @@ pub mod dockerfile {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/dockerfile/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/dockerfile/queries/injections.scm");
+    pub const HIGHLIGHT_QUERY: &str =
+        include_str!("../languages/dockerfile/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str =
+        include_str!("../languages/dockerfile/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -579,7 +599,8 @@ pub mod elisp {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elisp/queries/highlights.scm");
@@ -612,7 +633,8 @@ pub mod elixir {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elixir/queries/highlights.scm");
@@ -645,7 +667,8 @@ pub mod elm {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elm/queries/highlights.scm");
@@ -678,7 +701,8 @@ pub mod erlang {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/erlang/queries/highlights.scm");
@@ -711,7 +735,8 @@ pub mod fortran {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/fortran/queries/highlights.scm");
@@ -744,7 +769,8 @@ pub mod go {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/go/queries/highlights.scm");
@@ -777,7 +803,8 @@ pub mod gdscript {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/gdscript/queries/highlights.scm");
@@ -810,7 +837,8 @@ pub mod glsl {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/glsl/queries/highlights.scm");
@@ -843,7 +871,8 @@ pub mod haskell {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/haskell/queries/highlights.scm");
@@ -876,7 +905,8 @@ pub mod html {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/html/queries/highlights.scm");
@@ -909,7 +939,8 @@ pub mod java {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/java/queries/highlights.scm");
@@ -942,11 +973,14 @@ pub mod javascript {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/javascript/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/javascript/queries/injections.scm");
+    pub const HIGHLIGHT_QUERY: &str =
+        include_str!("../languages/javascript/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str =
+        include_str!("../languages/javascript/queries/injections.scm");
     pub const LOCALS_QUERY: &str = include_str!("../languages/javascript/queries/locals.scm");
 
     #[cfg(test)]
@@ -975,7 +1009,8 @@ pub mod json {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/json/queries/highlights.scm");
@@ -1008,7 +1043,8 @@ pub mod julia {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/julia/queries/highlights.scm");
@@ -1041,7 +1077,8 @@ pub mod kotlin {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/kotlin/queries/highlights.scm");
@@ -1074,7 +1111,8 @@ pub mod latex {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/latex/queries/highlights.scm");
@@ -1107,7 +1145,8 @@ pub mod lua {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/lua/queries/highlights.scm");
@@ -1140,7 +1179,8 @@ pub mod make {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/make/queries/highlights.scm");
@@ -1173,7 +1213,8 @@ pub mod matlab {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/matlab/queries/highlights.scm");
@@ -1206,7 +1247,8 @@ pub mod meson {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/meson/queries/highlights.scm");
@@ -1239,7 +1281,8 @@ pub mod nim {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = "";
@@ -1272,7 +1315,8 @@ pub mod nix {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/nix/queries/highlights.scm");
@@ -1305,7 +1349,8 @@ pub mod objc {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/objc/queries/highlights.scm");
@@ -1338,7 +1383,8 @@ pub mod ocaml {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ocaml/queries/highlights.scm");
@@ -1371,11 +1417,14 @@ pub mod ocaml_interface {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ocaml_interface/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/ocaml_interface/queries/injections.scm");
+    pub const HIGHLIGHT_QUERY: &str =
+        include_str!("../languages/ocaml_interface/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str =
+        include_str!("../languages/ocaml_interface/queries/injections.scm");
     pub const LOCALS_QUERY: &str = include_str!("../languages/ocaml_interface/queries/locals.scm");
 
     #[cfg(test)]
@@ -1404,7 +1453,8 @@ pub mod openscad {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/openscad/queries/highlights.scm");
@@ -1437,7 +1487,8 @@ pub mod pascal {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/pascal/queries/highlights.scm");
@@ -1470,7 +1521,8 @@ pub mod perl {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/perl/queries/highlights.scm");
@@ -1503,7 +1555,8 @@ pub mod php {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/php/queries/highlights.scm");
@@ -1536,7 +1589,8 @@ pub mod python {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/python/queries/highlights.scm");
@@ -1569,7 +1623,8 @@ pub mod r {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/r/queries/highlights.scm");
@@ -1602,7 +1657,8 @@ pub mod regex {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/regex/queries/highlights.scm");
@@ -1635,7 +1691,8 @@ pub mod ruby {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ruby/queries/highlights.scm");
@@ -1668,7 +1725,8 @@ pub mod rust {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/rust/queries/highlights.scm");
@@ -1701,7 +1759,8 @@ pub mod scala {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scala/queries/highlights.scm");
@@ -1734,7 +1793,8 @@ pub mod scheme {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scheme/queries/highlights.scm");
@@ -1767,7 +1827,8 @@ pub mod scss {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scss/queries/highlights.scm");
@@ -1800,7 +1861,8 @@ pub mod sql {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/sql/queries/highlights.scm");
@@ -1833,7 +1895,8 @@ pub mod toml {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/toml/queries/highlights.scm");
@@ -1866,11 +1929,14 @@ pub mod typescript {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/typescript/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/typescript/queries/injections.scm");
+    pub const HIGHLIGHT_QUERY: &str =
+        include_str!("../languages/typescript/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str =
+        include_str!("../languages/typescript/queries/injections.scm");
     pub const LOCALS_QUERY: &str = include_str!("../languages/typescript/queries/locals.scm");
 
     #[cfg(test)]
@@ -1899,7 +1965,8 @@ pub mod x86asm {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/x86asm/queries/highlights.scm");
@@ -1932,7 +1999,8 @@ pub mod yaml {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/yaml/queries/highlights.scm");
@@ -1965,7 +2033,8 @@ pub mod wgsl {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/wgsl/queries/highlights.scm");
@@ -1998,7 +2067,8 @@ pub mod zig {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).unwrap()
+        )
+        .unwrap()
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/zig/queries/highlights.scm");
@@ -2017,6 +2087,7 @@ pub mod zig {
     }
 }
 
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum Language {
     Ada,
     GenericAsm,
