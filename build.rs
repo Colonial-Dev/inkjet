@@ -135,12 +135,19 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
     }
 
     let enum_definition = indoc::formatdoc! {"
+        /// The set of all languages supported by Inkjet.
         #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
         pub enum Language {{
             {member_buffer}
         }}
 
         impl Language {{
+            /// Attempts to convert a string token (such as `rust` or `rs`) into the corresponding language.
+            /// 
+            /// Returns [`None`] if the language was not found.
+            /// 
+            /// The tokens for each language are sourced from its `name` and `aliases` keys in
+            /// `config/languages.toml`.
             pub fn from_token(token: &str) -> Option<Self> {{
                 match token {{
                     {from_str_buffer}

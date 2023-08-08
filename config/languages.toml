@@ -41,6 +41,7 @@ aliases = ["clj", "cljc"]
 
 [[languages]]
 name = "cmake"
+pretty_name = "CMake"
 repo = "https://github.com/uyha/tree-sitter-cmake"
 
 [[languages]]
@@ -190,6 +191,7 @@ repo = "https://github.com/nix-community/tree-sitter-nix"
 
 [[languages]]
 name = "objc"
+pretty_name = "ObjC"
 repo = "https://github.com/jiyee/tree-sitter-objc"
 aliases = ["objective-c", "objectivec", "obj-c"]
 

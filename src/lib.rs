@@ -1,25 +1,39 @@
+//! Inkjet is a batteries-included syntax highlighting library for Rust, based on `tree-sitter`.
+//! 
+//! See these links for the list of [features](https://github.com/SomewhereOutInSpace/inkjet#features), all [supported languages](https://github.com/SomewhereOutInSpace/inkjet#included-languages) or the [FAQ](https://github.com/SomewhereOutInSpace/inkjet#faq).
+//! 
+//! Otherwise, you can get started by...
+
 #![doc(
-    html_logo_url = "https://github.com/SomewhereOutInSpace/inkjet/tree/master/.github/logo.png"
+    html_logo_url = "https://raw.githubusercontent.com/SomewhereOutInSpace/inkjet/master/.github/logo.png"
 )]
 #![warn(clippy::all)]
 
 mod error;
-pub mod formatter;
 mod languages;
+pub mod formatter;
 
-use std::io::Write;
-
-use ahash::HashMap;
-use tree_sitter_highlight::{HighlightConfiguration, Highlighter as TSHighlighter};
-
-pub use crate::formatter::{
-    Formatter,
-    HIGHLIGHT_NAMES,
-    HIGHLIGHT_CLASS_NAMES,
+use ahash::{HashMap, HashSet};
+use tree_sitter_highlight::{
+    HighlightConfiguration,
+    Highlighter as TSHighlighter
 };
-pub use crate::languages::Language;
-pub use error::{InkjetError, InkjetResult as Result};
 
+use crate::formatter::{
+    Formatter,
+    HIGHLIGHT_NAMES
+};
+
+pub use tree_sitter_highlight;
+
+pub use crate::languages::Language;
+
+pub use crate::error::{
+    InkjetError,
+    InkjetResult as Result
+};
+
+/// 
 pub struct Highlighter {
     languages: HashMap<Language, HighlightConfiguration>,
     highlighter: TSHighlighter,
@@ -35,12 +49,12 @@ impl Highlighter {
         &mut self,
         lang: Language,
         formatter: &F,
-        source: impl AsRef<[u8]>,
+        source: &str,
         output: &mut O,
     ) -> Result<()>
     where
         F: Formatter,
-        O: Write,
+        O: std::io::Write,
     {
         let Some(config) = self.languages.get(&lang) else {
             return Err(InkjetError::InvalidLanguage)
@@ -48,10 +62,10 @@ impl Highlighter {
 
         let highlights = self
             .highlighter
-            .highlight(config, source.as_ref(), None, |_| None)?;
+            .highlight(config, source.as_bytes(), None, |_| None)?;
 
         for event in highlights {
-            formatter.write_io(output, &HIGHLIGHT_NAMES, event?)?
+            formatter.write_io(source, output, event?)?
         }
 
         Ok(())
@@ -61,7 +75,7 @@ impl Highlighter {
         &mut self,
         lang: Language,
         formatter: &F,
-        source: impl AsRef<[u8]>,
+        source: &str,
     ) -> Result<String>
     where
         F: Formatter,
@@ -74,10 +88,10 @@ impl Highlighter {
 
         let highlights = self
             .highlighter
-            .highlight(config, source.as_ref(), None, |_| None)?;
+            .highlight(config, source.as_bytes(), None, |_| None)?;
 
         for event in highlights {
-            formatter.write_fmt(&mut buffer, &HIGHLIGHT_NAMES, event?)?
+            formatter.write_fmt(source,&mut buffer, event?)?
         }
 
         Ok(buffer)
@@ -107,30 +121,36 @@ impl Clone for Highlighter {
     }
 }
 
+/// A builder for [`Highlighter`]s.
 #[derive(Debug, Default)]
 pub struct HighlighterBuilder {
-    languages: Vec<Language>,
+    languages: HashSet<Language>,
 }
 
 impl HighlighterBuilder {
+    /// Create a new highlighter builder.
     pub fn new() -> Self {
         Self::default()
     }
 
+    /// Add a language to the builder.
     pub fn language(&mut self, lang: Language) -> &mut Self {
-        self.languages.push(lang);
+        self.languages.insert(lang);
         self
     }
 
+    /// Add a set of languages to the builder.
     pub fn languages(&mut self, langs: impl Iterator<Item = Language>) -> &mut Self {
         self.languages.extend(langs);
         self
     }
 
+    /// Add all supported languags to the builder.
     pub fn all_languages(&mut self) -> &mut Self {
         todo!()
     }
 
+    /// Consume the builder, constructing a new [`Highlighter`].
     pub fn build(self) -> Highlighter {
         let languages = self
             .languages

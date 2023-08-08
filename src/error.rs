@@ -1,7 +1,9 @@
 use thiserror::Error;
 
+/// Shorthand for [`Result<T, InkjetError>`].
 pub type InkjetResult<T> = Result<T, InkjetError>;
 
+/// Concrete error type for all possible Inkjet errors.
 #[derive(Error, Debug)]
 pub enum InkjetError {
     #[error("internal tree-sitter error: {0}")]
