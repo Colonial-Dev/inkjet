@@ -12,14 +12,17 @@ use std::io::Write;
 use ahash::HashMap;
 use tree_sitter_highlight::{HighlightConfiguration, Highlighter as TSHighlighter};
 
-pub use crate::formatter::Formatter;
+pub use crate::formatter::{
+    Formatter,
+    HIGHLIGHT_NAMES,
+    HIGHLIGHT_CLASS_NAMES,
+};
 pub use crate::languages::Language;
 pub use error::{InkjetError, InkjetResult as Result};
 
 pub struct Highlighter {
     languages: HashMap<Language, HighlightConfiguration>,
     highlighter: TSHighlighter,
-    names: Box<[String]>,
 }
 
 impl Highlighter {
@@ -48,7 +51,7 @@ impl Highlighter {
             .highlight(config, source.as_ref(), None, |_| None)?;
 
         for event in highlights {
-            formatter.write_io(output, &self.names, event?)?
+            formatter.write_io(output, &HIGHLIGHT_NAMES, event?)?
         }
 
         Ok(())
@@ -74,7 +77,7 @@ impl Highlighter {
             .highlight(config, source.as_ref(), None, |_| None)?;
 
         for event in highlights {
-            formatter.write_fmt(&mut buffer, &self.names, event?)?
+            formatter.write_fmt(&mut buffer, &HIGHLIGHT_NAMES, event?)?
         }
 
         Ok(buffer)
@@ -89,7 +92,7 @@ impl Clone for Highlighter {
             .copied()
             .map(|lang| {
                 let mut config = lang.config();
-                config.configure(&self.names);
+                config.configure(&HIGHLIGHT_NAMES);
 
                 (lang, config)
             })
@@ -97,12 +100,9 @@ impl Clone for Highlighter {
 
         let highlighter = TSHighlighter::new();
 
-        let names = self.names.clone();
-
         Self {
             languages,
-            highlighter,
-            names,
+            highlighter
         }
     }
 }
@@ -110,7 +110,6 @@ impl Clone for Highlighter {
 #[derive(Debug, Default)]
 pub struct HighlighterBuilder {
     languages: Vec<Language>,
-    names: Option<Box<[String]>>,
 }
 
 impl HighlighterBuilder {
@@ -132,29 +131,13 @@ impl HighlighterBuilder {
         todo!()
     }
 
-    pub fn recognized_names(&mut self, names: &[impl AsRef<str>]) -> &mut Self {
-        let names = names
-            .iter()
-            .map(AsRef::as_ref)
-            .map(ToOwned::to_owned)
-            .collect();
-
-        self.names = Some(names);
-        self
-    }
-
     pub fn build(self) -> Highlighter {
-        let names = match self.names {
-            Some(names) => names,
-            None => todo!(),
-        };
-
         let languages = self
             .languages
             .into_iter()
             .map(|lang| {
                 let mut config = lang.config();
-                config.configure(&names);
+                config.configure(&HIGHLIGHT_NAMES);
 
                 (lang, config)
             })
@@ -164,8 +147,7 @@ impl HighlighterBuilder {
 
         Highlighter {
             languages,
-            highlighter,
-            names,
+            highlighter
         }
     }
 }
