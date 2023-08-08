@@ -223,7 +223,8 @@ impl Language {
         let build = build
             .include(&path)
             .flag_if_supported("-w")
-            .flag_if_supported("-O1")
+            .flag_if_supported("-s")
+            .flag_if_supported("-O2")
             .file(&parser_path);
 
         rerun_if_changed(&parser_path);
@@ -243,6 +244,7 @@ impl Language {
                 .cpp(true)
                 .include(&path)
                 .flag_if_supported("-w")
+                .flag_if_supported("-s")
                 .flag_if_supported("-O2")
                 .file(&scanner_path)
                 .compile(&format!("{}-scanner", self.name));

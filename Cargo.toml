@@ -13,7 +13,6 @@ include  = [
 ]
 
 [dependencies]
-phf = "0.11.2"
 tree-sitter = "0.20.10"
 tree-sitter-highlight = "0.20.1"
 
