@@ -5,21 +5,28 @@
 use tree_sitter_highlight::HighlightConfiguration;
 
 pub mod ada {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_ada() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_ada() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'ada'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'ada'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ada/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -27,6 +34,8 @@ pub mod ada {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -34,25 +43,37 @@ pub mod ada {
                 .set_language(unsafe { super::tree_sitter_ada() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod asm {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_asm() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_asm() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'asm'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'asm'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/asm/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -60,6 +81,8 @@ pub mod asm {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -67,25 +90,37 @@ pub mod asm {
                 .set_language(unsafe { super::tree_sitter_asm() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod bash {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_bash() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_bash() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'bash'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'bash'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/bash/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/bash/queries/injections.scm");
@@ -93,6 +128,8 @@ pub mod bash {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -100,25 +137,37 @@ pub mod bash {
                 .set_language(unsafe { super::tree_sitter_bash() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod bibtex {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_bibtex() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_bibtex() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'bibtex'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'bibtex'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/bibtex/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -126,6 +175,8 @@ pub mod bibtex {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -133,25 +184,37 @@ pub mod bibtex {
                 .set_language(unsafe { super::tree_sitter_bibtex() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod blueprint {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_blueprint() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_blueprint() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'blueprint'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'blueprint'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/blueprint/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -159,6 +222,8 @@ pub mod blueprint {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -166,25 +231,37 @@ pub mod blueprint {
                 .set_language(unsafe { super::tree_sitter_blueprint() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod c {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_c() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_c() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'c'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'c'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/c/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/c/queries/injections.scm");
@@ -192,6 +269,8 @@ pub mod c {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -199,25 +278,37 @@ pub mod c {
                 .set_language(unsafe { super::tree_sitter_c() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod capnp {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_capnp() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_capnp() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'capnp'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'capnp'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/capnp/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/capnp/queries/injections.scm");
@@ -225,6 +316,8 @@ pub mod capnp {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -232,25 +325,37 @@ pub mod capnp {
                 .set_language(unsafe { super::tree_sitter_capnp() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod clojure {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_clojure() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_clojure() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'clojure'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'clojure'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/clojure/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/clojure/queries/injections.scm");
@@ -258,6 +363,8 @@ pub mod clojure {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -265,58 +372,37 @@ pub mod clojure {
                 .set_language(unsafe { super::tree_sitter_clojure() })
                 .expect("Grammar should load successfully.");
         }
-    }
-}
 
-pub mod cmake {
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    extern "C" {
-        pub fn tree_sitter_cmake() -> Language;
-    }
-
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
-            unsafe { tree_sitter_cmake() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'cmake'!")
-    }
-
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cmake/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
-
-    #[cfg(test)]
-    mod tests {
         #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_cmake() })
-                .expect("Grammar should load successfully.");
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
         }
     }
 }
 
 pub mod c_sharp {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_c_sharp() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_c_sharp() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'c_sharp'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'c_sharp'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/c_sharp/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/c_sharp/queries/injections.scm");
@@ -324,6 +410,8 @@ pub mod c_sharp {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -331,25 +419,37 @@ pub mod c_sharp {
                 .set_language(unsafe { super::tree_sitter_c_sharp() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod commonlisp {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_commonlisp() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_commonlisp() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'commonlisp'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'commonlisp'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/commonlisp/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -357,6 +457,8 @@ pub mod commonlisp {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -364,25 +466,37 @@ pub mod commonlisp {
                 .set_language(unsafe { super::tree_sitter_commonlisp() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod cpp {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_cpp() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_cpp() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'cpp'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'cpp'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cpp/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/cpp/queries/injections.scm");
@@ -390,6 +504,8 @@ pub mod cpp {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -397,25 +513,37 @@ pub mod cpp {
                 .set_language(unsafe { super::tree_sitter_cpp() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod css {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_css() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_css() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'css'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'css'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/css/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/css/queries/injections.scm");
@@ -423,6 +551,8 @@ pub mod css {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -430,25 +560,37 @@ pub mod css {
                 .set_language(unsafe { super::tree_sitter_css() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod cue {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_cue() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_cue() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'cue'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'cue'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cue/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/cue/queries/injections.scm");
@@ -456,6 +598,8 @@ pub mod cue {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -463,25 +607,84 @@ pub mod cue {
                 .set_language(unsafe { super::tree_sitter_cue() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+pub mod d {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_d() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_d() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'd'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/d/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/d/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_d() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod dart {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_dart() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_dart() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'dart'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'dart'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/dart/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/dart/queries/injections.scm");
@@ -489,6 +692,8 @@ pub mod dart {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -496,25 +701,37 @@ pub mod dart {
                 .set_language(unsafe { super::tree_sitter_dart() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod diff {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_diff() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_diff() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'diff'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'diff'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/diff/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -522,6 +739,8 @@ pub mod diff {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -529,25 +748,37 @@ pub mod diff {
                 .set_language(unsafe { super::tree_sitter_diff() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod dockerfile {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_dockerfile() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_dockerfile() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'dockerfile'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'dockerfile'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/dockerfile/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/dockerfile/queries/injections.scm");
@@ -555,6 +786,8 @@ pub mod dockerfile {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -562,25 +795,37 @@ pub mod dockerfile {
                 .set_language(unsafe { super::tree_sitter_dockerfile() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod elisp {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_elisp() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_elisp() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'elisp'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'elisp'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elisp/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -588,6 +833,8 @@ pub mod elisp {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -595,25 +842,37 @@ pub mod elisp {
                 .set_language(unsafe { super::tree_sitter_elisp() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod elixir {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_elixir() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_elixir() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'elixir'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'elixir'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elixir/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/elixir/queries/injections.scm");
@@ -621,6 +880,8 @@ pub mod elixir {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -628,25 +889,37 @@ pub mod elixir {
                 .set_language(unsafe { super::tree_sitter_elixir() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod elm {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_elm() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_elm() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'elm'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'elm'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elm/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/elm/queries/injections.scm");
@@ -654,6 +927,8 @@ pub mod elm {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -661,25 +936,37 @@ pub mod elm {
                 .set_language(unsafe { super::tree_sitter_elm() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod erlang {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_erlang() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_erlang() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'erlang'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'erlang'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/erlang/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -687,6 +974,8 @@ pub mod erlang {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -694,25 +983,37 @@ pub mod erlang {
                 .set_language(unsafe { super::tree_sitter_erlang() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod fortran {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_fortran() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_fortran() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'fortran'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'fortran'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/fortran/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -720,6 +1021,8 @@ pub mod fortran {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -727,25 +1030,37 @@ pub mod fortran {
                 .set_language(unsafe { super::tree_sitter_fortran() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod go {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_go() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_go() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'go'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'go'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/go/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/go/queries/injections.scm");
@@ -753,6 +1068,8 @@ pub mod go {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -760,25 +1077,37 @@ pub mod go {
                 .set_language(unsafe { super::tree_sitter_go() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod gdscript {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_gdscript() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_gdscript() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'gdscript'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'gdscript'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/gdscript/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/gdscript/queries/injections.scm");
@@ -786,6 +1115,8 @@ pub mod gdscript {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -793,25 +1124,37 @@ pub mod gdscript {
                 .set_language(unsafe { super::tree_sitter_gdscript() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod glsl {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_glsl() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_glsl() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'glsl'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'glsl'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/glsl/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/glsl/queries/injections.scm");
@@ -819,6 +1162,8 @@ pub mod glsl {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -826,25 +1171,37 @@ pub mod glsl {
                 .set_language(unsafe { super::tree_sitter_glsl() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod haskell {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_haskell() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_haskell() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'haskell'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'haskell'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/haskell/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/haskell/queries/injections.scm");
@@ -852,6 +1209,8 @@ pub mod haskell {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -859,25 +1218,37 @@ pub mod haskell {
                 .set_language(unsafe { super::tree_sitter_haskell() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod html {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_html() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_html() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'html'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'html'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/html/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/html/queries/injections.scm");
@@ -885,6 +1256,8 @@ pub mod html {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -892,25 +1265,37 @@ pub mod html {
                 .set_language(unsafe { super::tree_sitter_html() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod java {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_java() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_java() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'java'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'java'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/java/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/java/queries/injections.scm");
@@ -918,6 +1303,8 @@ pub mod java {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -925,25 +1312,37 @@ pub mod java {
                 .set_language(unsafe { super::tree_sitter_java() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod javascript {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_javascript() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_javascript() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'javascript'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'javascript'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/javascript/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/javascript/queries/injections.scm");
@@ -951,6 +1350,8 @@ pub mod javascript {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -958,25 +1359,37 @@ pub mod javascript {
                 .set_language(unsafe { super::tree_sitter_javascript() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod json {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_json() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_json() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'json'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'json'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/json/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -984,6 +1397,8 @@ pub mod json {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -991,25 +1406,37 @@ pub mod json {
                 .set_language(unsafe { super::tree_sitter_json() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod julia {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_julia() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_julia() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'julia'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'julia'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/julia/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/julia/queries/injections.scm");
@@ -1017,6 +1444,8 @@ pub mod julia {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1024,25 +1453,37 @@ pub mod julia {
                 .set_language(unsafe { super::tree_sitter_julia() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod kotlin {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_kotlin() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_kotlin() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'kotlin'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'kotlin'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/kotlin/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/kotlin/queries/injections.scm");
@@ -1050,6 +1491,8 @@ pub mod kotlin {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1057,25 +1500,37 @@ pub mod kotlin {
                 .set_language(unsafe { super::tree_sitter_kotlin() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod latex {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_latex() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_latex() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'latex'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'latex'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/latex/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/latex/queries/injections.scm");
@@ -1083,6 +1538,8 @@ pub mod latex {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1090,157 +1547,84 @@ pub mod latex {
                 .set_language(unsafe { super::tree_sitter_latex() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+pub mod llvm {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_llvm() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_llvm() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'llvm'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/llvm/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_llvm() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod lua {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_lua() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_lua() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'lua'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'lua'!");
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/lua/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/lua/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/lua/queries/locals.scm");
+        config.configure(HIGHLIGHT_NAMES);
 
-    #[cfg(test)]
-    mod tests {
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_lua() })
-                .expect("Grammar should load successfully.");
-        }
-    }
-}
-
-pub mod make {
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    extern "C" {
-        pub fn tree_sitter_make() -> Language;
-    }
-
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
-            unsafe { tree_sitter_make() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'make'!")
-    }
-
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/make/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/make/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = "";
-
-    #[cfg(test)]
-    mod tests {
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_make() })
-                .expect("Grammar should load successfully.");
-        }
-    }
-}
-
-pub mod matlab {
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    extern "C" {
-        pub fn tree_sitter_matlab() -> Language;
-    }
-
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
-            unsafe { tree_sitter_matlab() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'matlab'!")
-    }
-
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/matlab/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/matlab/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/matlab/queries/locals.scm");
-
-    #[cfg(test)]
-    mod tests {
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_matlab() })
-                .expect("Grammar should load successfully.");
-        }
-    }
-}
-
-pub mod meson {
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    extern "C" {
-        pub fn tree_sitter_meson() -> Language;
-    }
-
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
-            unsafe { tree_sitter_meson() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'meson'!")
-    }
-
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/meson/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/meson/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = "";
-
-    #[cfg(test)]
-    mod tests {
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_meson() })
-                .expect("Grammar should load successfully.");
-        }
-    }
-}
-
-pub mod nim {
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    extern "C" {
-        pub fn tree_sitter_nim() -> Language;
-    }
-
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
-            unsafe { tree_sitter_nim() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'nim'!")
-    }
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = "";
     pub const INJECTIONS_QUERY: &str = "";
@@ -1248,6 +1632,196 @@ pub mod nim {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_lua() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+pub mod make {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_make() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_make() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'make'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/make/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/make/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_make() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+pub mod matlab {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_matlab() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_matlab() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'matlab'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/matlab/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/matlab/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/matlab/queries/locals.scm");
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_matlab() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+pub mod meson {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_meson() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_meson() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'meson'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/meson/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/meson/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_meson() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+pub mod nim {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_nim() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_nim() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'nim'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1255,25 +1829,37 @@ pub mod nim {
                 .set_language(unsafe { super::tree_sitter_nim() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod nix {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_nix() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_nix() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'nix'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'nix'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/nix/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/nix/queries/injections.scm");
@@ -1281,6 +1867,8 @@ pub mod nix {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1288,58 +1876,37 @@ pub mod nix {
                 .set_language(unsafe { super::tree_sitter_nix() })
                 .expect("Grammar should load successfully.");
         }
-    }
-}
 
-pub mod objc {
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    extern "C" {
-        pub fn tree_sitter_objc() -> Language;
-    }
-
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
-            unsafe { tree_sitter_objc() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'objc'!")
-    }
-
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/objc/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/objc/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/objc/queries/locals.scm");
-
-    #[cfg(test)]
-    mod tests {
         #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_objc() })
-                .expect("Grammar should load successfully.");
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
         }
     }
 }
 
 pub mod ocaml {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_ocaml() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_ocaml() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'ocaml'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'ocaml'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ocaml/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/ocaml/queries/injections.scm");
@@ -1347,6 +1914,8 @@ pub mod ocaml {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1354,25 +1923,37 @@ pub mod ocaml {
                 .set_language(unsafe { super::tree_sitter_ocaml() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod ocaml_interface {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_ocaml_interface() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_ocaml_interface() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'ocaml_interface'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'ocaml_interface'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ocaml_interface/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/ocaml_interface/queries/injections.scm");
@@ -1380,6 +1961,8 @@ pub mod ocaml_interface {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1387,25 +1970,37 @@ pub mod ocaml_interface {
                 .set_language(unsafe { super::tree_sitter_ocaml_interface() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod openscad {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_openscad() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_openscad() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'openscad'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'openscad'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/openscad/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/openscad/queries/injections.scm");
@@ -1413,6 +2008,8 @@ pub mod openscad {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1420,25 +2017,37 @@ pub mod openscad {
                 .set_language(unsafe { super::tree_sitter_openscad() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod pascal {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_pascal() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_pascal() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'pascal'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'pascal'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/pascal/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/pascal/queries/injections.scm");
@@ -1446,6 +2055,8 @@ pub mod pascal {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1453,25 +2064,37 @@ pub mod pascal {
                 .set_language(unsafe { super::tree_sitter_pascal() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod perl {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_perl() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_perl() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'perl'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'perl'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/perl/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/perl/queries/injections.scm");
@@ -1479,6 +2102,8 @@ pub mod perl {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1486,25 +2111,37 @@ pub mod perl {
                 .set_language(unsafe { super::tree_sitter_perl() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod php {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_php() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_php() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'php'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'php'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/php/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/php/queries/injections.scm");
@@ -1512,6 +2149,8 @@ pub mod php {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1519,25 +2158,84 @@ pub mod php {
                 .set_language(unsafe { super::tree_sitter_php() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+pub mod proto {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_proto() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_proto() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'proto'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/proto/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_proto() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod python {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_python() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_python() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'python'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'python'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/python/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/python/queries/injections.scm");
@@ -1545,6 +2243,8 @@ pub mod python {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1552,25 +2252,37 @@ pub mod python {
                 .set_language(unsafe { super::tree_sitter_python() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod r {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_r() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_r() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'r'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'r'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/r/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/r/queries/injections.scm");
@@ -1578,6 +2290,8 @@ pub mod r {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1585,25 +2299,84 @@ pub mod r {
                 .set_language(unsafe { super::tree_sitter_r() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+pub mod racket {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_racket() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_racket() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'racket'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/racket/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/racket/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_racket() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod regex {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_regex() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_regex() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'regex'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'regex'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/regex/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -1611,6 +2384,8 @@ pub mod regex {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1618,25 +2393,37 @@ pub mod regex {
                 .set_language(unsafe { super::tree_sitter_regex() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod ruby {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_ruby() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_ruby() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'ruby'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'ruby'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ruby/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/ruby/queries/injections.scm");
@@ -1644,6 +2431,8 @@ pub mod ruby {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1651,25 +2440,37 @@ pub mod ruby {
                 .set_language(unsafe { super::tree_sitter_ruby() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod rust {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_rust() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_rust() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'rust'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'rust'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/rust/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/rust/queries/injections.scm");
@@ -1677,6 +2478,8 @@ pub mod rust {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1684,25 +2487,37 @@ pub mod rust {
                 .set_language(unsafe { super::tree_sitter_rust() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod scala {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_scala() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_scala() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'scala'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'scala'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scala/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/scala/queries/injections.scm");
@@ -1710,6 +2525,8 @@ pub mod scala {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1717,25 +2534,37 @@ pub mod scala {
                 .set_language(unsafe { super::tree_sitter_scala() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod scheme {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_scheme() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_scheme() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'scheme'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'scheme'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scheme/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/scheme/queries/injections.scm");
@@ -1743,6 +2572,8 @@ pub mod scheme {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1750,25 +2581,37 @@ pub mod scheme {
                 .set_language(unsafe { super::tree_sitter_scheme() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod scss {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_scss() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_scss() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'scss'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'scss'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scss/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -1776,6 +2619,8 @@ pub mod scss {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1783,25 +2628,37 @@ pub mod scss {
                 .set_language(unsafe { super::tree_sitter_scss() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod sql {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_sql() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_sql() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'sql'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'sql'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/sql/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/sql/queries/injections.scm");
@@ -1809,6 +2666,8 @@ pub mod sql {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1816,25 +2675,37 @@ pub mod sql {
                 .set_language(unsafe { super::tree_sitter_sql() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod toml {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_toml() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_toml() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'toml'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'toml'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/toml/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/toml/queries/injections.scm");
@@ -1842,6 +2713,8 @@ pub mod toml {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1849,25 +2722,37 @@ pub mod toml {
                 .set_language(unsafe { super::tree_sitter_toml() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod typescript {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_typescript() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_typescript() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'typescript'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'typescript'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/typescript/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/typescript/queries/injections.scm");
@@ -1875,6 +2760,8 @@ pub mod typescript {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1882,25 +2769,37 @@ pub mod typescript {
                 .set_language(unsafe { super::tree_sitter_typescript() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod x86asm {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_x86asm() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_x86asm() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'x86asm'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'x86asm'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/x86asm/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -1908,6 +2807,8 @@ pub mod x86asm {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1915,25 +2816,37 @@ pub mod x86asm {
                 .set_language(unsafe { super::tree_sitter_x86asm() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod yaml {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_yaml() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_yaml() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'yaml'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'yaml'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/yaml/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/yaml/queries/injections.scm");
@@ -1941,6 +2854,8 @@ pub mod yaml {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1948,25 +2863,37 @@ pub mod yaml {
                 .set_language(unsafe { super::tree_sitter_yaml() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod wgsl {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_wgsl() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_wgsl() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'wgsl'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'wgsl'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/wgsl/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
@@ -1974,6 +2901,8 @@ pub mod wgsl {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
@@ -1981,25 +2910,37 @@ pub mod wgsl {
                 .set_language(unsafe { super::tree_sitter_wgsl() })
                 .expect("Grammar should load successfully.");
         }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
     }
 }
 
 pub mod zig {
+    use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
         pub fn tree_sitter_zig() -> Language;
     }
 
-    pub fn config() -> HighlightConfiguration {
-        HighlightConfiguration::new(
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
             unsafe { tree_sitter_zig() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'zig'!")
-    }
+        ).expect("Failed to load highlight configuration for language 'zig'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/zig/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/zig/queries/injections.scm");
@@ -2007,12 +2948,19 @@ pub mod zig {
 
     #[cfg(test)]
     mod tests {
+        use super::*;
+
         #[test]
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { super::tree_sitter_zig() })
                 .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
         }
     }
 }
@@ -2028,12 +2976,12 @@ pub enum Language {
     C,
     Capnp,
     Clojure,
-    CMake,
     CSharp,
     CommonLisp,
     Cpp,
     Css,
     Cue,
+    D,
     Dart,
     Diff,
     Dockerfile,
@@ -2053,21 +3001,23 @@ pub enum Language {
     Julia,
     Kotlin,
     Latex,
+    Llvm,
     Lua,
     Make,
     Matlab,
     Meson,
     Nim,
     Nix,
-    ObjC,
     Ocaml,
     OcamlInterface,
     OpenScad,
     Pascal,
     Perl,
     Php,
+    ProtoBuf,
     Python,
     R,
+    Racket,
     Regex,
     Ruby,
     Rust,
@@ -2093,12 +3043,12 @@ impl Language {
         Self::C,
         Self::Capnp,
         Self::Clojure,
-        Self::CMake,
         Self::CSharp,
         Self::CommonLisp,
         Self::Cpp,
         Self::Css,
         Self::Cue,
+        Self::D,
         Self::Dart,
         Self::Diff,
         Self::Dockerfile,
@@ -2118,21 +3068,23 @@ impl Language {
         Self::Julia,
         Self::Kotlin,
         Self::Latex,
+        Self::Llvm,
         Self::Lua,
         Self::Make,
         Self::Matlab,
         Self::Meson,
         Self::Nim,
         Self::Nix,
-        Self::ObjC,
         Self::Ocaml,
         Self::OcamlInterface,
         Self::OpenScad,
         Self::Pascal,
         Self::Perl,
         Self::Php,
+        Self::ProtoBuf,
         Self::Python,
         Self::R,
+        Self::Racket,
         Self::Regex,
         Self::Ruby,
         Self::Rust,
@@ -2169,7 +3121,6 @@ impl Language {
             "clojure" => Some(Self::Clojure),
             "clj" => Some(Self::Clojure),
             "cljc" => Some(Self::Clojure),
-            "cmake" => Some(Self::CMake),
             "c_sharp" => Some(Self::CSharp),
             "c#" => Some(Self::CSharp),
             "csharp" => Some(Self::CSharp),
@@ -2186,6 +3137,8 @@ impl Language {
             "hh" => Some(Self::Cpp),
             "css" => Some(Self::Css),
             "cue" => Some(Self::Cue),
+            "d" => Some(Self::D),
+            "dlang" => Some(Self::D),
             "dart" => Some(Self::Dart),
             "diff" => Some(Self::Diff),
             "dockerfile" => Some(Self::Dockerfile),
@@ -2225,6 +3178,7 @@ impl Language {
             "kts" => Some(Self::Kotlin),
             "latex" => Some(Self::Latex),
             "tex" => Some(Self::Latex),
+            "llvm" => Some(Self::Llvm),
             "lua" => Some(Self::Lua),
             "make" => Some(Self::Make),
             "mk" => Some(Self::Make),
@@ -2234,10 +3188,6 @@ impl Language {
             "meson" => Some(Self::Meson),
             "nim" => Some(Self::Nim),
             "nix" => Some(Self::Nix),
-            "objc" => Some(Self::ObjC),
-            "objective-c" => Some(Self::ObjC),
-            "objectivec" => Some(Self::ObjC),
-            "obj-c" => Some(Self::ObjC),
             "ocaml" => Some(Self::Ocaml),
             "ml" => Some(Self::Ocaml),
             "ocaml_interface" => Some(Self::OcamlInterface),
@@ -2248,9 +3198,13 @@ impl Language {
             "perl" => Some(Self::Perl),
             "pl" => Some(Self::Perl),
             "php" => Some(Self::Php),
+            "proto" => Some(Self::ProtoBuf),
+            "protobuf" => Some(Self::ProtoBuf),
             "python" => Some(Self::Python),
             "py" => Some(Self::Python),
             "r" => Some(Self::R),
+            "racket" => Some(Self::Racket),
+            "rkt" => Some(Self::Racket),
             "regex" => Some(Self::Regex),
             "ruby" => Some(Self::Ruby),
             "rb" => Some(Self::Ruby),
@@ -2274,69 +3228,71 @@ impl Language {
         }
     }
 
-    pub(crate) fn config(&self) -> HighlightConfiguration {
+    pub(crate) fn config(&self) -> &'static HighlightConfiguration {
         match *self {
-            Self::Ada => ada::config(),
-            Self::GenericAsm => asm::config(),
-            Self::Bash => bash::config(),
-            Self::Bibtex => bibtex::config(),
-            Self::Blueprint => blueprint::config(),
-            Self::C => c::config(),
-            Self::Capnp => capnp::config(),
-            Self::Clojure => clojure::config(),
-            Self::CMake => cmake::config(),
-            Self::CSharp => c_sharp::config(),
-            Self::CommonLisp => commonlisp::config(),
-            Self::Cpp => cpp::config(),
-            Self::Css => css::config(),
-            Self::Cue => cue::config(),
-            Self::Dart => dart::config(),
-            Self::Diff => diff::config(),
-            Self::Dockerfile => dockerfile::config(),
-            Self::Elisp => elisp::config(),
-            Self::Elixir => elixir::config(),
-            Self::Elm => elm::config(),
-            Self::Erlang => erlang::config(),
-            Self::Fortran => fortran::config(),
-            Self::Go => go::config(),
-            Self::GDScript => gdscript::config(),
-            Self::Glsl => glsl::config(),
-            Self::Haskell => haskell::config(),
-            Self::Html => html::config(),
-            Self::Java => java::config(),
-            Self::Javascript => javascript::config(),
-            Self::Json => json::config(),
-            Self::Julia => julia::config(),
-            Self::Kotlin => kotlin::config(),
-            Self::Latex => latex::config(),
-            Self::Lua => lua::config(),
-            Self::Make => make::config(),
-            Self::Matlab => matlab::config(),
-            Self::Meson => meson::config(),
-            Self::Nim => nim::config(),
-            Self::Nix => nix::config(),
-            Self::ObjC => objc::config(),
-            Self::Ocaml => ocaml::config(),
-            Self::OcamlInterface => ocaml_interface::config(),
-            Self::OpenScad => openscad::config(),
-            Self::Pascal => pascal::config(),
-            Self::Perl => perl::config(),
-            Self::Php => php::config(),
-            Self::Python => python::config(),
-            Self::R => r::config(),
-            Self::Regex => regex::config(),
-            Self::Ruby => ruby::config(),
-            Self::Rust => rust::config(),
-            Self::Scala => scala::config(),
-            Self::Scheme => scheme::config(),
-            Self::Scss => scss::config(),
-            Self::Sql => sql::config(),
-            Self::Toml => toml::config(),
-            Self::Typescript => typescript::config(),
-            Self::X86asm => x86asm::config(),
-            Self::Yaml => yaml::config(),
-            Self::Wgsl => wgsl::config(),
-            Self::Zig => zig::config(),
+            Self::Ada => &ada::CONFIG,
+            Self::GenericAsm => &asm::CONFIG,
+            Self::Bash => &bash::CONFIG,
+            Self::Bibtex => &bibtex::CONFIG,
+            Self::Blueprint => &blueprint::CONFIG,
+            Self::C => &c::CONFIG,
+            Self::Capnp => &capnp::CONFIG,
+            Self::Clojure => &clojure::CONFIG,
+            Self::CSharp => &c_sharp::CONFIG,
+            Self::CommonLisp => &commonlisp::CONFIG,
+            Self::Cpp => &cpp::CONFIG,
+            Self::Css => &css::CONFIG,
+            Self::Cue => &cue::CONFIG,
+            Self::D => &d::CONFIG,
+            Self::Dart => &dart::CONFIG,
+            Self::Diff => &diff::CONFIG,
+            Self::Dockerfile => &dockerfile::CONFIG,
+            Self::Elisp => &elisp::CONFIG,
+            Self::Elixir => &elixir::CONFIG,
+            Self::Elm => &elm::CONFIG,
+            Self::Erlang => &erlang::CONFIG,
+            Self::Fortran => &fortran::CONFIG,
+            Self::Go => &go::CONFIG,
+            Self::GDScript => &gdscript::CONFIG,
+            Self::Glsl => &glsl::CONFIG,
+            Self::Haskell => &haskell::CONFIG,
+            Self::Html => &html::CONFIG,
+            Self::Java => &java::CONFIG,
+            Self::Javascript => &javascript::CONFIG,
+            Self::Json => &json::CONFIG,
+            Self::Julia => &julia::CONFIG,
+            Self::Kotlin => &kotlin::CONFIG,
+            Self::Latex => &latex::CONFIG,
+            Self::Llvm => &llvm::CONFIG,
+            Self::Lua => &lua::CONFIG,
+            Self::Make => &make::CONFIG,
+            Self::Matlab => &matlab::CONFIG,
+            Self::Meson => &meson::CONFIG,
+            Self::Nim => &nim::CONFIG,
+            Self::Nix => &nix::CONFIG,
+            Self::Ocaml => &ocaml::CONFIG,
+            Self::OcamlInterface => &ocaml_interface::CONFIG,
+            Self::OpenScad => &openscad::CONFIG,
+            Self::Pascal => &pascal::CONFIG,
+            Self::Perl => &perl::CONFIG,
+            Self::Php => &php::CONFIG,
+            Self::ProtoBuf => &proto::CONFIG,
+            Self::Python => &python::CONFIG,
+            Self::R => &r::CONFIG,
+            Self::Racket => &racket::CONFIG,
+            Self::Regex => &regex::CONFIG,
+            Self::Ruby => &ruby::CONFIG,
+            Self::Rust => &rust::CONFIG,
+            Self::Scala => &scala::CONFIG,
+            Self::Scheme => &scheme::CONFIG,
+            Self::Scss => &scss::CONFIG,
+            Self::Sql => &sql::CONFIG,
+            Self::Toml => &toml::CONFIG,
+            Self::Typescript => &typescript::CONFIG,
+            Self::X86asm => &x86asm::CONFIG,
+            Self::Yaml => &yaml::CONFIG,
+            Self::Wgsl => &wgsl::CONFIG,
+            Self::Zig => &zig::CONFIG,
         }
     }
 }

@@ -18,7 +18,7 @@ default = ["html"]
 html = ["dep:v_htmlescape"]
 
 [dependencies]
-ahash = "0.8.3"
+once_cell = "1.18.0"
 thiserror = "1.0.44"
 tree-sitter = "0.20.10"
 tree-sitter-highlight = "0.20.1"

@@ -40,11 +40,6 @@ repo = "https://github.com/sogaiu/tree-sitter-clojure"
 aliases = ["clj", "cljc"]
 
 [[languages]]
-name = "cmake"
-pretty_name = "CMake"
-repo = "https://github.com/uyha/tree-sitter-cmake"
-
-[[languages]]
 name = "c_sharp"
 pretty_name = "CSharp"
 repo = "https://github.com/tree-sitter/tree-sitter-c-sharp"
@@ -68,6 +63,13 @@ repo = "https://github.com/tree-sitter/tree-sitter-css"
 [[languages]]
 name = "cue"
 repo = "https://github.com/eonpatapon/tree-sitter-cue"
+
+[[languages]]
+name = "d"
+repo = "https://github.com/gdamore/tree-sitter-d"
+aliases = ["dlang"]
+# I think the nvim ones are for a different implementation?
+nvim_override = false
 
 [[languages]]
 name = "dart"
@@ -164,8 +166,14 @@ repo = "https://github.com/latex-lsp/tree-sitter-latex"
 aliases = ["tex"]
 
 [[languages]]
+name = "llvm"
+repo = "https://github.com/benwilliamgraham/tree-sitter-llvm"
+
+[[languages]]
 name = "lua"
 repo = "https://github.com/tjdevries/tree-sitter-lua"
+# Something in the nvim queries doesn't play nice with vanilla tree-sitter
+nvim_override = false
 
 [[languages]]
 name = "make"
@@ -188,12 +196,6 @@ repo = "https://github.com/aMOPel/tree-sitter-nim"
 [[languages]]
 name = "nix"
 repo = "https://github.com/nix-community/tree-sitter-nix"
-
-[[languages]]
-name = "objc"
-pretty_name = "ObjC"
-repo = "https://github.com/jiyee/tree-sitter-objc"
-aliases = ["objective-c", "objectivec", "obj-c"]
 
 [[languages]]
 name = "ocaml"
@@ -240,6 +242,12 @@ name = "php"
 repo = "https://github.com/tree-sitter/tree-sitter-php"
 
 [[languages]]
+name = "proto"
+pretty_name = "ProtoBuf"
+repo = "https://github.com/treywood/tree-sitter-proto"
+aliases = ["protobuf"]
+
+[[languages]]
 name = "python"
 repo = "https://github.com/tree-sitter/tree-sitter-python"
 aliases = ["py"]
@@ -247,6 +255,11 @@ aliases = ["py"]
 [[languages]]
 name = "r"
 repo = "https://github.com/r-lib/tree-sitter-r/"
+
+[[languages]]
+name = "racket"
+repo = "https://github.com/6cdh/tree-sitter-racket"
+aliases = ["rkt"]
 
 [[languages]]
 name = "regex"

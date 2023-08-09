@@ -30,12 +30,12 @@ Inkjet comes bundled with support for over sixty languages, and it's easy to add
 - C
 - Cap'n Proto
 - Clojure
-- CMake
 - C#
 - Common Lisp
 - C++
 - CSS
 - Cue
+- D
 - Dart
 - `diff` output
 - Dockerfile
@@ -56,20 +56,22 @@ Inkjet comes bundled with support for over sixty languages, and it's easy to add
 - Julia
 - Kotlin
 - LaTeX
+- LLVM
 - Lua
 - GNU Make
 - MatLab
 - Meson
 - Nim
 - Nix
-- Objective-C
 - OCaml
 - OpenSCAD
 - Pascal
 - Perl
 - PHP
+- Protobuf
 - Python
 - R
+- Racket
 - Regex
 - Ruby
 - Rust

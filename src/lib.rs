@@ -9,18 +9,12 @@
 
 mod error;
 mod languages;
+pub mod constants;
 pub mod formatter;
 
-use ahash::{HashMap, HashSet};
-use tree_sitter_highlight::{
-    HighlightConfiguration,
-    Highlighter as TSHighlighter
-};
+use tree_sitter_highlight::Highlighter as TSHighlighter;
 
-use crate::formatter::{
-    Formatter,
-    HIGHLIGHT_NAMES
-};
+use crate::formatter::Formatter;
 
 pub use tree_sitter_highlight;
 
@@ -31,16 +25,50 @@ pub use crate::error::{
     InkjetResult as Result
 };
 
+/// A type for highlighting code.
 /// 
+/// [`Highlighter`]s store the configuration for all the languages you want to highlight, as well as
+/// the underlying `tree-sitter` parser used to do the heavy lifting.
+/// 
+/// To create a highlighter, use the [`Highlighter::builder`] method:
+/// 
+/// Then, to highlight some code, use the [`highlight_to_writer`](Highligher::highlight_to_writer) or [`highlight_to_string`](Highligher::highlight_to_string)
+/// methods:
+/// 
+/// ```rust
+/// # use std::io;
+/// # use inkjet::*;
+/// # let mut highlighter = Highlighter::new();
+/// let code = r#"
+///     fn main() {
+///         println!("Hello, world!");
+///     }
+/// "#;
+/// 
+/// // Highlighting into the void
+/// let _ = highlighter.highlight_to_writer(
+///     Language::Rust,
+///     &formatter::Html,
+///     code,
+///     &mut io::sink()
+/// )?;
+/// 
+/// let out = highlighter.highlight_to_string(
+///     Language::Rust,
+///     &formatter::Html,
+///     code
+/// )?;
+/// 
+/// # Ok::<(), InkjetError>(())
+/// ```
 pub struct Highlighter {
-    languages: HashMap<Language, HighlightConfiguration>,
     highlighter: TSHighlighter,
 }
 
 impl Highlighter {
     /// Create a new [highlighter builder](HighlighterBuilder).
-    pub fn builder() -> HighlighterBuilder {
-        HighlighterBuilder::new()
+    pub fn new() -> Self {
+        Self { highlighter: TSHighlighter::new() }
     }
 
     pub fn highlight_to_writer<F, O>(
@@ -54,14 +82,19 @@ impl Highlighter {
         F: Formatter,
         O: std::io::Write,
     {
-        let Some(config) = self.languages.get(&lang) else {
-            return Err(InkjetError::InvalidLanguage)
-        };
+        let config = lang.config();
 
         let highlights = self
             .highlighter
-            .highlight(config, source.as_bytes(), None, |_| None)?;
-
+            .highlight(
+                config,
+                source.as_bytes(),
+                None,
+                |token| match Language::from_token(token) {
+                    Some(lang) => Some(lang.config()),
+                    None => None
+                })?;
+        
         for event in highlights {
             formatter.write_io(source, output, event?)?
         }
@@ -69,6 +102,7 @@ impl Highlighter {
         Ok(())
     }
 
+    /// Highlight a string of the provided language to 
     pub fn highlight_to_string<F>(
         &mut self,
         lang: Language,
@@ -78,15 +112,20 @@ impl Highlighter {
     where
         F: Formatter,
     {
-        let Some(config) = self.languages.get(&lang) else {
-            return Err(InkjetError::InvalidLanguage)
-        };
+        let config = lang.config();
 
         let mut buffer = String::new();
 
         let highlights = self
             .highlighter
-            .highlight(config, source.as_bytes(), None, |_| None)?;
+            .highlight(
+                config,
+                source.as_bytes(),
+                None,
+                |token| match Language::from_token(token) {
+                    Some(lang) => Some(lang.config()),
+                    None => None
+                })?;
 
         for event in highlights {
             formatter.write_fmt(source,&mut buffer, event?)?
@@ -96,80 +135,15 @@ impl Highlighter {
     }
 }
 
+impl Default for Highlighter {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Clone for Highlighter {
     fn clone(&self) -> Self {
-        let languages = self
-            .languages
-            .keys()
-            .copied()
-            .map(|lang| {
-                let mut config = lang.config();
-                config.configure(HIGHLIGHT_NAMES);
-
-                (lang, config)
-            })
-            .collect();
-
-        let highlighter = TSHighlighter::new();
-
-        Self {
-            languages,
-            highlighter
-        }
-    }
-}
-
-/// A builder for [`Highlighter`]s.
-#[derive(Debug, Default)]
-pub struct HighlighterBuilder {
-    languages: HashSet<Language>,
-}
-
-impl HighlighterBuilder {
-    /// Create a new highlighter builder.
-    pub fn new() -> Self {
-        Self::default()
-    }
-
-    /// Add a language to the builder.
-    pub fn language(mut self, lang: Language) -> Self {
-        self.languages.insert(lang);
-        self
-    }
-
-    /// Add a set of languages to the builder.
-    pub fn languages(mut self, langs: impl Iterator<Item = Language>) -> Self {
-        self.languages.extend(langs);
-        self
-    }
-
-    /// Add all supported languags to the builder.
-    #[allow(unused_mut)]
-    pub fn all_languages(mut self) -> Self {
-        self.languages(
-            Language::ALL_LANGS.iter().copied()
-        )
-    }
-
-    /// Consume the builder, constructing a new [`Highlighter`].
-    pub fn build(self) -> Highlighter {
-        let languages = self
-            .languages
-            .into_iter()
-            .map(|lang| {
-                let mut config = lang.config();
-                config.configure(HIGHLIGHT_NAMES);
-
-                (lang, config)
-            })
-            .collect();
-
-        let highlighter = TSHighlighter::new();
-
-        Highlighter {
-            languages,
-            highlighter
-        }
+        Self { highlighter: TSHighlighter::new() }
     }
 }
 
@@ -180,15 +154,12 @@ mod tests {
     use super::*;
 
     #[test]
-    fn self_test() {
-        let mut hili = Highlighter::builder()
-            .language(Language::Rust)
-            .build();
-        
-        hili.highlight_to_string(
+    fn self_test() {        
+        Highlighter::new().highlight_to_writer(
             Language::Rust,
             &formatter::Html,
-            include_str!("lib.rs")
+            include_str!("lib.rs"),
+            &mut std::io::sink()
         ).unwrap();
     }
 }

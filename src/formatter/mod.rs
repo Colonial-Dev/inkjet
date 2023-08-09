@@ -1,6 +1,5 @@
-//! Constants and traits for formatting the output of highlighters.
+//! Traits and implementations for formatting the output of highlighters.
 
-mod constants;
 #[cfg(feature = "html")]
 mod html;
 
@@ -8,7 +7,6 @@ use tree_sitter_highlight::HighlightEvent;
 
 use crate::error::InkjetResult as Result;
 
-pub use constants::*;
 #[cfg(feature = "html")]
 pub use html::*;
 

@@ -54,7 +54,7 @@ fn download_langs(languages: &[Language]) -> Result<()> {
 
             let nvim_query_path = format!("languages/temp/nvim/queries/{}", lang.name);
 
-            let query_path = match Path::new(&nvim_query_path).try_exists()? {
+            let query_path = match Path::new(&nvim_query_path).try_exists()? && lang.nvim_override {
                 false => format!("languages/temp/{}/queries", lang.name),
                 true => nvim_query_path,
             };
@@ -68,6 +68,7 @@ fn download_langs(languages: &[Language]) -> Result<()> {
             // Remove unneeded queries and JSON data.
             // We discard the error because these files might not be there.
             let _ = fs::remove_file(format!("languages/{}/queries/textobjects.scm", lang.name));
+            let _ = fs::remove_file(format!("languages/{}/queries/indents.scm", lang.name));
             let _ = fs::remove_file(format!("languages/{}/queries/folds.scm", lang.name));
             let _ = fs::remove_file(format!("languages/{}/src/grammar.json", lang.name));
             let _ = fs::remove_file(format!("languages/{}/src/node-types.json", lang.name));
@@ -121,7 +122,7 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
         // Add language to config match
         writeln!(
             &mut into_cfg_buffer,
-            "Self::{pretty_name} => {}::config(),",
+            "Self::{pretty_name} => &{}::CONFIG,",
             lang.name
         )?;
 
@@ -167,7 +168,7 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
                 }}
             }}
 
-            pub(crate) fn config(&self) -> HighlightConfiguration {{
+            pub(crate) fn config(&self) -> &'static HighlightConfiguration {{
                 match *self {{
                     {into_cfg_buffer}
                 }}
@@ -194,6 +195,8 @@ struct Languages {
 struct Language {
     name: String,
     repo: String,
+    #[serde(default = "bool_true")]
+    nvim_override: bool,
     #[serde(default)]
     aliases: Vec<String>,
     command: Option<String>,
@@ -281,21 +284,28 @@ impl Language {
         let generated_module = indoc::formatdoc!(
             "
             pub mod {name} {{
+                use once_cell::sync::Lazy;
                 use tree_sitter::Language;
                 use tree_sitter_highlight::HighlightConfiguration;
+
+                use crate::constants::HIGHLIGHT_NAMES;
             
                 extern \"C\" {{
                     pub fn tree_sitter_{name}() -> Language;
                 }}
 
-                pub fn config() -> HighlightConfiguration {{
-                    HighlightConfiguration::new(
+                pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {{
+                    let mut config = HighlightConfiguration::new(
                         unsafe {{ tree_sitter_{name}() }},
                         HIGHLIGHT_QUERY,
                         INJECTIONS_QUERY,
                         LOCALS_QUERY,
-                    ).expect(\"Failed to load highlight configuration for language '{name}'!\")
-                }}
+                    ).expect(\"Failed to load highlight configuration for language '{name}'!\");
+
+                    config.configure(HIGHLIGHT_NAMES);
+
+                    config
+                }});
             
                 pub const HIGHLIGHT_QUERY: &str = {highlight_query};
                 pub const INJECTIONS_QUERY: &str = {injections_query};
@@ -303,12 +313,19 @@ impl Language {
             
                 #[cfg(test)]
                 mod tests {{
+                    use super::*;
+
                     #[test]
                     fn grammar_loading() {{
                         let mut parser = tree_sitter::Parser::new();
                         parser
                             .set_language(unsafe {{ super::tree_sitter_{name}() }})
                             .expect(\"Grammar should load successfully.\");
+                    }}
+
+                    #[test]
+                    fn config_loading() {{
+                        let _cfg = Lazy::get(&CONFIG);
                     }}
                 }}
             }}
@@ -330,4 +347,8 @@ fn uppercase_first_char(str: &str) -> String {
         None => String::new(),
         Some(char) => char.to_uppercase().collect::<String>() + chars.as_str(),
     }
+}
+
+fn bool_true() -> bool {
+    true
 }
