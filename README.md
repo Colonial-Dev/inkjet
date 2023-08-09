@@ -13,7 +13,7 @@
 ## Features
 
 - Language grammars are linked into the executable as C functions - no need to load anything at runtime!
-- Pluggable formatters. Inkjet includes formatters for HTML (either with class names or inline styles), and you can write your own if needed.
+- Pluggable formatters. Inkjet includes a formatter for HTML, and you can write your own if needed.
 - Highlight into a new `String` or a `std::io::Writer`, depending on your use case.
 - Specify languages explicitly (from an `enum`) or look them up using a token like `"rs"` or `"rust"`.
 - ~~Extremely cursed `build.rs`~~
@@ -38,7 +38,7 @@ Inkjet comes bundled with support for over sixty languages, and it's easy to add
 - Cue
 - Dart
 - `diff` output
-- Dockerfule
+- Dockerfile
 - Emacs Lisp
 - Elixir
 - Elm

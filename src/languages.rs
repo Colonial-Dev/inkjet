@@ -18,8 +18,7 @@ pub mod ada {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'ada'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ada/queries/highlights.scm");
@@ -52,8 +51,7 @@ pub mod asm {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'asm'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/asm/queries/highlights.scm");
@@ -86,8 +84,7 @@ pub mod bash {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'bash'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/bash/queries/highlights.scm");
@@ -120,8 +117,7 @@ pub mod bibtex {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'bibtex'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/bibtex/queries/highlights.scm");
@@ -154,8 +150,7 @@ pub mod blueprint {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'blueprint'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/blueprint/queries/highlights.scm");
@@ -188,8 +183,7 @@ pub mod c {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'c'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/c/queries/highlights.scm");
@@ -222,8 +216,7 @@ pub mod capnp {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'capnp'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/capnp/queries/highlights.scm");
@@ -256,8 +249,7 @@ pub mod clojure {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'clojure'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/clojure/queries/highlights.scm");
@@ -290,8 +282,7 @@ pub mod cmake {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'cmake'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cmake/queries/highlights.scm");
@@ -324,8 +315,7 @@ pub mod c_sharp {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'c_sharp'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/c_sharp/queries/highlights.scm");
@@ -358,12 +348,10 @@ pub mod commonlisp {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'commonlisp'!")
     }
 
-    pub const HIGHLIGHT_QUERY: &str =
-        include_str!("../languages/commonlisp/queries/highlights.scm");
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/commonlisp/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/commonlisp/queries/locals.scm");
 
@@ -393,8 +381,7 @@ pub mod cpp {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'cpp'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cpp/queries/highlights.scm");
@@ -427,8 +414,7 @@ pub mod css {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'css'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/css/queries/highlights.scm");
@@ -461,8 +447,7 @@ pub mod cue {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'cue'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cue/queries/highlights.scm");
@@ -495,8 +480,7 @@ pub mod dart {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'dart'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/dart/queries/highlights.scm");
@@ -529,8 +513,7 @@ pub mod diff {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'diff'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/diff/queries/highlights.scm");
@@ -563,14 +546,11 @@ pub mod dockerfile {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'dockerfile'!")
     }
 
-    pub const HIGHLIGHT_QUERY: &str =
-        include_str!("../languages/dockerfile/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str =
-        include_str!("../languages/dockerfile/queries/injections.scm");
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/dockerfile/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/dockerfile/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -599,8 +579,7 @@ pub mod elisp {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'elisp'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elisp/queries/highlights.scm");
@@ -633,8 +612,7 @@ pub mod elixir {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'elixir'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elixir/queries/highlights.scm");
@@ -667,8 +645,7 @@ pub mod elm {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'elm'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elm/queries/highlights.scm");
@@ -701,8 +678,7 @@ pub mod erlang {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'erlang'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/erlang/queries/highlights.scm");
@@ -735,8 +711,7 @@ pub mod fortran {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'fortran'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/fortran/queries/highlights.scm");
@@ -769,8 +744,7 @@ pub mod go {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'go'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/go/queries/highlights.scm");
@@ -803,8 +777,7 @@ pub mod gdscript {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'gdscript'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/gdscript/queries/highlights.scm");
@@ -837,8 +810,7 @@ pub mod glsl {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'glsl'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/glsl/queries/highlights.scm");
@@ -871,8 +843,7 @@ pub mod haskell {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'haskell'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/haskell/queries/highlights.scm");
@@ -905,8 +876,7 @@ pub mod html {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'html'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/html/queries/highlights.scm");
@@ -939,8 +909,7 @@ pub mod java {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'java'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/java/queries/highlights.scm");
@@ -973,14 +942,11 @@ pub mod javascript {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'javascript'!")
     }
 
-    pub const HIGHLIGHT_QUERY: &str =
-        include_str!("../languages/javascript/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str =
-        include_str!("../languages/javascript/queries/injections.scm");
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/javascript/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/javascript/queries/injections.scm");
     pub const LOCALS_QUERY: &str = include_str!("../languages/javascript/queries/locals.scm");
 
     #[cfg(test)]
@@ -1009,8 +975,7 @@ pub mod json {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'json'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/json/queries/highlights.scm");
@@ -1043,8 +1008,7 @@ pub mod julia {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'julia'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/julia/queries/highlights.scm");
@@ -1077,8 +1041,7 @@ pub mod kotlin {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'kotlin'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/kotlin/queries/highlights.scm");
@@ -1111,8 +1074,7 @@ pub mod latex {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'latex'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/latex/queries/highlights.scm");
@@ -1145,8 +1107,7 @@ pub mod lua {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'lua'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/lua/queries/highlights.scm");
@@ -1179,8 +1140,7 @@ pub mod make {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'make'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/make/queries/highlights.scm");
@@ -1213,8 +1173,7 @@ pub mod matlab {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'matlab'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/matlab/queries/highlights.scm");
@@ -1247,8 +1206,7 @@ pub mod meson {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'meson'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/meson/queries/highlights.scm");
@@ -1281,8 +1239,7 @@ pub mod nim {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'nim'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = "";
@@ -1315,8 +1272,7 @@ pub mod nix {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'nix'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/nix/queries/highlights.scm");
@@ -1349,8 +1305,7 @@ pub mod objc {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'objc'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/objc/queries/highlights.scm");
@@ -1383,8 +1338,7 @@ pub mod ocaml {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'ocaml'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ocaml/queries/highlights.scm");
@@ -1417,14 +1371,11 @@ pub mod ocaml_interface {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'ocaml_interface'!")
     }
 
-    pub const HIGHLIGHT_QUERY: &str =
-        include_str!("../languages/ocaml_interface/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str =
-        include_str!("../languages/ocaml_interface/queries/injections.scm");
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ocaml_interface/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/ocaml_interface/queries/injections.scm");
     pub const LOCALS_QUERY: &str = include_str!("../languages/ocaml_interface/queries/locals.scm");
 
     #[cfg(test)]
@@ -1453,8 +1404,7 @@ pub mod openscad {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'openscad'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/openscad/queries/highlights.scm");
@@ -1487,8 +1437,7 @@ pub mod pascal {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'pascal'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/pascal/queries/highlights.scm");
@@ -1521,8 +1470,7 @@ pub mod perl {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'perl'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/perl/queries/highlights.scm");
@@ -1555,8 +1503,7 @@ pub mod php {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'php'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/php/queries/highlights.scm");
@@ -1589,8 +1536,7 @@ pub mod python {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'python'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/python/queries/highlights.scm");
@@ -1623,8 +1569,7 @@ pub mod r {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'r'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/r/queries/highlights.scm");
@@ -1657,8 +1602,7 @@ pub mod regex {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'regex'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/regex/queries/highlights.scm");
@@ -1691,8 +1635,7 @@ pub mod ruby {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'ruby'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ruby/queries/highlights.scm");
@@ -1725,8 +1668,7 @@ pub mod rust {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'rust'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/rust/queries/highlights.scm");
@@ -1759,8 +1701,7 @@ pub mod scala {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'scala'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scala/queries/highlights.scm");
@@ -1793,8 +1734,7 @@ pub mod scheme {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'scheme'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scheme/queries/highlights.scm");
@@ -1827,8 +1767,7 @@ pub mod scss {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'scss'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scss/queries/highlights.scm");
@@ -1861,8 +1800,7 @@ pub mod sql {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'sql'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/sql/queries/highlights.scm");
@@ -1895,8 +1833,7 @@ pub mod toml {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'toml'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/toml/queries/highlights.scm");
@@ -1929,14 +1866,11 @@ pub mod typescript {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'typescript'!")
     }
 
-    pub const HIGHLIGHT_QUERY: &str =
-        include_str!("../languages/typescript/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str =
-        include_str!("../languages/typescript/queries/injections.scm");
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/typescript/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/typescript/queries/injections.scm");
     pub const LOCALS_QUERY: &str = include_str!("../languages/typescript/queries/locals.scm");
 
     #[cfg(test)]
@@ -1965,8 +1899,7 @@ pub mod x86asm {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'x86asm'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/x86asm/queries/highlights.scm");
@@ -1999,8 +1932,7 @@ pub mod yaml {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'yaml'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/yaml/queries/highlights.scm");
@@ -2033,8 +1965,7 @@ pub mod wgsl {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'wgsl'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/wgsl/queries/highlights.scm");
@@ -2067,8 +1998,7 @@ pub mod zig {
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        )
-        .unwrap()
+        ).expect("Failed to load highlight configuration for language 'zig'!")
     }
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/zig/queries/highlights.scm");
@@ -2098,7 +2028,7 @@ pub enum Language {
     C,
     Capnp,
     Clojure,
-    Cmake,
+    CMake,
     CSharp,
     CommonLisp,
     Cpp,
@@ -2129,7 +2059,7 @@ pub enum Language {
     Meson,
     Nim,
     Nix,
-    Objc,
+    ObjC,
     Ocaml,
     OcamlInterface,
     OpenScad,
@@ -2154,6 +2084,70 @@ pub enum Language {
 }
 
 impl Language {
+    pub(crate) const ALL_LANGS: &[Self] = &[
+        Self::Ada,
+        Self::GenericAsm,
+        Self::Bash,
+        Self::Bibtex,
+        Self::Blueprint,
+        Self::C,
+        Self::Capnp,
+        Self::Clojure,
+        Self::CMake,
+        Self::CSharp,
+        Self::CommonLisp,
+        Self::Cpp,
+        Self::Css,
+        Self::Cue,
+        Self::Dart,
+        Self::Diff,
+        Self::Dockerfile,
+        Self::Elisp,
+        Self::Elixir,
+        Self::Elm,
+        Self::Erlang,
+        Self::Fortran,
+        Self::Go,
+        Self::GDScript,
+        Self::Glsl,
+        Self::Haskell,
+        Self::Html,
+        Self::Java,
+        Self::Javascript,
+        Self::Json,
+        Self::Julia,
+        Self::Kotlin,
+        Self::Latex,
+        Self::Lua,
+        Self::Make,
+        Self::Matlab,
+        Self::Meson,
+        Self::Nim,
+        Self::Nix,
+        Self::ObjC,
+        Self::Ocaml,
+        Self::OcamlInterface,
+        Self::OpenScad,
+        Self::Pascal,
+        Self::Perl,
+        Self::Php,
+        Self::Python,
+        Self::R,
+        Self::Regex,
+        Self::Ruby,
+        Self::Rust,
+        Self::Scala,
+        Self::Scheme,
+        Self::Scss,
+        Self::Sql,
+        Self::Toml,
+        Self::Typescript,
+        Self::X86asm,
+        Self::Yaml,
+        Self::Wgsl,
+        Self::Zig,
+    ];
+
     /// Attempts to convert a string token (such as `rust` or `rs`) into the corresponding language.
     /// 
     /// Returns [`None`] if the language was not found.
@@ -2175,7 +2169,7 @@ impl Language {
             "clojure" => Some(Self::Clojure),
             "clj" => Some(Self::Clojure),
             "cljc" => Some(Self::Clojure),
-            "cmake" => Some(Self::Cmake),
+            "cmake" => Some(Self::CMake),
             "c_sharp" => Some(Self::CSharp),
             "c#" => Some(Self::CSharp),
             "csharp" => Some(Self::CSharp),
@@ -2240,10 +2234,10 @@ impl Language {
             "meson" => Some(Self::Meson),
             "nim" => Some(Self::Nim),
             "nix" => Some(Self::Nix),
-            "objc" => Some(Self::Objc),
-            "objective-c" => Some(Self::Objc),
-            "objectivec" => Some(Self::Objc),
-            "obj-c" => Some(Self::Objc),
+            "objc" => Some(Self::ObjC),
+            "objective-c" => Some(Self::ObjC),
+            "objectivec" => Some(Self::ObjC),
+            "obj-c" => Some(Self::ObjC),
             "ocaml" => Some(Self::Ocaml),
             "ml" => Some(Self::Ocaml),
             "ocaml_interface" => Some(Self::OcamlInterface),
@@ -2290,7 +2284,7 @@ impl Language {
             Self::C => c::config(),
             Self::Capnp => capnp::config(),
             Self::Clojure => clojure::config(),
-            Self::Cmake => cmake::config(),
+            Self::CMake => cmake::config(),
             Self::CSharp => c_sharp::config(),
             Self::CommonLisp => commonlisp::config(),
             Self::Cpp => cpp::config(),
@@ -2321,7 +2315,7 @@ impl Language {
             Self::Meson => meson::config(),
             Self::Nim => nim::config(),
             Self::Nix => nix::config(),
-            Self::Objc => objc::config(),
+            Self::ObjC => objc::config(),
             Self::Ocaml => ocaml::config(),
             Self::OcamlInterface => ocaml_interface::config(),
             Self::OpenScad => openscad::config(),

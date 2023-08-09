@@ -144,8 +144,11 @@ impl HighlighterBuilder {
     }
 
     /// Add all supported languags to the builder.
+    #[allow(unused_mut)]
     pub fn all_languages(mut self) -> Self {
-        todo!()
+        self.languages(
+            Language::ALL_LANGS.iter().copied()
+        )
     }
 
     /// Consume the builder, constructing a new [`Highlighter`].
@@ -181,7 +184,7 @@ mod tests {
         let mut hili = Highlighter::builder()
             .language(Language::Rust)
             .build();
-
+        
         hili.highlight_to_string(
             Language::Rust,
             &formatter::Html,

@@ -99,6 +99,7 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
     }
 
     let mut member_buffer = String::new();
+    let mut all_langs_buffer = String::new();
     let mut from_str_buffer = String::new();
     let mut into_cfg_buffer = String::new();
 
@@ -113,6 +114,9 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
 
         // Add language to member list
         writeln!(&mut member_buffer, "{},", pretty_name)?;
+
+        // Add language to ALL_LANGS static
+        writeln!(&mut all_langs_buffer, "Self::{},", pretty_name)?;
 
         // Add language to config match
         writeln!(
@@ -146,6 +150,10 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
         }}
 
         impl Language {{
+            pub(crate) const ALL_LANGS: &[Self] = &[
+                {all_langs_buffer}
+            ];
+
             /// Attempts to convert a string token (such as `rust` or `rs`) into the corresponding language.
             /// 
             /// Returns [`None`] if the language was not found.
