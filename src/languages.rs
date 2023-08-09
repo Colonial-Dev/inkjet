@@ -123,8 +123,8 @@ pub mod bash {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/bash/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/bash/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/bash/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -171,7 +171,7 @@ pub mod bibtex {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/bibtex/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = include_str!("../languages/bibtex/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -264,8 +264,8 @@ pub mod c {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/c/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/c/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/c/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -358,8 +358,8 @@ pub mod clojure {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/clojure/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/clojure/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/clojure/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -405,8 +405,8 @@ pub mod c_sharp {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/c_sharp/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/c_sharp/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/c_sharp/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -451,9 +451,9 @@ pub mod commonlisp {
         config
     });
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/commonlisp/queries/highlights.scm");
+    pub const HIGHLIGHT_QUERY: &str = "";
     pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = include_str!("../languages/commonlisp/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -500,7 +500,7 @@ pub mod cpp {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cpp/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/cpp/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/cpp/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -546,7 +546,7 @@ pub mod css {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/css/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/css/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -687,8 +687,8 @@ pub mod dart {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/dart/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/dart/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/dart/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -781,7 +781,7 @@ pub mod dockerfile {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/dockerfile/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/dockerfile/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -876,7 +876,7 @@ pub mod elixir {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elixir/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/elixir/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/elixir/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -923,7 +923,7 @@ pub mod elm {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/elm/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/elm/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = include_str!("../languages/elm/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -1063,8 +1063,8 @@ pub mod go {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/go/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/go/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/go/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1075,53 +1075,6 @@ pub mod go {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { super::tree_sitter_go() })
-                .expect("Grammar should load successfully.");
-        }
-
-        #[test]
-        fn config_loading() {
-            let _cfg = Lazy::get(&CONFIG);
-        }
-    }
-}
-
-pub mod gdscript {
-    use once_cell::sync::Lazy;
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    use crate::constants::HIGHLIGHT_NAMES;
-
-    extern "C" {
-        pub fn tree_sitter_gdscript() -> Language;
-    }
-
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
-        let mut config = HighlightConfiguration::new(
-            unsafe { tree_sitter_gdscript() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'gdscript'!");
-
-        config.configure(HIGHLIGHT_NAMES);
-
-        config
-    });
-
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/gdscript/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/gdscript/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/gdscript/queries/locals.scm");
-
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_gdscript() })
                 .expect("Grammar should load successfully.");
         }
 
@@ -1157,8 +1110,8 @@ pub mod glsl {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/glsl/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/glsl/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/glsl/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1204,8 +1157,8 @@ pub mod haskell {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/haskell/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/haskell/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = include_str!("../languages/haskell/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -1252,7 +1205,7 @@ pub mod html {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/html/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/html/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/html/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1298,8 +1251,8 @@ pub mod java {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/java/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/java/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/java/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1393,7 +1346,7 @@ pub mod json {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/json/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = include_str!("../languages/json/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1404,53 +1357,6 @@ pub mod json {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { super::tree_sitter_json() })
-                .expect("Grammar should load successfully.");
-        }
-
-        #[test]
-        fn config_loading() {
-            let _cfg = Lazy::get(&CONFIG);
-        }
-    }
-}
-
-pub mod julia {
-    use once_cell::sync::Lazy;
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    use crate::constants::HIGHLIGHT_NAMES;
-
-    extern "C" {
-        pub fn tree_sitter_julia() -> Language;
-    }
-
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
-        let mut config = HighlightConfiguration::new(
-            unsafe { tree_sitter_julia() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'julia'!");
-
-        config.configure(HIGHLIGHT_NAMES);
-
-        config
-    });
-
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/julia/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/julia/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/julia/queries/locals.scm");
-
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_julia() })
                 .expect("Grammar should load successfully.");
         }
 
@@ -1486,54 +1392,7 @@ pub mod kotlin {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/kotlin/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/kotlin/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/kotlin/queries/locals.scm");
-
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_kotlin() })
-                .expect("Grammar should load successfully.");
-        }
-
-        #[test]
-        fn config_loading() {
-            let _cfg = Lazy::get(&CONFIG);
-        }
-    }
-}
-
-pub mod latex {
-    use once_cell::sync::Lazy;
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    use crate::constants::HIGHLIGHT_NAMES;
-
-    extern "C" {
-        pub fn tree_sitter_latex() -> Language;
-    }
-
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
-        let mut config = HighlightConfiguration::new(
-            unsafe { tree_sitter_latex() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'latex'!");
-
-        config.configure(HIGHLIGHT_NAMES);
-
-        config
-    });
-
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/latex/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/latex/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -1544,7 +1403,7 @@ pub mod latex {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { super::tree_sitter_latex() })
+                .set_language(unsafe { super::tree_sitter_kotlin() })
                 .expect("Grammar should load successfully.");
         }
 
@@ -1626,9 +1485,9 @@ pub mod lua {
         config
     });
 
-    pub const HIGHLIGHT_QUERY: &str = "";
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/lua/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/lua/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/lua/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -1674,7 +1533,7 @@ pub mod make {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/make/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/make/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -1720,9 +1579,9 @@ pub mod matlab {
         config
     });
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/matlab/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/matlab/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/matlab/queries/locals.scm");
+    pub const HIGHLIGHT_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1768,7 +1627,7 @@ pub mod meson {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/meson/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/meson/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -1909,7 +1768,7 @@ pub mod ocaml {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ocaml/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/ocaml/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/ocaml/queries/locals.scm");
 
     #[cfg(test)]
@@ -1956,7 +1815,7 @@ pub mod ocaml_interface {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ocaml_interface/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/ocaml_interface/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/ocaml_interface/queries/locals.scm");
 
     #[cfg(test)]
@@ -2050,7 +1909,7 @@ pub mod pascal {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/pascal/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/pascal/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/pascal/queries/locals.scm");
 
     #[cfg(test)]
@@ -2062,53 +1921,6 @@ pub mod pascal {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { super::tree_sitter_pascal() })
-                .expect("Grammar should load successfully.");
-        }
-
-        #[test]
-        fn config_loading() {
-            let _cfg = Lazy::get(&CONFIG);
-        }
-    }
-}
-
-pub mod perl {
-    use once_cell::sync::Lazy;
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    use crate::constants::HIGHLIGHT_NAMES;
-
-    extern "C" {
-        pub fn tree_sitter_perl() -> Language;
-    }
-
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
-        let mut config = HighlightConfiguration::new(
-            unsafe { tree_sitter_perl() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'perl'!");
-
-        config.configure(HIGHLIGHT_NAMES);
-
-        config
-    });
-
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/perl/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/perl/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = "";
-
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_perl() })
                 .expect("Grammar should load successfully.");
         }
 
@@ -2145,7 +1957,7 @@ pub mod php {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/php/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/php/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/php/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -2238,8 +2050,8 @@ pub mod python {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/python/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/python/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/python/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -2285,7 +2097,7 @@ pub mod r {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/r/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/r/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/r/queries/locals.scm");
 
     #[cfg(test)]
@@ -2332,8 +2144,8 @@ pub mod racket {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/racket/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/racket/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = include_str!("../languages/racket/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -2426,7 +2238,7 @@ pub mod ruby {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ruby/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/ruby/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/ruby/queries/locals.scm");
 
     #[cfg(test)]
@@ -2474,7 +2286,7 @@ pub mod rust {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/rust/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/rust/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/rust/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -2519,9 +2331,9 @@ pub mod scala {
         config
     });
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scala/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/scala/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/scala/queries/locals.scm");
+    pub const HIGHLIGHT_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -2567,7 +2379,7 @@ pub mod scheme {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scheme/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/scheme/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -2661,7 +2473,7 @@ pub mod sql {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/sql/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/sql/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -2673,6 +2485,53 @@ pub mod sql {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { super::tree_sitter_sql() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+pub mod swift {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_swift() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_swift() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'swift'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/swift/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = include_str!("../languages/swift/queries/locals.scm");
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_swift() })
                 .expect("Grammar should load successfully.");
         }
 
@@ -2708,8 +2567,8 @@ pub mod toml {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/toml/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/toml/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/toml/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -2755,7 +2614,7 @@ pub mod typescript {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/typescript/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/typescript/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/typescript/queries/locals.scm");
 
     #[cfg(test)]
@@ -2814,53 +2673,6 @@ pub mod x86asm {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { super::tree_sitter_x86asm() })
-                .expect("Grammar should load successfully.");
-        }
-
-        #[test]
-        fn config_loading() {
-            let _cfg = Lazy::get(&CONFIG);
-        }
-    }
-}
-
-pub mod yaml {
-    use once_cell::sync::Lazy;
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-
-    use crate::constants::HIGHLIGHT_NAMES;
-
-    extern "C" {
-        pub fn tree_sitter_yaml() -> Language;
-    }
-
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
-        let mut config = HighlightConfiguration::new(
-            unsafe { tree_sitter_yaml() },
-            HIGHLIGHT_QUERY,
-            INJECTIONS_QUERY,
-            LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'yaml'!");
-
-        config.configure(HIGHLIGHT_NAMES);
-
-        config
-    });
-
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/yaml/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/yaml/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/yaml/queries/locals.scm");
-
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { super::tree_sitter_yaml() })
                 .expect("Grammar should load successfully.");
         }
 
@@ -2944,7 +2756,7 @@ pub mod zig {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/zig/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/zig/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/zig/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -2991,16 +2803,13 @@ pub enum Language {
     Erlang,
     Fortran,
     Go,
-    GDScript,
     Glsl,
     Haskell,
     Html,
     Java,
     Javascript,
     Json,
-    Julia,
     Kotlin,
-    Latex,
     Llvm,
     Lua,
     Make,
@@ -3012,7 +2821,6 @@ pub enum Language {
     OcamlInterface,
     OpenScad,
     Pascal,
-    Perl,
     Php,
     ProtoBuf,
     Python,
@@ -3025,10 +2833,10 @@ pub enum Language {
     Scheme,
     Scss,
     Sql,
+    Swift,
     Toml,
     Typescript,
     X86asm,
-    Yaml,
     Wgsl,
     Zig,
 }
@@ -3058,16 +2866,13 @@ impl Language {
         Self::Erlang,
         Self::Fortran,
         Self::Go,
-        Self::GDScript,
         Self::Glsl,
         Self::Haskell,
         Self::Html,
         Self::Java,
         Self::Javascript,
         Self::Json,
-        Self::Julia,
         Self::Kotlin,
-        Self::Latex,
         Self::Llvm,
         Self::Lua,
         Self::Make,
@@ -3079,7 +2884,6 @@ impl Language {
         Self::OcamlInterface,
         Self::OpenScad,
         Self::Pascal,
-        Self::Perl,
         Self::Php,
         Self::ProtoBuf,
         Self::Python,
@@ -3092,10 +2896,10 @@ impl Language {
         Self::Scheme,
         Self::Scss,
         Self::Sql,
+        Self::Swift,
         Self::Toml,
         Self::Typescript,
         Self::X86asm,
-        Self::Yaml,
         Self::Wgsl,
         Self::Zig,
     ];
@@ -3107,125 +2911,7 @@ impl Language {
     /// The tokens for each language are sourced from its `name` and `aliases` keys in
     /// `config/languages.toml`.
     pub fn from_token(token: &str) -> Option<Self> {
-        match token {
-            "ada" => Some(Self::Ada),
-            "asm" => Some(Self::GenericAsm),
-            "bash" => Some(Self::Bash),
-            "bibtex" => Some(Self::Bibtex),
-            "bib" => Some(Self::Bibtex),
-            "blueprint" => Some(Self::Blueprint),
-            "blp" => Some(Self::Blueprint),
-            "c" => Some(Self::C),
-            "h" => Some(Self::C),
-            "capnp" => Some(Self::Capnp),
-            "clojure" => Some(Self::Clojure),
-            "clj" => Some(Self::Clojure),
-            "cljc" => Some(Self::Clojure),
-            "c_sharp" => Some(Self::CSharp),
-            "c#" => Some(Self::CSharp),
-            "csharp" => Some(Self::CSharp),
-            "cs" => Some(Self::CSharp),
-            "commonlisp" => Some(Self::CommonLisp),
-            "cl" => Some(Self::CommonLisp),
-            "lisp" => Some(Self::CommonLisp),
-            "common-lisp" => Some(Self::CommonLisp),
-            "cpp" => Some(Self::Cpp),
-            "c++" => Some(Self::Cpp),
-            "hpp" => Some(Self::Cpp),
-            "h++" => Some(Self::Cpp),
-            "cc" => Some(Self::Cpp),
-            "hh" => Some(Self::Cpp),
-            "css" => Some(Self::Css),
-            "cue" => Some(Self::Cue),
-            "d" => Some(Self::D),
-            "dlang" => Some(Self::D),
-            "dart" => Some(Self::Dart),
-            "diff" => Some(Self::Diff),
-            "dockerfile" => Some(Self::Dockerfile),
-            "docker" => Some(Self::Dockerfile),
-            "elisp" => Some(Self::Elisp),
-            "el" => Some(Self::Elisp),
-            "emacs-lisp" => Some(Self::Elisp),
-            "elixir" => Some(Self::Elixir),
-            "ex" => Some(Self::Elixir),
-            "eex" => Some(Self::Elixir),
-            "exs" => Some(Self::Elixir),
-            "leex" => Some(Self::Elixir),
-            "elm" => Some(Self::Elm),
-            "erlang" => Some(Self::Erlang),
-            "erl" => Some(Self::Erlang),
-            "hrl" => Some(Self::Erlang),
-            "es" => Some(Self::Erlang),
-            "escript" => Some(Self::Erlang),
-            "fortran" => Some(Self::Fortran),
-            "go" => Some(Self::Go),
-            "golang" => Some(Self::Go),
-            "gdscript" => Some(Self::GDScript),
-            "gd" => Some(Self::GDScript),
-            "glsl" => Some(Self::Glsl),
-            "haskell" => Some(Self::Haskell),
-            "hs" => Some(Self::Haskell),
-            "html" => Some(Self::Html),
-            "htm" => Some(Self::Html),
-            "java" => Some(Self::Java),
-            "javascript" => Some(Self::Javascript),
-            "js" => Some(Self::Javascript),
-            "json" => Some(Self::Json),
-            "julia" => Some(Self::Julia),
-            "jl" => Some(Self::Julia),
-            "kotlin" => Some(Self::Kotlin),
-            "kt" => Some(Self::Kotlin),
-            "kts" => Some(Self::Kotlin),
-            "latex" => Some(Self::Latex),
-            "tex" => Some(Self::Latex),
-            "llvm" => Some(Self::Llvm),
-            "lua" => Some(Self::Lua),
-            "make" => Some(Self::Make),
-            "mk" => Some(Self::Make),
-            "makefile" => Some(Self::Make),
-            "matlab" => Some(Self::Matlab),
-            "m" => Some(Self::Matlab),
-            "meson" => Some(Self::Meson),
-            "nim" => Some(Self::Nim),
-            "nix" => Some(Self::Nix),
-            "ocaml" => Some(Self::Ocaml),
-            "ml" => Some(Self::Ocaml),
-            "ocaml_interface" => Some(Self::OcamlInterface),
-            "mli" => Some(Self::OcamlInterface),
-            "openscad" => Some(Self::OpenScad),
-            "scad" => Some(Self::OpenScad),
-            "pascal" => Some(Self::Pascal),
-            "perl" => Some(Self::Perl),
-            "pl" => Some(Self::Perl),
-            "php" => Some(Self::Php),
-            "proto" => Some(Self::ProtoBuf),
-            "protobuf" => Some(Self::ProtoBuf),
-            "python" => Some(Self::Python),
-            "py" => Some(Self::Python),
-            "r" => Some(Self::R),
-            "racket" => Some(Self::Racket),
-            "rkt" => Some(Self::Racket),
-            "regex" => Some(Self::Regex),
-            "ruby" => Some(Self::Ruby),
-            "rb" => Some(Self::Ruby),
-            "rust" => Some(Self::Rust),
-            "rs" => Some(Self::Rust),
-            "scala" => Some(Self::Scala),
-            "scheme" => Some(Self::Scheme),
-            "scm" => Some(Self::Scheme),
-            "ss" => Some(Self::Scheme),
-            "scss" => Some(Self::Scss),
-            "sql" => Some(Self::Sql),
-            "toml" => Some(Self::Toml),
-            "typescript" => Some(Self::Typescript),
-            "ts" => Some(Self::Typescript),
-            "x86asm" => Some(Self::X86asm),
-            "x86" => Some(Self::X86asm),
-            "yaml" => Some(Self::Yaml),
-            "wgsl" => Some(Self::Wgsl),
-            "zig" => Some(Self::Zig),
-            _ => None,
-        }
+        LANGUAGE_TOKENS.get(token).map(ToOwned::to_owned)
     }
 
     pub(crate) fn config(&self) -> &'static HighlightConfiguration {
@@ -3253,16 +2939,13 @@ impl Language {
             Self::Erlang => &erlang::CONFIG,
             Self::Fortran => &fortran::CONFIG,
             Self::Go => &go::CONFIG,
-            Self::GDScript => &gdscript::CONFIG,
             Self::Glsl => &glsl::CONFIG,
             Self::Haskell => &haskell::CONFIG,
             Self::Html => &html::CONFIG,
             Self::Java => &java::CONFIG,
             Self::Javascript => &javascript::CONFIG,
             Self::Json => &json::CONFIG,
-            Self::Julia => &julia::CONFIG,
             Self::Kotlin => &kotlin::CONFIG,
-            Self::Latex => &latex::CONFIG,
             Self::Llvm => &llvm::CONFIG,
             Self::Lua => &lua::CONFIG,
             Self::Make => &make::CONFIG,
@@ -3274,7 +2957,6 @@ impl Language {
             Self::OcamlInterface => &ocaml_interface::CONFIG,
             Self::OpenScad => &openscad::CONFIG,
             Self::Pascal => &pascal::CONFIG,
-            Self::Perl => &perl::CONFIG,
             Self::Php => &php::CONFIG,
             Self::ProtoBuf => &proto::CONFIG,
             Self::Python => &python::CONFIG,
@@ -3287,12 +2969,152 @@ impl Language {
             Self::Scheme => &scheme::CONFIG,
             Self::Scss => &scss::CONFIG,
             Self::Sql => &sql::CONFIG,
+            Self::Swift => &swift::CONFIG,
             Self::Toml => &toml::CONFIG,
             Self::Typescript => &typescript::CONFIG,
             Self::X86asm => &x86asm::CONFIG,
-            Self::Yaml => &yaml::CONFIG,
             Self::Wgsl => &wgsl::CONFIG,
             Self::Zig => &zig::CONFIG,
         }
     }
 }
+
+static LANGUAGE_TOKENS: phf::Map<&'static str, Language> = 
+::phf::Map {
+    key: 10121458955350035957,
+    disps: &[
+        (0, 18),
+        (1, 4),
+        (0, 1),
+        (0, 25),
+        (1, 52),
+        (0, 54),
+        (0, 4),
+        (0, 39),
+        (0, 0),
+        (3, 21),
+        (0, 34),
+        (8, 12),
+        (6, 69),
+        (0, 13),
+        (6, 104),
+        (0, 0),
+        (0, 5),
+        (52, 48),
+        (2, 42),
+        (2, 0),
+        (11, 5),
+        (12, 70),
+    ],
+    entries: &[
+        ("scala", Language::Scala),
+        ("emacs-lisp", Language::Elisp),
+        ("kts", Language::Kotlin),
+        ("csharp", Language::CSharp),
+        ("rkt", Language::Racket),
+        ("typescript", Language::Typescript),
+        ("css", Language::Css),
+        ("bash", Language::Bash),
+        ("cpp", Language::Cpp),
+        ("cljc", Language::Clojure),
+        ("json", Language::Json),
+        ("c", Language::C),
+        ("ocaml", Language::Ocaml),
+        ("rust", Language::Rust),
+        ("hpp", Language::Cpp),
+        ("elixir", Language::Elixir),
+        ("js", Language::Javascript),
+        ("zig", Language::Zig),
+        ("javascript", Language::Javascript),
+        ("dart", Language::Dart),
+        ("el", Language::Elisp),
+        ("pascal", Language::Pascal),
+        ("cc", Language::Cpp),
+        ("toml", Language::Toml),
+        ("kotlin", Language::Kotlin),
+        ("rb", Language::Ruby),
+        ("r", Language::R),
+        ("wgsl", Language::Wgsl),
+        ("common-lisp", Language::CommonLisp),
+        ("clj", Language::Clojure),
+        ("regex", Language::Regex),
+        ("lua", Language::Lua),
+        ("capnp", Language::Capnp),
+        ("rs", Language::Rust),
+        ("nim", Language::Nim),
+        ("scad", Language::OpenScad),
+        ("erlang", Language::Erlang),
+        ("h", Language::C),
+        ("scm", Language::Scheme),
+        ("glsl", Language::Glsl),
+        ("cl", Language::CommonLisp),
+        ("d", Language::D),
+        ("proto", Language::ProtoBuf),
+        ("swift", Language::Swift),
+        ("lisp", Language::CommonLisp),
+        ("blueprint", Language::Blueprint),
+        ("htm", Language::Html),
+        ("sql", Language::Sql),
+        ("docker", Language::Dockerfile),
+        ("c++", Language::Cpp),
+        ("kt", Language::Kotlin),
+        ("diff", Language::Diff),
+        ("hs", Language::Haskell),
+        ("eex", Language::Elixir),
+        ("mli", Language::OcamlInterface),
+        ("escript", Language::Erlang),
+        ("c_sharp", Language::CSharp),
+        ("protobuf", Language::ProtoBuf),
+        ("openscad", Language::OpenScad),
+        ("go", Language::Go),
+        ("scss", Language::Scss),
+        ("hrl", Language::Erlang),
+        ("ada", Language::Ada),
+        ("bibtex", Language::Bibtex),
+        ("x86", Language::X86asm),
+        ("ocaml_interface", Language::OcamlInterface),
+        ("h++", Language::Cpp),
+        ("mk", Language::Make),
+        ("cue", Language::Cue),
+        ("ruby", Language::Ruby),
+        ("cs", Language::CSharp),
+        ("x86asm", Language::X86asm),
+        ("scheme", Language::Scheme),
+        ("commonlisp", Language::CommonLisp),
+        ("llvm", Language::Llvm),
+        ("exs", Language::Elixir),
+        ("ts", Language::Typescript),
+        ("ss", Language::Scheme),
+        ("asm", Language::GenericAsm),
+        ("php", Language::Php),
+        ("java", Language::Java),
+        ("html", Language::Html),
+        ("hh", Language::Cpp),
+        ("elm", Language::Elm),
+        ("erl", Language::Erlang),
+        ("dlang", Language::D),
+        ("ml", Language::Ocaml),
+        ("blp", Language::Blueprint),
+        ("m", Language::Matlab),
+        ("py", Language::Python),
+        ("python", Language::Python),
+        ("dockerfile", Language::Dockerfile),
+        ("bib", Language::Bibtex),
+        ("meson", Language::Meson),
+        ("leex", Language::Elixir),
+        ("matlab", Language::Matlab),
+        ("haskell", Language::Haskell),
+        ("make", Language::Make),
+        ("fortran", Language::Fortran),
+        ("elisp", Language::Elisp),
+        ("es", Language::Erlang),
+        ("c#", Language::CSharp),
+        ("clojure", Language::Clojure),
+        ("golang", Language::Go),
+        ("racket", Language::Racket),
+        ("ex", Language::Elixir),
+        ("nix", Language::Nix),
+        ("makefile", Language::Make),
+    ],
+};
+

@@ -1,5 +1,3 @@
-; CREDITS @pfoerster (adapted from https://github.com/latex-lsp/tree-sitter-bibtex)
-
 [
   (string_type)
   (preamble_type)
@@ -21,10 +19,10 @@
 (number) @number
 
 (field
-  name: (identifier) @field)
+  name: (identifier) @variable.builtin)
 
 (token
-  (identifier) @parameter)
+  (identifier) @variable.parameter)
 
 [
   (brace_word)
@@ -34,7 +32,7 @@
 [
   (key_brace)
   (key_paren)
-] @symbol
+] @attribute
 
 (string
   name: (identifier) @constant)

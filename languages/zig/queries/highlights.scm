@@ -1,9 +1,8 @@
-(line_comment) @comment @spell
-
 [
   (container_doc_comment)
   (doc_comment)
-] @comment.documentation @spell
+  (line_comment)
+] @comment @spell
 
 [
   variable: (IDENTIFIER)
@@ -24,7 +23,7 @@ parameter: (IDENTIFIER) @parameter
     field_access: (IDENTIFIER)
     parameter: (IDENTIFIER)
   ] @type
-  (#lua-match? @type "^%u([%l]+[%u%l%d]*)*$")
+  (#match? @type "^[A-Z]([a-z]+[A-Za-z0-9]*)*$")
 )
 ;; assume camelCase is a function
 (
@@ -33,7 +32,7 @@ parameter: (IDENTIFIER) @parameter
     field_access: (IDENTIFIER)
     parameter: (IDENTIFIER)
   ] @function
-  (#lua-match? @function "^%l+([%u][%l%d]*)+$")
+  (#match? @function "^[a-z]+([A-Z][a-z0-9]*)+$")
 )
 
 ;; assume all CAPS_1 is a constant
@@ -42,11 +41,13 @@ parameter: (IDENTIFIER) @parameter
     variable_type_function: (IDENTIFIER)
     field_access: (IDENTIFIER)
   ] @constant
-  (#lua-match? @constant "^%u[%u%d_]+$")
+  (#match? @constant "^[A-Z][A-Z_0-9]+$")
 )
 
-function: (IDENTIFIER) @function
-function_call: (IDENTIFIER) @function.call
+[
+  function_call: (IDENTIFIER)
+  function: (IDENTIFIER)
+] @function
 
 exception: "!" @exception
 

@@ -1,3 +1,7 @@
+(invocation
+  (object_reference
+    name: (identifier) @function.call))
+
 [
   (keyword_gist)
   (keyword_btree)
@@ -10,11 +14,6 @@
 
 (object_reference
   name: (identifier) @type)
-
-(invocation
-  (object_reference
-    name: (identifier) @function.call
-    parameter: [(field)]? @parameter))
 
 (relation
   alias: (identifier) @variable)
@@ -75,31 +74,14 @@
  (keyword_safe)
  (keyword_cost)
  (keyword_strict)
- (keyword_matched)
- (keyword_encrypted)
- (keyword_valid)
- (keyword_admin)
- (keyword_user)
- (keyword_until)
- (keyword_connection)
- (keyword_cycle)
- (keyword_increment)
- (keyword_minvalue)
- (keyword_maxvalue)
- (keyword_none)
- (keyword_owned)
- (keyword_verbose)
- (keyword_authorization)
 ] @attribute
 
 [
  (keyword_materialized)
- (keyword_tablespace)
  (keyword_recursive)
  (keyword_temp)
  (keyword_temporary)
  (keyword_unlogged)
- (keyword_logged)
  (keyword_external)
  (keyword_parquet)
  (keyword_csv)
@@ -130,14 +112,15 @@
   (keyword_create)
   (keyword_insert)
   (keyword_merge)
-  (keyword_truncate)
-  (keyword_explain)
   (keyword_distinct)
   (keyword_replace)
   (keyword_update)
   (keyword_into)
   (keyword_overwrite)
+  (keyword_matched)
   (keyword_values)
+  (keyword_value)
+  (keyword_attribute)
   (keyword_set)
   (keyword_left)
   (keyword_right)
@@ -174,10 +157,6 @@
   (keyword_drop)
   (keyword_add)
   (keyword_view)
-  (keyword_database)
-  (keyword_role)
-  (keyword_group)
-  (keyword_sequence)
   (keyword_end)
   (keyword_is)
   (keyword_using)
@@ -186,18 +165,14 @@
   (keyword_no)
   (keyword_data)
   (keyword_type)
-  (keyword_value)
-  (keyword_attribute)
   (keyword_rename)
   (keyword_to)
   (keyword_schema)
   (keyword_owner)
-  (keyword_union)
+  (keyword_authorization)
   (keyword_all)
   (keyword_any)
   (keyword_some)
-  (keyword_except)
-  (keyword_intersect)
   (keyword_returning)
   (keyword_begin)
   (keyword_commit)
@@ -233,6 +208,9 @@
   (keyword_stored)
   (keyword_partitioned)
   (keyword_analyze)
+  (keyword_explain)
+  (keyword_verbose)
+  (keyword_truncate)
   (keyword_rewrite)
   (keyword_optimize)
   (keyword_vacuum)
@@ -264,8 +242,25 @@
   (keyword_tblproperties)
   (keyword_trigger)
   (keyword_unsafe)
+  (keyword_admin)
+  (keyword_connection)
+  (keyword_cycle)
+  (keyword_database)
+  (keyword_encrypted)
+  (keyword_increment)
+  (keyword_logged)
+  (keyword_none)
+  (keyword_owned)
+  (keyword_password)
+  (keyword_reset)
+  (keyword_role)
+  (keyword_sequence)
   (keyword_start)
   (keyword_restart)
+  (keyword_tablespace)
+  (keyword_until)
+  (keyword_user)
+  (keyword_valid)
 ] @keyword
 
 [
@@ -290,6 +285,8 @@
  (keyword_noscan)
  (keyword_stats)
  (keyword_statistics)
+ (keyword_maxvalue)
+ (keyword_minvalue)
 ] @type.qualifier
 
 [
@@ -344,6 +341,9 @@
   (keyword_by)
   (keyword_on)
   (keyword_do)
+  (keyword_union)
+  (keyword_except)
+  (keyword_intersect)
 ] @keyword.operator
 
 [

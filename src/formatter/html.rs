@@ -6,6 +6,8 @@ use crate::error::InkjetResult as Result;
 use super::Formatter;
 
 /// Formatter implementation for highlighting into HTML with class names.
+/// 
+/// Note: you will need to wrap the output in a `<pre>` tag for correct whitespacing.
 pub struct Html;
 
 impl Formatter for Html {
@@ -21,6 +23,7 @@ impl Formatter for Html {
             },
             HighlightEvent::HighlightStart(idx) => {
                 let name = HIGHLIGHT_CLASS_NAMES[idx.0];
+                println!("{name}");
                 write!(
                     writer,
                     "<span class=\"{}\">",

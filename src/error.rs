@@ -12,6 +12,4 @@ pub enum InkjetError {
     Fmt(#[from] std::fmt::Error),
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
-    #[error("language not found or invalid")]
-    InvalidLanguage,
 }

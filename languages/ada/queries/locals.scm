@@ -9,7 +9,7 @@
 (subprogram_body) @scope
 (block_statement) @scope
 
-(with_clause (identifier) @definition.import)
+(with_clause (_) @definition.import)
 (procedure_specification name: (_) @definition.function)
 (function_specification name: (_) @definition.function)
 (package_declaration name: (_) @definition.var)

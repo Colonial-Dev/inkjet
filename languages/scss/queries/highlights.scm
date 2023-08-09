@@ -1,65 +1,63 @@
-; inherits: css
+(comment) @comment
 
-[
-  "@at-root"
-  "@debug"
-  "@error"
-  "@extend"
-  "@forward"
-  "@mixin"
-  "@use"
-  "@warn"
-] @keyword
+(tag_name) @tag
+(nesting_selector) @tag
+(universal_selector) @tag
 
-"@function" @keyword.function
+"~" @operator
+">" @operator
+"+" @operator
+"-" @operator
+"*" @operator
+"/" @operator
+"=" @operator
+"^=" @operator
+"|=" @operator
+"~=" @operator
+"$=" @operator
+"*=" @operator
 
-"@return" @keyword.return
+"and" @operator
+"or" @operator
+"not" @operator
+"only" @operator
 
-"@include" @include
+(attribute_selector (plain_value) @string)
+(pseudo_element_selector (tag_name) @attribute)
+(pseudo_class_selector (class_name) @attribute)
 
-[
-  "@while"
-  "@each"
-  "@for"
-  "from"
-  "through"
-  "in"
-] @repeat
+(class_name) @property
+(id_name) @property
+(namespace_name) @property
+(property_name) @property
+(feature_name) @property
 
-(single_line_comment) @comment
+(attribute_name) @attribute
+
 (function_name) @function
 
+((property_name) @variable
+ (match? @variable "^--"))
+((plain_value) @variable
+ (match? @variable "^--"))
 
-[
-  ">="
-  "<="
-] @operator
+"@media" @keyword
+"@import" @keyword
+"@charset" @keyword
+"@namespace" @keyword
+"@supports" @keyword
+"@keyframes" @keyword
+(at_keyword) @keyword
+(to) @keyword
+(from) @keyword
+(important) @keyword
 
+(string_value) @string
+(color_value) @string.special
 
-(mixin_statement (name) @function)
-(mixin_statement (parameters (parameter) @parameter))
+(integer_value) @number
+(float_value) @number
+(unit) @type
 
-(function_statement (name) @function)
-(function_statement (parameters (parameter) @parameter))
-
-(plain_value) @string
-(keyword_query) @function
-(identifier) @variable
-(variable_name) @variable
-
-(each_statement (key) @parameter)
-(each_statement (value) @parameter)
-(each_statement (variable_value) @parameter)
-
-(for_statement (variable) @parameter)
-(for_statement (_ (variable_value) @parameter))
-
-(argument) @parameter
-(arguments (variable_value) @parameter)
-
-[
-  "["
-  "]"
-] @punctuation.bracket
-
-(include_statement (identifier) @function)
+"#" @punctuation.delimiter
+"," @punctuation.delimiter

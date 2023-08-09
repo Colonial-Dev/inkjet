@@ -1,3 +1,9 @@
+;; Based on the nvim-treesitter highlighting, which is under the Apache license.
+;; See https://github.com/nvim-treesitter/nvim-treesitter/blob/f8ab59861eed4a1c168505e3433462ed800f2bae/queries/kotlin/highlights.scm
+;;
+;; The only difference in this file is that queries using #lua-match?
+;; have been removed.
+
 ;;; Identifiers
 
 (simple_identifier) @variable
@@ -33,25 +39,10 @@
 	(navigation_suffix
 		(simple_identifier) @property))
 
-; SCREAMING CASE identifiers are assumed to be constants
-((simple_identifier) @constant
-(#lua-match? @constant "^[A-Z][A-Z0-9_]*$"))
-
-(_
-	(navigation_suffix
-		(simple_identifier) @constant
-		(#lua-match? @constant "^[A-Z][A-Z0-9_]*$")))
-
 (enum_entry
 	(simple_identifier) @constant)
 
 (type_identifier) @type
-
-; '?' operator, replacement for Java @Nullable
-(nullable_type) @punctuation.special
-
-(type_alias
-	(type_identifier) @type.definition)
 
 ((type_identifier) @type.builtin
 	(#any-of? @type.builtin
@@ -92,36 +83,21 @@
 		"MutableList"
 ))
 
-(package_header "package" @keyword
-	. (identifier (simple_identifier) @namespace))
+(package_header
+	. (identifier)) @namespace
 
 (import_header
 	"import" @include)
 
-; The last `simple_identifier` in a `import_header` will always either be a function
-; or a type. Classes can appear anywhere in the import path, unlike functions
-(import_header
-	(identifier
-		(simple_identifier) @type @_import)
-	(import_alias
-		(type_identifier) @type.definition)?
-		(#lua-match? @_import "^[A-Z]"))
 
-(import_header
-	(identifier
-		(simple_identifier) @function @_import .)
-	(import_alias
-		(type_identifier) @function)?
-		(#lua-match? @_import "^[a-z]"))
-
-; TODO: Separate labeled returns/breaks/continue/super/this
+; TODO: Seperate labeled returns/breaks/continue/super/this
 ;       Must be implemented in the parser first
 (label) @label
 
 ;;; Function definitions
 
 (function_declaration
-	(simple_identifier) @function)
+	. (simple_identifier) @function)
 
 (getter
 	("get") @function.builtin)
@@ -155,17 +131,13 @@
 
 ; function()
 (call_expression
-	. (simple_identifier) @function.call)
-
-; ::function
-(callable_reference
-	. (simple_identifier) @function.call)
+	. (simple_identifier) @function)
 
 ; object.function() or object.property.function()
 (call_expression
 	(navigation_expression
 		(navigation_suffix
-			(simple_identifier) @function.call) . ))
+			(simple_identifier) @function) . ))
 
 (call_expression
 	. (simple_identifier) @function.builtin
@@ -218,14 +190,10 @@
 ;;; Literals
 
 [
-  (line_comment)
-  (multiline_comment)
-] @comment @spell
-
-((multiline_comment) @comment.documentation
-  (#lua-match? @comment.documentation "^/[*][*][^*].*[*]/$"))
-
-(shebang_line) @preproc
+	(line_comment)
+	(multiline_comment)
+	(shebang_line)
+] @comment
 
 (real_literal) @float
 [
@@ -245,8 +213,7 @@
 
 (string_literal) @string
 
-; NOTE: Escapes not allowed in multi-line strings
-(character_literal (character_escape_seq) @string.escape)
+(character_escape_seq) @string.escape
 
 ; There are 3 ways to define a regex
 ;    - "[abc]?".toRegex()
@@ -266,7 +233,7 @@
 			(value_argument
 				(string_literal) @string.regex))))
 
-;    - Regex.fromLiteral("[abc]?")
+;   - Regex.fromLiteral("[abc]?")
 (call_expression
 	(navigation_expression
 		((simple_identifier) @_class
@@ -282,9 +249,6 @@
 ;;; Keywords
 
 (type_alias "typealias" @keyword)
-
-(companion_object "companion" @keyword)
-
 [
 	(class_modifier)
 	(member_modifier)
@@ -296,7 +260,7 @@
 	(visibility_modifier)
 	(reification_modifier)
 	(inheritance_modifier)
-] @type.qualifier
+]@keyword
 
 [
 	"val"
@@ -308,13 +272,7 @@
 ;	"typeof" ; NOTE: It is reserved for future use
 ] @keyword
 
-[
-  "suspend"
-] @keyword.coroutine
-
-[
-  "fun"
-] @keyword.function
+("fun") @keyword.function
 
 (jump_expression) @keyword.return
 
@@ -415,7 +373,7 @@
 ; NOTE: `interpolated_identifier`s can be highlighted in any way
 (string_literal
 	"$" @punctuation.special
-	(interpolated_identifier) @none @variable)
+	(interpolated_identifier) @none)
 (string_literal
 	"${" @punctuation.special
 	(interpolated_expression) @none

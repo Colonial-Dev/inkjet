@@ -1,3 +1,4 @@
-[(line_comment) (block_comment)] @comment
+; Parse glsl where defined
 
-(glsl_content) @glsl
+((glsl_content) @injection.content
+ (#set! injection.language "glsl"))

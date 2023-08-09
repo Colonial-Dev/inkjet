@@ -1,3 +1,17 @@
+;; Copyright 2022 nvim-treesitter
+;;
+;; Licensed under the Apache License, Version 2.0 (the "License");
+;; you may not use this file except in compliance with the License.
+;; You may obtain a copy of the License at
+;;
+;;     http://www.apache.org/licenses/LICENSE-2.0
+;;
+;; Unless required by applicable law or agreed to in writing, software
+;; distributed under the License is distributed on an "AS IS" BASIS,
+;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;; See the License for the specific language governing permissions and
+;; limitations under the License.
+
 ;; ----------------------------------------------------------------------------
 ;; Literals and comments
 
@@ -38,7 +52,7 @@
   "∀"
 ] @repeat
 
-(pragma) @preproc
+(pragma) @constant.macro
 
 [
   "if"
@@ -60,12 +74,8 @@
   (type_operator)
   (tycon_arrow)
   (qualified_module)  ; grabs the `.` (dot), ex: import System.IO
-  (qualified_type)
-  (qualified_variable)
   (all_names)
   (wildcard)
-  "."
-  ".."
   "="
   "|"
   "::"
@@ -85,7 +95,6 @@
   "in"
   "class"
   "instance"
-  "pattern"
   "data"
   "newtype"
   "family"
@@ -110,51 +119,36 @@
 
 (variable) @variable
 (pat_wildcard) @variable
-(signature name: (variable) @variable)
 
+(signature name: (variable) @type)
 (function
   name: (variable) @function
   patterns: (patterns))
-(function
-  name: (variable) @function
-  rhs: (exp_lambda))
-((signature (variable) @function (fun)) . (function (variable)))
-((signature (variable) @_type (fun)) . (function (variable) @function) (#eq? @function @_type))
-((signature (variable) @function (context (fun))) . (function (variable)))
-((signature (variable) @_type (context (fun))) . (function (variable) @function) (#eq? @function @_type))
-((signature (variable) @function (forall (context (fun)))) . (function (variable)))
-((signature (variable) @_type (forall (context (fun)))) . (function (variable) @function) (#eq? @function @_type))
+((signature (fun)) . (function (variable) @function))
+((signature (context (fun))) . (function (variable) @function))
+((signature (forall (context (fun)))) . (function (variable) @function))
 
 (exp_infix (variable) @operator)  ; consider infix functions as operators
-(exp_section_right (variable) @operator) ; partially applied infix functions (sections) also get highlighted as operators
-(exp_section_left (variable) @operator)
 
-(exp_infix (exp_name) @function.call (#set! "priority" 101))
-(exp_apply . (exp_name (variable) @function.call))
-(exp_apply . (exp_name (qualified_variable (variable) @function.call)))
+(exp_infix (exp_name) @function (#set! "priority" 101))
+(exp_apply . (exp_name (variable) @function))
+(exp_apply . (exp_name (qualified_variable (variable) @function)))
 
 
 ;; ----------------------------------------------------------------------------
 ;; Types
 
 (type) @type
-(type_star) @type
 (type_variable) @type
 
 (constructor) @constructor
 
 ; True or False
-((constructor) @boolean (#any-of? @boolean "True" "False"))
+((constructor) @_bool (#match? @_bool "(True|False)")) @boolean
 
 
 ;; ----------------------------------------------------------------------------
 ;; Quasi-quotes
 
-(quoter) @function.call
+(quoter) @function
 ; Highlighting of quasiquote_body is handled by injections.scm
-
-;; ----------------------------------------------------------------------------
-;; Spell checking
-
-(comment) @spell
-

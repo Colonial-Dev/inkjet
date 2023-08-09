@@ -1,259 +1,154 @@
-; Variables
-
-(identifier) @variable
-(global_variable) @variable.global
-
 ; Keywords
 
 [
- "alias"
- "begin"
- "class"
- "do"
- "end"
- "ensure"
- "module"
- "rescue"
- "then"
- ] @keyword
-
-[
- "return"
- "yield"
-] @keyword.return
-
-[
- "and"
- "or"
- "in"
- "not"
-] @keyword.operator
-
-[
+  "alias"
+  "and"
+  "begin"
+  "break"
+  "case"
+  "class"
   "def"
-  "undef"
-] @keyword.function
+  "do"
+  "else"
+  "elsif"
+  "end"
+  "ensure"
+  "for"
+  "if"
+  "in"
+  "module"
+  "next"
+  "or"
+  "rescue"
+  "retry"
+  "return"
+  "then"
+  "unless"
+  "until"
+  "when"
+  "while"
+  "yield"
+] @keyword
 
-(method
-  "end" @keyword.function)
-
-[
- "case"
- "else"
- "elsif"
- "if"
- "unless"
- "when"
- "then"
- ] @conditional
-
-(if
-  "end" @conditional)
-
-[
- "for"
- "until"
- "while"
- "break"
- "redo"
- "retry"
- "next"
- ] @repeat
-
-(constant) @type
-
-((identifier) @type.qualifier
- (#any-of? @type.qualifier "private" "protected" "public"))
-
-[
- "rescue"
- "ensure"
- ] @exception
-
-((identifier) @exception
- (#any-of? @exception "fail" "raise"))
+((identifier) @keyword
+ (#match? @keyword "^(private|protected|public)$"))
 
 ; Function calls
 
-"defined?" @function
+((identifier) @function.method.builtin
+ (#eq? @function.method.builtin "require"))
+
+"defined?" @function.method.builtin
 
 (call
-   receiver: (constant)? @type
-   method: [
-            (identifier)
-            (constant)
-            ] @function.call
-   )
-
-(program
- (call
-  (identifier) @include)
- (#any-of? @include "require" "require_relative" "load"))
+  method: [(identifier) (constant)] @function.method)
 
 ; Function definitions
 
-(alias (identifier) @function)
-(setter (identifier) @function)
-
-(method name: [
-               (identifier) @function
-               (constant) @type
-               ])
-
-(singleton_method name: [
-                         (identifier) @function
-                         (constant) @type
-                         ])
-
-(class name: (constant) @type)
-(module name: (constant) @type)
-(superclass (constant) @type)
+(alias (identifier) @function.method)
+(setter (identifier) @function.method)
+(method name: [(identifier) (constant)] @function.method)
+(singleton_method name: [(identifier) (constant)] @function.method)
 
 ; Identifiers
+
 [
- (class_variable)
- (instance_variable)
- ] @label
+  (class_variable)
+  (instance_variable)
+] @property
 
 ((identifier) @constant.builtin
- (#vim-match? @constant.builtin "^__(callee|dir|id|method|send|ENCODING|FILE|LINE)__$"))
+ (#match? @constant.builtin "^__(FILE|LINE|ENCODING)__$"))
 
-((constant) @type
- (#vim-match? @type "^[A-Z\\d_]+$"))
+(file) @constant.builtin
+(line) @constant.builtin
+(encoding) @constant.builtin
 
-[
- (self)
- (super)
- ] @variable.builtin
+(hash_splat_nil
+  "**" @operator
+) @constant.builtin
 
-(method_parameters (identifier) @parameter)
-(lambda_parameters (identifier) @parameter)
-(block_parameters (identifier) @parameter)
-(splat_parameter (identifier) @parameter)
-(hash_splat_parameter (identifier) @parameter)
-(optional_parameter (identifier) @parameter)
-(destructured_parameter (identifier) @parameter)
-(block_parameter (identifier) @parameter)
-(keyword_parameter (identifier) @parameter)
+((constant) @constant
+ (#match? @constant "^[A-Z\\d_]+$"))
 
-; TODO: Re-enable this once it is supported
-; ((identifier) @function
-;  (#is-not? local))
+(constant) @constructor
+
+(self) @variable.builtin
+(super) @variable.builtin
+
+(block_parameter (identifier) @variable.parameter)
+(block_parameters (identifier) @variable.parameter)
+(destructured_parameter (identifier) @variable.parameter)
+(hash_splat_parameter (identifier) @variable.parameter)
+(lambda_parameters (identifier) @variable.parameter)
+(method_parameters (identifier) @variable.parameter)
+(splat_parameter (identifier) @variable.parameter)
+
+(keyword_parameter name: (identifier) @variable.parameter)
+(optional_parameter name: (identifier) @variable.parameter)
+
+((identifier) @function.method
+ (#is-not? local))
+(identifier) @variable
 
 ; Literals
 
 [
- (string)
- (bare_string)
- (subshell)
- (heredoc_body)
- ] @string
+  (string)
+  (bare_string)
+  (subshell)
+  (heredoc_body)
+  (heredoc_beginning)
+] @string
 
 [
- (heredoc_beginning)
- (heredoc_end)
- ] @constant
+  (simple_symbol)
+  (delimited_symbol)
+  (hash_key_symbol)
+  (bare_symbol)
+] @string.special.symbol
+
+(regex) @string.special.regex
+(escape_sequence) @escape
 
 [
- (bare_symbol)
- (simple_symbol)
- (delimited_symbol)
- (hash_key_symbol)
- ] @symbol
-
-(pair key: (hash_key_symbol) ":" @constant)
-(regex) @string.regex
-(escape_sequence) @string.escape
-(integer) @number
-(float) @float
+  (integer)
+  (float)
+] @number
 
 [
- (true)
- (false)
- ] @boolean
+  (nil)
+  (true)
+  (false)
+]@constant.builtin
 
-(nil) @constant.builtin
+(interpolation
+  "#{" @punctuation.special
+  "}" @punctuation.special) @embedded
 
-(comment) @comment @spell
-
-(program
-  (comment)+ @comment.documentation
-  (class))
-
-(module
-  (comment)+ @comment.documentation
-  (body_statement (class)))
-
-(class
-  (comment)+ @comment.documentation
-  (body_statement (method)))
-
-(body_statement
-  (comment)+ @comment.documentation
-  (method))
+(comment) @comment
 
 ; Operators
 
 [
- "!"
- "="
- "=="
- "==="
- "<=>"
- "=>"
- "->"
- ">>"
- "<<"
- ">"
- "<"
- ">="
- "<="
- "**"
- "*"
- "/"
- "%"
- "+"
- "-"
- "&"
- "|"
- "^"
- "&&"
- "||"
- "||="
- "&&="
- "!="
- "%="
- "+="
- "-="
- "*="
- "/="
- "=~"
- "!~"
- "?"
- ":"
- ".."
- "..."
- ] @operator
+"="
+"=>"
+"->"
+] @operator
 
 [
- ","
- ";"
- "."
- ] @punctuation.delimiter
+  ","
+  ";"
+  "."
+] @punctuation.delimiter
 
 [
- "("
- ")"
- "["
- "]"
- "{"
- "}"
- "%w("
- "%i("
- ] @punctuation.bracket
-
-(interpolation
-  "#{" @punctuation.special
-  "}" @punctuation.special) @none
-
-(ERROR) @error
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+  "%w("
+  "%i("
+] @punctuation.bracket

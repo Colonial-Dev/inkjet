@@ -1,98 +1,85 @@
-(comment) @comment @spell
+[
+ "("
+ ")"
+ "{"
+ "}"
+] @punctuation.bracket
 
-(conditional
- (_ [
-  "ifeq"
-  "else"
-  "ifneq"
-  "ifdef"
-  "ifndef"
- ] @conditional)
- "endif" @conditional)
+[
+ ":"
+ "&:"
+ "::"
+ "|"
+ ";"
+ "\""
+ "'"
+ ","
+] @punctuation.delimiter
 
-(rule (targets
-       (word) @function.builtin
-       (#any-of? @function.builtin
-        ".DEFAULT"
-        ".SUFFIXES"
-        ".DELETE_ON_ERROR"
-        ".EXPORT_ALL_VARIABLES"
-        ".IGNORE"
-        ".INTERMEDIATE"
-        ".LOW_RESOLUTION_TIME"
-        ".NOTPARALLEL"
-        ".ONESHELL"
-        ".PHONY"
-        ".POSIX"
-        ".PRECIOUS"
-        ".SECONDARY"
-        ".SECONDEXPANSION"
-        ".SILENT"
-        ".SUFFIXES")))
+[
+ "$"
+ "$$"
+] @punctuation.special
 
-(rule ["&:" ":" "::"] @operator)
+(automatic_variable
+ [ "@" "%" "<" "?" "^" "+" "/" "*" "D" "F"] @punctuation.special)
 
-(export_directive "export" @keyword)
-(override_directive "override" @keyword)
-(include_directive ["include" "-include"] @include)
+(automatic_variable
+ "/" @error . ["D" "F"])
 
-(variable_assignment
- name: (word) @symbol
- [
-  "?="
-  ":="
-  "::="
-; ":::="
-  "+="
-  "="
- ] @operator)
+[
+ "="
+ ":="
+ "::="
+ "?="
+ "+="
+ "!="
+ "@"
+ "-"
+ "+"
+] @operator
 
-(shell_assignment
- name: (word) @symbol
- "!=" @operator)
+[
+ (text)
+ (string)
+ (raw_text)
+] @string
 
-(define_directive
- "define" @keyword
- name: (word) @symbol
- [
-  "="
-  ":="
-  "::="
-; ":::="
-  "?="
-  "!="
- ]? @operator
- "endef" @keyword)
+(variable_assignment (word) @string)
 
-(variable_assignment
- (word) @variable.builtin (#any-of? @variable.builtin
-  ".DEFAULT_GOAL"
-  ".EXTRA_PREREQS"
-  ".FEATURES"
-  ".INCLUDE_DIRS"
-  ".RECIPEPREFIX"
-  ".SHELLFLAGS"
-  ".VARIABLES"
-  "MAKEARGS"
-  "MAKEFILE_LIST"
-  "MAKEFLAGS"
-  "MAKE_RESTARTS"
-  "MAKE_TERMERR"
-  "MAKE_TERMOUT"
-  "SHELL"
- ))
+[
+ "ifeq"
+ "ifneq"
+ "ifdef"
+ "ifndef"
+ "else"
+ "endif"
+ "if"
+ "or"  ; boolean functions are conditional in make grammar
+ "and"
+] @conditional
 
-; Use string to match bash
-(variable_reference (word) @string) @operator
+"foreach" @repeat
 
-(shell_function
- ["$" "(" ")"] @operator
- "shell" @function.builtin)
+[
+ "define"
+ "endef"
+ "vpath"
+ "undefine"
+ "export"
+ "unexport"
+ "override"
+ "private"
+; "load"
+] @keyword
 
-(function_call ["$" "(" ")"] @operator)
-(substitution_reference ["$" "(" ")"] @operator)
+[
+ "include"
+ "sinclude"
+ "-include"
+] @include
 
-(function_call [
+[
  "subst"
  "patsubst"
  "strip"
@@ -115,17 +102,70 @@
  "wildcard"
  "realpath"
  "abspath"
- "error"
- "warning"
- "info"
- "origin"
- "flavor"
- "foreach"
- "if"
- "or"
- "and"
  "call"
  "eval"
  "file"
  "value"
- ] @function.builtin)
+ "shell"
+] @keyword.function
+
+[
+ "error"
+ "warning"
+ "info"
+] @exception
+
+;; Variable
+(variable_assignment
+  name: (word) @constant)
+
+(variable_reference
+  (word) @constant)
+
+(comment) @comment
+
+((word) @clean @string.regex
+ (#match? @clean "[%\*\?]"))
+
+(function_call
+  function: "error"
+  (arguments (text) @text.danger))
+
+(function_call
+  function: "warning"
+  (arguments (text) @text.warning))
+
+(function_call
+  function: "info"
+  (arguments (text) @text.note))
+
+;; Install Command Categories
+;; Others special variables
+;; Variables Used by Implicit Rules
+[
+ "VPATH"
+ ".RECIPEPREFIX"
+] @constant.builtin
+
+(variable_assignment
+  name: (word) @clean @constant.builtin
+        (#match? @clean "^(AR|AS|CC|CXX|CPP|FC|M2C|PC|CO|GET|LEX|YACC|LINT|MAKEINFO|TEX|TEXI2DVI|WEAVE|CWEAVE|TANGLE|CTANGLE|RM|ARFLAGS|ASFLAGS|CFLAGS|CXXFLAGS|COFLAGS|CPPFLAGS|FFLAGS|GFLAGS|LDFLAGS|LDLIBS|LFLAGS|YFLAGS|PFLAGS|RFLAGS|LINTFLAGS|PRE_INSTALL|POST_INSTALL|NORMAL_INSTALL|PRE_UNINSTALL|POST_UNINSTALL|NORMAL_UNINSTALL|MAKEFILE_LIST|MAKE_RESTARTS|MAKE_TERMOUT|MAKE_TERMERR|\.DEFAULT_GOAL|\.RECIPEPREFIX|\.EXTRA_PREREQS)$"))
+
+(variable_reference
+  (word) @clean @constant.builtin
+  (#match? @clean "^(AR|AS|CC|CXX|CPP|FC|M2C|PC|CO|GET|LEX|YACC|LINT|MAKEINFO|TEX|TEXI2DVI|WEAVE|CWEAVE|TANGLE|CTANGLE|RM|ARFLAGS|ASFLAGS|CFLAGS|CXXFLAGS|COFLAGS|CPPFLAGS|FFLAGS|GFLAGS|LDFLAGS|LDLIBS|LFLAGS|YFLAGS|PFLAGS|RFLAGS|LINTFLAGS|PRE_INSTALL|POST_INSTALL|NORMAL_INSTALL|PRE_UNINSTALL|POST_UNINSTALL|NORMAL_UNINSTALL|MAKEFILE_LIST|MAKE_RESTARTS|MAKE_TERMOUT|MAKE_TERMERR|\.DEFAULT_GOAL|\.RECIPEPREFIX|\.EXTRA_PREREQS\.VARIABLES|\.FEATURES|\.INCLUDE_DIRS|\.LOADED)$"))
+
+;; Standart targets
+(targets
+  (word) @constant.macro
+  (#match? @constant.macro "^(all|install|install-html|install-dvi|install-pdf|install-ps|uninstall|install-strip|clean|distclean|mostlyclean|maintainer-clean|TAGS|info|dvi|html|pdf|ps|dist|check|installcheck|installdirs)$"))
+
+(targets
+  (word) @constant.macro
+  (#match? @constant.macro "^(all|install|install-html|install-dvi|install-pdf|install-ps|uninstall|install-strip|clean|distclean|mostlyclean|maintainer-clean|TAGS|info|dvi|html|pdf|ps|dist|check|installcheck|installdirs)$"))
+
+;; Builtin targets
+(targets
+  (word) @constant.macro
+  (#match? @constant.macro "^\.(PHONY|SUFFIXES|DEFAULT|PRECIOUS|INTERMEDIATE|SECONDARY|SECONDEXPANSION|DELETE_ON_ERROR|IGNORE|LOW_RESOLUTION_TIME|SILENT|EXPORT_ALL_VARIABLES|NOTPARALLEL|ONESHELL|POSIX)$"))
+

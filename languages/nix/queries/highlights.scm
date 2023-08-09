@@ -1,55 +1,91 @@
-; basic keywords
-[
-  "assert"
-  "in"
-  "inherit"
-  "let"
-  "rec"
-  "with"
-] @keyword
-
-(variable_expression
-  name: (identifier) @keyword
-  (#eq? @keyword "derivation")
-  (#set! "priority" 101))
-
-; exceptions
-(variable_expression
-  name: (identifier) @exception
-  (#any-of? @exception "abort" "throw")
-  (#set! "priority" 101))
-
-; if/then/else
-[
-  "if"
-  "then"
-  "else"
-] @conditional
-
-; field access default (`a.b or c`)
-"or" @keyword.operator
-
-; comments
 (comment) @comment
 
-; strings
-([ (string_expression) (indented_string_expression) ]
-  (#set! "priority" 99)) @string
-
-; paths and URLs
-[ (path_expression) (hpath_expression) (spath_expression) (uri_expression) ] @string.special
-
-; escape sequences
-(escape_sequence) @string.escape
-
-; delimiters
 [
-  "."
+  "if" 
+  "then"
+  "else"
+  "let"
+  "inherit"
+  "in"
+  "rec"
+  "with" 
+  "assert"
+  "or"
+] @keyword
+
+((identifier) @variable.builtin
+ (#match? @variable.builtin "^(__currentSystem|__currentTime|__nixPath|__nixVersion|__storeDir|builtins|false|null|true)$")
+ (#is-not? local))
+
+((identifier) @function.builtin
+ (#match? @function.builtin "^(__add|__addErrorContext|__all|__any|__appendContext|__attrNames|__attrValues|__bitAnd|__bitOr|__bitXor|__catAttrs|__compareVersions|__concatLists|__concatMap|__concatStringsSep|__deepSeq|__div|__elem|__elemAt|__fetchurl|__filter|__filterSource|__findFile|__foldl'|__fromJSON|__functionArgs|__genList|__genericClosure|__getAttr|__getContext|__getEnv|__hasAttr|__hasContext|__hashFile|__hashString|__head|__intersectAttrs|__isAttrs|__isBool|__isFloat|__isFunction|__isInt|__isList|__isPath|__isString|__langVersion|__length|__lessThan|__listToAttrs|__mapAttrs|__match|__mul|__parseDrvName|__partition|__path|__pathExists|__readDir|__readFile|__replaceStrings|__seq|__sort|__split|__splitVersion|__storePath|__stringLength|__sub|__substring|__tail|__toFile|__toJSON|__toPath|__toXML|__trace|__tryEval|__typeOf|__unsafeDiscardOutputDependency|__unsafeDiscardStringContext|__unsafeGetAttrPos|__valueSize|abort|baseNameOf|derivation|derivationStrict|dirOf|fetchGit|fetchMercurial|fetchTarball|fromTOML|import|isNull|map|placeholder|removeAttrs|scopedImport|throw|toString)$")
+ (#is-not? local))
+
+[
+  (string_expression)
+  (indented_string_expression)
+] @string
+
+[
+  (path_expression)
+  (hpath_expression)
+  (spath_expression)
+] @string.special.path
+
+(uri_expression) @string.special.uri
+
+[
+  (integer_expression)
+  (float_expression)
+] @number
+
+(interpolation
+  "${" @punctuation.special
+  "}" @punctuation.special) @embedded
+
+(escape_sequence) @escape
+(dollar_escape) @escape
+
+(function_expression
+  universal: (identifier) @variable.parameter
+)
+
+(formal
+  name: (identifier) @variable.parameter
+  "?"? @punctuation.delimiter)
+
+(select_expression
+  attrpath: (attrpath (identifier)) @property)
+
+(apply_expression
+  function: [
+    (variable_expression (identifier)) @function
+    (select_expression
+      attrpath: (attrpath
+        attr: (identifier) @function .))])
+
+(unary_expression
+  operator: _ @operator)
+
+(binary_expression
+  operator: _ @operator)
+
+(variable_expression (identifier) @variable)
+
+(binding
+  attrpath: (attrpath (identifier)) @property)
+
+(identifier) @property
+
+(inherit_from attrs: (inherited_attrs attr: (identifier) @property) )
+
+[
   ";"
+  "."
   ","
+  "="
 ] @punctuation.delimiter
 
-; brackets
 [
   "("
   ")"
@@ -59,75 +95,4 @@
   "}"
 ] @punctuation.bracket
 
-; `?` in `{ x ? y }:`, used to set defaults for named function arguments
-(formal
-  name: (identifier) @parameter
-  "?"? @operator)
-
-; `...` in `{ ... }`, used to ignore unknown named function arguments (see above)
-(ellipses) @punctuation.special
-
-; universal is the parameter of the function expression
-; `:` in `x: y`, used to separate function argument from body (see above)
-(function_expression
-  universal: (identifier) @parameter
-  ":" @punctuation.special)
-
-; function calls
-(apply_expression
-  function: (variable_expression
-    name: (identifier) @function.call))
-
-; basic identifiers
-(variable_expression) @variable
-
-(variable_expression
-  name: (identifier) @include
-  (#eq? @include "import"))
-
-(variable_expression
-  name: (identifier) @boolean
-  (#any-of? @boolean "true" "false"))
-
-; builtin functions
-(variable_expression name: (identifier) @function.builtin (#any-of? @function.builtin
-  ; nix eval --impure --expr 'with builtins; filter (x: !(elem x [ "abort" "derivation" "import" "throw" ]) && isFunction builtins.${x}) (attrNames builtins)'
-  "add" "addErrorContext" "all" "any" "appendContext" "attrNames" "attrValues" "baseNameOf" "bitAnd" "bitOr" "bitXor" "break" "catAttrs" "ceil" "compareVersions" "concatLists" "concatMap" "concatStringsSep" "deepSeq" "derivationStrict" "dirOf" "div" "elem" "elemAt" "fetchGit" "fetchMercurial" "fetchTarball" "fetchTree" "fetchurl" "filter" "filterSource" "findFile" "floor" "foldl'" "fromJSON" "fromTOML" "functionArgs" "genList" "genericClosure" "getAttr" "getContext" "getEnv" "getFlake" "groupBy" "hasAttr" "hasContext" "hashFile" "hashString" "head" "intersectAttrs" "isAttrs" "isBool" "isFloat" "isFunction" "isInt" "isList" "isNull" "isPath" "isString" "length" "lessThan" "listToAttrs" "map" "mapAttrs" "match" "mul" "parseDrvName" "partition" "path" "pathExists" "placeholder" "readDir" "readFile" "removeAttrs" "replaceStrings" "scopedImport" "seq" "sort" "split" "splitVersion" "storePath" "stringLength" "sub" "substring" "tail" "toFile" "toJSON" "toPath" "toString" "toXML" "trace" "traceVerbose" "tryEval" "typeOf" "unsafeDiscardOutputDependency" "unsafeDiscardStringContext" "unsafeGetAttrPos" "zipAttrsWith"
-  ; primops, `__<tab>` in `nix repl`
- "__add" "__filter" "__isFunction" "__split" "__addErrorContext" "__filterSource" "__isInt" "__splitVersion" "__all" "__findFile" "__isList" "__storeDir" "__any" "__floor" "__isPath" "__storePath" "__appendContext" "__foldl'" "__isString" "__stringLength" "__attrNames" "__fromJSON" "__langVersion" "__sub" "__attrValues" "__functionArgs" "__length" "__substring" "__bitAnd" "__genList" "__lessThan" "__tail" "__bitOr" "__genericClosure" "__listToAttrs" "__toFile" "__bitXor" "__getAttr" "__mapAttrs" "__toJSON" "__catAttrs" "__getContext" "__match" "__toPath" "__ceil" "__getEnv" "__mul" "__toXML" "__compareVersions" "__getFlake" "__nixPath" "__trace" "__concatLists" "__groupBy" "__nixVersion" "__traceVerbose" "__concatMap" "__hasAttr" "__parseDrvName" "__tryEval" "__concatStringsSep" "__hasContext" "__partition" "__typeOf" "__currentSystem" "__hashFile" "__path" "__unsafeDiscardOutputDependency" "__currentTime" "__hashString" "__pathExists" "__unsafeDiscardStringContext" "__deepSeq" "__head" "__readDir" "__unsafeGetAttrPos" "__div" "__intersectAttrs" "__readFile" "__zipAttrsWith" "__elem" "__isAttrs" "__replaceStrings" "__elemAt" "__isBool" "__seq" "__fetchurl" "__isFloat" "__sort"
-))
-
-; constants
-(variable_expression name: (identifier) @constant.builtin (#any-of? @constant.builtin
-  ; nix eval --impure --expr 'with builtins; filter (x: !(isFunction builtins.${x} || isBool builtins.${x})) (attrNames builtins)'
-  "builtins" "currentSystem" "currentTime" "langVersion" "nixPath" "nixVersion" "null" "storeDir"
-))
-
-; string interpolation (this was very annoying to get working properly)
-(interpolation "${" @punctuation.special (_) "}" @punctuation.special) @none
-
-(select_expression
-  expression: (_) @_expr
-  attrpath: (attrpath attr: (identifier) @field)
-  (#not-eq? @_expr "builtins")
-)
-(attrset_expression (binding_set (binding . (attrpath (identifier) @field))))
-(rec_attrset_expression (binding_set (binding . (attrpath (identifier) @field))))
-
-; unary operators
-(unary_expression operator: _ @operator)
-
-; binary operators
-(binary_expression operator: _ @operator)
-
-; integers, also highlight a unary -
-[
-  (unary_expression "-" (integer_expression))
-  (integer_expression)
-] @number
-
-; floats, also highlight a unary -
-[
-  (unary_expression "-" (float_expression))
-  (float_expression)
-] @float
+(identifier) @variable

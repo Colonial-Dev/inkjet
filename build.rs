@@ -5,6 +5,7 @@ use std::process::{Child, Command};
 
 use anyhow::{Error, Result};
 use fs_extra::dir::{self, CopyOptions};
+use phf_codegen::Map;
 use rayon::prelude::*;
 use serde::Deserialize;
 
@@ -29,13 +30,6 @@ fn download_langs(languages: &[Language]) -> Result<()> {
     fs::remove_dir_all("languages")?;
     fs::create_dir_all("languages/temp")?;
 
-    Command::new("git")
-        .arg("clone")
-        .arg("https://github.com/nvim-treesitter/nvim-treesitter")
-        .arg("languages/temp/nvim")
-        .spawn()?
-        .wait()?;
-
     languages
         .par_iter()
         .map(|lang| (lang.download(), lang))
@@ -52,12 +46,7 @@ fn download_langs(languages: &[Language]) -> Result<()> {
                 &CopyOptions::new(),
             )?;
 
-            let nvim_query_path = format!("languages/temp/nvim/queries/{}", lang.name);
-
-            let query_path = match Path::new(&nvim_query_path).try_exists()? && lang.nvim_override {
-                false => format!("languages/temp/{}/queries", lang.name),
-                true => nvim_query_path,
-            };
+            let query_path = format!("languages/temp/{}/queries", lang.name);
 
             dir::copy(
                 query_path,
@@ -101,9 +90,10 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
 
     let mut member_buffer = String::new();
     let mut all_langs_buffer = String::new();
-    let mut from_str_buffer = String::new();
     let mut into_cfg_buffer = String::new();
 
+
+    let mut alias_map = Map::new();
     for lang in languages {
         use std::fmt::Write;
 
@@ -126,20 +116,17 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
             lang.name
         )?;
 
-        // Add canonical language name to from_str match
-        writeln!(
-            &mut from_str_buffer,
-            "\"{}\" => Some(Self::{}),",
-            lang.name, pretty_name
-        )?;
+        alias_map.entry(
+            &lang.name,
+            &format!("Language::{}", pretty_name)
+        );
 
         // Add all language aliases to from_str match
         for alias in &lang.aliases {
-            writeln!(
-                &mut from_str_buffer,
-                "\"{}\" => Some(Self::{}),",
-                alias, pretty_name
-            )?;
+            alias_map.entry(
+                alias,
+                &format!("Language::{}", pretty_name)
+            );
         }
     }
 
@@ -162,10 +149,7 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
             /// The tokens for each language are sourced from its `name` and `aliases` keys in
             /// `config/languages.toml`.
             pub fn from_token(token: &str) -> Option<Self> {{
-                match token {{
-                    {from_str_buffer}
-                    _ => None,
-                }}
+                LANGUAGE_TOKENS.get(token).map(ToOwned::to_owned)
             }}
 
             pub(crate) fn config(&self) -> &'static HighlightConfiguration {{
@@ -174,7 +158,9 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
                 }}
             }}
         }}
-    "};
+
+        static LANGUAGE_TOKENS: phf::Map<&'static str, Language> = \n{};\n
+    ", alias_map.build()};
 
     let mut file = File::create("src/languages.rs")?;
 
@@ -195,8 +181,6 @@ struct Languages {
 struct Language {
     name: String,
     repo: String,
-    #[serde(default = "bool_true")]
-    nvim_override: bool,
     #[serde(default)]
     aliases: Vec<String>,
     command: Option<String>,
@@ -347,8 +331,4 @@ fn uppercase_first_char(str: &str) -> String {
         None => String::new(),
         Some(char) => char.to_uppercase().collect::<String>() + chars.as_str(),
     }
-}
-
-fn bool_true() -> bool {
-    true
 }

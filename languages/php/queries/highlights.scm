@@ -1,98 +1,32 @@
-; Variables
-
-(variable_name) @variable
-
-; Constants
-
-((name) @constant
- (#lua-match? @constant "^_?[A-Z][A-Z%d_]*$"))
-((name) @constant.builtin
- (#lua-match? @constant.builtin "^__[A-Z][A-Z%d_]+__$"))
-
-(const_declaration (const_element (name) @constant))
+(php_tag) @tag
+"?>" @tag
 
 ; Types
 
-[
- (primitive_type)
- (cast_type)
- ] @type.builtin
-(named_type
-  [(name) @type
-   (qualified_name (name) @type)])
-(class_declaration
-  name: (name) @type)
-(base_clause
-  [(name) @type
-   (qualified_name (name) @type)])
-(enum_declaration
-  name: (name) @type)
-(interface_declaration
-  name: (name) @type)
-(namespace_use_clause
-  [(name) @type
-   (qualified_name (name) @type)])
-(namespace_aliasing_clause (name) @type.definition)
-(class_interface_clause
-  [(name) @type
-   (qualified_name (name) @type)])
-(scoped_call_expression
-  scope: [(name) @type
-          (qualified_name (name) @type)])
-(class_constant_access_expression
-  . [(name) @type
-     (qualified_name (name) @type)]
-  (name) @constant)
-(trait_declaration
-  name: (name) @type)
-(use_declaration
-    (name) @type)
-(binary_expression
-  operator: "instanceof"
-  right: [(name) @type
-          (qualified_name (name) @type)])
+(primitive_type) @type.builtin
+(cast_type) @type.builtin
+(named_type (name) @type) @type
+(named_type (qualified_name) @type) @type
 
-; Functions, methods, constructors
+; Functions
 
 (array_creation_expression "array" @function.builtin)
 (list_literal "list" @function.builtin)
 
 (method_declaration
-  name: (name) @method)
+  name: (name) @function.method)
 
 (function_call_expression
-  function: (qualified_name (name) @function.call))
-
-(function_call_expression
-  (name) @function.call)
+  function: [(qualified_name (name)) (name)] @function)
 
 (scoped_call_expression
-  name: (name) @function.call)
+  name: (name) @function)
 
 (member_call_expression
-  name: (name) @method.call)
+  name: (name) @function.method)
 
 (function_definition
   name: (name) @function)
-
-(nullsafe_member_call_expression
-    name: (name) @method)
-
-(method_declaration
-    name: (name) @constructor
-    (#eq? @constructor "__construct"))
-(object_creation_expression
-  [(name) @constructor
-   (qualified_name (name) @constructor)])
-
-; Parameters
-[
-  (simple_parameter)
-  (variadic_parameter)
-] @parameter
-
-(argument
-    (name) @parameter)
 
 ; Member
 
@@ -101,7 +35,6 @@
 
 (member_access_expression
   name: (variable_name (name)) @property)
-
 (member_access_expression
   name: (name) @property)
 
@@ -109,206 +42,81 @@
 
 (relative_scope) @variable.builtin
 
-((variable_name) @variable.builtin
- (#eq? @variable.builtin "$this"))
+((name) @constant
+ (#match? @constant "^_?[A-Z][A-Z\\d_]+$"))
+((name) @constant.builtin
+ (#match? @constant.builtin "^__[A-Z][A-Z\d_]+__$"))
 
-; Namespace
-(namespace_definition
-  name: (namespace_name (name) @namespace))
-(namespace_name_as_prefix
-  (namespace_name (name) @namespace))
+((name) @constructor
+ (#match? @constructor "^[A-Z]"))
 
-; Attributes
-(attribute_list) @attribute
+((name) @variable.builtin
+ (#eq? @variable.builtin "this"))
 
-; Conditions ( ? : )
-(conditional_expression) @conditional
-
-; Directives
-(declare_directive ["strict_types" "ticks" "encoding"] @parameter)
+(variable_name) @variable
 
 ; Basic tokens
-
 [
- (string)
- (encapsed_string)
- (heredoc_body)
- (nowdoc_body)
- (shell_command_expression) ; backtick operator: `ls -la`
- ] @string
-(escape_sequence) @string.escape
-
-(boolean) @boolean
+  (string)
+  (string_value)
+  (encapsed_string)
+  (heredoc)
+  (heredoc_body)
+  (nowdoc_body)
+] @string
+(boolean) @constant.builtin
 (null) @constant.builtin
 (integer) @number
-(float) @float
-(comment) @comment @spell
+(float) @number
+(comment) @comment
 
-(named_label_statement) @label
+"$" @operator
+
 ; Keywords
 
-[
- "and"
- "as"
- "instanceof"
- "or"
- "xor"
-] @keyword.operator
-
-[
- "fn"
- "function"
-] @keyword.function
-
-[
- "break"
- "class"
- "clone"
- "declare"
- "default"
- "echo"
- "enddeclare"
- "enum"
- "extends"
- "global"
- "goto"
- "implements"
- "insteadof"
- "interface"
- "namespace"
- "new"
- "trait"
- "unset"
- ] @keyword
-
-[
- "abstract"
- "const"
- "final"
- "private"
- "protected"
- "public"
- "readonly"
- "static"
-] @type.qualifier
-
-[
-  "return"
-  "yield"
-] @keyword.return
-
-[
- "case"
- "else"
- "elseif"
- "endif"
- "endswitch"
- "if"
- "switch"
- "match"
-  "??"
- ] @conditional
-
-[
- "continue"
- "do"
- "endfor"
- "endforeach"
- "endwhile"
- "for"
- "foreach"
- "while"
- ] @repeat
-
-[
- "catch"
- "finally"
- "throw"
- "try"
- ] @exception
-
-[
- "include_once"
- "include"
- "require_once"
- "require"
- "use"
- ] @include
-
-[
- ","
- ";"
- ":"
- "\\"
- ] @punctuation.delimiter
-
-[
- (php_tag)
- "?>"
- "("
- ")"
- "["
- "]"
- "{"
- "}"
- "#["
- ] @punctuation.bracket
-
-[
-  "="
-
-  "."
-  "-"
-  "*"
-  "/"
-  "+"
-  "%"
-  "**"
-
-  "~"
-  "|"
-  "^"
-  "&"
-  "<<"
-  ">>"
-
-  "->"
-  "?->"
-
-  "=>"
-
-  "<"
-  "<="
-  ">="
-  ">"
-  "<>"
-  "=="
-  "!="
-  "==="
-  "!=="
-
-  "!"
-  "&&"
-  "||"
-
-  ".="
-  "-="
-  "+="
-  "*="
-  "/="
-  "%="
-  "**="
-  "&="
-  "|="
-  "^="
-  "<<="
-  ">>="
-  "??="
-  "--"
-  "++"
-
-  "@"
-  "::"
-] @operator
-
-(ERROR) @error
+"abstract" @keyword
+"as" @keyword
+"break" @keyword
+"case" @keyword
+"catch" @keyword
+"class" @keyword
+"const" @keyword
+"continue" @keyword
+"declare" @keyword
+"default" @keyword
+"do" @keyword
+"echo" @keyword
+"else" @keyword
+"elseif" @keyword
+"enddeclare" @keyword
+"endforeach" @keyword
+"endif" @keyword
+"endswitch" @keyword
+"endwhile" @keyword
+"extends" @keyword
+"final" @keyword
+"finally" @keyword
+"foreach" @keyword
+"function" @keyword
+"global" @keyword
+"if" @keyword
+"implements" @keyword
+"include_once" @keyword
+"include" @keyword
+"insteadof" @keyword
+"interface" @keyword
+"namespace" @keyword
+"new" @keyword
+"private" @keyword
+"protected" @keyword
+"public" @keyword
+"require_once" @keyword
+"require" @keyword
+"return" @keyword
+"static" @keyword
+"switch" @keyword
+"throw" @keyword
+"trait" @keyword
+"try" @keyword
+"use" @keyword
+"while" @keyword

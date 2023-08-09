@@ -2,7 +2,7 @@
 //! 
 //! See these links for the list of [features](https://github.com/SomewhereOutInSpace/inkjet#features), all [supported languages](https://github.com/SomewhereOutInSpace/inkjet#included-languages) or the [FAQ](https://github.com/SomewhereOutInSpace/inkjet#faq).
 //! 
-//! Otherwise, you can get started by...
+//! Otherwise, you can get started [here](Highlighter).
 
 #![doc(html_logo_url = "https://raw.githubusercontent.com/SomewhereOutInSpace/inkjet/master/.github/logo.png")]
 #![warn(clippy::all)]
@@ -27,12 +27,8 @@ pub use crate::error::{
 
 /// A type for highlighting code.
 /// 
-/// [`Highlighter`]s store the configuration for all the languages you want to highlight, as well as
-/// the underlying `tree-sitter` parser used to do the heavy lifting.
-/// 
-/// To create a highlighter, use the [`Highlighter::builder`] method:
-/// 
-/// Then, to highlight some code, use the [`highlight_to_writer`](Highligher::highlight_to_writer) or [`highlight_to_string`](Highligher::highlight_to_string)
+/// To create a highlighter, use the [`Highlighter::new`] method. Then, to highlight some code,
+///  use the [`highlight_to_writer`](Highlighter::highlight_to_writer) or [`highlight_to_string`](Highlighter::highlight_to_string)
 /// methods:
 /// 
 /// ```rust
@@ -58,19 +54,19 @@ pub use crate::error::{
 ///     &formatter::Html,
 ///     code
 /// )?;
-/// 
 /// # Ok::<(), InkjetError>(())
 /// ```
-pub struct Highlighter {
-    highlighter: TSHighlighter,
-}
+/// 
+/// The error type for highlighting is [`InkjetError`], which wraps both IO/formatting errors as well as internal `tree-sitter` errors.
+pub struct Highlighter(TSHighlighter);
 
 impl Highlighter {
-    /// Create a new [highlighter builder](HighlighterBuilder).
+    /// Create a new highlighter.
     pub fn new() -> Self {
-        Self { highlighter: TSHighlighter::new() }
+        Self(TSHighlighter::new())
     }
 
+    /// Highlight into an instance of [`std::io::Write`] using the provided formatter.
     pub fn highlight_to_writer<F, O>(
         &mut self,
         lang: Language,
@@ -85,7 +81,7 @@ impl Highlighter {
         let config = lang.config();
 
         let highlights = self
-            .highlighter
+            .0
             .highlight(
                 config,
                 source.as_bytes(),
@@ -93,7 +89,7 @@ impl Highlighter {
                 |token| match Language::from_token(token) {
                     Some(lang) => Some(lang.config()),
                     None => None
-                })?;
+            })?;
         
         for event in highlights {
             formatter.write_io(source, output, event?)?
@@ -102,7 +98,7 @@ impl Highlighter {
         Ok(())
     }
 
-    /// Highlight a string of the provided language to 
+    /// Highlight into a new [`String`] using the provided formatter.
     pub fn highlight_to_string<F>(
         &mut self,
         lang: Language,
@@ -117,7 +113,7 @@ impl Highlighter {
         let mut buffer = String::new();
 
         let highlights = self
-            .highlighter
+            .0
             .highlight(
                 config,
                 source.as_bytes(),
@@ -125,7 +121,7 @@ impl Highlighter {
                 |token| match Language::from_token(token) {
                     Some(lang) => Some(lang.config()),
                     None => None
-                })?;
+            })?;
 
         for event in highlights {
             formatter.write_fmt(source,&mut buffer, event?)?
@@ -143,23 +139,6 @@ impl Default for Highlighter {
 
 impl Clone for Highlighter {
     fn clone(&self) -> Self {
-        Self { highlighter: TSHighlighter::new() }
-    }
-}
-
-// TODO: "easy" module/functions for quickly highlighting to HTML without having to set up a bunch of state
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn self_test() {        
-        Highlighter::new().highlight_to_writer(
-            Language::Rust,
-            &formatter::Html,
-            include_str!("lib.rs"),
-            &mut std::io::sink()
-        ).unwrap();
+        Self::new()
     }
 }

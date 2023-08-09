@@ -97,7 +97,7 @@
 (primitive_type) @type.builtin
 
 ((identifier) @type
-  (#lua-match? @type "^_?#"))
+  (#match? @type "^(#|_#)"))
 
 [
   (slice_type)
