@@ -23,7 +23,7 @@ impl Formatter for Html {
             },
             HighlightEvent::HighlightStart(idx) => {
                 let name = HIGHLIGHT_CLASS_NAMES[idx.0];
-                println!("{name}");
+
                 write!(
                     writer,
                     "<span class=\"{}\">",

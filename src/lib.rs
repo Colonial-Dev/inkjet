@@ -58,6 +58,10 @@ pub use crate::error::{
 /// ```
 /// 
 /// The error type for highlighting is [`InkjetError`], which wraps both IO/formatting errors as well as internal `tree-sitter` errors.
+/// 
+/// ### Performance Note
+/// When you highlight a language for the first time, Inkjet has to build its corresponding [`HighlightConfiguration`](tree_sitter_highlight::HighlightConfiguration).
+/// This is handled automatically and only needs to be done once per language, as the result is stored in a global [`Lazy`](once_cell::sync::Lazy).
 pub struct Highlighter(TSHighlighter);
 
 impl Highlighter {
