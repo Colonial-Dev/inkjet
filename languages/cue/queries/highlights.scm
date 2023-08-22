@@ -1,54 +1,12 @@
-; Includes
+(package_clause "package" @keyword.control.import)
+
+(package_identifier) @variable
+
+(import_declaration "import" @keyword.control.import)
 
 [
-  "package"
-  "import"
-] @include
-
-; Namespaces
-
-(package_identifier) @namespace
-
-(import_spec ["." "_"] @punctuation.special)
-
-[
-  (attr_path)
-  (package_path)
-] @text.uri ;; In attributes
-
-; Attributes
-
-(attribute) @attribute
-
-; Conditionals
-
-"if" @conditional
-
-; Repeats
-
-[
-  "for"
-] @repeat
-
-(for_clause "_" @punctuation.special)
-
-; Keywords
-
-[
-  "let"
-] @keyword
-
-[
-  "in"
-] @keyword.operator
-
-; Operators
-
-[
-  "+"
-  "-"
+  "!"
   "*"
-  "/"
   "|"
   "&"
   "||"
@@ -61,104 +19,92 @@
   ">="
   "=~"
   "!~"
-  "!"
-  "="
+  "+"
+  "-"
+  "*"
+  "/"
 ] @operator
 
-; Fields & Properties
+(unary_expression "*" @operator.default)
 
-(field 
-  (label 
-  (identifier) @field))
+(unary_expression "=~" @operator.regexp)
 
-(selector_expression
-  (_)
-  (identifier) @property)
+(unary_expression "!~" @operator.regexp)
 
-; Functions
+(binary_expression _ "&" @operator.unify _)
 
-(call_expression
-  function: (identifier) @function.call)
-(call_expression
-  function: (selector_expression
-  (_)
-  (identifier) @function.call))
-(call_expression
-  function: (builtin_function) @function.call)
+(binary_expression _ "|" @operator.disjunct _)
 
-(builtin_function) @function.builtin
+(builtin) @function.builtin
 
-; Variables
+(qualified_identifier) @function.builtin
 
-(identifier) @variable
+(let_clause "let" @keyword.storage.type)
 
-; Types
+(for_clause "for" @keyword.control.repeat)
+(for_clause "in" @keyword.control.repeat)
 
-(primitive_type) @type.builtin
+(guard_clause "if" @keyword.control.conditional)
 
-((identifier) @type
-  (#match? @type "^(#|_#)"))
+(comment) @comment
 
 [
-  (slice_type)
-  (pointer_type)
-] @type ;; In attributes
+  (string_type)
+  (simple_string_lit)
+  (multiline_string_lit)
+  (bytes_type)
+  (simple_bytes_lit)
+  (multiline_bytes_lit)
+] @string
 
-; Punctuation
+[
+  (number_type)
+  (int_lit)
+  (int_type)
+  (uint_type)
+] @constant.numeric.integer
+
+[
+  (float_lit)
+  (float_type)
+] @constant.numeric.float
+
+[
+  (bool_type)
+  (true)
+  (false)
+] @constant.builtin.boolean
+
+(null) @constant.builtin
+
+(ellipsis) @punctuation.bracket
 
 [
   ","
   ":"
 ] @punctuation.delimiter
 
-[ "{" "}" ] @punctuation.bracket
-
-[ "[" "]" ] @punctuation.bracket
-
-[ "(" ")" ] @punctuation.bracket
-
-[ "<" ">" ] @punctuation.bracket
-
 [
-  (ellipsis)
-  "?"
-] @punctuation.special
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+] @punctuation.bracket
 
-; Literals
+(interpolation "\\(" @punctuation.bracket (_) ")" @punctuation.bracket) @variable.other.member
 
-(string) @string
+(field (label (identifier) @variable.other.member))
 
-[
-  (escape_char)
-  (escape_unicode)
-] @string.escape
+(
+  (identifier) @keyword.storage.type
+  (#match? @keyword.storage.type "^#")
+)
 
-(number) @number
+(field (label alias: (identifier) @label))
 
-(float) @float
+(let_clause left: (identifier) @label)
 
-(si_unit
-  (float)
-  (_) @symbol)
 
-(boolean) @boolean
-
-[
-  (null)
-  (top)
-  (bottom)
-] @constant.builtin
-
-; Interpolations
-
-(interpolation "\\(" @punctuation.special (_) ")" @punctuation.special) @none
-
-(interpolation "\\(" (identifier) @variable ")")
-
-; Comments
-
-(comment) @comment @spell
-
-; Errors
-
-(ERROR) @error
+(attribute (identifier) @tag)

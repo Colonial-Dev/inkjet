@@ -1,15 +1,20 @@
 [[languages]]
 name = "ada"
 repo = "https://github.com/briot/tree-sitter-ada"
+helix_override = true
 
 [[languages]]
 name = "asm"
-pretty_name = "GenericAsm"
 repo = "https://github.com/rush-rs/tree-sitter-asm"
-command = '''
-git clone https://github.com/rush-rs/tree-sitter-asm languages/temp/asm &&
-cp languages/temp/asm/queries/asm/* languages/temp/asm/queries
-'''
+helix_override = true
+
+[[languages]]
+name = "astro"
+repo = "https://github.com/virchau13/tree-sitter-astro"
+
+[[languages]]
+name = "awk"
+repo = "https://github.com/Beaglefoot/tree-sitter-awk"
 
 [[languages]]
 name = "bash"
@@ -19,6 +24,10 @@ repo = "https://github.com/tree-sitter/tree-sitter-bash"
 name = "bibtex"
 repo = "https://github.com/latex-lsp/tree-sitter-bibtex"
 aliases = ["bib"]
+
+[[languages]]
+name = "bicep"
+repo = "https://github.com/amaanq/tree-sitter-bicep"
 
 [[languages]]
 name = "blueprint"
@@ -40,14 +49,20 @@ repo = "https://github.com/sogaiu/tree-sitter-clojure"
 aliases = ["clj", "cljc"]
 
 [[languages]]
+name = "cmake"
+repo = "https://github.com/uyha/tree-sitter-cmake"
+
+[[languages]]
 name = "c_sharp"
 pretty_name = "CSharp"
+helix_path = "c-sharp"
 repo = "https://github.com/tree-sitter/tree-sitter-c-sharp"
 aliases = ["c#", "csharp", "cs"]
 
 [[languages]]
 name = "commonlisp"
 pretty_name = "CommonLisp"
+helix_path = "common-lisp"
 repo = "https://github.com/theHamsta/tree-sitter-commonlisp"
 aliases = ["cl", "lisp", "common-lisp"]
 
@@ -86,6 +101,7 @@ aliases = ["docker"]
 name = "elisp"
 repo = "https://github.com/Wilfred/tree-sitter-elisp"
 aliases = ["el", "emacs-lisp"]
+helix_override = true
 
 [[languages]]
 name = "elixir"
@@ -102,17 +118,37 @@ repo = "https://github.com/WhatsApp/tree-sitter-erlang"
 aliases = ["erl", "hrl", "es", "escript"]
 
 [[languages]]
+name = "forth"
+repo = "https://github.com/AlexanderBrevig/tree-sitter-forth"
+aliases = ["fth"]
+
+[[languages]]
 name = "fortran"
 repo = "https://github.com/stadelmanma/tree-sitter-fortran"
+aliases = ["for"]
+
+# [[languages]]
+# name = "fsharp"
+# repo = "https://github.com/Nsidorenco/tree-sitter-fsharp"
+# aliases = ["f#", "fs"]
+
+[[languages]]
+name = "gdscript"
+repo = "https://github.com/PrestonKnopp/tree-sitter-gdscript"
+aliases = ["gd"]
+
+[[languages]]
+name = "gleam"
+repo = "https://github.com/gleam-lang/tree-sitter-gleam"
+
+[[languages]]
+name = "glsl"
+repo = "https://github.com/theHamsta/tree-sitter-glsl"
 
 [[languages]]
 name = "go"
 repo = "https://github.com/tree-sitter/tree-sitter-go"
 aliases = ["golang"]
-
-[[languages]]
-name = "glsl"
-repo = "https://github.com/theHamsta/tree-sitter-glsl"
 
 [[languages]]
 name = "haskell"
@@ -130,22 +166,47 @@ repo = "https://github.com/tree-sitter/tree-sitter-html"
 aliases = ["htm"]
 
 [[languages]]
+name = "ini"
+repo = "https://github.com/justinmk/tree-sitter-ini"
+
+[[languages]]
 name = "java"
 repo = "https://github.com/tree-sitter/tree-sitter-java"
 
 [[languages]]
 name = "javascript"
 repo = "https://github.com/tree-sitter/tree-sitter-javascript"
+helix_path = "_javascript"
 aliases = ["js"]
+
+[[languages]]
+name = "jinja2"
+repo = "https://github.com/dbt-labs/tree-sitter-jinja2"
+aliases = ["jinja"]
 
 [[languages]]
 name = "json"
 repo = "https://github.com/tree-sitter/tree-sitter-json"
 
 [[languages]]
+name = "julia"
+repo = "https://github.com/tree-sitter/tree-sitter-julia"
+aliases = ["jl"]
+
+[[languages]]
+name = "just"
+repo = "https://github.com/IndianBoy42/tree-sitter-just"
+aliases = ["justfile"]
+
+[[languages]]
 name = "kotlin"
 repo = "https://github.com/fwcd/tree-sitter-kotlin"
 aliases = ["kt", "kts"]
+
+[[languages]]
+name = "latex"
+repo = "https://github.com/latex-lsp/tree-sitter-latex"
+aliases = ["tex"]
 
 [[languages]]
 name = "llvm"
@@ -154,10 +215,6 @@ repo = "https://github.com/benwilliamgraham/tree-sitter-llvm"
 [[languages]]
 name = "lua"
 repo = "https://github.com/tjdevries/tree-sitter-lua"
-command = '''
-git clone https://github.com/tjdevries/tree-sitter-lua languages/temp/lua &&
-cp languages/temp/lua/queries/lua/* languages/temp/lua/queries
-'''
 
 [[languages]]
 name = "make"
@@ -196,6 +253,7 @@ aliases = ["ml"]
 [[languages]]
 name = "ocaml_interface"
 pretty_name = "OcamlInterface"
+helix_path = "ocaml-interface"
 repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
 command = '''
 set -euxo pipefail &&
@@ -216,6 +274,11 @@ aliases = ["scad"]
 name = "pascal"
 repo = "https://github.com/Isopod/tree-sitter-pascal"
 
+# [[languages]]
+# name = "perl"
+# repo = "https://github.com/tree-sitter-perl/tree-sitter-perl"
+# aliases = ["pl"]
+
 [[languages]]
 name = "php"
 repo = "https://github.com/tree-sitter/tree-sitter-php"
@@ -223,6 +286,7 @@ repo = "https://github.com/tree-sitter/tree-sitter-php"
 [[languages]]
 name = "proto"
 pretty_name = "ProtoBuf"
+helix_path = "protobuf"
 repo = "https://github.com/treywood/tree-sitter-proto"
 aliases = ["protobuf"]
 
@@ -292,6 +356,7 @@ repo = "https://github.com/tree-sitter/tree-sitter-toml"
 [[languages]]
 name = "typescript"
 repo = "https://github.com/tree-sitter/tree-sitter-typescript"
+helix_path = "_typescript"
 # Disgusting hack to extract the non-TSX grammar, relocate the scanner header and patch the source file appropriately
 # Words cannot describe how much I hate this, but it works
 command = '''
@@ -307,10 +372,15 @@ aliases = ["ts"]
 name = "x86asm"
 repo = "https://github.com/bearcove/tree-sitter-x86asm"
 aliases = ["x86"]
+helix_override = true
 
 [[languages]]
 name = "wgsl"
 repo = "https://github.com/szebniok/tree-sitter-wgsl"
+
+[[languages]]
+name = "yaml"
+repo = "https://github.com/ikatyang/tree-sitter-yaml"
 
 [[languages]]
 name = "zig"

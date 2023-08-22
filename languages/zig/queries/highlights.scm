@@ -1,20 +1,11 @@
 [
   (container_doc_comment)
   (doc_comment)
+] @comment.documentation
+
+[
   (line_comment)
-] @comment @spell
-
-[
-  variable: (IDENTIFIER)
-  variable_type_function: (IDENTIFIER)
-] @variable
-
-parameter: (IDENTIFIER) @parameter
-
-[
-  field_member: (IDENTIFIER)
-  field_access: (IDENTIFIER)
-] @field
+] @comment.line
 
 ;; assume TitleCase is a type
 (
@@ -23,8 +14,9 @@ parameter: (IDENTIFIER) @parameter
     field_access: (IDENTIFIER)
     parameter: (IDENTIFIER)
   ] @type
-  (#match? @type "^[A-Z]([a-z]+[A-Za-z0-9]*)*$")
+  (#match? @type "^[A-Z]([a-z]+[A-Za-z0-9]*)+$")
 )
+
 ;; assume camelCase is a function
 (
   [
@@ -44,150 +36,157 @@ parameter: (IDENTIFIER) @parameter
   (#match? @constant "^[A-Z][A-Z_0-9]+$")
 )
 
-[
-  function_call: (IDENTIFIER)
-  function: (IDENTIFIER)
-] @function
-
-exception: "!" @exception
-
+;; _
 (
   (IDENTIFIER) @variable.builtin
   (#eq? @variable.builtin "_")
 )
 
+;; C Pointers [*c]T
 (PtrTypeStart "c" @variable.builtin)
 
-(
-  (ContainerDeclType
-    [
-      (ErrorUnionExpr)
-      "enum"
-    ]
-  )
-  (ContainerField (IDENTIFIER) @constant)
-)
+[
+  variable: (IDENTIFIER)
+  variable_type_function: (IDENTIFIER)
+] @variable
+
+parameter: (IDENTIFIER) @variable.parameter
+
+[
+  field_member: (IDENTIFIER)
+  field_access: (IDENTIFIER)
+] @variable.other.member
+
+[
+  function_call: (IDENTIFIER)
+  function: (IDENTIFIER)
+] @function
+
+exception: "!" @keyword.control.exception
 
 field_constant: (IDENTIFIER) @constant
 
 (BUILTINIDENTIFIER) @function.builtin
 
-((BUILTINIDENTIFIER) @include
-  (#any-of? @include "@import" "@cImport"))
+((BUILTINIDENTIFIER) @keyword.control.import
+  (#any-of? @keyword.control.import "@import" "@cImport"))
 
-(INTEGER) @number
+(INTEGER) @constant.numeric.integer
 
-(FLOAT) @float
-
-[
-  "true"
-  "false"
-] @boolean
+(FLOAT) @constant.numeric.float
 
 [
   (LINESTRING)
   (STRINGLITERALSINGLE)
-] @string @spell
+] @string
 
-(CHAR_LITERAL) @character
-(EscapeSequence) @string.escape
+(CHAR_LITERAL) @constant.character
+(EscapeSequence) @constant.character.escape
 (FormatSequence) @string.special
+
+[
+  "anytype"
+  "anyframe"
+  (BuildinTypeExpr)
+] @type.builtin
 
 (BreakLabel (IDENTIFIER) @label)
 (BlockLabel (IDENTIFIER) @label)
 
 [
-  "asm"
-  "defer"
-  "errdefer"
-  "test"
-  "struct"
-  "union"
-  "enum"
-  "opaque"
-  "error"
-] @keyword
+  "true"
+  "false"
+] @constant.builtin.boolean
 
 [
-  "async"
-  "await"
-  "suspend"
-  "nosuspend"
-  "resume"
-] @keyword.coroutine
+  "undefined"
+  "unreachable"
+  "null"
+] @constant.builtin
+
+[
+  "else"
+  "if"
+  "switch"
+] @keyword.control.conditional
+
+[
+  "for"
+  "while"
+] @keyword.control.repeat
+
+[
+  "or"
+  "and"
+  "orelse"
+] @keyword.operator
+
+[
+  "enum"
+] @type.enum
+
+[
+  "struct"
+  "union"
+  "packed"
+  "opaque"
+  "export"
+  "extern"
+  "linksection"
+] @keyword.storage.type
+
+[
+  "const"
+  "var"
+  "threadlocal"
+  "allowzero"
+  "volatile"
+  "align"
+] @keyword.storage.modifier
+
+[
+  "try"
+  "error"
+  "catch"
+] @keyword.control.exception
 
 [
   "fn"
 ] @keyword.function
 
 [
-  "and"
-  "or"
-  "orelse"
-] @keyword.operator
+  "test"
+] @keyword
+
+[
+  "pub"
+  "usingnamespace"
+] @keyword.control.import
 
 [
   "return"
-] @keyword.return
-
-[
-  "if"
-  "else"
-  "switch"
-] @conditional
-
-[
-  "for"
-  "while"
   "break"
   "continue"
-] @repeat
+] @keyword.control.return
 
 [
-  "usingnamespace"
-] @include
-
-[
-  "try"
-  "catch"
-] @exception
-
-[
-  "anytype"
-  (BuildinTypeExpr)
-] @type.builtin
-
-[
-  "const"
-  "var"
-  "volatile"
-  "allowzero"
-  "noalias"
-] @type.qualifier
-
-[
-  "addrspace"
-  "align"
-  "callconv"
-  "linksection"
-] @storageclass
+  "defer"
+  "errdefer"
+  "async"
+  "nosuspend"
+  "await"
+  "suspend"
+  "resume"
+] @function.macro
 
 [
   "comptime"
-  "export"
-  "extern"
   "inline"
   "noinline"
-  "packed"
-  "pub"
-  "threadlocal"
-] @attribute
-
-[
-  "null"
-  "unreachable"
-  "undefined"
-] @constant.builtin
+  "asm"
+  "callconv"
+  "noalias"
+] @keyword.directive
 
 [
   (CompareOp)
@@ -229,5 +228,4 @@ field_constant: (IDENTIFIER) @constant
   (PtrIndexPayload "|")
 ] @punctuation.bracket
 
-; Error
-(ERROR) @error
+(ERROR) @keyword.control.exception

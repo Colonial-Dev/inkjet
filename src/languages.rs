@@ -4,6 +4,7 @@
 
 use tree_sitter_highlight::HighlightConfiguration;
 
+#[cfg(feature = "language-ada")]
 pub mod ada {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -51,6 +52,7 @@ pub mod ada {
     }
 }
 
+#[cfg(feature = "language-asm")]
 pub mod asm {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -75,7 +77,7 @@ pub mod asm {
         config
     });
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/asm/queries/highlights.scm");
+    pub const HIGHLIGHT_QUERY: &str = "";
     pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
 
@@ -98,6 +100,103 @@ pub mod asm {
     }
 }
 
+#[cfg(feature = "language-astro")]
+pub mod astro {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_astro() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_astro() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'astro'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/astro/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/astro/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_astro() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-awk")]
+pub mod awk {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_awk() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_awk() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'awk'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/awk/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/awk/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_awk() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-bash")]
 pub mod bash {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -123,7 +222,7 @@ pub mod bash {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/bash/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/bash/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -145,6 +244,7 @@ pub mod bash {
     }
 }
 
+#[cfg(feature = "language-bibtex")]
 pub mod bibtex {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -192,6 +292,55 @@ pub mod bibtex {
     }
 }
 
+#[cfg(feature = "language-bicep")]
+pub mod bicep {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_bicep() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_bicep() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'bicep'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/bicep/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_bicep() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-blueprint")]
 pub mod blueprint {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -239,6 +388,7 @@ pub mod blueprint {
     }
 }
 
+#[cfg(feature = "language-c")]
 pub mod c {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -264,7 +414,7 @@ pub mod c {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/c/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/c/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -286,6 +436,7 @@ pub mod c {
     }
 }
 
+#[cfg(feature = "language-capnp")]
 pub mod capnp {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -333,6 +484,7 @@ pub mod capnp {
     }
 }
 
+#[cfg(feature = "language-clojure")]
 pub mod clojure {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -358,7 +510,7 @@ pub mod clojure {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/clojure/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/clojure/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -380,6 +532,55 @@ pub mod clojure {
     }
 }
 
+#[cfg(feature = "language-cmake")]
+pub mod cmake {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_cmake() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_cmake() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'cmake'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cmake/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/cmake/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_cmake() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-c-sharp")]
 pub mod c_sharp {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -405,7 +606,7 @@ pub mod c_sharp {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/c_sharp/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/c_sharp/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -427,6 +628,7 @@ pub mod c_sharp {
     }
 }
 
+#[cfg(feature = "language-commonlisp")]
 pub mod commonlisp {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -451,8 +653,8 @@ pub mod commonlisp {
         config
     });
 
-    pub const HIGHLIGHT_QUERY: &str = "";
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/commonlisp/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/commonlisp/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -474,6 +676,7 @@ pub mod commonlisp {
     }
 }
 
+#[cfg(feature = "language-cpp")]
 pub mod cpp {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -521,6 +724,7 @@ pub mod cpp {
     }
 }
 
+#[cfg(feature = "language-css")]
 pub mod css {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -546,7 +750,7 @@ pub mod css {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/css/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/css/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -568,6 +772,7 @@ pub mod css {
     }
 }
 
+#[cfg(feature = "language-cue")]
 pub mod cue {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -593,8 +798,8 @@ pub mod cue {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/cue/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/cue/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/cue/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -615,6 +820,7 @@ pub mod cue {
     }
 }
 
+#[cfg(feature = "language-d")]
 pub mod d {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -662,6 +868,7 @@ pub mod d {
     }
 }
 
+#[cfg(feature = "language-dart")]
 pub mod dart {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -687,8 +894,8 @@ pub mod dart {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/dart/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/dart/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/dart/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -709,6 +916,7 @@ pub mod dart {
     }
 }
 
+#[cfg(feature = "language-diff")]
 pub mod diff {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -756,6 +964,7 @@ pub mod diff {
     }
 }
 
+#[cfg(feature = "language-dockerfile")]
 pub mod dockerfile {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -781,7 +990,7 @@ pub mod dockerfile {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/dockerfile/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/dockerfile/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -803,6 +1012,7 @@ pub mod dockerfile {
     }
 }
 
+#[cfg(feature = "language-elisp")]
 pub mod elisp {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -850,6 +1060,7 @@ pub mod elisp {
     }
 }
 
+#[cfg(feature = "language-elixir")]
 pub mod elixir {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -897,6 +1108,7 @@ pub mod elixir {
     }
 }
 
+#[cfg(feature = "language-elm")]
 pub mod elm {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -944,6 +1156,7 @@ pub mod elm {
     }
 }
 
+#[cfg(feature = "language-erlang")]
 pub mod erlang {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -969,8 +1182,8 @@ pub mod erlang {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/erlang/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/erlang/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/erlang/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -991,6 +1204,55 @@ pub mod erlang {
     }
 }
 
+#[cfg(feature = "language-forth")]
+pub mod forth {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_forth() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_forth() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'forth'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/forth/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_forth() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-fortran")]
 pub mod fortran {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1016,7 +1278,7 @@ pub mod fortran {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/fortran/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/fortran/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -1038,7 +1300,8 @@ pub mod fortran {
     }
 }
 
-pub mod go {
+#[cfg(feature = "language-gdscript")]
+pub mod gdscript {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
@@ -1046,24 +1309,24 @@ pub mod go {
     use crate::constants::HIGHLIGHT_NAMES;
 
     extern "C" {
-        pub fn tree_sitter_go() -> Language;
+        pub fn tree_sitter_gdscript() -> Language;
     }
 
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
-            unsafe { tree_sitter_go() },
+            unsafe { tree_sitter_gdscript() },
             HIGHLIGHT_QUERY,
             INJECTIONS_QUERY,
             LOCALS_QUERY,
-        ).expect("Failed to load highlight configuration for language 'go'!");
+        ).expect("Failed to load highlight configuration for language 'gdscript'!");
 
         config.configure(HIGHLIGHT_NAMES);
 
         config
     });
 
-    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/go/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/gdscript/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/gdscript/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -1074,7 +1337,7 @@ pub mod go {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { super::tree_sitter_go() })
+                .set_language(unsafe { super::tree_sitter_gdscript() })
                 .expect("Grammar should load successfully.");
         }
 
@@ -1085,6 +1348,55 @@ pub mod go {
     }
 }
 
+#[cfg(feature = "language-gleam")]
+pub mod gleam {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_gleam() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_gleam() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'gleam'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/gleam/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = include_str!("../languages/gleam/queries/locals.scm");
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_gleam() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-glsl")]
 pub mod glsl {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1110,8 +1422,8 @@ pub mod glsl {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/glsl/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/glsl/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/glsl/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -1132,6 +1444,55 @@ pub mod glsl {
     }
 }
 
+#[cfg(feature = "language-go")]
+pub mod go {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_go() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_go() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'go'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/go/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/go/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/go/queries/locals.scm");
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_go() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-haskell")]
 pub mod haskell {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1157,7 +1518,7 @@ pub mod haskell {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/haskell/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/haskell/queries/injections.scm");
     pub const LOCALS_QUERY: &str = include_str!("../languages/haskell/queries/locals.scm");
 
     #[cfg(test)]
@@ -1179,6 +1540,7 @@ pub mod haskell {
     }
 }
 
+#[cfg(feature = "language-html")]
 pub mod html {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1226,6 +1588,55 @@ pub mod html {
     }
 }
 
+#[cfg(feature = "language-ini")]
+pub mod ini {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_ini() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_ini() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'ini'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ini/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_ini() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-java")]
 pub mod java {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1251,7 +1662,7 @@ pub mod java {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/java/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/java/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -1273,6 +1684,7 @@ pub mod java {
     }
 }
 
+#[cfg(feature = "language-javascript")]
 pub mod javascript {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1298,7 +1710,7 @@ pub mod javascript {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/javascript/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/javascript/queries/injections.scm");
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/javascript/queries/locals.scm");
 
     #[cfg(test)]
@@ -1320,6 +1732,55 @@ pub mod javascript {
     }
 }
 
+#[cfg(feature = "language-jinja2")]
+pub mod jinja2 {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_jinja2() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_jinja2() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'jinja2'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/jinja2/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/jinja2/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_jinja2() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-json")]
 pub mod json {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1367,6 +1828,103 @@ pub mod json {
     }
 }
 
+#[cfg(feature = "language-julia")]
+pub mod julia {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_julia() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_julia() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'julia'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/julia/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/julia/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/julia/queries/locals.scm");
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_julia() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-just")]
+pub mod just {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_just() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_just() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'just'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/just/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/just/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/just/queries/locals.scm");
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_just() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-kotlin")]
 pub mod kotlin {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1392,7 +1950,7 @@ pub mod kotlin {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/kotlin/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/kotlin/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -1414,6 +1972,55 @@ pub mod kotlin {
     }
 }
 
+#[cfg(feature = "language-latex")]
+pub mod latex {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_latex() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_latex() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'latex'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/latex/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/latex/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_latex() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-llvm")]
 pub mod llvm {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1439,8 +2046,8 @@ pub mod llvm {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/llvm/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/llvm/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/llvm/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -1461,6 +2068,7 @@ pub mod llvm {
     }
 }
 
+#[cfg(feature = "language-lua")]
 pub mod lua {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1487,7 +2095,7 @@ pub mod lua {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/lua/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/lua/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/lua/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1508,6 +2116,7 @@ pub mod lua {
     }
 }
 
+#[cfg(feature = "language-make")]
 pub mod make {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1533,7 +2142,7 @@ pub mod make {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/make/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/make/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -1555,6 +2164,7 @@ pub mod make {
     }
 }
 
+#[cfg(feature = "language-matlab")]
 pub mod matlab {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1579,9 +2189,9 @@ pub mod matlab {
         config
     });
 
-    pub const HIGHLIGHT_QUERY: &str = "";
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/matlab/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/matlab/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/matlab/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -1602,6 +2212,7 @@ pub mod matlab {
     }
 }
 
+#[cfg(feature = "language-meson")]
 pub mod meson {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1649,6 +2260,7 @@ pub mod meson {
     }
 }
 
+#[cfg(feature = "language-nim")]
 pub mod nim {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1673,7 +2285,7 @@ pub mod nim {
         config
     });
 
-    pub const HIGHLIGHT_QUERY: &str = "";
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/nim/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
 
@@ -1696,6 +2308,7 @@ pub mod nim {
     }
 }
 
+#[cfg(feature = "language-nix")]
 pub mod nix {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1722,7 +2335,7 @@ pub mod nix {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/nix/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/nix/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/nix/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1743,6 +2356,7 @@ pub mod nix {
     }
 }
 
+#[cfg(feature = "language-ocaml")]
 pub mod ocaml {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1768,7 +2382,7 @@ pub mod ocaml {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ocaml/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/ocaml/queries/injections.scm");
     pub const LOCALS_QUERY: &str = include_str!("../languages/ocaml/queries/locals.scm");
 
     #[cfg(test)]
@@ -1790,6 +2404,7 @@ pub mod ocaml {
     }
 }
 
+#[cfg(feature = "language-ocaml-interface")]
 pub mod ocaml_interface {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1815,8 +2430,8 @@ pub mod ocaml_interface {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ocaml_interface/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = include_str!("../languages/ocaml_interface/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/ocaml_interface/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1837,6 +2452,7 @@ pub mod ocaml_interface {
     }
 }
 
+#[cfg(feature = "language-openscad")]
 pub mod openscad {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1862,8 +2478,8 @@ pub mod openscad {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/openscad/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = include_str!("../languages/openscad/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = include_str!("../languages/openscad/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1884,6 +2500,7 @@ pub mod openscad {
     }
 }
 
+#[cfg(feature = "language-pascal")]
 pub mod pascal {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1909,8 +2526,8 @@ pub mod pascal {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/pascal/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = include_str!("../languages/pascal/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/pascal/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -1931,6 +2548,7 @@ pub mod pascal {
     }
 }
 
+#[cfg(feature = "language-php")]
 pub mod php {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -1978,6 +2596,7 @@ pub mod php {
     }
 }
 
+#[cfg(feature = "language-proto")]
 pub mod proto {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2003,7 +2622,7 @@ pub mod proto {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/proto/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/proto/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -2025,6 +2644,7 @@ pub mod proto {
     }
 }
 
+#[cfg(feature = "language-python")]
 pub mod python {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2050,8 +2670,8 @@ pub mod python {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/python/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/python/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/python/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -2072,6 +2692,7 @@ pub mod python {
     }
 }
 
+#[cfg(feature = "language-r")]
 pub mod r {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2097,7 +2718,7 @@ pub mod r {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/r/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/r/queries/injections.scm");
     pub const LOCALS_QUERY: &str = include_str!("../languages/r/queries/locals.scm");
 
     #[cfg(test)]
@@ -2119,6 +2740,7 @@ pub mod r {
     }
 }
 
+#[cfg(feature = "language-racket")]
 pub mod racket {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2144,8 +2766,8 @@ pub mod racket {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/racket/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = include_str!("../languages/racket/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/racket/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
     mod tests {
@@ -2166,6 +2788,7 @@ pub mod racket {
     }
 }
 
+#[cfg(feature = "language-regex")]
 pub mod regex {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2213,6 +2836,7 @@ pub mod regex {
     }
 }
 
+#[cfg(feature = "language-ruby")]
 pub mod ruby {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2238,7 +2862,7 @@ pub mod ruby {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/ruby/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/ruby/queries/injections.scm");
     pub const LOCALS_QUERY: &str = include_str!("../languages/ruby/queries/locals.scm");
 
     #[cfg(test)]
@@ -2260,6 +2884,7 @@ pub mod ruby {
     }
 }
 
+#[cfg(feature = "language-rust")]
 pub mod rust {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2286,7 +2911,7 @@ pub mod rust {
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/rust/queries/highlights.scm");
     pub const INJECTIONS_QUERY: &str = include_str!("../languages/rust/queries/injections.scm");
-    pub const LOCALS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = include_str!("../languages/rust/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -2307,6 +2932,7 @@ pub mod rust {
     }
 }
 
+#[cfg(feature = "language-scala")]
 pub mod scala {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2331,9 +2957,9 @@ pub mod scala {
         config
     });
 
-    pub const HIGHLIGHT_QUERY: &str = "";
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scala/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/scala/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = include_str!("../languages/scala/queries/locals.scm");
 
     #[cfg(test)]
     mod tests {
@@ -2354,6 +2980,7 @@ pub mod scala {
     }
 }
 
+#[cfg(feature = "language-scheme")]
 pub mod scheme {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2379,7 +3006,7 @@ pub mod scheme {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scheme/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/scheme/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -2401,6 +3028,7 @@ pub mod scheme {
     }
 }
 
+#[cfg(feature = "language-scss")]
 pub mod scss {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2426,7 +3054,7 @@ pub mod scss {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/scss/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/scss/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -2448,6 +3076,7 @@ pub mod scss {
     }
 }
 
+#[cfg(feature = "language-sql")]
 pub mod sql {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2495,6 +3124,7 @@ pub mod sql {
     }
 }
 
+#[cfg(feature = "language-swift")]
 pub mod swift {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2542,6 +3172,7 @@ pub mod swift {
     }
 }
 
+#[cfg(feature = "language-toml")]
 pub mod toml {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2567,7 +3198,7 @@ pub mod toml {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/toml/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/toml/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -2589,6 +3220,7 @@ pub mod toml {
     }
 }
 
+#[cfg(feature = "language-typescript")]
 pub mod typescript {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2636,6 +3268,7 @@ pub mod typescript {
     }
 }
 
+#[cfg(feature = "language-x86asm")]
 pub mod x86asm {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2683,6 +3316,7 @@ pub mod x86asm {
     }
 }
 
+#[cfg(feature = "language-wgsl")]
 pub mod wgsl {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2708,7 +3342,7 @@ pub mod wgsl {
     });
 
     pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/wgsl/queries/highlights.scm");
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/wgsl/queries/injections.scm");
     pub const LOCALS_QUERY: &str = "";
 
     #[cfg(test)]
@@ -2730,6 +3364,55 @@ pub mod wgsl {
     }
 }
 
+#[cfg(feature = "language-yaml")]
+pub mod yaml {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_yaml() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_yaml() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'yaml'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/yaml/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/yaml/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_yaml() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-zig")]
 pub mod zig {
     use once_cell::sync::Lazy;
     use tree_sitter::Language;
@@ -2778,129 +3461,301 @@ pub mod zig {
 }
 
 /// The set of all languages supported by Inkjet.
+#[non_exhaustive]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum Language {
+    #[cfg(feature = "language-ada")]
     Ada,
-    GenericAsm,
+    #[cfg(feature = "language-asm")]
+    Asm,
+    #[cfg(feature = "language-astro")]
+    Astro,
+    #[cfg(feature = "language-awk")]
+    Awk,
+    #[cfg(feature = "language-bash")]
     Bash,
+    #[cfg(feature = "language-bibtex")]
     Bibtex,
+    #[cfg(feature = "language-bicep")]
+    Bicep,
+    #[cfg(feature = "language-blueprint")]
     Blueprint,
+    #[cfg(feature = "language-c")]
     C,
+    #[cfg(feature = "language-capnp")]
     Capnp,
+    #[cfg(feature = "language-clojure")]
     Clojure,
+    #[cfg(feature = "language-cmake")]
+    Cmake,
+    #[cfg(feature = "language-c-sharp")]
     CSharp,
+    #[cfg(feature = "language-commonlisp")]
     CommonLisp,
+    #[cfg(feature = "language-cpp")]
     Cpp,
+    #[cfg(feature = "language-css")]
     Css,
+    #[cfg(feature = "language-cue")]
     Cue,
+    #[cfg(feature = "language-d")]
     D,
+    #[cfg(feature = "language-dart")]
     Dart,
+    #[cfg(feature = "language-diff")]
     Diff,
+    #[cfg(feature = "language-dockerfile")]
     Dockerfile,
+    #[cfg(feature = "language-elisp")]
     Elisp,
+    #[cfg(feature = "language-elixir")]
     Elixir,
+    #[cfg(feature = "language-elm")]
     Elm,
+    #[cfg(feature = "language-erlang")]
     Erlang,
+    #[cfg(feature = "language-forth")]
+    Forth,
+    #[cfg(feature = "language-fortran")]
     Fortran,
-    Go,
+    #[cfg(feature = "language-gdscript")]
+    Gdscript,
+    #[cfg(feature = "language-gleam")]
+    Gleam,
+    #[cfg(feature = "language-glsl")]
     Glsl,
+    #[cfg(feature = "language-go")]
+    Go,
+    #[cfg(feature = "language-haskell")]
     Haskell,
+    #[cfg(feature = "language-html")]
     Html,
+    #[cfg(feature = "language-ini")]
+    Ini,
+    #[cfg(feature = "language-java")]
     Java,
+    #[cfg(feature = "language-javascript")]
     Javascript,
+    #[cfg(feature = "language-jinja2")]
+    Jinja2,
+    #[cfg(feature = "language-json")]
     Json,
+    #[cfg(feature = "language-julia")]
+    Julia,
+    #[cfg(feature = "language-just")]
+    Just,
+    #[cfg(feature = "language-kotlin")]
     Kotlin,
+    #[cfg(feature = "language-latex")]
+    Latex,
+    #[cfg(feature = "language-llvm")]
     Llvm,
+    #[cfg(feature = "language-lua")]
     Lua,
+    #[cfg(feature = "language-make")]
     Make,
+    #[cfg(feature = "language-matlab")]
     Matlab,
+    #[cfg(feature = "language-meson")]
     Meson,
+    #[cfg(feature = "language-nim")]
     Nim,
+    #[cfg(feature = "language-nix")]
     Nix,
+    #[cfg(feature = "language-ocaml")]
     Ocaml,
+    #[cfg(feature = "language-ocaml-interface")]
     OcamlInterface,
+    #[cfg(feature = "language-openscad")]
     OpenScad,
+    #[cfg(feature = "language-pascal")]
     Pascal,
+    #[cfg(feature = "language-php")]
     Php,
+    #[cfg(feature = "language-proto")]
     ProtoBuf,
+    #[cfg(feature = "language-python")]
     Python,
+    #[cfg(feature = "language-r")]
     R,
+    #[cfg(feature = "language-racket")]
     Racket,
+    #[cfg(feature = "language-regex")]
     Regex,
+    #[cfg(feature = "language-ruby")]
     Ruby,
+    #[cfg(feature = "language-rust")]
     Rust,
+    #[cfg(feature = "language-scala")]
     Scala,
+    #[cfg(feature = "language-scheme")]
     Scheme,
+    #[cfg(feature = "language-scss")]
     Scss,
+    #[cfg(feature = "language-sql")]
     Sql,
+    #[cfg(feature = "language-swift")]
     Swift,
+    #[cfg(feature = "language-toml")]
     Toml,
+    #[cfg(feature = "language-typescript")]
     Typescript,
+    #[cfg(feature = "language-x86asm")]
     X86asm,
+    #[cfg(feature = "language-wgsl")]
     Wgsl,
+    #[cfg(feature = "language-yaml")]
+    Yaml,
+    #[cfg(feature = "language-zig")]
     Zig,
 }
 
 impl Language {
-    pub(crate) const ALL_LANGS: &[Self] = &[
+    // Array containing all possible language variants.
+    pub const ALL_LANGS: &[Self] = &[
+        #[cfg(feature = "language-ada")]
         Self::Ada,
-        Self::GenericAsm,
+        #[cfg(feature = "language-asm")]
+        Self::Asm,
+        #[cfg(feature = "language-astro")]
+        Self::Astro,
+        #[cfg(feature = "language-awk")]
+        Self::Awk,
+        #[cfg(feature = "language-bash")]
         Self::Bash,
+        #[cfg(feature = "language-bibtex")]
         Self::Bibtex,
+        #[cfg(feature = "language-bicep")]
+        Self::Bicep,
+        #[cfg(feature = "language-blueprint")]
         Self::Blueprint,
+        #[cfg(feature = "language-c")]
         Self::C,
+        #[cfg(feature = "language-capnp")]
         Self::Capnp,
+        #[cfg(feature = "language-clojure")]
         Self::Clojure,
+        #[cfg(feature = "language-cmake")]
+        Self::Cmake,
+        #[cfg(feature = "language-c-sharp")]
         Self::CSharp,
+        #[cfg(feature = "language-commonlisp")]
         Self::CommonLisp,
+        #[cfg(feature = "language-cpp")]
         Self::Cpp,
+        #[cfg(feature = "language-css")]
         Self::Css,
+        #[cfg(feature = "language-cue")]
         Self::Cue,
+        #[cfg(feature = "language-d")]
         Self::D,
+        #[cfg(feature = "language-dart")]
         Self::Dart,
+        #[cfg(feature = "language-diff")]
         Self::Diff,
+        #[cfg(feature = "language-dockerfile")]
         Self::Dockerfile,
+        #[cfg(feature = "language-elisp")]
         Self::Elisp,
+        #[cfg(feature = "language-elixir")]
         Self::Elixir,
+        #[cfg(feature = "language-elm")]
         Self::Elm,
+        #[cfg(feature = "language-erlang")]
         Self::Erlang,
+        #[cfg(feature = "language-forth")]
+        Self::Forth,
+        #[cfg(feature = "language-fortran")]
         Self::Fortran,
-        Self::Go,
+        #[cfg(feature = "language-gdscript")]
+        Self::Gdscript,
+        #[cfg(feature = "language-gleam")]
+        Self::Gleam,
+        #[cfg(feature = "language-glsl")]
         Self::Glsl,
+        #[cfg(feature = "language-go")]
+        Self::Go,
+        #[cfg(feature = "language-haskell")]
         Self::Haskell,
+        #[cfg(feature = "language-html")]
         Self::Html,
+        #[cfg(feature = "language-ini")]
+        Self::Ini,
+        #[cfg(feature = "language-java")]
         Self::Java,
+        #[cfg(feature = "language-javascript")]
         Self::Javascript,
+        #[cfg(feature = "language-jinja2")]
+        Self::Jinja2,
+        #[cfg(feature = "language-json")]
         Self::Json,
+        #[cfg(feature = "language-julia")]
+        Self::Julia,
+        #[cfg(feature = "language-just")]
+        Self::Just,
+        #[cfg(feature = "language-kotlin")]
         Self::Kotlin,
+        #[cfg(feature = "language-latex")]
+        Self::Latex,
+        #[cfg(feature = "language-llvm")]
         Self::Llvm,
+        #[cfg(feature = "language-lua")]
         Self::Lua,
+        #[cfg(feature = "language-make")]
         Self::Make,
+        #[cfg(feature = "language-matlab")]
         Self::Matlab,
+        #[cfg(feature = "language-meson")]
         Self::Meson,
+        #[cfg(feature = "language-nim")]
         Self::Nim,
+        #[cfg(feature = "language-nix")]
         Self::Nix,
+        #[cfg(feature = "language-ocaml")]
         Self::Ocaml,
+        #[cfg(feature = "language-ocaml-interface")]
         Self::OcamlInterface,
+        #[cfg(feature = "language-openscad")]
         Self::OpenScad,
+        #[cfg(feature = "language-pascal")]
         Self::Pascal,
+        #[cfg(feature = "language-php")]
         Self::Php,
+        #[cfg(feature = "language-proto")]
         Self::ProtoBuf,
+        #[cfg(feature = "language-python")]
         Self::Python,
+        #[cfg(feature = "language-r")]
         Self::R,
+        #[cfg(feature = "language-racket")]
         Self::Racket,
+        #[cfg(feature = "language-regex")]
         Self::Regex,
+        #[cfg(feature = "language-ruby")]
         Self::Ruby,
+        #[cfg(feature = "language-rust")]
         Self::Rust,
+        #[cfg(feature = "language-scala")]
         Self::Scala,
+        #[cfg(feature = "language-scheme")]
         Self::Scheme,
+        #[cfg(feature = "language-scss")]
         Self::Scss,
+        #[cfg(feature = "language-sql")]
         Self::Sql,
+        #[cfg(feature = "language-swift")]
         Self::Swift,
+        #[cfg(feature = "language-toml")]
         Self::Toml,
+        #[cfg(feature = "language-typescript")]
         Self::Typescript,
+        #[cfg(feature = "language-x86asm")]
         Self::X86asm,
+        #[cfg(feature = "language-wgsl")]
         Self::Wgsl,
+        #[cfg(feature = "language-yaml")]
+        Self::Yaml,
+        #[cfg(feature = "language-zig")]
         Self::Zig,
     ];
 
@@ -2911,210 +3766,414 @@ impl Language {
     /// The tokens for each language are sourced from its `name` and `aliases` keys in
     /// `config/languages.toml`.
     pub fn from_token(token: &str) -> Option<Self> {
-        LANGUAGE_TOKENS.get(token).map(ToOwned::to_owned)
+        match token {
+            #[cfg(feature = "language-ada")]
+            "ada" => Some(Self::Ada),
+            #[cfg(feature = "language-asm")]
+            "asm" => Some(Self::Asm),
+            #[cfg(feature = "language-astro")]
+            "astro" => Some(Self::Astro),
+            #[cfg(feature = "language-awk")]
+            "awk" => Some(Self::Awk),
+            #[cfg(feature = "language-bash")]
+            "bash" => Some(Self::Bash),
+            #[cfg(feature = "language-bibtex")]
+            "bibtex" => Some(Self::Bibtex),
+            #[cfg(feature = "language-bibtex")]
+            "bib" => Some(Self::Bibtex),
+            #[cfg(feature = "language-bicep")]
+            "bicep" => Some(Self::Bicep),
+            #[cfg(feature = "language-blueprint")]
+            "blueprint" => Some(Self::Blueprint),
+            #[cfg(feature = "language-blueprint")]
+            "blp" => Some(Self::Blueprint),
+            #[cfg(feature = "language-c")]
+            "c" => Some(Self::C),
+            #[cfg(feature = "language-c")]
+            "h" => Some(Self::C),
+            #[cfg(feature = "language-capnp")]
+            "capnp" => Some(Self::Capnp),
+            #[cfg(feature = "language-clojure")]
+            "clojure" => Some(Self::Clojure),
+            #[cfg(feature = "language-clojure")]
+            "clj" => Some(Self::Clojure),
+            #[cfg(feature = "language-clojure")]
+            "cljc" => Some(Self::Clojure),
+            #[cfg(feature = "language-cmake")]
+            "cmake" => Some(Self::Cmake),
+            #[cfg(feature = "language-c-sharp")]
+            "c_sharp" => Some(Self::CSharp),
+            #[cfg(feature = "language-c-sharp")]
+            "c#" => Some(Self::CSharp),
+            #[cfg(feature = "language-c-sharp")]
+            "csharp" => Some(Self::CSharp),
+            #[cfg(feature = "language-c-sharp")]
+            "cs" => Some(Self::CSharp),
+            #[cfg(feature = "language-commonlisp")]
+            "commonlisp" => Some(Self::CommonLisp),
+            #[cfg(feature = "language-commonlisp")]
+            "cl" => Some(Self::CommonLisp),
+            #[cfg(feature = "language-commonlisp")]
+            "lisp" => Some(Self::CommonLisp),
+            #[cfg(feature = "language-commonlisp")]
+            "common-lisp" => Some(Self::CommonLisp),
+            #[cfg(feature = "language-cpp")]
+            "cpp" => Some(Self::Cpp),
+            #[cfg(feature = "language-cpp")]
+            "c++" => Some(Self::Cpp),
+            #[cfg(feature = "language-cpp")]
+            "hpp" => Some(Self::Cpp),
+            #[cfg(feature = "language-cpp")]
+            "h++" => Some(Self::Cpp),
+            #[cfg(feature = "language-cpp")]
+            "cc" => Some(Self::Cpp),
+            #[cfg(feature = "language-cpp")]
+            "hh" => Some(Self::Cpp),
+            #[cfg(feature = "language-css")]
+            "css" => Some(Self::Css),
+            #[cfg(feature = "language-cue")]
+            "cue" => Some(Self::Cue),
+            #[cfg(feature = "language-d")]
+            "d" => Some(Self::D),
+            #[cfg(feature = "language-d")]
+            "dlang" => Some(Self::D),
+            #[cfg(feature = "language-dart")]
+            "dart" => Some(Self::Dart),
+            #[cfg(feature = "language-diff")]
+            "diff" => Some(Self::Diff),
+            #[cfg(feature = "language-dockerfile")]
+            "dockerfile" => Some(Self::Dockerfile),
+            #[cfg(feature = "language-dockerfile")]
+            "docker" => Some(Self::Dockerfile),
+            #[cfg(feature = "language-elisp")]
+            "elisp" => Some(Self::Elisp),
+            #[cfg(feature = "language-elisp")]
+            "el" => Some(Self::Elisp),
+            #[cfg(feature = "language-elisp")]
+            "emacs-lisp" => Some(Self::Elisp),
+            #[cfg(feature = "language-elixir")]
+            "elixir" => Some(Self::Elixir),
+            #[cfg(feature = "language-elixir")]
+            "ex" => Some(Self::Elixir),
+            #[cfg(feature = "language-elixir")]
+            "eex" => Some(Self::Elixir),
+            #[cfg(feature = "language-elixir")]
+            "exs" => Some(Self::Elixir),
+            #[cfg(feature = "language-elixir")]
+            "leex" => Some(Self::Elixir),
+            #[cfg(feature = "language-elm")]
+            "elm" => Some(Self::Elm),
+            #[cfg(feature = "language-erlang")]
+            "erlang" => Some(Self::Erlang),
+            #[cfg(feature = "language-erlang")]
+            "erl" => Some(Self::Erlang),
+            #[cfg(feature = "language-erlang")]
+            "hrl" => Some(Self::Erlang),
+            #[cfg(feature = "language-erlang")]
+            "es" => Some(Self::Erlang),
+            #[cfg(feature = "language-erlang")]
+            "escript" => Some(Self::Erlang),
+            #[cfg(feature = "language-forth")]
+            "forth" => Some(Self::Forth),
+            #[cfg(feature = "language-forth")]
+            "fth" => Some(Self::Forth),
+            #[cfg(feature = "language-fortran")]
+            "fortran" => Some(Self::Fortran),
+            #[cfg(feature = "language-fortran")]
+            "for" => Some(Self::Fortran),
+            #[cfg(feature = "language-gdscript")]
+            "gdscript" => Some(Self::Gdscript),
+            #[cfg(feature = "language-gdscript")]
+            "gd" => Some(Self::Gdscript),
+            #[cfg(feature = "language-gleam")]
+            "gleam" => Some(Self::Gleam),
+            #[cfg(feature = "language-glsl")]
+            "glsl" => Some(Self::Glsl),
+            #[cfg(feature = "language-go")]
+            "go" => Some(Self::Go),
+            #[cfg(feature = "language-go")]
+            "golang" => Some(Self::Go),
+            #[cfg(feature = "language-haskell")]
+            "haskell" => Some(Self::Haskell),
+            #[cfg(feature = "language-haskell")]
+            "hs" => Some(Self::Haskell),
+            #[cfg(feature = "language-html")]
+            "html" => Some(Self::Html),
+            #[cfg(feature = "language-html")]
+            "htm" => Some(Self::Html),
+            #[cfg(feature = "language-ini")]
+            "ini" => Some(Self::Ini),
+            #[cfg(feature = "language-java")]
+            "java" => Some(Self::Java),
+            #[cfg(feature = "language-javascript")]
+            "javascript" => Some(Self::Javascript),
+            #[cfg(feature = "language-javascript")]
+            "js" => Some(Self::Javascript),
+            #[cfg(feature = "language-jinja2")]
+            "jinja2" => Some(Self::Jinja2),
+            #[cfg(feature = "language-jinja2")]
+            "jinja" => Some(Self::Jinja2),
+            #[cfg(feature = "language-json")]
+            "json" => Some(Self::Json),
+            #[cfg(feature = "language-julia")]
+            "julia" => Some(Self::Julia),
+            #[cfg(feature = "language-julia")]
+            "jl" => Some(Self::Julia),
+            #[cfg(feature = "language-just")]
+            "just" => Some(Self::Just),
+            #[cfg(feature = "language-just")]
+            "justfile" => Some(Self::Just),
+            #[cfg(feature = "language-kotlin")]
+            "kotlin" => Some(Self::Kotlin),
+            #[cfg(feature = "language-kotlin")]
+            "kt" => Some(Self::Kotlin),
+            #[cfg(feature = "language-kotlin")]
+            "kts" => Some(Self::Kotlin),
+            #[cfg(feature = "language-latex")]
+            "latex" => Some(Self::Latex),
+            #[cfg(feature = "language-latex")]
+            "tex" => Some(Self::Latex),
+            #[cfg(feature = "language-llvm")]
+            "llvm" => Some(Self::Llvm),
+            #[cfg(feature = "language-lua")]
+            "lua" => Some(Self::Lua),
+            #[cfg(feature = "language-make")]
+            "make" => Some(Self::Make),
+            #[cfg(feature = "language-make")]
+            "mk" => Some(Self::Make),
+            #[cfg(feature = "language-make")]
+            "makefile" => Some(Self::Make),
+            #[cfg(feature = "language-matlab")]
+            "matlab" => Some(Self::Matlab),
+            #[cfg(feature = "language-matlab")]
+            "m" => Some(Self::Matlab),
+            #[cfg(feature = "language-meson")]
+            "meson" => Some(Self::Meson),
+            #[cfg(feature = "language-nim")]
+            "nim" => Some(Self::Nim),
+            #[cfg(feature = "language-nix")]
+            "nix" => Some(Self::Nix),
+            #[cfg(feature = "language-ocaml")]
+            "ocaml" => Some(Self::Ocaml),
+            #[cfg(feature = "language-ocaml")]
+            "ml" => Some(Self::Ocaml),
+            #[cfg(feature = "language-ocaml-interface")]
+            "ocaml_interface" => Some(Self::OcamlInterface),
+            #[cfg(feature = "language-ocaml-interface")]
+            "mli" => Some(Self::OcamlInterface),
+            #[cfg(feature = "language-openscad")]
+            "openscad" => Some(Self::OpenScad),
+            #[cfg(feature = "language-openscad")]
+            "scad" => Some(Self::OpenScad),
+            #[cfg(feature = "language-pascal")]
+            "pascal" => Some(Self::Pascal),
+            #[cfg(feature = "language-php")]
+            "php" => Some(Self::Php),
+            #[cfg(feature = "language-proto")]
+            "proto" => Some(Self::ProtoBuf),
+            #[cfg(feature = "language-proto")]
+            "protobuf" => Some(Self::ProtoBuf),
+            #[cfg(feature = "language-python")]
+            "python" => Some(Self::Python),
+            #[cfg(feature = "language-python")]
+            "py" => Some(Self::Python),
+            #[cfg(feature = "language-r")]
+            "r" => Some(Self::R),
+            #[cfg(feature = "language-racket")]
+            "racket" => Some(Self::Racket),
+            #[cfg(feature = "language-racket")]
+            "rkt" => Some(Self::Racket),
+            #[cfg(feature = "language-regex")]
+            "regex" => Some(Self::Regex),
+            #[cfg(feature = "language-ruby")]
+            "ruby" => Some(Self::Ruby),
+            #[cfg(feature = "language-ruby")]
+            "rb" => Some(Self::Ruby),
+            #[cfg(feature = "language-rust")]
+            "rust" => Some(Self::Rust),
+            #[cfg(feature = "language-rust")]
+            "rs" => Some(Self::Rust),
+            #[cfg(feature = "language-scala")]
+            "scala" => Some(Self::Scala),
+            #[cfg(feature = "language-scheme")]
+            "scheme" => Some(Self::Scheme),
+            #[cfg(feature = "language-scheme")]
+            "scm" => Some(Self::Scheme),
+            #[cfg(feature = "language-scheme")]
+            "ss" => Some(Self::Scheme),
+            #[cfg(feature = "language-scss")]
+            "scss" => Some(Self::Scss),
+            #[cfg(feature = "language-sql")]
+            "sql" => Some(Self::Sql),
+            #[cfg(feature = "language-swift")]
+            "swift" => Some(Self::Swift),
+            #[cfg(feature = "language-toml")]
+            "toml" => Some(Self::Toml),
+            #[cfg(feature = "language-typescript")]
+            "typescript" => Some(Self::Typescript),
+            #[cfg(feature = "language-typescript")]
+            "ts" => Some(Self::Typescript),
+            #[cfg(feature = "language-x86asm")]
+            "x86asm" => Some(Self::X86asm),
+            #[cfg(feature = "language-x86asm")]
+            "x86" => Some(Self::X86asm),
+            #[cfg(feature = "language-wgsl")]
+            "wgsl" => Some(Self::Wgsl),
+            #[cfg(feature = "language-yaml")]
+            "yaml" => Some(Self::Yaml),
+            #[cfg(feature = "language-zig")]
+            "zig" => Some(Self::Zig),
+            _ => None
+        }
     }
 
-    pub(crate) fn config(&self) -> &'static HighlightConfiguration {
+    /// Get the underlying [`HighlightConfiguration`] for a language.
+    pub fn config(&self) -> &'static HighlightConfiguration {
         match *self {
+            #[cfg(feature = "language-ada")]
             Self::Ada => &ada::CONFIG,
-            Self::GenericAsm => &asm::CONFIG,
+            #[cfg(feature = "language-asm")]
+            Self::Asm => &asm::CONFIG,
+            #[cfg(feature = "language-astro")]
+            Self::Astro => &astro::CONFIG,
+            #[cfg(feature = "language-awk")]
+            Self::Awk => &awk::CONFIG,
+            #[cfg(feature = "language-bash")]
             Self::Bash => &bash::CONFIG,
+            #[cfg(feature = "language-bibtex")]
             Self::Bibtex => &bibtex::CONFIG,
+            #[cfg(feature = "language-bicep")]
+            Self::Bicep => &bicep::CONFIG,
+            #[cfg(feature = "language-blueprint")]
             Self::Blueprint => &blueprint::CONFIG,
+            #[cfg(feature = "language-c")]
             Self::C => &c::CONFIG,
+            #[cfg(feature = "language-capnp")]
             Self::Capnp => &capnp::CONFIG,
+            #[cfg(feature = "language-clojure")]
             Self::Clojure => &clojure::CONFIG,
+            #[cfg(feature = "language-cmake")]
+            Self::Cmake => &cmake::CONFIG,
+            #[cfg(feature = "language-c-sharp")]
             Self::CSharp => &c_sharp::CONFIG,
+            #[cfg(feature = "language-commonlisp")]
             Self::CommonLisp => &commonlisp::CONFIG,
+            #[cfg(feature = "language-cpp")]
             Self::Cpp => &cpp::CONFIG,
+            #[cfg(feature = "language-css")]
             Self::Css => &css::CONFIG,
+            #[cfg(feature = "language-cue")]
             Self::Cue => &cue::CONFIG,
+            #[cfg(feature = "language-d")]
             Self::D => &d::CONFIG,
+            #[cfg(feature = "language-dart")]
             Self::Dart => &dart::CONFIG,
+            #[cfg(feature = "language-diff")]
             Self::Diff => &diff::CONFIG,
+            #[cfg(feature = "language-dockerfile")]
             Self::Dockerfile => &dockerfile::CONFIG,
+            #[cfg(feature = "language-elisp")]
             Self::Elisp => &elisp::CONFIG,
+            #[cfg(feature = "language-elixir")]
             Self::Elixir => &elixir::CONFIG,
+            #[cfg(feature = "language-elm")]
             Self::Elm => &elm::CONFIG,
+            #[cfg(feature = "language-erlang")]
             Self::Erlang => &erlang::CONFIG,
+            #[cfg(feature = "language-forth")]
+            Self::Forth => &forth::CONFIG,
+            #[cfg(feature = "language-fortran")]
             Self::Fortran => &fortran::CONFIG,
-            Self::Go => &go::CONFIG,
+            #[cfg(feature = "language-gdscript")]
+            Self::Gdscript => &gdscript::CONFIG,
+            #[cfg(feature = "language-gleam")]
+            Self::Gleam => &gleam::CONFIG,
+            #[cfg(feature = "language-glsl")]
             Self::Glsl => &glsl::CONFIG,
+            #[cfg(feature = "language-go")]
+            Self::Go => &go::CONFIG,
+            #[cfg(feature = "language-haskell")]
             Self::Haskell => &haskell::CONFIG,
+            #[cfg(feature = "language-html")]
             Self::Html => &html::CONFIG,
+            #[cfg(feature = "language-ini")]
+            Self::Ini => &ini::CONFIG,
+            #[cfg(feature = "language-java")]
             Self::Java => &java::CONFIG,
+            #[cfg(feature = "language-javascript")]
             Self::Javascript => &javascript::CONFIG,
+            #[cfg(feature = "language-jinja2")]
+            Self::Jinja2 => &jinja2::CONFIG,
+            #[cfg(feature = "language-json")]
             Self::Json => &json::CONFIG,
+            #[cfg(feature = "language-julia")]
+            Self::Julia => &julia::CONFIG,
+            #[cfg(feature = "language-just")]
+            Self::Just => &just::CONFIG,
+            #[cfg(feature = "language-kotlin")]
             Self::Kotlin => &kotlin::CONFIG,
+            #[cfg(feature = "language-latex")]
+            Self::Latex => &latex::CONFIG,
+            #[cfg(feature = "language-llvm")]
             Self::Llvm => &llvm::CONFIG,
+            #[cfg(feature = "language-lua")]
             Self::Lua => &lua::CONFIG,
+            #[cfg(feature = "language-make")]
             Self::Make => &make::CONFIG,
+            #[cfg(feature = "language-matlab")]
             Self::Matlab => &matlab::CONFIG,
+            #[cfg(feature = "language-meson")]
             Self::Meson => &meson::CONFIG,
+            #[cfg(feature = "language-nim")]
             Self::Nim => &nim::CONFIG,
+            #[cfg(feature = "language-nix")]
             Self::Nix => &nix::CONFIG,
+            #[cfg(feature = "language-ocaml")]
             Self::Ocaml => &ocaml::CONFIG,
+            #[cfg(feature = "language-ocaml-interface")]
             Self::OcamlInterface => &ocaml_interface::CONFIG,
+            #[cfg(feature = "language-openscad")]
             Self::OpenScad => &openscad::CONFIG,
+            #[cfg(feature = "language-pascal")]
             Self::Pascal => &pascal::CONFIG,
+            #[cfg(feature = "language-php")]
             Self::Php => &php::CONFIG,
+            #[cfg(feature = "language-proto")]
             Self::ProtoBuf => &proto::CONFIG,
+            #[cfg(feature = "language-python")]
             Self::Python => &python::CONFIG,
+            #[cfg(feature = "language-r")]
             Self::R => &r::CONFIG,
+            #[cfg(feature = "language-racket")]
             Self::Racket => &racket::CONFIG,
+            #[cfg(feature = "language-regex")]
             Self::Regex => &regex::CONFIG,
+            #[cfg(feature = "language-ruby")]
             Self::Ruby => &ruby::CONFIG,
+            #[cfg(feature = "language-rust")]
             Self::Rust => &rust::CONFIG,
+            #[cfg(feature = "language-scala")]
             Self::Scala => &scala::CONFIG,
+            #[cfg(feature = "language-scheme")]
             Self::Scheme => &scheme::CONFIG,
+            #[cfg(feature = "language-scss")]
             Self::Scss => &scss::CONFIG,
+            #[cfg(feature = "language-sql")]
             Self::Sql => &sql::CONFIG,
+            #[cfg(feature = "language-swift")]
             Self::Swift => &swift::CONFIG,
+            #[cfg(feature = "language-toml")]
             Self::Toml => &toml::CONFIG,
+            #[cfg(feature = "language-typescript")]
             Self::Typescript => &typescript::CONFIG,
+            #[cfg(feature = "language-x86asm")]
             Self::X86asm => &x86asm::CONFIG,
+            #[cfg(feature = "language-wgsl")]
             Self::Wgsl => &wgsl::CONFIG,
+            #[cfg(feature = "language-yaml")]
+            Self::Yaml => &yaml::CONFIG,
+            #[cfg(feature = "language-zig")]
             Self::Zig => &zig::CONFIG,
         }
     }
 }
-
-static LANGUAGE_TOKENS: phf::Map<&'static str, Language> = 
-::phf::Map {
-    key: 10121458955350035957,
-    disps: &[
-        (0, 18),
-        (1, 4),
-        (0, 1),
-        (0, 25),
-        (1, 52),
-        (0, 54),
-        (0, 4),
-        (0, 39),
-        (0, 0),
-        (3, 21),
-        (0, 34),
-        (8, 12),
-        (6, 69),
-        (0, 13),
-        (6, 104),
-        (0, 0),
-        (0, 5),
-        (52, 48),
-        (2, 42),
-        (2, 0),
-        (11, 5),
-        (12, 70),
-    ],
-    entries: &[
-        ("scala", Language::Scala),
-        ("emacs-lisp", Language::Elisp),
-        ("kts", Language::Kotlin),
-        ("csharp", Language::CSharp),
-        ("rkt", Language::Racket),
-        ("typescript", Language::Typescript),
-        ("css", Language::Css),
-        ("bash", Language::Bash),
-        ("cpp", Language::Cpp),
-        ("cljc", Language::Clojure),
-        ("json", Language::Json),
-        ("c", Language::C),
-        ("ocaml", Language::Ocaml),
-        ("rust", Language::Rust),
-        ("hpp", Language::Cpp),
-        ("elixir", Language::Elixir),
-        ("js", Language::Javascript),
-        ("zig", Language::Zig),
-        ("javascript", Language::Javascript),
-        ("dart", Language::Dart),
-        ("el", Language::Elisp),
-        ("pascal", Language::Pascal),
-        ("cc", Language::Cpp),
-        ("toml", Language::Toml),
-        ("kotlin", Language::Kotlin),
-        ("rb", Language::Ruby),
-        ("r", Language::R),
-        ("wgsl", Language::Wgsl),
-        ("common-lisp", Language::CommonLisp),
-        ("clj", Language::Clojure),
-        ("regex", Language::Regex),
-        ("lua", Language::Lua),
-        ("capnp", Language::Capnp),
-        ("rs", Language::Rust),
-        ("nim", Language::Nim),
-        ("scad", Language::OpenScad),
-        ("erlang", Language::Erlang),
-        ("h", Language::C),
-        ("scm", Language::Scheme),
-        ("glsl", Language::Glsl),
-        ("cl", Language::CommonLisp),
-        ("d", Language::D),
-        ("proto", Language::ProtoBuf),
-        ("swift", Language::Swift),
-        ("lisp", Language::CommonLisp),
-        ("blueprint", Language::Blueprint),
-        ("htm", Language::Html),
-        ("sql", Language::Sql),
-        ("docker", Language::Dockerfile),
-        ("c++", Language::Cpp),
-        ("kt", Language::Kotlin),
-        ("diff", Language::Diff),
-        ("hs", Language::Haskell),
-        ("eex", Language::Elixir),
-        ("mli", Language::OcamlInterface),
-        ("escript", Language::Erlang),
-        ("c_sharp", Language::CSharp),
-        ("protobuf", Language::ProtoBuf),
-        ("openscad", Language::OpenScad),
-        ("go", Language::Go),
-        ("scss", Language::Scss),
-        ("hrl", Language::Erlang),
-        ("ada", Language::Ada),
-        ("bibtex", Language::Bibtex),
-        ("x86", Language::X86asm),
-        ("ocaml_interface", Language::OcamlInterface),
-        ("h++", Language::Cpp),
-        ("mk", Language::Make),
-        ("cue", Language::Cue),
-        ("ruby", Language::Ruby),
-        ("cs", Language::CSharp),
-        ("x86asm", Language::X86asm),
-        ("scheme", Language::Scheme),
-        ("commonlisp", Language::CommonLisp),
-        ("llvm", Language::Llvm),
-        ("exs", Language::Elixir),
-        ("ts", Language::Typescript),
-        ("ss", Language::Scheme),
-        ("asm", Language::GenericAsm),
-        ("php", Language::Php),
-        ("java", Language::Java),
-        ("html", Language::Html),
-        ("hh", Language::Cpp),
-        ("elm", Language::Elm),
-        ("erl", Language::Erlang),
-        ("dlang", Language::D),
-        ("ml", Language::Ocaml),
-        ("blp", Language::Blueprint),
-        ("m", Language::Matlab),
-        ("py", Language::Python),
-        ("python", Language::Python),
-        ("dockerfile", Language::Dockerfile),
-        ("bib", Language::Bibtex),
-        ("meson", Language::Meson),
-        ("leex", Language::Elixir),
-        ("matlab", Language::Matlab),
-        ("haskell", Language::Haskell),
-        ("make", Language::Make),
-        ("fortran", Language::Fortran),
-        ("elisp", Language::Elisp),
-        ("es", Language::Erlang),
-        ("c#", Language::CSharp),
-        ("clojure", Language::Clojure),
-        ("golang", Language::Go),
-        ("racket", Language::Racket),
-        ("ex", Language::Elixir),
-        ("nix", Language::Nix),
-        ("makefile", Language::Make),
-    ],
-};
-

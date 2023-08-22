@@ -2,11 +2,67 @@
 "?>" @tag
 
 ; Types
+[
+  (primitive_type)
+  (cast_type)
+] @type.builtin
 
-(primitive_type) @type.builtin
-(cast_type) @type.builtin
-(named_type (name) @type) @type
-(named_type (qualified_name) @type) @type
+(named_type
+  [ (name) @type
+    (qualified_name (name) @type)])
+
+(base_clause
+  [ (name) @type
+    (qualified_name (name) @type)])
+
+(enum_declaration
+  name: (name) @type.enum)
+
+(interface_declaration
+  name: (name) @constructor)
+
+(class_declaration
+  name: (name) @constructor)
+
+(trait_declaration
+  name:(name) @constructor)
+
+(namespace_definition
+  name: (namespace_name (name) @namespace))
+
+(namespace_name_as_prefix 
+  (namespace_name (name) @namespace))
+
+(namespace_use_clause
+  [ (name) @namespace
+    (qualified_name (name) @type) ])
+
+(namespace_aliasing_clause (name) @namespace)
+
+(class_interface_clause
+  [(name) @type
+   (qualified_name (name) @type)])
+
+(scoped_call_expression
+  scope: [(name) @type
+          (qualified_name (name) @type)])
+
+(class_constant_access_expression
+  . [(name) @constructor
+     (qualified_name (name) @constructor)]
+  (name) @constant)
+
+(use_declaration (name) @type)
+
+(binary_expression
+  operator: "instanceof"
+  right: [(name) @type
+          (qualified_name (name) @type)])
+
+; Superglobals
+(subscript_expression
+  (variable_name(name) @constant.builtin
+    (#match? @constant.builtin "^_?[A-Z][A-Z\\d_]+$")))
 
 ; Functions
 
@@ -17,7 +73,7 @@
   name: (name) @function.method)
 
 (function_call_expression
-  function: [(qualified_name (name)) (name)] @function)
+  function: (_) @function)
 
 (scoped_call_expression
   name: (name) @function)
@@ -28,15 +84,31 @@
 (function_definition
   name: (name) @function)
 
+(nullsafe_member_call_expression
+    name: (name) @function.method)
+
+(object_creation_expression
+  [(name) @constructor
+   (qualified_name (name) @constructor)])
+
+; Parameters
+[
+  (simple_parameter)
+  (variadic_parameter)
+] @variable.parameter
+
+(argument
+    (name) @variable.parameter)
+
 ; Member
 
 (property_element
-  (variable_name) @property)
+  (variable_name) @variable.other.member)
 
 (member_access_expression
-  name: (variable_name (name)) @property)
+  name: (variable_name (name)) @variable.other.member)
 (member_access_expression
-  name: (name) @property)
+  name: (name) @variable.other.member)
 
 ; Variables
 
@@ -44,8 +116,6 @@
 
 ((name) @constant
  (#match? @constant "^_?[A-Z][A-Z\\d_]+$"))
-((name) @constant.builtin
- (#match? @constant.builtin "^__[A-Z][A-Z\d_]+__$"))
 
 ((name) @constructor
  (#match? @constructor "^[A-Z]"))
@@ -55,68 +125,194 @@
 
 (variable_name) @variable
 
+; Attributes
+(attribute_list) @attribute
+
 ; Basic tokens
+
 [
   (string)
-  (string_value)
   (encapsed_string)
-  (heredoc)
   (heredoc_body)
   (nowdoc_body)
+  (shell_command_expression) 
 ] @string
-(boolean) @constant.builtin
+(escape_sequence) @constant.character.escape
+
+(boolean) @constant.builtin.boolean
 (null) @constant.builtin
-(integer) @number
-(float) @number
+(integer) @constant.numeric.integer
+(float) @constant.numeric.float
 (comment) @comment
 
-"$" @operator
+(goto_statement (name) @label)
+(named_label_statement (name) @label)
 
 ; Keywords
 
-"abstract" @keyword
-"as" @keyword
-"break" @keyword
-"case" @keyword
-"catch" @keyword
-"class" @keyword
-"const" @keyword
-"continue" @keyword
-"declare" @keyword
-"default" @keyword
-"do" @keyword
-"echo" @keyword
-"else" @keyword
-"elseif" @keyword
-"enddeclare" @keyword
-"endforeach" @keyword
-"endif" @keyword
-"endswitch" @keyword
-"endwhile" @keyword
-"extends" @keyword
-"final" @keyword
-"finally" @keyword
-"foreach" @keyword
-"function" @keyword
-"global" @keyword
-"if" @keyword
-"implements" @keyword
-"include_once" @keyword
-"include" @keyword
-"insteadof" @keyword
-"interface" @keyword
-"namespace" @keyword
-"new" @keyword
-"private" @keyword
-"protected" @keyword
-"public" @keyword
-"require_once" @keyword
-"require" @keyword
-"return" @keyword
-"static" @keyword
-"switch" @keyword
-"throw" @keyword
-"trait" @keyword
-"try" @keyword
-"use" @keyword
-"while" @keyword
+[
+  "default" 
+  "echo" 
+  "enum" 
+  "extends" 
+  "final" 
+  "goto"
+  "global" 
+  "implements" 
+  "insteadof" 
+  "new" 
+  "private" 
+  "protected" 
+  "public" 
+  "clone"
+  "unset"
+] @keyword
+
+[
+  "if" 
+  "else" 
+  "elseif" 
+  "endif" 
+  "switch" 
+  "endswitch" 
+  "case" 
+  "match" 
+  "declare" 
+  "enddeclare" 
+  "??"
+] @keyword.control.conditional
+
+[
+  "for"
+  "endfor"
+  "foreach" 
+  "endforeach" 
+  "while" 
+  "endwhile" 
+  "do"
+] @keyword.control.repeat
+
+[
+  
+  "include_once" 
+  "include" 
+  "require_once" 
+  "require" 
+  "use"
+] @keyword.control.import
+
+[
+  "return" 
+  "break" 
+  "continue" 
+  "yield"
+] @keyword.control.return
+
+[
+  "throw" 
+  "try" 
+  "catch" 
+  "finally"
+] @keyword.control.exception
+
+[
+  "as" 
+  "or"
+  "xor"
+  "and"
+  "instanceof"
+] @keyword.operator
+
+[
+  "fn" 
+  "function" 
+] @keyword.function
+
+[
+  "namespace" 
+  "class" 
+  "interface" 
+  "trait" 
+  "abstract" 
+] @keyword.storage.type
+
+[
+  "static"
+  "const"
+] @keyword.storage.modifier
+
+[
+  ","
+  ";"
+  ":"
+  "\\"
+ ] @punctuation.delimiter
+
+[
+  (php_tag)
+  "?>"
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+  "#["
+] @punctuation.bracket
+
+[
+  "="
+
+  "."
+  "-"
+  "*"
+  "/"
+  "+"
+  "%"
+  "**"
+
+  "~"
+  "|"
+  "^"
+  "&"
+  "<<"
+  ">>"
+
+  "->"
+  "?->"
+
+  "=>"
+
+  "<"
+  "<="
+  ">="
+  ">"
+  "<>"
+  "=="
+  "!="
+  "==="
+  "!=="
+
+  "!"
+  "&&"
+  "||"
+
+  ".="
+  "-="
+  "+="
+  "*="
+  "/="
+  "%="
+  "**="
+  "&="
+  "|="
+  "^="
+  "<<="
+  ">>="
+  "??="
+  "--"
+  "++"
+
+  "@"
+  "::"
+] @operator

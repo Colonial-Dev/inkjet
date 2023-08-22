@@ -3,21 +3,19 @@
 
 ; Literals
 
-(integer) @number
+(integer) @constant.numeric.integer
 
-(float) @float
+(float) @constant.numeric.float
 
-(complex) @number
+(complex) @constant.numeric.integer
 
 (string) @string
-(string (escape_sequence) @string.escape)
+(string (escape_sequence) @constant.character.escape)
 
 (comment) @comment
 
-(identifier) @variable
-
-(formal_parameters (identifier) @parameter)
-(formal_parameters (default_parameter (identifier) @parameter))
+(formal_parameters (identifier) @variable.parameter)
+(formal_parameters (default_parameter (identifier) @variable.parameter))
 
 ; Operators
 [
@@ -97,32 +95,34 @@
   "if"
   "else"
   "switch"
-] @conditional
+] @keyword.control.conditional
 
 [
   "while"
   "repeat"
   "for"
-] @repeat
+] @keyword.control.repeat
 
 [
   (true)
   (false)
-] @boolean
+] @constant.builtin.boolean
 
 "function" @keyword.function
 
 (call function: (identifier) @function)
-(default_argument name: (identifier) @parameter)
+(default_argument name: (identifier) @variable.parameter)
 
-
-(namespace_get function: (identifier) @method)
-(namespace_get_internal function: (identifier) @method)
 
 (namespace_get namespace: (identifier) @namespace
  "::" @operator)
 (namespace_get_internal namespace: (identifier) @namespace
  ":::" @operator)
+
+(namespace_get function: (identifier) @function.method)
+(namespace_get_internal function: (identifier) @function.method)
+
+(identifier) @variable
 
 ; Error
 (ERROR) @error

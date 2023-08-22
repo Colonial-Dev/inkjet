@@ -1,3 +1,20 @@
+; The following code originates mostly from
+; https://github.com/elixir-lang/tree-sitter-elixir, with minor edits to
+; align the captures with helix. The following should be considered
+; Copyright 2021 The Elixir Team
+;
+; Licensed under the Apache License, Version 2.0 (the "License");
+; you may not use this file except in compliance with the License.
+; You may obtain a copy of the License at
+;
+;    https://www.apache.org/licenses/LICENSE-2.0
+;
+; Unless required by applicable law or agreed to in writing, software
+; distributed under the License is distributed on an "AS IS" BASIS,
+; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+; See the License for the specific language governing permissions and
+; limitations under the License.
+
 ; Reserved keywords
 
 ["when" "and" "or" "not" "in" "not in" "fn" "do" "end" "catch" "rescue" "after" "else"] @keyword
@@ -6,35 +23,42 @@
 
 ; * doc string
 (unary_operator
-  operator: "@" @comment.doc
+  operator: "@" @comment.block.documentation
   operand: (call
-    target: (identifier) @comment.doc.__attribute__
+    target: (identifier) @comment.block.documentation.__attribute__
     (arguments
       [
-        (string) @comment.doc
-        (charlist) @comment.doc
+        (string) @comment.block.documentation
+        (charlist) @comment.block.documentation
         (sigil
-          quoted_start: _ @comment.doc
-          quoted_end: _ @comment.doc) @comment.doc
-        (boolean) @comment.doc
+          quoted_start: _ @comment.block.documentation
+          quoted_end: _ @comment.block.documentation) @comment.block.documentation
+        (boolean) @comment.block.documentation
       ]))
-  (#match? @comment.doc.__attribute__ "^(moduledoc|typedoc|doc)$"))
+  (#match? @comment.block.documentation.__attribute__ "^(moduledoc|typedoc|doc)$"))
 
 ; * module attribute
 (unary_operator
-  operator: "@" @attribute
+  operator: "@" @variable.other.member
   operand: [
-    (identifier) @attribute
+    (identifier) @variable.other.member
     (call
-      target: (identifier) @attribute)
-    (boolean) @attribute
-    (nil) @attribute
+      target: (identifier) @variable.other.member)
+    (boolean) @variable.other.member
+    (nil) @variable.other.member
   ])
 
-; * capture operand
+; * capture operator
 (unary_operator
   operator: "&"
-  operand: (integer) @operator)
+  operand: [
+    (integer) @operator
+    (binary_operator
+      left: [
+        (call target: (dot left: (_) right: (identifier) @function))
+        (identifier) @function
+      ] operator: "/" right: (integer) @operator)
+  ])
 
 (operator_identifier) @operator
 
@@ -52,29 +76,25 @@
 
 ; Literals
 
-[
-  (boolean)
-  (nil)
-] @constant
+(nil) @constant.builtin
 
-[
-  (integer)
-  (float)
-] @number
+(boolean) @constant.builtin.boolean
+(integer) @constant.numeric.integer
+(float) @constant.numeric.float
 
-(alias) @module
+(alias) @namespace
 
 (call
   target: (dot
-    left: (atom) @module))
+    left: (atom) @namespace))
 
-(char) @constant
+(char) @constant.character
 
 ; Quoted content
 
 (interpolation "#{" @punctuation.special "}" @punctuation.special) @embedded
 
-(escape_sequence) @string.escape
+(escape_sequence) @constant.character.escape
 
 [
   (atom)
@@ -98,9 +118,9 @@
 
 (sigil
   (sigil_name) @__name__
-  quoted_start: _ @string.regex
-  quoted_end: _ @string.regex
-  (#match? @__name__ "^[rR]$")) @string.regex
+  quoted_start: _ @string.regexp
+  quoted_end: _ @string.regexp
+  (#match? @__name__ "^[rR]$")) @string.regexp
 
 (sigil
   (sigil_name) @__name__
@@ -165,8 +185,8 @@
 
 ; * unused
 (
-  (identifier) @comment.unused
-  (#match? @comment.unused "^_")
+  (identifier) @comment
+  (#match? @comment "^_")
 )
 
 ; * regular

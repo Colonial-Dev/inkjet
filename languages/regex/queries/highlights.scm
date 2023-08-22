@@ -1,3 +1,5 @@
+; upstream: https://github.com/tree-sitter/tree-sitter-regex/blob/e1cfca3c79896ff79842f057ea13e529b66af636/queries/highlights.scm
+
 [
   "("
   ")"
@@ -11,7 +13,16 @@
   "}"
 ] @punctuation.bracket
 
-(group_name) @property
+[
+  "*"
+  "+"
+  "|"
+  "="
+  "<="
+  "!"
+  "<!"
+  "?"
+] @operator
 
 [
   (identity_escape)
@@ -22,20 +33,13 @@
   (end_assertion)
   (boundary_assertion)
   (non_boundary_assertion)
-] @escape
+] @constant.character.escape
 
-[
-  "*"
-  "+"
-  "?"
-  "|"
-  "="
-  "!"
-] @operator
+(group_name) @label
 
 (count_quantifier
   [
-    (decimal_digits) @number
+    (decimal_digits) @constant.numeric
     "," @punctuation.delimiter
   ])
 
@@ -46,5 +50,4 @@
   ])
 
 (class_character) @constant.character
-
-(pattern_character) @string
+(ERROR) @error

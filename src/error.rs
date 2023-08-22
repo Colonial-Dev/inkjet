@@ -4,7 +4,7 @@ use thiserror::Error;
 pub type InkjetResult<T> = Result<T, InkjetError>;
 
 /// Concrete error type for all possible Inkjet errors.
-#[derive(Error, Debug)]
+#[derive(Debug, Error)]
 pub enum InkjetError {
     #[error("internal tree-sitter error: {0}")]
     TreeSitter(#[from] tree_sitter_highlight::Error),

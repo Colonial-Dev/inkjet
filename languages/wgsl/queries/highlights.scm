@@ -1,111 +1,117 @@
-(int_literal) @number
-(float_literal) @float
-(bool_literal) @boolean
-
-(type_declaration [ "bool" "u32" "i32" "f16" "f32" ] @type.builtin)
-(type_declaration) @type
-
-(function_declaration
-    (identifier) @function)
-
-(parameter
-    (variable_identifier_declaration (identifier) @parameter))
-
-(struct_declaration
-    (identifier) @structure)
-
-(struct_declaration
-    (struct_member (variable_identifier_declaration (identifier) @field)))
-
-(attribute
-    (identifier) @attribute)
-
-(identifier) @variable
-
-(type_constructor_or_function_call_expression
-    (type_declaration) @function.call)
+(int_literal) @constant.numeric.integer
+(float_literal) @constant.numeric.float
+(bool_literal) @constant.builtin.boolean
 
 [
-    "struct"
-    "bitcast"
-    "discard"
-    "enable"
-    "fallthrough"
-    "let"
-    "type"
-    "var"
-    "override"
-    (texel_format)
+  "bitcast"
+  "discard"
+  "enable"
+  "fallthrough"
 ] @keyword
 
 [
-    "private"
-    "storage"
-    "uniform"
-    "workgroup"
-] @storageclass
+  "let"
+  "override"
+  "struct"
+  "type"
+  "var"
+  (texel_format)
+] @keyword.storage.type
 
 [
-    "read"
-    "read_write"
-    "write"
-] @type.qualifier
+  (access_mode)
+  (address_space)
+] @keyword.storage.modifier
 
 "fn" @keyword.function
 
-"return" @keyword.return
+"return" @keyword.control.return
 
-[ "," "." ":" ";" "->" ] @punctuation.delimiter
+["," "." ":" ";"] @punctuation.delimiter
 
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket
 
-[
-    "loop"
-    "for"
-    "while"
-    "break"
-    "continue"
-    "continuing"
-] @repeat
+(type_declaration ["<" ">"] @punctuation.bracket)
 
 [
-    "if"
-    "else"
-    "switch"
-    "case"
-    "default"
-] @conditional
+  "break"
+  "continue"
+  "continuing"
+] @keyword.control
 
 [
-    "&"
-    "&&"
-    "/"
-    "!"
-    "="
-    "=="
-    "!="
-    ">"
-    ">="
-    ">>"
-    "<"
-    "<="
-    "<<"
-    "%"
-    "-"
-    "+"
-    "|"
-    "||"
-    "*"
-    "~"
-    "^"
-    "@"
-    "++"
-    "--"
+  "loop"
+  "for"
+  "while"
+] @keyword.control.repeat
+
+[
+  "if"
+  "else"
+  "switch"
+  "case"
+  "default"
+] @keyword.control.conditional
+
+[
+  "!"
+  "!="
+  "%"
+  "%="
+  "&"
+  "&&"
+  "&="
+  "*"
+  "*="
+  "+"
+  "++"
+  "+="
+  "-"
+  "--"
+  "-="
+  "->"
+  "/"
+  "/="
+  "<"
+  "<<"
+  "<="
+  "="
+  "=="
+  ">"
+  ">="
+  ">>"
+  "@"
+  "^"
+  "^="
+  "|"
+  "|="
+  "||"
+  "~"
 ] @operator
 
-[
-    (line_comment)
-    (block_comment)
-] @comment
+(function_declaration
+  (identifier) @function)
 
-(ERROR) @error
+(parameter
+  (variable_identifier_declaration
+    (identifier) @variable.parameter))
+
+(struct_declaration
+  (identifier) @type)
+
+(struct_declaration
+  (struct_member
+    (variable_identifier_declaration
+      (identifier) @variable.other.member)))
+
+(type_constructor_or_function_call_expression
+  (type_declaration (identifier) @function))
+
+(type_declaration _ @type)
+
+(attribute
+  (identifier) @attribute)
+
+(identifier) @variable
+
+(comment) @comment

@@ -1,9 +1,7 @@
-use tree_sitter_highlight::HighlightEvent;
-
 use crate::constants::HIGHLIGHT_CLASS_NAMES;
 use crate::error::InkjetResult as Result;
 
-use super::Formatter;
+use super::{Formatter, HighlightEvent};
 
 /// Formatter implementation for highlighting into HTML with class names.
 /// 

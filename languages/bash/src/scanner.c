@@ -47,6 +47,8 @@ enum TokenType {
     CONCAT,
     VARIABLE_NAME,
     REGEX,
+    EXTGLOB_PATTERN,
+    BARE_DOLLAR,
     CLOSING_BRACE,
     CLOSING_BRACKET,
     HEREDOC_ARROW,
@@ -75,6 +77,12 @@ typedef struct {
 static inline void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 
 static inline void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
+
+static inline bool in_error_recovery(const bool *valid_symbols) {
+    return valid_symbols[HEREDOC_START] && valid_symbols[HEREDOC_BODY_END] &&
+           valid_symbols[FILE_DESCRIPTOR] && valid_symbols[EMPTY_VALUE] &&
+           valid_symbols[CONCAT] && valid_symbols[REGEX];
+}
 
 static unsigned serialize(Scanner *scanner, char *buffer) {
     if (scanner->heredoc_delimiter.len + 3 >=
@@ -148,7 +156,9 @@ static bool scan_heredoc_start(Scanner *scanner, TSLexer *lexer) {
     }
 
     lexer->result_symbol = HEREDOC_START;
-    scanner->heredoc_is_raw = lexer->lookahead == '\'';
+    scanner->heredoc_is_raw = lexer->lookahead == '\'' ||
+                              lexer->lookahead == '"' ||
+                              lexer->lookahead == '\\';
     scanner->started_heredoc = false;
     STRING_CLEAR(scanner->heredoc_delimiter);
 
@@ -182,7 +192,7 @@ static bool scan_heredoc_content(Scanner *scanner, TSLexer *lexer,
     for (;;) {
         switch (lexer->lookahead) {
             case '\0': {
-                if (did_advance) {
+                if (lexer->eof(lexer) && did_advance) {
                     scanner->heredoc_is_raw = false;
                     scanner->started_heredoc = false;
                     scanner->heredoc_allows_indent = false;
@@ -234,13 +244,20 @@ static bool scan_heredoc_content(Scanner *scanner, TSLexer *lexer,
             }
 
             default: {
-                if (scan_heredoc_end_identifier(scanner, lexer)) {
-                    scanner->heredoc_is_raw = false;
-                    scanner->started_heredoc = false;
-                    scanner->heredoc_allows_indent = false;
-                    STRING_CLEAR(scanner->heredoc_delimiter);
-                    lexer->result_symbol = end_type;
-                    return true;
+                if (lexer->get_column(lexer) == 0) {
+                    // an alternative is to check the starting column of the
+                    // heredoc body and track that statefully
+                    while (iswspace(lexer->lookahead)) {
+                        skip(lexer);
+                    }
+                    if (scan_heredoc_end_identifier(scanner, lexer)) {
+                        scanner->heredoc_is_raw = false;
+                        scanner->started_heredoc = false;
+                        scanner->heredoc_allows_indent = false;
+                        STRING_CLEAR(scanner->heredoc_delimiter);
+                        lexer->result_symbol = end_type;
+                        return true;
+                    }
                 }
                 did_advance = true;
                 advance(lexer);
@@ -257,7 +274,7 @@ static bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
               lexer->lookahead == '<' || lexer->lookahead == ')' ||
               lexer->lookahead == '(' || lexer->lookahead == ';' ||
               lexer->lookahead == '&' || lexer->lookahead == '|' ||
-              lexer->lookahead == '`' || lexer->lookahead == '#' ||
+              lexer->lookahead == '`' ||
               (lexer->lookahead == '}' && valid_symbols[CLOSING_BRACE]) ||
               (lexer->lookahead == ']' && valid_symbols[CLOSING_BRACKET]))) {
             lexer->result_symbol = CONCAT;
@@ -265,26 +282,41 @@ static bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
         }
     }
 
+    if (valid_symbols[BARE_DOLLAR] && !in_error_recovery(valid_symbols)) {
+        while (iswspace(lexer->lookahead)) {
+            skip(lexer);
+        }
+
+        if (lexer->lookahead == '$') {
+            advance(lexer);
+            lexer->result_symbol = BARE_DOLLAR;
+            return iswspace(lexer->lookahead) || lexer->eof(lexer);
+        }
+    }
+
     if (valid_symbols[EMPTY_VALUE]) {
-        if (iswspace(lexer->lookahead)) {
+        if (iswspace(lexer->lookahead) || lexer->eof(lexer) ||
+            lexer->lookahead == ';' || lexer->lookahead == '&') {
             lexer->result_symbol = EMPTY_VALUE;
             return true;
         }
     }
 
     if (valid_symbols[HEREDOC_BODY_BEGINNING] &&
-        scanner->heredoc_delimiter.len > 0 && !scanner->started_heredoc) {
+        scanner->heredoc_delimiter.len > 0 && !scanner->started_heredoc &&
+        !in_error_recovery(valid_symbols)) {
         return scan_heredoc_content(scanner, lexer, HEREDOC_BODY_BEGINNING,
                                     SIMPLE_HEREDOC_BODY);
     }
 
     if (valid_symbols[HEREDOC_BODY_MIDDLE] &&
-        scanner->heredoc_delimiter.len > 0 && scanner->started_heredoc) {
+        scanner->heredoc_delimiter.len > 0 && scanner->started_heredoc &&
+        !in_error_recovery(valid_symbols)) {
         return scan_heredoc_content(scanner, lexer, HEREDOC_BODY_MIDDLE,
                                     HEREDOC_BODY_END);
     }
 
-    if (valid_symbols[HEREDOC_START]) {
+    if (valid_symbols[HEREDOC_START] && !in_error_recovery(valid_symbols)) {
         return scan_heredoc_start(scanner, lexer);
     }
 
@@ -437,6 +469,79 @@ static bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
             lexer->result_symbol = REGEX;
             return true;
         }
+    }
+
+    if (valid_symbols[EXTGLOB_PATTERN]) {
+        // first skip ws, then check for ? * + @ !
+        while (iswspace(lexer->lookahead)) {
+            skip(lexer);
+        }
+
+        if (lexer->lookahead == '?' || lexer->lookahead == '*' ||
+            lexer->lookahead == '+' || lexer->lookahead == '@' ||
+            lexer->lookahead == '!') {
+            lexer->mark_end(lexer);
+            advance(lexer);
+
+            if (lexer->lookahead != '(') {
+                return false;
+            }
+
+            typedef struct {
+                bool done;
+                uint32_t paren_depth;
+                uint32_t bracket_depth;
+                uint32_t brace_depth;
+            } State;
+
+            State state = {false, 0, 0, 0};
+            while (!state.done) {
+                switch (lexer->lookahead) {
+                    case '\0':
+                        return false;
+                    case '(':
+                        state.paren_depth++;
+                        break;
+                    case '[':
+                        state.bracket_depth++;
+                        break;
+                    case '{':
+                        state.brace_depth++;
+                        break;
+                    case ')':
+                        if (state.paren_depth == 0) {
+                            state.done = true;
+                        }
+                        state.paren_depth--;
+                        break;
+                    case ']':
+                        if (state.bracket_depth == 0) {
+                            state.done = true;
+                        }
+                        state.bracket_depth--;
+                        break;
+                    case '}':
+                        if (state.brace_depth == 0) {
+                            state.done = true;
+                        }
+                        state.brace_depth--;
+                        break;
+                }
+
+                if (!state.done) {
+                    bool was_space = iswspace(lexer->lookahead);
+                    advance(lexer);
+                    if (!was_space) {
+                        lexer->mark_end(lexer);
+                    }
+                }
+            }
+
+            lexer->result_symbol = EXTGLOB_PATTERN;
+            return true;
+        }
+
+        return false;
     }
 
     return false;

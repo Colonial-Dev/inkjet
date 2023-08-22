@@ -1,180 +1,169 @@
 ;;; Highlighting for lua
 
 ;;; Builtins
+((identifier) @variable.builtin
+ (#eq? @variable.builtin "self"))
+
 ;; Keywords
 
+(if_statement
 [
-  (if_start)
-  (if_then)
-  (if_elseif)
-  (if_else)
-  (if_end)] @conditional
+  "if"
+  "then"
+  "end"
+] @keyword.control.conditional)
+
+(elseif_statement
+[
+  "elseif"
+  "then"
+  "end"
+] @keyword.control.conditional)
+
+(else_statement
+[
+  "else"
+  "end"
+] @keyword.control.conditional)
+
+(for_statement
+[
+  "for"
+  "do"
+  "end"
+] @keyword.control.repeat)
+
+(while_statement
+[
+  "while"
+  "do"
+  "end"
+] @keyword.control.repeat)
+
+(repeat_statement
+[
+  "repeat"
+  "until"
+] @keyword.control.repeat)
+
+(do_statement
+[
+  "do"
+  "end"
+] @keyword)
+
+"return" @keyword.control.return
 
 [
-  (for_start)
-  (for_in)
-  (for_do)
-  (for_end)] @repeat
+ "in"
+ "local"
+ (break_statement)
+ "goto"
+] @keyword
 
+(function_declaration
 [
-  (while_start)
-  (while_do)
-  (while_end)] @repeat
+  "function"
+  "end"
+] @keyword.function)
 
+(function_definition
 [
-  (repeat_start)
-  (repeat_until)] @repeat
-
-[
-  (return_statement)
-  (module_return_statement)
-  (break_statement)] @keyword
- 
-
-
-; [
-;  "goto"
-; ] @keyword
+  "function"
+  "end"
+] @keyword.function)
 
 ;; Operators
-
-; TODO: I think I've made a bunch of these nodes.
-;   we might be able to just use those!
 
 [
  "not"
  "and"
- "or"] @keyword.operator
+ "or"
+] @keyword.operator
 
 [
- "="
- "~="
- "=="
- "<="
- ">="
- "<"
- ">"
- "+"
- "-"
- "%"
- "/"
- "//"
- "*"
- "^"
- "&"
- "~"
- "|"
- ">>"
- "<<"
- ".."
- "#"]
-@operator
-
-
+"="
+"~="
+"=="
+"<="
+">="
+"<"
+">"
+"+"
+"-"
+"%"
+"/"
+"//"
+"*"
+"^"
+"&"
+"~"
+"|"
+">>"
+"<<"
+".."
+"#"
+ ] @operator
 
 ;; Punctuation
-[
-  ","
-  "." ] @punctuation.delimiter
+["," "." ":" ";"] @punctuation.delimiter
 
 ;; Brackets
+
 [
- (left_paren)
- (right_paren)
+ "("
+ ")"
  "["
  "]"
  "{"
- "}"] @punctuation.bracket
+ "}"
+] @punctuation.bracket
 
-;; Variables
-(identifier) @variable
-(
-  (identifier) @variable.builtin
-  (#match? @variable.builtin "self"))
-
-; (preproc_call
-;   directive: (preproc_directive) @_u
-;   argument: (_) @constant
-;   (#eq? @_u "#undef"))
-
-;; Constants
-(boolean) @boolean
-(nil) @constant.builtin
-(ellipsis) @constant ;; "..."
-(local) @keyword
-
-;; Functions
-(function_call_paren) @function.bracket
-
+; ;; Constants
 [
-  (function_start)
-  (function_end)] @keyword.function
+(false)
+(true)
+] @constant.builtin.boolean
+(nil) @constant.builtin
+(vararg_expression) @constant
 
-(emmy_type) @type
-(emmy_literal) @string
-(emmy_parameter
- (identifier) @parameter
- description: (_)? @comment) @comment
-
-(emmy_class) @comment
-(emmy_field name: (_) @property) @comment
-(emmy_function_parameter
-  name: (_) @parameter) 
-
-(emmy_type_dictionary_value key: (identifier) @property)
-
-(emmy_note) @comment
-(emmy_see) @comment
-
-; TODO: Make the container so we can still highlight the beginning of the line
-; (emmy_eval_container) @comment
-; (_emmy_eval_container) @comment
-
-(emmy_return) @comment
-
-; TODO: returns
-
-(emmy_header) @comment
-(emmy_ignore) @comment
-(documentation_brief) @comment
-
-(documentation_command) @comment
-
-(function_call
-  [
-    ((identifier)+ @identifier . (identifier) @function.call . (function_call_paren))
-    ((identifier) @function.call.lua . (function_call_paren))])
-
-(function_call
-  prefix: (identifier) @function.call.lua
-  args: (string_argument) @string)
-
-(function_call
- prefix: (identifier) @function.call.lua
- args: (table_argument))
-
-; (function [(function_name) (identifier)] @function)
-; (function ["function" "end"] @keyword.function)
-; (local_function [(function_name) (identifier)] @function)
-; (local_function ["function" "end"] @keyword.function)
-; (function_definition ["function" "end"] @keyword.function)
-
-; TODO: Do I have replacements for these.
-; (property_identifier) @property
-; (method) @method
-
-; (function_call (identifier) @function . (arguments))
-; (function_call (field (property_identifier) @function) . (arguments))
+((identifier) @constant
+ (#match? @constant "^[A-Z][A-Z_0-9]*$"))
 
 ;; Parameters
-; (parameters (identifier) @parameter)
+(parameters
+  (identifier) @variable.parameter)
+
+; ;; Functions
+(function_declaration name: (identifier) @function)
+(function_call name: (identifier) @function.call)
+
+(function_declaration name: (dot_index_expression field: (identifier) @function))
+(function_call name: (dot_index_expression field: (identifier) @function.call))
+
+; TODO: incorrectly highlights variable N in `N, nop = 42, function() end`
+(assignment_statement
+    (variable_list
+      name: (identifier) @function)
+    (expression_list
+      value: (function_definition)))
+
+(method_index_expression method: (identifier) @function.method)
 
 ;; Nodes
-; (table ["{" "}"] @constructor)
 (comment) @comment
 (string) @string
-(number) @number
-; (label_statement) @label
+(number) @constant.numeric.integer
+(label_statement) @label
+; A bit of a tricky one, this will only match field names
+(field . (identifier) @variable.other.member (_))
+(hash_bang_line) @comment
+
+;; Property
+(dot_index_expression field: (identifier) @variable.other.member)
+
+;; Variable
+(identifier) @variable
 
 ;; Error
 (ERROR) @error

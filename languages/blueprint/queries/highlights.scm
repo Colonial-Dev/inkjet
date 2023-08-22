@@ -1,21 +1,20 @@
-(object_id) @variable
+(object_id) @attribute
 
 (string) @string
-(escape_sequence) @string.escape
+(escape_sequence) @constant.character.escape
 
 (comment) @comment
 
 (constant) @constant.builtin
-
-(boolean) @boolean
-
-(using) @include
+(boolean) @constant.builtin.boolean
 
 (template) @keyword
 
+(using) @keyword.control.import
+
 (decorator) @attribute
 
-(property_definition (property_name) @property)
+(property_definition (property_name) @variable.other.member)
 
 (object) @type
 
@@ -32,14 +31,14 @@
 (menu_section "section" @keyword)
 (menu_item "item" @function.macro)
 
-(template_definition (template_name_qualifier) @type.qualifier)
+(template_definition (template_name_qualifier) @keyword.storage.type)
 
 (import_statement (gobject_library) @namespace)
 
-(import_statement (version_number) @float)
+(import_statement (version_number) @constant.numeric.float)
 
-(float) @float
-(number) @number
+(float) @constant.numeric.float
+(number) @constant.numeric
 
 [
   ";"

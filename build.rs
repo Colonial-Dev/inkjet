@@ -5,7 +5,6 @@ use std::process::{Child, Command};
 
 use anyhow::{Error, Result};
 use fs_extra::dir::{self, CopyOptions};
-use phf_codegen::Map;
 use rayon::prelude::*;
 use serde::Deserialize;
 
@@ -21,20 +20,44 @@ fn main() -> Result<()> {
         generate_langs_module(&languages)?;
     }
 
-    languages.par_iter().for_each(Language::compile);
+    if std::env::var("INKJET_REBUILD_FEATURES").is_ok() {
+        generate_features_list(&languages)?;
+    }
+
+    languages
+        .par_iter()
+        .filter(|lang| {
+            let name = lang.name.to_uppercase().replace('-', "_");
+            let name = format!("CARGO_FEATURE_LANGUAGE_{name}");
+
+            std::env::var(name).is_ok()
+        })
+        .for_each(Language::compile);
 
     Ok(())
 }
 
 fn download_langs(languages: &[Language]) -> Result<()> {
     fs::remove_dir_all("languages")?;
-    fs::create_dir_all("languages/temp")?;
+    fs::create_dir_all("languages/temp/helix_queries")?;
+
+    Command::new("git")
+        .arg("clone")
+        .arg("https://github.com/helix-editor/helix")
+        .arg("languages/temp/helix_all")
+        .spawn()?
+        .wait()?;
+
+    dir::copy(
+        "languages/temp/helix_all/runtime/queries/",
+        "languages/temp/helix_queries",
+        &CopyOptions::new().content_only(true)
+    )?;
 
     languages
         .par_iter()
-        .map(|lang| (lang.download(), lang))
-        .try_for_each(|(child, lang)| -> Result<()> {
-            child?.wait()?;
+        .try_for_each(|lang| -> Result<()> {
+            lang.download()?.wait()?;
 
             println!("Finished downloading {}.", lang.name);
 
@@ -46,7 +69,15 @@ fn download_langs(languages: &[Language]) -> Result<()> {
                 &CopyOptions::new(),
             )?;
 
-            let query_path = format!("languages/temp/{}/queries", lang.name);
+            let query_path = match &lang.helix_path {
+                Some(path) => format!("languages/temp/helix_queries/{path}"),
+                None => format!("languages/temp/helix_queries/{}", lang.name)
+            };
+
+            let query_path = match lang.helix_override {
+                false => query_path,
+                true => format!("languages/temp/{}/queries", lang.name)
+            };
 
             dir::copy(
                 query_path,
@@ -91,9 +122,8 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
     let mut member_buffer = String::new();
     let mut all_langs_buffer = String::new();
     let mut into_cfg_buffer = String::new();
+    let mut from_token_buffer = String::new();
 
-
-    let mut alias_map = Map::new();
     for lang in languages {
         use std::fmt::Write;
 
@@ -103,42 +133,48 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
             .map(ToOwned::to_owned)
             .unwrap_or_else(|| uppercase_first_char(&lang.name));
 
+        let feature = lang.name.replace('_', "-");
+        let feature = format!("#[cfg(feature = \"language-{feature}\")]\n");
+
         // Add language to member list
-        writeln!(&mut member_buffer, "{},", pretty_name)?;
+        writeln!(&mut member_buffer, "{feature}{},", pretty_name)?;
 
         // Add language to ALL_LANGS static
-        writeln!(&mut all_langs_buffer, "Self::{},", pretty_name)?;
+        writeln!(&mut all_langs_buffer, "{feature}Self::{},", pretty_name)?;
 
         // Add language to config match
         writeln!(
             &mut into_cfg_buffer,
-            "Self::{pretty_name} => &{}::CONFIG,",
+            "{feature}Self::{pretty_name} => &{}::CONFIG,",
             lang.name
         )?;
 
-        alias_map.entry(
-            &lang.name,
-            &format!("Language::{}", pretty_name)
-        );
+        writeln!(
+            &mut from_token_buffer,
+            "{feature}\"{}\" => Some(Self::{pretty_name}),",
+            lang.name
+        )?;
 
         // Add all language aliases to from_str match
         for alias in &lang.aliases {
-            alias_map.entry(
-                alias,
-                &format!("Language::{}", pretty_name)
-            );
+            writeln!(
+                &mut from_token_buffer,
+                "{feature}\"{alias}\" => Some(Self::{pretty_name}),",
+            )?;
         }
     }
 
     let enum_definition = indoc::formatdoc! {"
         /// The set of all languages supported by Inkjet.
+        #[non_exhaustive]
         #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
         pub enum Language {{
             {member_buffer}
         }}
 
         impl Language {{
-            pub(crate) const ALL_LANGS: &[Self] = &[
+            // Array containing all possible language variants.
+            pub const ALL_LANGS: &[Self] = &[
                 {all_langs_buffer}
             ];
 
@@ -149,24 +185,51 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
             /// The tokens for each language are sourced from its `name` and `aliases` keys in
             /// `config/languages.toml`.
             pub fn from_token(token: &str) -> Option<Self> {{
-                LANGUAGE_TOKENS.get(token).map(ToOwned::to_owned)
+                match token {{
+                    {from_token_buffer}
+                    _ => None
+                }}
             }}
 
-            pub(crate) fn config(&self) -> &'static HighlightConfiguration {{
+            /// Get the underlying [`HighlightConfiguration`] for a language.
+            pub fn config(&self) -> &'static HighlightConfiguration {{
                 match *self {{
                     {into_cfg_buffer}
                 }}
             }}
         }}
-
-        static LANGUAGE_TOKENS: phf::Map<&'static str, Language> = \n{};\n
-    ", alias_map.build()};
+    "};
 
     let mut file = File::create("src/languages.rs")?;
 
     write!(&mut file, "{}", &module_buffer)?;
 
     write!(&mut file, "{}", &enum_definition)?;
+
+    Ok(())
+}
+
+fn generate_features_list(languages: &[Language]) -> Result<()> {
+    let mut all_languages_buffer = String::new();
+    let mut features_buffer = String::new();
+
+    for lang in languages {
+        all_languages_buffer += &format!("\"language-{}\",\n", lang.name.replace('_', "-"));
+        features_buffer += &format!("language-{} = []\n", lang.name.replace('_', "-"));
+    }
+
+    let mut file = fs::File::create("features")?;
+
+    write!(
+        file,
+        "
+            all_languages = [
+                {all_languages_buffer}
+            ]
+
+            {features_buffer}
+        "
+    )?;
 
     Ok(())
 }
@@ -184,6 +247,9 @@ struct Language {
     #[serde(default)]
     aliases: Vec<String>,
     command: Option<String>,
+    helix_path: Option<String>,
+    #[serde(default)]
+    helix_override: bool,
     pretty_name: Option<String>,
 }
 
@@ -246,6 +312,9 @@ impl Language {
     pub fn generate_module(&self, module_buffer: &mut String) {
         let name = &self.name;
 
+        let feature = name.replace('_', "-");
+        let feature = format!("#[cfg(feature = \"language-{feature}\")]");
+
         let highlight_path = format!("languages/{name}/queries/highlights.scm");
         let injections_path = format!("languages/{name}/queries/injections.scm");
         let locals_path = format!("languages/{name}/queries/locals.scm");
@@ -267,6 +336,7 @@ impl Language {
 
         let generated_module = indoc::formatdoc!(
             "
+            {feature}
             pub mod {name} {{
                 use once_cell::sync::Lazy;
                 use tree_sitter::Language;

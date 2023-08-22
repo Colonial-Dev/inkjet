@@ -1,4 +1,3 @@
-
 (value_declaration) @local.scope
 (type_alias_declaration) @local.scope
 (type_declaration) @local.scope

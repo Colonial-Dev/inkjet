@@ -1,9 +1,6 @@
-; These scopes are arbitrary and line up with good colors for the
-; `tree-sitter highlight` command. Adapt them as you see fit.
-
-[(addition) (new_file)] @string
-[(deletion) (old_file)] @keyword
+[(addition) (new_file)] @diff.plus
+[(deletion) (old_file)] @diff.minus
 
 (commit) @constant
 (location) @attribute
-(command) @variable.builtin
+(command) @markup.bold

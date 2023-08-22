@@ -1,9 +1,7 @@
 ; Preproc
 
-[
-  (unique_id)
-  (top_level_annotation_body)
-] @preproc
+(unique_id) @keyword.directive
+(top_level_annotation_body) @keyword.directive
 
 ; Includes
 
@@ -11,29 +9,11 @@
   "import"
   "$import"
   "embed"
-  "using"
-] @include
+] @keyword.control.import
 
-(import_path) @string @text.uri
-
-; Keywords
-
-[
-  "annotation"
-  "enum"
-  "group"
-  "interface"
-  "struct"
-  "union"
-  "extends"
-  "namespace"
-] @keyword
+(import_path) @string
 
 ; Builtins
-
-[
-  "const"
-] @type.qualifier
 
 [
   (primitive_type)
@@ -42,7 +22,7 @@
 
 ; Typedefs
 
-(type_definition) @type.definition
+(type_definition) @type
 
 ; Labels (@number, @number!)
 
@@ -50,56 +30,66 @@
 
 ; Methods
 
-[
-  (annotation_definition_identifier)
-  (method_identifier)
-] @method
+(annotation_definition_identifier) @function.method
+(method_identifier) @function.method
 
 ; Fields
 
-(field_identifier) @field
+(field_identifier) @variable.other.member
 
 ; Properties
 
-(property) @property
+(property) @label
 
 ; Parameters
 
-[
-  (param_identifier)
-  (return_identifier)
-] @parameter
-
-(annotation_target) @parameter.builtin
+(param_identifier) @variable.parameter
+(return_identifier) @variable.parameter
 
 ; Constants
 
-[
-  (const_identifier)
-  (local_const)
-  (enum_member)
-] @constant
+(const_identifier) @variable
+(local_const) @constant
+(enum_member) @type.enum.variant
 
 (void) @constant.builtin
 
 ; Types
 
-[
-  (enum_identifier)
-  (extend_type)
-  (type_identifier)
-] @type
+(enum_identifier) @type.enum
+(extend_type) @type
+(type_identifier) @type
 
 ; Attributes
 
-[
-  (annotation_identifier)
-  (attribute)
-] @attribute
+(annotation_identifier) @attribute
+(attribute) @attribute
 
 ; Operators
 
-"=" @operator
+[
+ ; @ ! -
+  "="
+] @operator
+
+; Keywords
+
+
+[
+  "annotation"
+  "enum"
+  "group"
+  "interface"
+  "struct"
+  "union"
+] @keyword.storage.type
+
+[
+  "extends"
+  "namespace"
+  "using"
+  (annotation_target)
+] @special
 
 ; Literals
 
@@ -110,27 +100,27 @@
   (namespace)
 ] @string
 
-(namespace) @text.underline
-
-(escape_sequence) @string.escape
+(escape_sequence) @constant.character.escape
 
 (data_string) @string.special
 
-(number) @number
+(number) @constant.numeric.integer
 
-(float) @float
+(float) @constant.numeric.float
 
-(boolean) @boolean
+(boolean) @constant.builtin.boolean
 
-(data_hex) @symbol
+; Misc
 
-; Punctuation
+[
+  "const"
+] @keyword.storage.modifier
 
 [
   "*"
   "$"
   ":"
-] @punctuation.special
+] @string.special.symbol
 
 ["{" "}"] @punctuation.bracket
 
@@ -144,10 +134,8 @@
   "->"
 ] @punctuation.delimiter
 
+(data_hex) @constant
+
 ; Comments
 
-(comment) @comment @spell
-
-; Errors
-
-(ERROR) @error
+(comment) @comment.line

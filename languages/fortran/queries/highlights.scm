@@ -1,155 +1,134 @@
-(identifier) @variable
-(string_literal) @string
-(number_literal) @number
-(boolean_literal) @boolean
-(comment) @comment
+[
+  (intrinsic_type)
+  "dimension"
+  "intent"
+  "in"
+  "out"
+  "inout"
+  "type"
+  "endtype"
+  "attributes"
+  "global"
+  "device"
+  "host"
+  "grid_global"
+  "pointer"
+] @keyword.storage.modifier
 
 [
- (intrinsic_type)
- "allocatable"
- "attributes"
- "device"
- "dimension"
- "endtype"
- "global"
- "grid_global"
- "host"
- "import"
- "in"
- "inout"
- "intent"
- "optional"
- "out"
- "pointer"
- "type"
- "value"
- ] @type
+  "contains"
+  "public"
+  "private"
+] @keyword.directive
 
 [
- "contains"
- "private"
- "public"
- ] @include
+"implicit"
+(none)
+] @attribute
 
 [
- (none)
- "implicit"
- ] @attribute
+  "function"
+  "endfunction"
+  "endprogram"
+  "subroutine"
+  "endsubroutine"
+] @keyword.storage
 
 [
- "endfunction"
- "endprogram"
- "endsubroutine"
- "function"
- "procedure"
- "subroutine"
- ] @keyword.function
+  "module"
+  "endmodule"
+  "bind"
+  "call"
+  "class"
+  "continue"
+  "cycle"
+  "enumerator"
+  "equivalence"
+  "exit"
+  "format"
+  "goto"
+  "include"
+  "interface"
+  "endinterface"
+  "only"
+  "parameter"
+  "procedure"
+  "print"
+  "program"
+  "endprogram"
+  "read"
+  "return"
+  "result"
+  "stop"
+  "use"
+  "write"
+  "enum"
+  "endenum"
+  (default)
+  (procedure_qualifier)
+] @keyword
 
 [
- (default)
- (procedure_qualifier)
- "abstract"
- "bind"
- "call"
- "class"
- "continue"
- "cycle"
- "endenum"
- "endinterface"
- "endmodule"
- "endprocedure"
- "endprogram"
- "endsubmodule"
- "enum"
- "enumerator"
- "equivalence"
- "exit"
- "extends"
- "format"
- "goto"
- "include"
- "interface"
- "intrinsic"
- "non_intrinsic"
- "module"
- "namelist"
- "only"
- "parameter"
- "print"
- "procedure"
- "program"
- "read"
- "stop"
- "submodule"
- "use"
- "write"
- ] @keyword
-
-"return" @keyword.return
+  "if" 
+  "then"
+  "else"
+  "elseif"
+  "endif"
+  "where"
+  "endwhere"
+] @keyword.control.conditional
 
 [
- "else"
- "elseif"
- "elsewhere"
- "endif"
- "endwhere"
- "if"
- "then"
- "where"
- ] @conditional
+  "do"
+  "enddo"
+  "while"
+  "forall"
+] @keyword.control.repeat
 
 [
- "do"
- "enddo"
- "forall"
- "while"
- ] @repeat
+  "*"
+  "**"
+  "+"
+  "-"
+  "/"
+  "="
+  "<"
+  ">"
+  "<="
+  ">="
+  "=="
+  "/="
+] @operator
 
 [
- "*"
- "+"
- "-"
- "/"
- "="
- "<"
- ">"
- "<="
- ">="
- "=="
- "/="
- ] @operator
+  "\\.and\\."
+  "\\.or\\."
+  "\\.lt\\."
+  "\\.gt\\."
+  "\\.ge\\."
+  "\\.le\\."
+  "\\.eq\\."
+  "\\.eqv\\."
+  "\\.neqv\\."
+] @keyword.operator
 
-[
- "\\.and\\."
- "\\.or\\."
- "\\.lt\\."
- "\\.gt\\."
- "\\.ge\\."
- "\\.le\\."
- "\\.eq\\."
- "\\.eqv\\."
- "\\.neqv\\."
- ] @keyword.operator
-
-;; Brackets
-[
- "("
- ")"
- "["
- "]"
- "<<<"
- ">>>"
+ ;; Brackets
+ [
+  "("
+  ")"
+  "["
+  "]"
  ] @punctuation.bracket
 
-;; Delimiter
-[
- "::"
- ","
- "%"
+ ;; Delimiter
+ [
+  "::"
+  ","
+  "%"
  ] @punctuation.delimiter
 
 (parameters
-  (identifier) @parameter)
+  (identifier) @variable.parameter)
 
 (program_statement
   (name) @namespace)
@@ -157,16 +136,10 @@
 (module_statement
   (name) @namespace)
 
-(submodule_statement
-  (module_name) (name) @namespace)
-
 (function_statement
   (name) @function)
 
 (subroutine_statement
-  (name) @function)
-
-(module_procedure_statement
   (name) @function)
 
 (end_program_statement
@@ -175,23 +148,24 @@
 (end_module_statement
   (name) @namespace)
 
-(end_submodule_statement
-  (name) @namespace)
-
 (end_function_statement
   (name) @function)
 
 (end_subroutine_statement
   (name) @function)
 
-(end_module_procedure_statement
-  (name) @function)
-
 (subroutine_call
-  (identifier) @function)
+	(name) @function)
 
 (keyword_argument
   name: (identifier) @keyword)
 
 (derived_type_member_expression
-  (type_member) @property)
+  (type_member) @variable.other.member)
+
+(identifier) @variable
+(string_literal) @string
+(number_literal) @constant.numeric
+(boolean_literal) @constant.builtin.boolean
+(comment) @comment
+

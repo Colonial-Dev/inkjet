@@ -1,5 +1,10 @@
-[ "." ";" ":" "," ] @punctuation.delimiter
-[ "\\(" "(" ")" "[" "]" "{" "}"] @punctuation.bracket ; TODO: "\\(" ")" in interpolations should be @punctuation.special
+; Upstream: https://github.com/alex-pinkus/tree-sitter-swift/blob/8d2fd80e3322df51e3f70952e60d57f5d4077eb8/queries/highlights.scm
+
+(line_string_literal
+  ["\\(" ")"] @punctuation.special)
+
+["." ";" ":" "," ] @punctuation.delimiter
+["(" ")" "[" "]" "{" "}"] @punctuation.bracket ; TODO: "\\(" ")" in interpolations should be @punctuation.special
 
 ; Identifiers
 (attribute) @variable
@@ -17,17 +22,16 @@
   (inheritance_modifier)
 ] @keyword
 
-(function_declaration (simple_identifier) @method)
-(function_declaration ["init" @constructor])
+(function_declaration (simple_identifier) @function.method)
+(function_declaration "init" @constructor)
 (throws) @keyword
 "async" @keyword
-"await" @keyword
 (where_keyword) @keyword
-(parameter external_name: (simple_identifier) @parameter)
-(parameter name: (simple_identifier) @parameter)
-(type_parameter (type_identifier) @parameter)
-(inheritance_constraint (identifier (simple_identifier) @parameter))
-(equality_constraint (identifier (simple_identifier) @parameter))
+(parameter external_name: (simple_identifier) @variable.parameter)
+(parameter name: (simple_identifier) @variable.parameter)
+(type_parameter (type_identifier) @variable.parameter)
+(inheritance_constraint (identifier (simple_identifier) @variable.parameter))
+(equality_constraint (identifier (simple_identifier) @variable.parameter))
 (pattern bound_identifier: (simple_identifier)) @variable
 
 [
@@ -52,18 +56,18 @@
   (modify_specifier)
 ] @keyword
 
-(class_body (property_declaration (pattern (simple_identifier) @property)))
-(protocol_property_declaration (pattern (simple_identifier) @property))
+(class_body (property_declaration (pattern (simple_identifier) @variable.other.member)))
+(protocol_property_declaration (pattern (simple_identifier) @variable.other.member))
 
-(import_declaration ["import" @include])
+(import_declaration "import" @keyword.control.import)
 
-(enum_entry ["case" @keyword])
+(enum_entry "case" @keyword)
 
 ; Function calls
-(call_expression (simple_identifier) @function.call) ; foo()
+(call_expression (simple_identifier) @function) ; foo()
 (call_expression ; foo.bar.baz(): highlight the baz()
   (navigation_expression
-    (navigation_suffix (simple_identifier) @function.call)))
+    (navigation_suffix (simple_identifier) @function)))
 ((navigation_expression
    (simple_identifier) @type) ; SomeType.method(): highlight SomeType as a type
    (#match? @type "^[A-Z]"))
@@ -72,35 +76,33 @@
 (diagnostic) @function.macro
 
 ; Statements
-(for_statement ["for" @repeat])
-(for_statement ["in" @repeat])
-(for_statement (pattern) @variable)
+(for_statement "for" @keyword.control.repeat)
+(for_statement "in" @keyword.control.repeat)
+(for_statement item: (simple_identifier) @variable)
 (else) @keyword
 (as_operator) @keyword
 
-["while" "repeat" "continue" "break"] @repeat
+["while" "repeat" "continue" "break"] @keyword.control.repeat
 
 ["let" "var"] @keyword
 
-(guard_statement ["guard" @conditional])
-(if_statement ["if" @conditional])
-(switch_statement ["switch" @conditional])
-(switch_entry ["case" @keyword])
-(switch_entry ["fallthrough" @keyword])
+(guard_statement "guard" @keyword.control.conditional)
+(if_statement "if" @keyword.control.conditional)
+(switch_statement "switch" @keyword.control.conditional)
+(switch_entry "case" @keyword)
+(switch_entry "fallthrough" @keyword)
 (switch_entry (default_keyword) @keyword)
 "return" @keyword.return
 (ternary_expression
-  ["?" ":"] @conditional)
+  ["?" ":"] @keyword.control.conditional)
 
 ["do" (throw_keyword) (catch_keyword)] @keyword
 
 (statement_label) @label
 
 ; Comments
-[
- (comment)
- (multiline_comment)
-] @comment @spell
+(comment) @comment
+(multiline_comment) @comment
 
 ; String literals
 (line_str_text) @string
@@ -112,57 +114,58 @@
 ["\"" "\"\"\""] @string
 
 ; Lambda literals
-(lambda_literal ["in" @keyword.operator])
+(lambda_literal "in" @keyword.operator)
 
 ; Basic literals
 [
- (integer_literal)
- (hex_literal)
- (oct_literal)
- (bin_literal)
-] @number
-(real_literal) @float
-(boolean_literal) @boolean
+  (hex_literal)
+  (oct_literal)
+  (bin_literal)
+] @constant.numeric
+(integer_literal) @constant.numeric.integer
+(real_literal) @constant.numeric.float
+(boolean_literal) @constant.builtin.boolean
 "nil" @variable.builtin
 
-; Regex literals
-(regex_literal) @string.regex
+"?" @type
+(type_annotation "!" @type)
+
+(simple_identifier) @variable
 
 ; Operators
-(custom_operator) @operator
 [
- "try"
- "try?"
- "try!"
- "!"
- "+"
- "-"
- "*"
- "/"
- "%"
- "="
- "+="
- "-="
- "*="
- "/="
- "<"
- ">"
- "<="
- ">="
- "++"
- "--"
- "&"
- "~"
- "%="
- "!="
- "!=="
- "=="
- "==="
- "??"
+  "try"
+  "try?"
+  "try!"
+  "!"
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  "="
+  "+="
+  "-="
+  "*="
+  "/="
+  "<"
+  ">"
+  "<="
+  ">="
+  "++"
+  "--"
+  "&"
+  "~"
+  "%="
+  "!="
+  "!=="
+  "=="
+  "==="
+  "??"
 
- "->"
+  "->"
 
- "..<"
- "..."
+  "..<"
+  "..."
+  (custom_operator)
 ] @operator
-

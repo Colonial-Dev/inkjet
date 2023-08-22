@@ -2,7 +2,7 @@
 ;
 ; Highlighting queries for D code for use by Tree-Sitter.
 ;
-; Copyright 2023 Garrett D'Amore
+; Copyright 2022 Garrett D'Amore
 ;
 ; Distributed under the MIT License.
 ; (See accompanying file LICENSE.txt or https://opensource.org/licenses/MIT)
@@ -12,33 +12,14 @@
 (identity_expression (in) @operator)
 (identity_expression (is) @operator)
 
-[
-	(lazy)
-	(align)
-	(extern)
-	(static)
-	(abstract)
-	(final)
-	(override)
-	(synchronized)
-	(auto)
-	(scope)
-	(gshared)
-	(ref)
-	(deprecated)
-	(nothrow)
-	(pure)
-	(type_ctor)
-] @keyword.storage
-
-(parameter_attribute (return) @keyword.storage)
-(parameter_attribute (in) @keyword.storage)
-(parameter_attribute (out) @keyword.storage)
+(storage_class) @keyword.storage
 
 (function_declaration (identifier) @function)
 
 (call_expression (identifier) @function)
 (call_expression (type (identifier) @function))
+
+(module_fqn) @namespace
 
 [
     (abstract)
@@ -48,22 +29,16 @@
     (assert)
     (auto)
     (cast)
-    (class)
     (const)
     (debug)
-    (delegate)
     (delete)
     (deprecated)
-    (enum)
     (export)
     (extern)
     (final)
-    (function)
     (immutable)
-    (import)
     (in)
     (inout)
-    (interface)
     (invariant)
     (is)
     (lazy)
@@ -84,7 +59,6 @@
     (scope)
     (shared)
     (static)
-    (struct)
     (super)
     (synchronized)
     (template)
@@ -92,7 +66,6 @@
     (throw)
     (typeid)
     (typeof)
-    (union)
     (unittest)
     (version)
     (with)
@@ -103,6 +76,16 @@
 ] @keyword
 
 [
+    (class)
+    (struct)
+    (interface)
+    (union)
+    (enum)
+    (function)
+    (delegate)
+] @keyword.storage.type
+
+[
     (break)
     (case)
     (catch)
@@ -111,16 +94,22 @@
     (default)
     (finally)
     (else)
-    (for)
-    (foreach)
-    (foreach_reverse)
     (goto)
     (if)
     (switch)
     (try)
-    (return)
-    (while)
 ] @keyword.control
+
+(return) @keyword.control.return
+
+(import) @keyword.control.import
+
+[
+    (for)
+    (foreach)
+    (foreach_reverse)
+    (while)
+] @keyword.control.repeat
 
 [
     (not_in)
@@ -172,6 +161,13 @@
 ] @operator
 
 [
+    "("
+    ")"
+    "["
+    "]"
+] @punctuation.bracket
+
+[
     ";"
     "."
     ":"
@@ -179,21 +175,13 @@
 ] @punctuation.delimiter
 
 [
-    "("
-    ")"
-    "["
-    "["
-    "{"
-    "}"
-] @punctuation.bracket
-
-[
-    (null)
     (true)
     (false)
-] @constant.language
+] @constant.builtin.boolean
 
-(special_keyword) @constant.language
+(null) @constant.builtin
+
+(special_keyword) @constant.builtin
 
 (directive) @keyword.directive
 (shebang) @keyword.directive
@@ -216,8 +204,7 @@
     (ulong)
     (real)
     (double)
-    (float)
-] @type
+] @type.builtin
 
 [
     (cent)
@@ -228,17 +215,17 @@
     (creal)
     (double)
     (cfloat)
-] @type.deprecated
+] @warning ; these types are deprecated
 
 (label (identifier) @label)
 (goto_statement (goto) @keyword (identifier) @label)
 
 (string_literal) @string
-(int_literal) @number
-(float_literal) @number
-(char_literal) @number
+(int_literal) @constant.numeric.integer
+(float_literal) @constant.numeric.float
+(char_literal) @constant.character
 (identifier) @variable
-(at_attribute) @property
+(at_attribute) @attribute
 
 ; everything after __EOF_ is plain text
-(end_file) @text
+(end_file) @ui.text

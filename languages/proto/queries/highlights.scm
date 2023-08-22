@@ -12,28 +12,39 @@
   "repeated"
   "reserved"
   "to"
+  "stream"
+  "extend"
+  "optional"
 ] @keyword
 
 [
-  (key_type)
+  (keyType)
   (type)
-  (message_name)
-  (enum_name)
-  (service_name)
-  (rpc_name)
-]@type
-
-(string) @string
+] @type.builtin
 
 [
-  (int_lit)
-  (float_lit)
-] @number
+  (mapName)
+  (enumName)
+  (messageName)
+  (extendName)
+  (serviceName)
+  (rpcName)
+] @type
 
 [
-  (true)
-  (false)
-] @constant.builtin
+  (fieldName)
+  (optionName)
+] @variable.other.member
+(enumVariantName) @type.enum.variant
+
+(fullIdent) @namespace
+
+(intLit) @constant.numeric.integer
+(floatLit) @constant.numeric.float
+(boolLit) @constant.builtin.boolean
+(strLit) @string
+
+(constant) @constant
 
 (comment) @comment
 
@@ -45,4 +56,3 @@
   "{"
   "}"
 ]  @punctuation.bracket
-

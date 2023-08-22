@@ -1,23 +1,14 @@
-; Scopes
-;-------
-
-[
-  (statement_block)
-  (function)
-  (arrow_function)
-  (function_declaration)
-  (method_definition)
-] @local.scope
-
 ; Definitions
 ;------------
+; Javascript and Typescript Treesitter grammars deviate when defining the
+; tree structure for parameters, so we need to address them in each specific
+; language instead of ecma.
 
-(pattern/identifier)@local.definition
+; (i)
+(formal_parameters 
+  (identifier) @local.definition)
 
-(variable_declarator
-  name: (identifier) @local.definition)
-
-; References
-;------------
-
-(identifier) @local.reference
+; (i = 1)
+(formal_parameters 
+  (assignment_pattern
+    left: (identifier) @local.definition))
