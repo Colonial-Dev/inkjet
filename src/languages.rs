@@ -3268,6 +3268,102 @@ pub mod typescript {
     }
 }
 
+#[cfg(feature = "language-wast")]
+pub mod wast {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_wast() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_wast() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'wast'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/wast/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_wast() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-wat")]
+pub mod wat {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_wat() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_wat() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'wat'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/wat/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_wat() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
 #[cfg(feature = "language-x86asm")]
 pub mod x86asm {
     use once_cell::sync::Lazy;
@@ -3600,6 +3696,10 @@ pub enum Language {
     Toml,
     #[cfg(feature = "language-typescript")]
     Typescript,
+    #[cfg(feature = "language-wast")]
+    Wast,
+    #[cfg(feature = "language-wat")]
+    Wat,
     #[cfg(feature = "language-x86asm")]
     X86asm,
     #[cfg(feature = "language-wgsl")]
@@ -3749,6 +3849,10 @@ impl Language {
         Self::Toml,
         #[cfg(feature = "language-typescript")]
         Self::Typescript,
+        #[cfg(feature = "language-wast")]
+        Self::Wast,
+        #[cfg(feature = "language-wat")]
+        Self::Wat,
         #[cfg(feature = "language-x86asm")]
         Self::X86asm,
         #[cfg(feature = "language-wgsl")]
@@ -4013,6 +4117,12 @@ impl Language {
             "typescript" => Some(Self::Typescript),
             #[cfg(feature = "language-typescript")]
             "ts" => Some(Self::Typescript),
+            #[cfg(feature = "language-wast")]
+            "wast" => Some(Self::Wast),
+            #[cfg(feature = "language-wat")]
+            "wat" => Some(Self::Wat),
+            #[cfg(feature = "language-wat")]
+            "wasm" => Some(Self::Wat),
             #[cfg(feature = "language-x86asm")]
             "x86asm" => Some(Self::X86asm),
             #[cfg(feature = "language-x86asm")]
@@ -4166,6 +4276,10 @@ impl Language {
             Self::Toml => &toml::CONFIG,
             #[cfg(feature = "language-typescript")]
             Self::Typescript => &typescript::CONFIG,
+            #[cfg(feature = "language-wast")]
+            Self::Wast => &wast::CONFIG,
+            #[cfg(feature = "language-wat")]
+            Self::Wat => &wat::CONFIG,
             #[cfg(feature = "language-x86asm")]
             Self::X86asm => &x86asm::CONFIG,
             #[cfg(feature = "language-wgsl")]

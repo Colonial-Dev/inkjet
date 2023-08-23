@@ -80,7 +80,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | ProtoBuf | `protobuf`, `proto` |
 | Python | `python`, `py` |
 | R | `r` |
-| Racket | `rkt` |
+| Racket | `racket`, `rkt` |
 | Regex | `regex` |
 | Ruby | `ruby`, `rb` |
 | Rust | `rust`, `rs` |
@@ -91,6 +91,8 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | Swift | `swift` |
 | TOML | `toml` |
 | TypeScript | `typescript`, `ts` |
+| WAST (WebAssembly Script) | `wast` |
+| WAT (WebAssembly Text) | `wat`, `wasm` |
 | x86 Assembly | `x86asm`, `x86` |
 | WGSL | `wgsl` |
 | YAML | `yaml` |

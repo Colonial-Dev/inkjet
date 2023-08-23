@@ -88,6 +88,8 @@ all_languages = [
     "language-swift",
     "language-toml",
     "language-typescript",
+    "language-wast",
+    "language-wat",
     "language-x86asm",
     "language-wgsl",
     "language-yaml",
@@ -162,6 +164,8 @@ language-sql = []
 language-swift = []
 language-toml = []
 language-typescript = []
+language-wast = []
+language-wat = []
 language-x86asm = []
 language-wgsl = []
 language-yaml = []

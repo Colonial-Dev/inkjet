@@ -181,6 +181,7 @@ aliases = ["js"]
 
 [[languages]]
 name = "jinja2"
+helix_path = "jinja"
 repo = "https://github.com/dbt-labs/tree-sitter-jinja2"
 aliases = ["jinja"]
 
@@ -367,6 +368,25 @@ sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/typescript
 cp -r languages/temp/typescript/typescript/src languages/temp/typescript/
 '''
 aliases = ["ts"]
+
+[[languages]]
+name = "wast"
+repo = "https://github.com/wasm-lsp/tree-sitter-wasm"
+command = '''
+set euxo pipefail &&
+git clone https://github.com/wasm-lsp/tree-sitter-wasm languages/temp/wast &&
+cp -r languages/temp/wast/wast/src languages/temp/wast/src
+'''
+
+[[languages]]
+name = "wat"
+repo = "https://github.com/wasm-lsp/tree-sitter-wasm"
+command = '''
+set euxo pipefail &&
+git clone https://github.com/wasm-lsp/tree-sitter-wasm languages/temp/wat &&
+cp -r languages/temp/wat/wat/src languages/temp/wat/src
+'''
+aliases = ["wasm"]
 
 [[languages]]
 name = "x86asm"
