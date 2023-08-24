@@ -69,7 +69,7 @@ pub const HIGHLIGHT_NAMES: &[&str] = &[
     "diff.delta.moved"
 ];
 
-/// The same as [`HIGHLIGHT-NAMES`], but with all dots replaced with `-`.
+/// The same as [`HIGHLIGHT-NAMES`], but with all dots replaced with spaces.
 pub const HIGHLIGHT_CLASS_NAMES: &[&str] = &[
     "attribute",
     "type",

@@ -99,7 +99,8 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | Zig | `zig` |
 
 ## Cargo Features
-- (Default) `html` - enables the bundled HTML formatter, which depends on `v_htmlescape`.
+- (Default) `html` - enables the bundled HTML formatter, which depends on `v_htmlescape` and the `theme` feature.
+- (Default) `theme` - enables the theme API, which depends on `ahash`, `toml` and `serde`.
 - (Default) `all-languages` - enables all languages.
 - `language-{name}` - enables the specified language.
     - If you want to only enable a subset of the included languages, you'll have to set `default-features=false` and manually re-add each language you want to use.
