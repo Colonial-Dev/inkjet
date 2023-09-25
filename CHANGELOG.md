@@ -1,3 +1,9 @@
+### 0.8.1
+- Added HEEx (Phoenix LiveView template format)
+- Fix some typos and missing names in `HIGHLIGHT_NAMES`.
+
+Thank you to @leandrocp for the PRs!
+
 ### 0.8.0
 Changes to formatters:
 - (Feature) Added the `IoWrapper` newtype, which allows instances of `io::Write` to be treated as an instance of `fmt::Write`.
