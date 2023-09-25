@@ -160,6 +160,10 @@ name = "hcl"
 repo = "https://github.com/MichaHoffmann/tree-sitter-hcl"
 aliases = ["terraform"]
 
+[[language]]
+name = "heex"
+repo = "https://github.com/phoenixframework/tree-sitter-heex"
+
 [[languages]]
 name = "html"
 repo = "https://github.com/tree-sitter/tree-sitter-html"
@@ -245,7 +249,7 @@ repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
 command = '''
 set -euxo pipefail &&
 git clone https://github.com/tree-sitter/tree-sitter-ocaml languages/temp/ocaml &&
-cp languages/temp/ocaml/common/scanner.h languages/temp/ocaml/ocaml/src && 
+cp languages/temp/ocaml/common/scanner.h languages/temp/ocaml/ocaml/src &&
 sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml/ocaml/src/scanner.c &&
 cp -r languages/temp/ocaml/ocaml/src languages/temp/ocaml
 '''
@@ -259,7 +263,7 @@ repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
 command = '''
 set -euxo pipefail &&
 git clone https://github.com/tree-sitter/tree-sitter-ocaml languages/temp/ocaml_interface &&
-cp languages/temp/ocaml_interface/common/scanner.h languages/temp/ocaml_interface/interface/src && 
+cp languages/temp/ocaml_interface/common/scanner.h languages/temp/ocaml_interface/interface/src &&
 sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml_interface/interface/src/scanner.c &&
 cp -r languages/temp/ocaml_interface/interface/src languages/temp/ocaml_interface
 '''
@@ -363,7 +367,7 @@ helix_path = "_typescript"
 command = '''
 set -euxo pipefail &&
 git clone https://github.com/tree-sitter/tree-sitter-typescript languages/temp/typescript &&
-cp languages/temp/typescript/common/scanner.h languages/temp/typescript/typescript/src && 
+cp languages/temp/typescript/common/scanner.h languages/temp/typescript/typescript/src &&
 sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/typescript/typescript/src/scanner.c &&
 cp -r languages/temp/typescript/typescript/src languages/temp/typescript/
 '''
