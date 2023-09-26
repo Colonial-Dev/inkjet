@@ -47,7 +47,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | Dockerfile | `dockerfile`, `docker` |
 | EEx | `eex` |
 | Emacs Lisp | `elisp`, `emacs-lisp`, `el` |
-| Elixir | `ex`, `eex`, `exs`, `leex` |
+| Elixir | `ex`, `exs`, `leex` |
 | Elm | `elm` |
 | Erlang | `erl`, `hrl`, `es`, `escript` |
 | Forth | `forth`, `fth` |
