@@ -58,6 +58,21 @@ static bool scan_int(TSLexer *lexer) {
         advance(lexer); // store all digits
     }
 
+    // handle line continuations
+    if (lexer->lookahead == '&') {
+      skip(lexer);
+      while (iswspace(lexer->lookahead)) {
+        skip(lexer);
+      }
+      // second '&' required to continue the literal
+      if (lexer->lookahead == '&') {
+        skip(lexer);
+        // don't return here, as we may have finished literal on first
+        // line but still have second '&'
+        scan_int(lexer);
+      }
+    }
+
     lexer->mark_end(lexer);
     return true;
 }
@@ -71,8 +86,7 @@ static bool scan_number(TSLexer *lexer) {
         // exclude decimal if followed by any letter other than d/D and e/E
         // if no leading digits are present and a non-digit follows
         // the decimal it's a nonmatch.
-        if (digits && (is_exp_sentinel(lexer->lookahead) ||
-                       !iswalnum(lexer->lookahead))) {
+        if (digits && !iswalnum(lexer->lookahead)) {
             lexer->mark_end(lexer); // add decimal to token
         }
         lexer->result_symbol = FLOAT_LITERAL;
@@ -249,7 +263,7 @@ static bool scan_string_literal(TSLexer *lexer) {
             }
             // If we hit the end of the line, consume all whitespace,
             // including new lines
-            if (lexer->lookahead == '\n') {
+            if (lexer->lookahead == '\n' || lexer->lookahead == '\r') {
                 while (iswspace(lexer->lookahead)) {
                     advance(lexer);
                 }

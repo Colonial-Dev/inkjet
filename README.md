@@ -58,6 +58,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | Go | `go`, `golang` |
 | Haskell | `haskell`, `hs` |
 | HCL | `hcl`, `terraform` |
+| HEEx | `heex` |
 | HTML | `html`, `htm` |
 | IEx | `iex` |
 | INI | `ini` |

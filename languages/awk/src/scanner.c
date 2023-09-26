@@ -7,7 +7,6 @@ enum TokenType
 {
   CONCATENATING_SPACE,
   IF_ELSE_SEPARATOR,
-  AMBIGUOUS_COMMENT,
   NO_SPACE
 };
 
@@ -201,17 +200,6 @@ bool tree_sitter_awk_external_scanner_scan(void *payload, TSLexer *lexer,
                                            const bool *valid_symbols)
 {
   bool statement_terminator_was_found = false;
-
-  if (valid_symbols[AMBIGUOUS_COMMENT])
-  {
-    if (lexer->lookahead == '#')
-    {
-      lexer->advance(lexer, false);
-      lexer->mark_end(lexer);
-      lexer->result_symbol = AMBIGUOUS_COMMENT;
-      return true;
-    }
-  }
 
   if (valid_symbols[NO_SPACE])
   {

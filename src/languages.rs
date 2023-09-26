@@ -1540,6 +1540,102 @@ pub mod haskell {
     }
 }
 
+#[cfg(feature = "language-hcl")]
+pub mod hcl {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_hcl() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_hcl() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'hcl'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/hcl/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/hcl/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_hcl() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
+#[cfg(feature = "language-heex")]
+pub mod heex {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_heex() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_heex() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'heex'!");
+
+        config.configure(HIGHLIGHT_NAMES);
+
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/heex/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/heex/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_heex() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let _cfg = Lazy::get(&CONFIG);
+        }
+    }
+}
+
 #[cfg(feature = "language-html")]
 pub mod html {
     use once_cell::sync::Lazy;
@@ -3624,6 +3720,10 @@ pub enum Language {
     Go,
     #[cfg(feature = "language-haskell")]
     Haskell,
+    #[cfg(feature = "language-hcl")]
+    Hcl,
+    #[cfg(feature = "language-heex")]
+    Heex,
     #[cfg(feature = "language-html")]
     Html,
     #[cfg(feature = "language-ini")]
@@ -3777,6 +3877,10 @@ impl Language {
         Self::Go,
         #[cfg(feature = "language-haskell")]
         Self::Haskell,
+        #[cfg(feature = "language-hcl")]
+        Self::Hcl,
+        #[cfg(feature = "language-heex")]
+        Self::Heex,
         #[cfg(feature = "language-html")]
         Self::Html,
         #[cfg(feature = "language-ini")]
@@ -4001,6 +4105,12 @@ impl Language {
             "haskell" => Some(Self::Haskell),
             #[cfg(feature = "language-haskell")]
             "hs" => Some(Self::Haskell),
+            #[cfg(feature = "language-hcl")]
+            "hcl" => Some(Self::Hcl),
+            #[cfg(feature = "language-hcl")]
+            "terraform" => Some(Self::Hcl),
+            #[cfg(feature = "language-heex")]
+            "heex" => Some(Self::Heex),
             #[cfg(feature = "language-html")]
             "html" => Some(Self::Html),
             #[cfg(feature = "language-html")]
@@ -4204,6 +4314,10 @@ impl Language {
             Self::Go => &go::CONFIG,
             #[cfg(feature = "language-haskell")]
             Self::Haskell => &haskell::CONFIG,
+            #[cfg(feature = "language-hcl")]
+            Self::Hcl => &hcl::CONFIG,
+            #[cfg(feature = "language-heex")]
+            Self::Heex => &heex::CONFIG,
             #[cfg(feature = "language-html")]
             Self::Html => &html::CONFIG,
             #[cfg(feature = "language-ini")]

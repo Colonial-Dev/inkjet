@@ -1,6 +1,6 @@
 [package]
 name = "inkjet"
-version = "0.8.0"
+version = "0.8.1"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/Colonial-Dev/inkjet/"
@@ -20,7 +20,84 @@ default = ["html", "theme", "all_languages"]
 html = ["theme", "dep:v_htmlescape"]
 theme = ["dep:ahash", "dep:toml", "dep:serde"]
 
-all_languages = ["language-ada", "language-asm", "language-astro", "language-awk", "language-bash", "language-bibtex", "language-bicep", "language-blueprint", "language-c", "language-capnp", "language-clojure", "language-cmake", "language-c-sharp", "language-commonlisp", "language-cpp", "language-css", "language-cue", "language-d", "language-dart", "language-diff", "language-dockerfile", "language-elisp", "language-elixir", "language-elm", "language-erlang", "language-forth", "language-fortran", "language-gdscript", "language-gleam", "language-glsl", "language-go", "language-haskell", "language-html", "language-ini", "language-java", "language-javascript", "language-jinja2", "language-json", "language-julia", "language-just", "language-kotlin", "language-latex", "language-llvm", "language-lua", "language-make", "language-matlab", "language-meson", "language-nim", "language-nix", "language-ocaml", "language-ocaml-interface", "language-openscad", "language-pascal", "language-php", "language-proto", "language-python", "language-r", "language-racket", "language-regex", "language-ruby", "language-rust", "language-scala", "language-scheme", "language-scss", "language-sql", "language-swift", "language-toml", "language-typescript", "language-wast", "language-wat", "language-x86asm", "language-wgsl", "language-yaml", "language-zig"]
+all_languages = [
+        "language-ada",
+	"language-asm",
+	"language-astro",
+	"language-awk",
+	"language-bash",
+	"language-bibtex",
+	"language-bicep",
+	"language-blueprint",
+	"language-c",
+	"language-capnp",
+	"language-clojure",
+	"language-cmake",
+	"language-c-sharp",
+	"language-commonlisp",
+	"language-cpp",
+	"language-css",
+	"language-cue",
+	"language-d",
+	"language-dart",
+	"language-diff",
+	"language-dockerfile",
+	"language-elisp",
+	"language-elixir",
+	"language-elm",
+	"language-erlang",
+	"language-forth",
+	"language-fortran",
+	"language-gdscript",
+	"language-gleam",
+	"language-glsl",
+	"language-go",
+	"language-haskell",
+	"language-hcl",
+	"language-heex",
+	"language-html",
+	"language-ini",
+	"language-java",
+	"language-javascript",
+	"language-jinja2",
+	"language-json",
+	"language-julia",
+	"language-just",
+	"language-kotlin",
+	"language-latex",
+	"language-llvm",
+	"language-lua",
+	"language-make",
+	"language-matlab",
+	"language-meson",
+	"language-nim",
+	"language-nix",
+	"language-ocaml",
+	"language-ocaml-interface",
+	"language-openscad",
+	"language-pascal",
+	"language-php",
+	"language-proto",
+	"language-python",
+	"language-r",
+	"language-racket",
+	"language-regex",
+	"language-ruby",
+	"language-rust",
+	"language-scala",
+	"language-scheme",
+	"language-scss",
+	"language-sql",
+	"language-swift",
+	"language-toml",
+	"language-typescript",
+	"language-wast",
+	"language-wat",
+	"language-x86asm",
+	"language-wgsl",
+	"language-yaml",
+	"language-zig",
+]
 
 language-ada = []
 language-asm = []
@@ -54,6 +131,8 @@ language-gleam = []
 language-glsl = []
 language-go = []
 language-haskell = []
+language-hcl = []
+language-heex = []
 language-html = []
 language-ini = []
 language-java = []
