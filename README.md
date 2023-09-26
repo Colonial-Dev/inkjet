@@ -45,6 +45,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | Dart | `dart` |
 | Diff | `diff` |
 | Dockerfile | `dockerfile`, `docker` |
+| EEx | `eex` |
 | Emacs Lisp | `elisp`, `emacs-lisp`, `el` |
 | Elixir | `ex`, `eex`, `exs`, `leex` |
 | Elm | `elm` |
@@ -59,6 +60,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | HCL | `hcl`, `terraform` |
 | HEEx | `heex` |
 | HTML | `html`, `htm` |
+| IEx | `iex` |
 | INI | `ini` |
 | JavaScript | `javascript`, `js` |
 | Jinja2 | `jinja2`, `jinja` |
