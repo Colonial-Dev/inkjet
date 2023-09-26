@@ -98,6 +98,10 @@ repo = "https://github.com/camdencheek/tree-sitter-dockerfile"
 aliases = ["docker"]
 
 [[languages]]
+name = "eex"
+repo = "https://github.com/connorlay/tree-sitter-eex"
+
+[[languages]]
 name = "elisp"
 repo = "https://github.com/Wilfred/tree-sitter-elisp"
 aliases = ["el", "emacs-lisp"]
@@ -106,7 +110,7 @@ helix_override = true
 [[languages]]
 name = "elixir"
 repo = "https://github.com/elixir-lang/tree-sitter-elixir"
-aliases = ["ex", "eex", "exs", "leex"]
+aliases = ["ex", "exs", "leex"]
 
 [[languages]]
 name = "elm"
@@ -164,6 +168,10 @@ aliases = ["terraform"]
 name = "html"
 repo = "https://github.com/tree-sitter/tree-sitter-html"
 aliases = ["htm"]
+
+[[languages]]
+name = "iex"
+repo = "https://github.com/elixir-lang/tree-sitter-iex"
 
 [[languages]]
 name = "ini"
@@ -245,7 +253,7 @@ repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
 command = '''
 set -euxo pipefail &&
 git clone https://github.com/tree-sitter/tree-sitter-ocaml languages/temp/ocaml &&
-cp languages/temp/ocaml/common/scanner.h languages/temp/ocaml/ocaml/src && 
+cp languages/temp/ocaml/common/scanner.h languages/temp/ocaml/ocaml/src &&
 sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml/ocaml/src/scanner.c &&
 cp -r languages/temp/ocaml/ocaml/src languages/temp/ocaml
 '''
@@ -259,7 +267,7 @@ repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
 command = '''
 set -euxo pipefail &&
 git clone https://github.com/tree-sitter/tree-sitter-ocaml languages/temp/ocaml_interface &&
-cp languages/temp/ocaml_interface/common/scanner.h languages/temp/ocaml_interface/interface/src && 
+cp languages/temp/ocaml_interface/common/scanner.h languages/temp/ocaml_interface/interface/src &&
 sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml_interface/interface/src/scanner.c &&
 cp -r languages/temp/ocaml_interface/interface/src languages/temp/ocaml_interface
 '''
@@ -363,7 +371,7 @@ helix_path = "_typescript"
 command = '''
 set -euxo pipefail &&
 git clone https://github.com/tree-sitter/tree-sitter-typescript languages/temp/typescript &&
-cp languages/temp/typescript/common/scanner.h languages/temp/typescript/typescript/src && 
+cp languages/temp/typescript/common/scanner.h languages/temp/typescript/typescript/src &&
 sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/typescript/typescript/src/scanner.c &&
 cp -r languages/temp/typescript/typescript/src languages/temp/typescript/
 '''
