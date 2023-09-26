@@ -1,6 +1,7 @@
 ### 0.8.1
 - Added HEEx (Phoenix LiveView template format)
-- Fix some typos and missing names in `HIGHLIGHT_NAMES`.
+- Fix some typos and missing names in `HIGHLIGHT_NAMES`
+- Fix HCL not being properly included in the languages list
 
 Thank you to @leandrocp for the PRs!
 

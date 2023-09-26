@@ -155,12 +155,12 @@ name = "haskell"
 repo = "https://github.com/tree-sitter/tree-sitter-haskell"
 aliases = ["hs"]
 
-[[language]]
+[[languages]]
 name = "hcl"
 repo = "https://github.com/MichaHoffmann/tree-sitter-hcl"
 aliases = ["terraform"]
 
-[[language]]
+[[languages]]
 name = "heex"
 repo = "https://github.com/phoenixframework/tree-sitter-heex"
 
