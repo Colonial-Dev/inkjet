@@ -984,6 +984,55 @@ pub mod dockerfile {
     }
 }
 
+#[cfg(feature = "language-eex")]
+pub mod eex {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_eex() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_eex() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'eex'!");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/eex/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/eex/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use tree_sitter_highlight::Highlighter;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_eex() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let cfg = &*CONFIG;
+            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+        }
+    }
+}
+
 #[cfg(feature = "language-elisp")]
 pub mod elisp {
     use once_cell::sync::Lazy;
@@ -1658,6 +1707,55 @@ pub mod html {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { super::tree_sitter_html() })
+                .expect("Grammar should load successfully.");
+        }
+
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let cfg = &*CONFIG;
+            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+        }
+    }
+}
+
+#[cfg(feature = "language-iex")]
+pub mod iex {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+
+    use crate::constants::HIGHLIGHT_NAMES;
+
+    extern "C" {
+        pub fn tree_sitter_iex() -> Language;
+    }
+
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+            unsafe { tree_sitter_iex() },
+            HIGHLIGHT_QUERY,
+            INJECTIONS_QUERY,
+            LOCALS_QUERY,
+        ).expect("Failed to load highlight configuration for language 'iex'!");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+
+    pub const HIGHLIGHT_QUERY: &str = include_str!("../languages/iex/queries/highlights.scm");
+    pub const INJECTIONS_QUERY: &str = include_str!("../languages/iex/queries/injections.scm");
+    pub const LOCALS_QUERY: &str = "";
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use tree_sitter_highlight::Highlighter;
+
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { super::tree_sitter_iex() })
                 .expect("Grammar should load successfully.");
         }
 
@@ -3576,6 +3674,8 @@ Dart,
 Diff,
 #[cfg(feature = "language-dockerfile")]
 Dockerfile,
+#[cfg(feature = "language-eex")]
+Eex,
 #[cfg(feature = "language-elisp")]
 Elisp,
 #[cfg(feature = "language-elixir")]
@@ -3604,6 +3704,8 @@ Hcl,
 Heex,
 #[cfg(feature = "language-html")]
 Html,
+#[cfg(feature = "language-iex")]
+Iex,
 #[cfg(feature = "language-ini")]
 Ini,
 #[cfg(feature = "language-java")]
@@ -3726,6 +3828,8 @@ Self::Dart,
 Self::Diff,
 #[cfg(feature = "language-dockerfile")]
 Self::Dockerfile,
+#[cfg(feature = "language-eex")]
+Self::Eex,
 #[cfg(feature = "language-elisp")]
 Self::Elisp,
 #[cfg(feature = "language-elixir")]
@@ -3754,6 +3858,8 @@ Self::Hcl,
 Self::Heex,
 #[cfg(feature = "language-html")]
 Self::Html,
+#[cfg(feature = "language-iex")]
+Self::Iex,
 #[cfg(feature = "language-ini")]
 Self::Ini,
 #[cfg(feature = "language-java")]
@@ -3919,6 +4025,8 @@ Self::Zig,
 "dockerfile" => Some(Self::Dockerfile),
 #[cfg(feature = "language-dockerfile")]
 "docker" => Some(Self::Dockerfile),
+#[cfg(feature = "language-eex")]
+"eex" => Some(Self::Eex),
 #[cfg(feature = "language-elisp")]
 "elisp" => Some(Self::Elisp),
 #[cfg(feature = "language-elisp")]
@@ -3929,8 +4037,6 @@ Self::Zig,
 "elixir" => Some(Self::Elixir),
 #[cfg(feature = "language-elixir")]
 "ex" => Some(Self::Elixir),
-#[cfg(feature = "language-elixir")]
-"eex" => Some(Self::Elixir),
 #[cfg(feature = "language-elixir")]
 "exs" => Some(Self::Elixir),
 #[cfg(feature = "language-elixir")]
@@ -3981,6 +4087,8 @@ Self::Zig,
 "html" => Some(Self::Html),
 #[cfg(feature = "language-html")]
 "htm" => Some(Self::Html),
+#[cfg(feature = "language-iex")]
+"iex" => Some(Self::Iex),
 #[cfg(feature = "language-ini")]
 "ini" => Some(Self::Ini),
 #[cfg(feature = "language-java")]
@@ -4145,6 +4253,8 @@ Self::Dart => &dart::CONFIG,
 Self::Diff => &diff::CONFIG,
 #[cfg(feature = "language-dockerfile")]
 Self::Dockerfile => &dockerfile::CONFIG,
+#[cfg(feature = "language-eex")]
+Self::Eex => &eex::CONFIG,
 #[cfg(feature = "language-elisp")]
 Self::Elisp => &elisp::CONFIG,
 #[cfg(feature = "language-elixir")]
@@ -4173,6 +4283,8 @@ Self::Hcl => &hcl::CONFIG,
 Self::Heex => &heex::CONFIG,
 #[cfg(feature = "language-html")]
 Self::Html => &html::CONFIG,
+#[cfg(feature = "language-iex")]
+Self::Iex => &iex::CONFIG,
 #[cfg(feature = "language-ini")]
 Self::Ini => &ini::CONFIG,
 #[cfg(feature = "language-java")]
