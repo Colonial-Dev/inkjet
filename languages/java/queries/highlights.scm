@@ -13,13 +13,15 @@
 (marker_annotation
   name: (identifier) @attribute)
 
+"@" @operator
+
 ; Types
+
+(type_identifier) @type
 
 (interface_declaration
   name: (identifier) @type)
 (class_declaration
-  name: (identifier) @type)
-(record_declaration
   name: (identifier) @type)
 (enum_declaration
   name: (identifier) @type)
@@ -30,13 +32,15 @@
 ((scoped_identifier
   scope: (identifier) @type)
  (#match? @type "^[A-Z]"))
+((method_invocation
+  object: (identifier) @type)
+ (#match? @type "^[A-Z]"))
+((method_reference
+  . (identifier) @type)
+ (#match? @type "^[A-Z]"))
 
 (constructor_declaration
   name: (identifier) @type)
-(compact_constructor_declaration
-  name: (identifier) @type)
-
-(type_identifier) @type
 
 [
   (boolean_type)
@@ -45,9 +49,6 @@
   (floating_point_type)
   (void_type)
 ] @type.builtin
-
-(type_arguments
-  (wildcard "?" @type.builtin))
 
 ; Variables
 
@@ -64,20 +65,15 @@
   (hex_integer_literal)
   (decimal_integer_literal)
   (octal_integer_literal)
-  (binary_integer_literal)
-] @constant.numeric.integer
-
-[
   (decimal_floating_point_literal)
   (hex_floating_point_literal)
-] @constant.numeric.float
-
-(character_literal) @constant.character
+] @number
 
 [
+  (character_literal)
   (string_literal)
-  (text_block)
 ] @string
+(escape_sequence) @string.escape
 
 [
   (true)
@@ -85,86 +81,10 @@
   (null_literal)
 ] @constant.builtin
 
-(line_comment) @comment
-(block_comment) @comment
-
-; Punctuation
-
 [
-  "::"
-  "."
-  ";"
-  ","
-] @punctuation.delimiter
-
-[
-  "@"
-  "..."
-] @punctuation.special
-
-[
-  "("
-  ")"
-  "["
-  "]"
-  "{"
-  "}"
-] @punctuation.bracket
-
-(type_arguments
-  [
-    "<"
-    ">"
-  ] @punctuation.bracket)
-
-(type_parameters
-  [
-    "<"
-    ">"
-  ] @punctuation.bracket)
-
-; Operators
-
-[
-  "="
-  ">"
-  "<"
-  "!"
-  "~"
-  "?"
-  ":"
-  "->"
-  "=="
-  ">="
-  "<="
-  "!="
-  "&&"
-  "||"
-  "++"
-  "--"
-  "+"
-  "-"
-  "*"
-  "/"
-  "&"
-  "|"
-  "^"
-  "%"
-  "<<"
-  ">>"
-  ">>>"
-  "+="
-  "-="
-  "*="
-  "/="
-  "&="
-  "|="
-  "^="
-  "%="
-  "<<="
-  ">>="
-  ">>>="
-] @operator
+  (line_comment)
+  (block_comment)
+] @comment
 
 ; Keywords
 
@@ -197,7 +117,6 @@
   "open"
   "opens"
   "package"
-  "permits"
   "private"
   "protected"
   "provides"
@@ -220,5 +139,4 @@
   "volatile"
   "while"
   "with"
-  "yield"
 ] @keyword

@@ -355,9 +355,7 @@ impl Language {
                         INJECTIONS_QUERY,
                         LOCALS_QUERY,
                     ).expect(\"Failed to load highlight configuration for language '{name}'!\");
-
                     config.configure(HIGHLIGHT_NAMES);
-
                     config
                 }});
             
@@ -368,6 +366,7 @@ impl Language {
                 #[cfg(test)]
                 mod tests {{
                     use super::*;
+                    use tree_sitter_highlight::Highlighter;
 
                     #[test]
                     fn grammar_loading() {{
@@ -379,7 +378,9 @@ impl Language {
 
                     #[test]
                     fn config_loading() {{
-                        let _cfg = Lazy::get(&CONFIG);
+                        let mut highlighter = Highlighter::new();
+                        let cfg = &*CONFIG;
+                        let _events = highlighter.highlight(&cfg, b\"\", None, |_| None).expect(\"Highlighter should generate events successfully.\");
                     }}
                 }}
             }}

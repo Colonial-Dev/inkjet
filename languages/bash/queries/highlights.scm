@@ -7,7 +7,7 @@
 
 (command_name) @function
 
-(variable_name) @variable.other.member
+(variable_name) @property
 
 [
   "case"
@@ -22,16 +22,18 @@
   "function"
   "if"
   "in"
-  "unset"
-  "while"
+  "select"
   "then"
+  "unset"
+  "until"
+  "while"
 ] @keyword
 
 (comment) @comment
 
 (function_definition name: (word) @function)
 
-(file_descriptor) @constant.numeric.integer
+(file_descriptor) @number
 
 [
   (command_substitution)
@@ -46,7 +48,6 @@
   ">>"
   "<"
   "|"
-  (expansion_flags)
 ] @operator
 
 (

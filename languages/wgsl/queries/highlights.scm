@@ -1,117 +1,111 @@
-(int_literal) @constant.numeric.integer
-(float_literal) @constant.numeric.float
-(bool_literal) @constant.builtin.boolean
+(int_literal) @number
+(float_literal) @float
+(bool_literal) @boolean
 
-[
-  "bitcast"
-  "discard"
-  "enable"
-  "fallthrough"
-] @keyword
-
-[
-  "let"
-  "override"
-  "struct"
-  "type"
-  "var"
-  (texel_format)
-] @keyword.storage.type
-
-[
-  (access_mode)
-  (address_space)
-] @keyword.storage.modifier
-
-"fn" @keyword.function
-
-"return" @keyword.control.return
-
-["," "." ":" ";"] @punctuation.delimiter
-
-["(" ")" "[" "]" "{" "}"] @punctuation.bracket
-
-(type_declaration ["<" ">"] @punctuation.bracket)
-
-[
-  "break"
-  "continue"
-  "continuing"
-] @keyword.control
-
-[
-  "loop"
-  "for"
-  "while"
-] @keyword.control.repeat
-
-[
-  "if"
-  "else"
-  "switch"
-  "case"
-  "default"
-] @keyword.control.conditional
-
-[
-  "!"
-  "!="
-  "%"
-  "%="
-  "&"
-  "&&"
-  "&="
-  "*"
-  "*="
-  "+"
-  "++"
-  "+="
-  "-"
-  "--"
-  "-="
-  "->"
-  "/"
-  "/="
-  "<"
-  "<<"
-  "<="
-  "="
-  "=="
-  ">"
-  ">="
-  ">>"
-  "@"
-  "^"
-  "^="
-  "|"
-  "|="
-  "||"
-  "~"
-] @operator
+(type_declaration [ "bool" "u32" "i32" "f16" "f32" ] @type.builtin)
+(type_declaration) @type
 
 (function_declaration
-  (identifier) @function)
+    (identifier) @function)
 
 (parameter
-  (variable_identifier_declaration
-    (identifier) @variable.parameter))
+    (variable_identifier_declaration (identifier) @parameter))
 
 (struct_declaration
-  (identifier) @type)
+    (identifier) @structure)
 
 (struct_declaration
-  (struct_member
-    (variable_identifier_declaration
-      (identifier) @variable.other.member)))
-
-(type_constructor_or_function_call_expression
-  (type_declaration (identifier) @function))
-
-(type_declaration _ @type)
+    (struct_member (variable_identifier_declaration (identifier) @field)))
 
 (attribute
-  (identifier) @attribute)
+    (identifier) @attribute)
 
 (identifier) @variable
 
-(comment) @comment
+(type_constructor_or_function_call_expression
+    (type_declaration) @function.call)
+
+[
+    "struct"
+    "bitcast"
+    "discard"
+    "enable"
+    "fallthrough"
+    "let"
+    "type"
+    "var"
+    "override"
+    (texel_format)
+] @keyword
+
+[
+    "private"
+    "storage"
+    "uniform"
+    "workgroup"
+] @storageclass
+
+[
+    "read"
+    "read_write"
+    "write"
+] @type.qualifier
+
+"fn" @keyword.function
+
+"return" @keyword.return
+
+[ "," "." ":" ";" "->" ] @punctuation.delimiter
+
+["(" ")" "[" "]" "{" "}"] @punctuation.bracket
+
+[
+    "loop"
+    "for"
+    "while"
+    "break"
+    "continue"
+    "continuing"
+] @repeat
+
+[
+    "if"
+    "else"
+    "switch"
+    "case"
+    "default"
+] @conditional
+
+[
+    "&"
+    "&&"
+    "/"
+    "!"
+    "="
+    "=="
+    "!="
+    ">"
+    ">="
+    ">>"
+    "<"
+    "<="
+    "<<"
+    "%"
+    "-"
+    "+"
+    "|"
+    "||"
+    "*"
+    "~"
+    "^"
+    "@"
+    "++"
+    "--"
+] @operator
+
+[
+    (line_comment)
+    (block_comment)
+] @comment
+
+(ERROR) @error
