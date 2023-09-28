@@ -53,7 +53,7 @@ aliases = ["clj", "cljc"]
 
 # [[languages]]
 # name = "cmake"
-# repo = "https://github.com/uyha/tree-sitter-cmake"lantom
+# repo = "https://github.com/uyha/tree-sitter-cmake"
 
 [[languages]]
 name = "c_sharp"
