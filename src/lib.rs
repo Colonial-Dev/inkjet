@@ -145,14 +145,28 @@ impl Highlighter {
         F: Formatter,
         O: std::io::Write,
     {
-        use crate::formatter::IoWrapper;
+        let config = lang.config();
+
+        let highlights = self
+            .0
+            .highlight(
+                config,
+                source.as_bytes(),
+                None,
+                |token| match Language::from_token(token) {
+                    Some(lang) => Some(lang.config()),
+                    None => None
+            })?;
+
+        formatter.start_io(source, output)?;
         
-        self.highlight_to_fmt(
-            lang,
-            formatter,
-            source,
-            &mut IoWrapper(output)
-        )
+        for event in highlights {
+            formatter.write_io(source, output, event?)?
+        }
+
+        formatter.finish_io(source, output)?;
+
+        Ok(())
     }
 
     /// Highlight into a new [`String`] using the provided formatter.

@@ -48,7 +48,7 @@ pub mod ada {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -97,7 +97,7 @@ pub mod asm {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -146,7 +146,7 @@ pub mod astro {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -195,7 +195,7 @@ pub mod awk {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -244,7 +244,7 @@ pub mod bash {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -293,7 +293,7 @@ pub mod bibtex {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -342,7 +342,7 @@ pub mod bicep {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -391,7 +391,7 @@ pub mod blueprint {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -440,7 +440,7 @@ pub mod c {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -489,7 +489,7 @@ pub mod capnp {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -538,7 +538,7 @@ pub mod clojure {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -587,7 +587,7 @@ pub mod c_sharp {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -636,7 +636,7 @@ pub mod commonlisp {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -685,7 +685,7 @@ pub mod cpp {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -734,7 +734,7 @@ pub mod css {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -783,7 +783,7 @@ pub mod cue {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -832,7 +832,7 @@ pub mod d {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -881,7 +881,7 @@ pub mod dart {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -930,7 +930,7 @@ pub mod diff {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -979,7 +979,7 @@ pub mod dockerfile {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1028,7 +1028,7 @@ pub mod eex {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1077,7 +1077,7 @@ pub mod elisp {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1126,7 +1126,7 @@ pub mod elixir {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1175,7 +1175,7 @@ pub mod elm {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1224,7 +1224,7 @@ pub mod erlang {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1273,7 +1273,7 @@ pub mod forth {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1322,7 +1322,7 @@ pub mod fortran {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1371,7 +1371,7 @@ pub mod gdscript {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1420,7 +1420,7 @@ pub mod gleam {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1469,7 +1469,7 @@ pub mod glsl {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1518,7 +1518,7 @@ pub mod go {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1567,7 +1567,7 @@ pub mod haskell {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1616,7 +1616,7 @@ pub mod hcl {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1665,7 +1665,7 @@ pub mod heex {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1714,7 +1714,7 @@ pub mod html {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1763,7 +1763,7 @@ pub mod iex {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1812,7 +1812,7 @@ pub mod ini {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1861,7 +1861,7 @@ pub mod java {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1910,7 +1910,7 @@ pub mod javascript {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -1959,7 +1959,7 @@ pub mod json {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2008,7 +2008,7 @@ pub mod kotlin {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2057,7 +2057,7 @@ pub mod latex {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2106,7 +2106,7 @@ pub mod llvm {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2155,7 +2155,7 @@ pub mod lua {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2204,7 +2204,7 @@ pub mod make {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2253,7 +2253,7 @@ pub mod matlab {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2302,7 +2302,7 @@ pub mod meson {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2351,7 +2351,7 @@ pub mod nim {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2400,7 +2400,7 @@ pub mod nix {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2449,7 +2449,7 @@ pub mod ocaml {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2498,7 +2498,7 @@ pub mod ocaml_interface {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2547,7 +2547,7 @@ pub mod openscad {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2596,7 +2596,7 @@ pub mod pascal {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2645,7 +2645,7 @@ pub mod php {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2694,7 +2694,7 @@ pub mod proto {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2743,7 +2743,7 @@ pub mod python {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2792,7 +2792,7 @@ pub mod r {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2841,7 +2841,7 @@ pub mod racket {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2890,7 +2890,7 @@ pub mod regex {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2939,7 +2939,7 @@ pub mod ruby {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -2988,7 +2988,7 @@ pub mod rust {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3037,7 +3037,7 @@ pub mod scala {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3086,7 +3086,7 @@ pub mod scheme {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3135,7 +3135,7 @@ pub mod scss {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3184,7 +3184,7 @@ pub mod sql {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3233,7 +3233,7 @@ pub mod swift {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3282,7 +3282,7 @@ pub mod toml {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3331,7 +3331,7 @@ pub mod typescript {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3380,7 +3380,7 @@ pub mod wast {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3429,7 +3429,7 @@ pub mod wat {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3478,7 +3478,7 @@ pub mod x86asm {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3527,7 +3527,7 @@ pub mod wgsl {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3576,7 +3576,7 @@ pub mod yaml {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }
@@ -3625,7 +3625,7 @@ pub mod zig {
         fn config_loading() {
             let mut highlighter = Highlighter::new();
             let cfg = &*CONFIG;
-            let _events = highlighter.highlight(&cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
+            let _events = highlighter.highlight(cfg, b"", None, |_| None).expect("Highlighter should generate events successfully.");
         }
     }
 }

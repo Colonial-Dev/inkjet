@@ -1,3 +1,6 @@
+### 0.9.1
+- (Bugfix) - `highlight_to_writer` no longer erroneously shells out to `highlight_to_fmt`.
+
 ### 0.9.0
 - (Bugfix, **Breaking**) - Due to an error in the test code, highlight configurations were not properly tested prior to this version. The following languages have been removed, as no working queries are available:
     - CMake
