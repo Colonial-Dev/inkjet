@@ -19,6 +19,8 @@ repo = "https://github.com/Beaglefoot/tree-sitter-awk"
 [[languages]]
 name = "bash"
 repo = "https://github.com/tree-sitter/tree-sitter-bash"
+aliases = ["sh"]
+helix_override = true
 
 [[languages]]
 name = "bibtex"
@@ -28,6 +30,7 @@ aliases = ["bib"]
 [[languages]]
 name = "bicep"
 repo = "https://github.com/amaanq/tree-sitter-bicep"
+helix_override = true
 
 [[languages]]
 name = "blueprint"
@@ -48,9 +51,9 @@ name = "clojure"
 repo = "https://github.com/sogaiu/tree-sitter-clojure"
 aliases = ["clj", "cljc"]
 
-[[languages]]
-name = "cmake"
-repo = "https://github.com/uyha/tree-sitter-cmake"
+# [[languages]]
+# name = "cmake"
+# repo = "https://github.com/uyha/tree-sitter-cmake"lantom
 
 [[languages]]
 name = "c_sharp"
@@ -58,6 +61,7 @@ pretty_name = "CSharp"
 helix_path = "c-sharp"
 repo = "https://github.com/tree-sitter/tree-sitter-c-sharp"
 aliases = ["c#", "csharp", "cs"]
+helix_override = true
 
 [[languages]]
 name = "commonlisp"
@@ -70,6 +74,7 @@ aliases = ["cl", "lisp", "common-lisp"]
 name = "cpp"
 repo = "https://github.com/tree-sitter/tree-sitter-cpp"
 aliases = ["c++", "hpp", "h++", "cc", "hh"]
+helix_override = true
 
 [[languages]]
 name = "css"
@@ -78,6 +83,7 @@ repo = "https://github.com/tree-sitter/tree-sitter-css"
 [[languages]]
 name = "cue"
 repo = "https://github.com/eonpatapon/tree-sitter-cue"
+helix_override = true
 
 [[languages]]
 name = "d"
@@ -87,6 +93,7 @@ aliases = ["dlang"]
 [[languages]]
 name = "dart"
 repo = "https://github.com/UserNobody14/tree-sitter-dart"
+helix_override = true
 
 [[languages]]
 name = "diff"
@@ -116,6 +123,7 @@ repo = "https://github.com/elm-tooling/tree-sitter-elm"
 name = "erlang"
 repo = "https://github.com/WhatsApp/tree-sitter-erlang"
 aliases = ["erl", "hrl", "es", "escript"]
+helix_override = true
 
 [[languages]]
 name = "forth"
@@ -126,6 +134,7 @@ aliases = ["fth"]
 name = "fortran"
 repo = "https://github.com/stadelmanma/tree-sitter-fortran"
 aliases = ["for"]
+helix_override = true
 
 # [[languages]]
 # name = "fsharp"
@@ -176,6 +185,7 @@ repo = "https://github.com/justinmk/tree-sitter-ini"
 [[languages]]
 name = "java"
 repo = "https://github.com/tree-sitter/tree-sitter-java"
+helix_override = true
 
 [[languages]]
 name = "javascript"
@@ -183,30 +193,31 @@ repo = "https://github.com/tree-sitter/tree-sitter-javascript"
 helix_path = "_javascript"
 aliases = ["js"]
 
-[[languages]]
-name = "jinja2"
-helix_path = "jinja"
-repo = "https://github.com/dbt-labs/tree-sitter-jinja2"
-aliases = ["jinja"]
+# [[languages]]
+# name = "jinja2"
+# helix_path = "jinja"
+# repo = "https://github.com/dbt-labs/tree-sitter-jinja2"
+# aliases = ["jinja"]
 
 [[languages]]
 name = "json"
 repo = "https://github.com/tree-sitter/tree-sitter-json"
 
-[[languages]]
-name = "julia"
-repo = "https://github.com/tree-sitter/tree-sitter-julia"
-aliases = ["jl"]
+# [[languages]]
+# name = "julia"
+# repo = "https://github.com/tree-sitter/tree-sitter-julia"
+# aliases = ["jl"]
 
-[[languages]]
-name = "just"
-repo = "https://github.com/IndianBoy42/tree-sitter-just"
-aliases = ["justfile"]
+# [[languages]]
+# name = "just"
+# repo = "https://github.com/IndianBoy42/tree-sitter-just"
+# aliases = ["justfile"]
 
 [[languages]]
 name = "kotlin"
 repo = "https://github.com/fwcd/tree-sitter-kotlin"
 aliases = ["kt", "kts"]
+helix_override = true
 
 [[languages]]
 name = "latex"
@@ -220,6 +231,7 @@ repo = "https://github.com/benwilliamgraham/tree-sitter-llvm"
 [[languages]]
 name = "lua"
 repo = "https://github.com/tjdevries/tree-sitter-lua"
+helix_override = true
 
 [[languages]]
 name = "make"
@@ -234,10 +246,12 @@ aliases = ["m"]
 [[languages]]
 name = "meson"
 repo = "https://github.com/Decodetalkers/tree-sitter-meson"
+helix_override = true
 
 [[languages]]
 name = "nim"
 repo = "https://github.com/aMOPel/tree-sitter-nim"
+helix_override = true
 
 [[languages]]
 name = "nix"
@@ -254,6 +268,7 @@ sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml/ocam
 cp -r languages/temp/ocaml/ocaml/src languages/temp/ocaml
 '''
 aliases = ["ml"]
+helix_override = true
 
 [[languages]]
 name = "ocaml_interface"
@@ -294,6 +309,7 @@ pretty_name = "ProtoBuf"
 helix_path = "protobuf"
 repo = "https://github.com/treywood/tree-sitter-proto"
 aliases = ["protobuf"]
+helix_override = true
 
 [[languages]]
 name = "python"
@@ -312,6 +328,7 @@ aliases = ["rkt"]
 [[languages]]
 name = "regex"
 repo = "https://github.com/tree-sitter/tree-sitter-regex"
+helix_override = true
 
 [[languages]]
 name = "ruby"
@@ -340,6 +357,7 @@ repo = "https://github.com/serenadeai/tree-sitter-scss"
 name = "sql"
 repo = "https://github.com/DerekStride/tree-sitter-sql/tree/gh-pages"
 command = "git clone --branch gh-pages https://github.com/DerekStride/tree-sitter-sql languages/temp/sql"
+helix_override = true
 
 [[languages]]
 name = "swift"
@@ -401,6 +419,7 @@ helix_override = true
 [[languages]]
 name = "wgsl"
 repo = "https://github.com/szebniok/tree-sitter-wgsl"
+helix_override = true
 
 [[languages]]
 name = "yaml"

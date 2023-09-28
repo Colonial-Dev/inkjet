@@ -1,62 +1,49 @@
 (comment) @comment
-
-; these are listed first, because they override keyword queries
-(function_expression (identifier) @function)
+(number) @number 
+(bool) @boolean
 
 [
-    (assignment_operator)
-    (additive_operator)
-    (multiplicative_operator)
-    (equality_operator)
-    ">="
-    "<="
-    "<"
-    ">"
-    "+"
-    "-"
+  "("
+  ")"
+  "{"
+  "}"
+	"["
+	"]"
+]
+@punctuation.bracket
+
+[
+  "="
+	"=="
+	"and"
+	"+"
+	"!="
+	"+="
+	"not"
 ] @operator
 
 [
-    (and)
-    (or)
-    (not)
-    (in)
-] @keyword.operator
+"if"
+"elif"
+"else"
+"endif"
 
+] @conditional
 [
-    "(" ")" "[" "]" "{" "}"
-] @punctuation.bracket
+"foreach"
+"endforeach"
+(keyword_break)
+(keyword_continue)
+] @repeat
 
-[
-    (if)
-    (elif)
-    (else)
-    (endif)
-] @keyword.control.conditional
+;;; format
+(string) @string
+["@"] @keyword
 
-[
-    (foreach)
-    (endforeach)
-    (break)
-    (continue)
-] @keyword.control.repeat
+(experession_statement
+	object: (identifier) @variable)
+(normal_command
+	command: (identifier) @function)
 
-(boolean_literal) @constant.builtin.boolean
-(int_literal) @constant.numeric.integer
-
-(keyword_argument keyword: (identifier) @variable.parameter)
-(escape_sequence) @constant.character.escape
-(bad_escape) @warning
-
-[
-"."
-","
-":"
-] @punctuation.delimiter
-
-[
-    (string_literal)
-    (fstring_literal)
-] @string
-
-(identifier) @variable
+(pair
+	key: (identifier) @property)

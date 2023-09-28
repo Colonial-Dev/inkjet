@@ -366,7 +366,7 @@ impl Language {
                 #[cfg(test)]
                 mod tests {{
                     use super::*;
-                    use tree_sitter_highlight::HighlightConfiguration;
+                    use tree_sitter_highlight::Highlighter;
 
                     #[test]
                     fn grammar_loading() {{
