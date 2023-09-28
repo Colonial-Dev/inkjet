@@ -35,7 +35,6 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | C | `c`, `h` |
 | Cap'N Proto | `capnp` |
 | Clojure | `clojure`, `clj`, `cljc` |
-| CMake | `cmake` |
 | C# | `c_sharp`, `c#`, `csharp`, `cs` |
 | Common Lisp | `commonlisp`, `common-list`, `cl`, `lisp` |
 | C++ | `c++`, `hpp`, `h++`, `cc`, `hh` |
@@ -63,10 +62,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | IEx | `iex` |
 | INI | `ini` |
 | JavaScript | `javascript`, `js` |
-| Jinja2 | `jinja2`, `jinja` |
 | JSON | `json` |
-| Julia | `jl` |
-| Just | `just`, `justfile` |
 | Kotlin | `kotlin`, `kt`, `kts` |
 | LaTeX | `latex`, `tex` |
 | LLVM | `llvm` |

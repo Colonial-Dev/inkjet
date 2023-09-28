@@ -1,3 +1,11 @@
+### 0.9.0
+- (Bugfix, **Breaking**) - Due to an error in the test code, highlight configurations were not properly tested prior to this version. The following languages have been removed, as no working queries are available:
+    - CMake
+    - Jinja2
+    - Julia
+    - Just
+- (Thanks again to @leandrop for the detective work. Hopefully I'll be able to re-introduce these languages down the road.)
+
 ### 0.8.1
 - Added HEEx, IEx and EEx
 - Fix some typos and missing names in `HIGHLIGHT_NAMES`
