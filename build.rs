@@ -184,6 +184,14 @@ fn generate_langs_module(languages: &[Language]) -> Result<()> {
             /// 
             /// The tokens for each language are sourced from its `name` and `aliases` keys in
             /// `config/languages.toml`.
+            /// 
+            /// # Example
+            /// ```rust
+            /// # use inkjet::Language;
+            /// let lang = Language::from_token(\"rs\").unwrap();
+            /// 
+            /// assert_eq!(lang, Language::Rust);
+            /// ```
             pub fn from_token(token: &str) -> Option<Self> {{
                 match token {{
                     {from_token_buffer}
@@ -380,7 +388,7 @@ impl Language {
                     fn config_loading() {{
                         let mut highlighter = Highlighter::new();
                         let cfg = &*CONFIG;
-                        let _events = highlighter.highlight(&cfg, b\"\", None, |_| None).expect(\"Highlighter should generate events successfully.\");
+                        let _events = highlighter.highlight(cfg, b\"\", None, |_| None).expect(\"Highlighter should generate events successfully.\");
                     }}
                 }}
             }}

@@ -7,6 +7,16 @@ use crate::Result;
 
 /// A formatter for highlighting into HTML with inline styles.
 /// 
+/// - The secondary color of the default style is used for the background.
+/// - The primary color of each style is used for the text.
+/// 
+/// Example output:
+/// ```html
+/// <pre style="background-color: #cccccc">
+///     <span style="color:#f85931">fn</span><span style="color:#f85931">main</span>
+/// </pre>
+/// ```
+/// 
 /// This formatter holds theme data in an [`Arc<Theme>`], making it cheap to clone and usable
 /// from muliple threads.
 #[derive(Debug, Clone)]
@@ -36,7 +46,7 @@ impl Formatter for ThemedHtml {
 
                 write!(
                     writer,
-                    "<span style=\"{}\">",
+                    "<span style=\"color:{}\">",
                     style.primary_color
                 )?;
             },

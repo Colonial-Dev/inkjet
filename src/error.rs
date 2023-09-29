@@ -9,6 +9,7 @@ pub enum InkjetError {
     #[error("internal tree-sitter error: {0}")]
     TreeSitter(#[from] tree_sitter_highlight::Error),
     #[error("TOML deserialization error: {0}")]
+    #[cfg(feature = "theme")]
     Toml(#[from] toml::de::Error),
     #[error("formatting error: {0}")]
     Fmt(#[from] std::fmt::Error),

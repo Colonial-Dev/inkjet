@@ -110,6 +110,18 @@ mod tests {
             keyword = { primary_color = "#00ff00", secondary_color = "#000000", modifiers = [] }
         "##;
     
-        toml::from_str::<Theme>(data).unwrap();
+        let data = toml::from_str::<Theme>(data).unwrap();
+
+        assert_eq!(data.default_style.primary_color, "#000000");
+        assert_eq!(data.default_style.secondary_color, "#ffffff");
+        assert!(data.default_style.modifiers.is_empty());
+
+        assert_eq!(data.styles["function"].primary_color, "#ff0000");
+        assert_eq!(data.styles["function"].secondary_color, "#000000");
+        assert!(data.styles["function"].modifiers.is_empty());
+
+        assert_eq!(data.styles["keyword"].primary_color, "#00ff00");
+        assert_eq!(data.styles["keyword"].secondary_color, "#000000");
+        assert!(data.styles["keyword"].modifiers.is_empty());
     }
 }

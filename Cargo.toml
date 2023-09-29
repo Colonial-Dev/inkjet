@@ -1,6 +1,6 @@
 [package]
 name = "inkjet"
-version = "0.9.1"
+version = "0.9.2"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/Colonial-Dev/inkjet/"
@@ -79,6 +79,7 @@ all_languages = [
     "language-openscad",
     "language-pascal",
     "language-php",
+    "language-plaintext",
     "language-proto",
     "language-python",
     "language-r",
@@ -159,6 +160,7 @@ language-ocaml-interface = []
 language-openscad = []
 language-pascal = []
 language-php = []
+language-plaintext = []
 language-proto = []
 language-python = []
 language-r = []

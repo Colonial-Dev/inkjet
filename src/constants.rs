@@ -185,3 +185,23 @@ pub const HIGHLIGHT_CLASS_NAMES: &[&str] = &[
     "diff delta",
     "diff delta moved",
 ];
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn equivalence() {
+        for i in 0..HIGHLIGHT_NAMES.len() {
+            assert_eq!(
+                HIGHLIGHT_NAMES[i].replace('.', " "),
+                HIGHLIGHT_CLASS_NAMES[i]
+            );
+
+            assert_eq!(
+                HIGHLIGHT_CLASS_NAMES[i].replace(' ', "."),
+                HIGHLIGHT_NAMES[i]
+            )
+        }
+    }
+}

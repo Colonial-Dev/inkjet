@@ -1,3 +1,9 @@
+### 0.9.2
+- (Bugfix) - Fix missing `cfg` attribute that made compiling without the `theme` feature impossible.
+- (Bugfix) - Fix typo in inline HTML formatter.
+- (Feature) - Added new `plaintext` language. Under the hood, this uses the `diff` grammar (small and cheap to load) but doesn't provide any highlighting queries, which makes highlighting with it a no-op.
+- Tidied up a few docs and added some additional tests.
+
 ### 0.9.1
 - (Bugfix) - `highlight_to_writer` no longer erroneously shells out to `highlight_to_fmt`.
 
