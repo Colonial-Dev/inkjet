@@ -321,7 +321,6 @@ repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
 hash = "694c577"
 command = '''
 set -euxo pipefail &&
-git clone https://github.com/tree-sitter/tree-sitter-ocaml languages/temp/ocaml &&
 cp languages/temp/ocaml/common/scanner.h languages/temp/ocaml/ocaml/src &&
 sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml/ocaml/src/scanner.c &&
 cp -r languages/temp/ocaml/ocaml/src languages/temp/ocaml
@@ -337,7 +336,6 @@ repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
 hash = "694c577"
 command = '''
 set -euxo pipefail &&
-git clone https://github.com/tree-sitter/tree-sitter-ocaml languages/temp/ocaml_interface &&
 cp languages/temp/ocaml_interface/common/scanner.h languages/temp/ocaml_interface/interface/src &&
 sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml_interface/interface/src/scanner.c &&
 cp -r languages/temp/ocaml_interface/interface/src languages/temp/ocaml_interface
@@ -373,7 +371,6 @@ hash = "c165725"
 aliases = ["none", "nolang"]
 command = '''
 set -euxo pipefail &&
-git clone https://github.com/the-mikedavis/tree-sitter-diff languages/temp/plaintext &&
 sed -i -e 's/\<tree_sitter_diff\>/tree_sitter_plaintext/' languages/temp/plaintext/src/parser.c &&
 rm languages/temp/plaintext/queries/highlights.scm
 '''
@@ -441,9 +438,9 @@ hash = "c478c68"
 
 [[languages]]
 name = "sql"
-repo = "https://github.com/DerekStride/tree-sitter-sql/tree/gh-pages"
-hash = "4c2eeb1"
-command = "git clone --branch gh-pages https://github.com/DerekStride/tree-sitter-sql languages/temp/sql"
+repo = "https://github.com/DerekStride/tree-sitter-sql"
+hash = "eeab724"
+branch = "gh-pages"
 helix_override = true
 
 [[languages]]
@@ -453,7 +450,6 @@ repo = "https://github.com/alex-pinkus/tree-sitter-swift"
 # So I uploaded the zip to the first filedrop site that came up on Google LOL
 # I would do this for other languages that don't check in parser.c, but they're all niche (unlike Swift)
 command = '''
-git clone https://github.com/alex-pinkus/tree-sitter-swift languages/temp/swift &&
 rm languages/temp/swift/src/scanner.c &&
 wget -P languages/temp/ https://files.catbox.moe/c5u7u2.zip &&
 unzip languages/temp/c5u7u2.zip -d languages/temp/swift/src
@@ -473,7 +469,6 @@ helix_path = "_typescript"
 # Words cannot describe how much I hate this, but it works
 command = '''
 set -euxo pipefail &&
-git clone https://github.com/tree-sitter/tree-sitter-typescript languages/temp/typescript &&
 cp languages/temp/typescript/common/scanner.h languages/temp/typescript/typescript/src &&
 sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/typescript/typescript/src/scanner.c &&
 cp -r languages/temp/typescript/typescript/src languages/temp/typescript/
@@ -485,8 +480,6 @@ name = "wast"
 repo = "https://github.com/wasm-lsp/tree-sitter-wasm"
 hash = "2ca28a9"
 command = '''
-set euxo pipefail &&
-git clone https://github.com/wasm-lsp/tree-sitter-wasm languages/temp/wast &&
 cp -r languages/temp/wast/wast/src languages/temp/wast/src
 '''
 
@@ -495,8 +488,6 @@ name = "wat"
 repo = "https://github.com/wasm-lsp/tree-sitter-wasm"
 hash = "2ca28a9"
 command = '''
-set euxo pipefail &&
-git clone https://github.com/wasm-lsp/tree-sitter-wasm languages/temp/wat &&
 cp -r languages/temp/wat/wat/src languages/temp/wat/src
 '''
 aliases = ["wasm"]

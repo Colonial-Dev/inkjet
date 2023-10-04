@@ -53,13 +53,24 @@ pub fn download_langs(languages: &[Language]) -> Result<()> {
 
         println!("Finished downloading {}.", lang.name);
 
-        if lang.hash.is_some() && lang.command.is_none() {
-            let hash = lang.hash.as_ref().unwrap();
+        if let Some(hash) = &lang.hash {
             let repo_dir = format!("languages/temp/{}", lang.name);
+
+            println!("Resetting {} onto {}...", lang.name, hash);
 
             Command::new("git")
                 .current_dir(repo_dir)
                 .args(["reset", "--hard", hash])
+                .spawn()?
+                .wait()?;
+        }
+
+        if let Some(command) = &lang.command {
+            println!("Executing prep script for {}...", lang.name);
+
+            Command::new("sh")
+                .arg("-c")
+                .arg(command)
                 .spawn()?
                 .wait()?;
         }

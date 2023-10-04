@@ -17,10 +17,13 @@ pub struct Language {
     pub name: String,
     pub repo: String,
     pub hash: Option<String>,
-    pub pretty_name: Option<String>,
+    pub branch: Option<String>,
+    pub command: Option<String>,
+
     #[serde(default)]
     pub aliases: Vec<String>,
-    pub command: Option<String>,
+    pub pretty_name: Option<String>,
+
     #[serde(default)]
     pub helix_override: bool,
     pub helix_path: Option<String>,
@@ -71,16 +74,23 @@ impl Language {
 
     #[cfg(feature = "development")]
     pub fn download(&self) -> Result<Child> {
-        if let Some(override_command) = &self.command {
-            Command::new("sh").arg("-c").arg(override_command).spawn()
-        } else {
-            Command::new("git")
-                .arg("clone")
-                .arg(&self.repo)
-                .arg(&format!("languages/temp/{}", self.name))
-                .spawn()
+        let path = format!("languages/temp/{}", self.name);
+
+        let mut args = vec![
+            "clone",
+            &self.repo,
+            &path
+        ];
+        
+        if let Some(branch) = &self.branch {
+            args.insert(1, "--branch");
+            args.insert(2, &branch);
         }
-        .map_err(Error::from)
+        
+        Command::new("git")
+            .args(args)
+            .spawn()
+            .map_err(Error::from)
     }
 
     #[cfg(feature = "development")]
