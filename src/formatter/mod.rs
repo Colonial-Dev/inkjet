@@ -2,7 +2,7 @@
 
 #[cfg(feature = "html")]
 mod html;
-#[cfg(feature = "html")]
+#[cfg(feature = "theme")]
 mod html_themed;
 #[cfg(feature = "theme")]
 mod theme;
@@ -13,12 +13,14 @@ use crate::error::InkjetResult as Result;
 
 #[cfg(feature = "html")]
 pub use html::*;
-#[cfg(feature = "html")]
+#[cfg(feature = "theme")]
 pub use html_themed::*;
 #[cfg(feature = "theme")]
 pub use theme::*;
 
 /// Pluggable trait for formatting the output of a highlighter.
+/// 
+/// See [`Html`] and [`ThemedHtml`] for example implementations.
 #[allow(unused_variables)]
 pub trait Formatter {
     /// Format a [`HighlightEvent`] into an instance of [`std::fmt::Write`].

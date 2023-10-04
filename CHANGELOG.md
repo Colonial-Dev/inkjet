@@ -1,3 +1,10 @@
+### 0.10.0
+- (Bugfix, **breaking**) - The `ThemedHtml` formatter is now feature-gated behind `theme` instead of `html`.
+- (Improvement) - Remove `rayon` and `indoc` from build dependencies, replacing them with `std::thread::spawn` and `format!`. This should speed up build times by a few seconds.
+- (Improvement) - Gate development portions of the build script behind a feature, further improving build times.
+- (Improvement) - `Language::from_token` and `Highlight::highlight_*` now accept an `AsRef<str>` instead of a plain `&str`.
+- (Feature) - Added the `Runtime` variant to `Language`, which holds an `fn() -> &'static HighlightConfiguration`. This makes it possible to use languages not statically known by Inkjet.
+
 ### 0.9.2
 - (Bugfix) - Fix missing `cfg` attribute that made compiling without the `theme` feature impossible.
 - (Bugfix) - Fix typo in inline HTML formatter.

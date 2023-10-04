@@ -1,0 +1,525 @@
+[[languages]]
+name = "ada"
+repo = "https://github.com/briot/tree-sitter-ada"
+hash = "f21f13a"
+helix_override = true
+
+[[languages]]
+name = "asm"
+repo = "https://github.com/rush-rs/tree-sitter-asm"
+hash = "36dc26a"
+helix_override = true
+aliases = ["assembly", "assembler"]
+
+[[languages]]
+name = "astro"
+repo = "https://github.com/virchau13/tree-sitter-astro"
+hash = "e122a8f"
+
+[[languages]]
+name = "awk"
+repo = "https://github.com/Beaglefoot/tree-sitter-awk"
+hash = "374da90"
+
+[[languages]]
+name = "bash"
+repo = "https://github.com/tree-sitter/tree-sitter-bash"
+hash = "1479a40"
+aliases = ["sh"]
+helix_override = true
+
+[[languages]]
+name = "bibtex"
+repo = "https://github.com/latex-lsp/tree-sitter-bibtex"
+hash = "ccfd77d"
+aliases = ["bib"]
+
+[[languages]]
+name = "bicep"
+repo = "https://github.com/amaanq/tree-sitter-bicep"
+hash = "3604d8c"
+helix_override = true
+
+[[languages]]
+name = "blueprint"
+repo = "https://gitlab.com/gabmus/tree-sitter-blueprint"
+hash = "863cea9f"
+aliases = ["blp"]
+
+[[languages]]
+name = "c"
+repo = "https://github.com/tree-sitter/tree-sitter-c"
+hash = "a2b7bac"
+aliases = ["h"]
+
+[[languages]]
+name = "capnp"
+repo = "https://github.com/amaanq/tree-sitter-capnp"
+hash = "dc28c9f"
+
+[[languages]]
+name = "clojure"
+repo = "https://github.com/sogaiu/tree-sitter-clojure"
+hash = "6e41628"
+aliases = ["clj", "cljc"]
+
+# [[languages]]
+# name = "cmake"
+# repo = "https://github.com/uyha/tree-sitter-cmake"
+
+[[languages]]
+name = "c_sharp"
+pretty_name = "CSharp"
+helix_path = "c-sharp"
+repo = "https://github.com/tree-sitter/tree-sitter-c-sharp"
+hash = "1648e21"
+aliases = ["c#", "csharp", "cs"]
+helix_override = true
+
+[[languages]]
+name = "commonlisp"
+pretty_name = "CommonLisp"
+helix_path = "common-lisp"
+repo = "https://github.com/theHamsta/tree-sitter-commonlisp"
+hash = "5153dbb"
+aliases = ["cl", "lisp", "common-lisp"]
+
+[[languages]]
+name = "cpp"
+repo = "https://github.com/tree-sitter/tree-sitter-cpp"
+hash = "a90f170"
+aliases = ["c++", "hpp", "h++", "cc", "hh"]
+helix_override = true
+
+[[languages]]
+name = "css"
+repo = "https://github.com/tree-sitter/tree-sitter-css"
+hash = "fec7d37"
+
+[[languages]]
+name = "cue"
+repo = "https://github.com/eonpatapon/tree-sitter-cue"
+hash = "2df92e6"
+helix_override = true
+
+[[languages]]
+name = "d"
+repo = "https://github.com/gdamore/tree-sitter-d"
+hash = "9120816"
+aliases = ["dlang"]
+
+[[languages]]
+name = "dart"
+repo = "https://github.com/UserNobody14/tree-sitter-dart"
+hash = "7e447dc"
+helix_override = true
+
+[[languages]]
+name = "diff"
+repo = "https://github.com/the-mikedavis/tree-sitter-diff"
+hash = "c165725"
+
+[[languages]]
+name = "dockerfile"
+repo = "https://github.com/camdencheek/tree-sitter-dockerfile"
+hash = "1800d5a"
+aliases = ["docker"]
+
+[[languages]]
+name = "eex"
+repo = "https://github.com/connorlay/tree-sitter-eex"
+hash = "f742f2f"
+
+[[languages]]
+name = "elisp"
+repo = "https://github.com/Wilfred/tree-sitter-elisp"
+hash = "e5524fd"
+aliases = ["el", "emacs-lisp"]
+helix_override = true
+
+[[languages]]
+name = "elixir"
+repo = "https://github.com/elixir-lang/tree-sitter-elixir"
+hash = "a2861e8"
+aliases = ["ex", "exs", "leex"]
+
+[[languages]]
+name = "elm"
+repo = "https://github.com/elm-tooling/tree-sitter-elm"
+hash = "0694058"
+
+[[languages]]
+name = "erlang"
+repo = "https://github.com/WhatsApp/tree-sitter-erlang"
+hash = "4a0ec79"
+aliases = ["erl", "hrl", "es", "escript"]
+helix_override = true
+
+[[languages]]
+name = "forth"
+repo = "https://github.com/AlexanderBrevig/tree-sitter-forth"
+hash = "e7d1f8a"
+aliases = ["fth"]
+
+[[languages]]
+name = "fortran"
+repo = "https://github.com/stadelmanma/tree-sitter-fortran"
+hash = "f73d473"
+aliases = ["for"]
+helix_override = true
+
+# [[languages]]
+# name = "fsharp"
+# repo = "https://github.com/Nsidorenco/tree-sitter-fsharp"
+# aliases = ["f#", "fs"]
+
+[[languages]]
+name = "gdscript"
+repo = "https://github.com/PrestonKnopp/tree-sitter-gdscript"
+hash = "03f20b9"
+aliases = ["gd"]
+
+[[languages]]
+name = "gleam"
+repo = "https://github.com/gleam-lang/tree-sitter-gleam"
+hash = "32c8f1e"
+
+[[languages]]
+name = "glsl"
+repo = "https://github.com/theHamsta/tree-sitter-glsl"
+hash = "ec6100d"
+
+[[languages]]
+name = "go"
+repo = "https://github.com/tree-sitter/tree-sitter-go"
+hash = "bbaa67a"
+aliases = ["golang"]
+
+[[languages]]
+name = "haskell"
+repo = "https://github.com/tree-sitter/tree-sitter-haskell"
+hash = "d7ac98f"
+aliases = ["hs"]
+
+[[languages]]
+name = "hcl"
+repo = "https://github.com/MichaHoffmann/tree-sitter-hcl"
+hash = "b553906"
+aliases = ["terraform"]
+
+[[languages]]
+name = "heex"
+repo = "https://github.com/phoenixframework/tree-sitter-heex"
+hash = "4a36c9a"
+
+[[languages]]
+name = "html"
+repo = "https://github.com/tree-sitter/tree-sitter-html"
+hash = "d742025"
+aliases = ["htm"]
+
+[[languages]]
+name = "iex"
+repo = "https://github.com/elixir-lang/tree-sitter-iex"
+hash = "39f20bb"
+
+[[languages]]
+name = "ini"
+repo = "https://github.com/justinmk/tree-sitter-ini"
+hash = "7f11a02"
+
+[[languages]]
+name = "java"
+repo = "https://github.com/tree-sitter/tree-sitter-java"
+hash = "83044af"
+helix_override = true
+
+[[languages]]
+name = "javascript"
+repo = "https://github.com/tree-sitter/tree-sitter-javascript"
+hash = "f1e5a09"
+helix_path = "_javascript"
+aliases = ["js"]
+
+# [[languages]]
+# name = "jinja2"
+# helix_path = "jinja"
+# repo = "https://github.com/dbt-labs/tree-sitter-jinja2"
+# aliases = ["jinja"]
+
+[[languages]]
+name = "json"
+repo = "https://github.com/tree-sitter/tree-sitter-json"
+hash = "ca3f891"
+
+# [[languages]]
+# name = "julia"
+# repo = "https://github.com/tree-sitter/tree-sitter-julia"
+# aliases = ["jl"]
+
+# [[languages]]
+# name = "just"
+# repo = "https://github.com/IndianBoy42/tree-sitter-just"
+# aliases = ["justfile"]
+
+[[languages]]
+name = "kotlin"
+repo = "https://github.com/fwcd/tree-sitter-kotlin"
+hash = "7587b4a"
+aliases = ["kt", "kts"]
+helix_override = true
+
+[[languages]]
+name = "latex"
+repo = "https://github.com/latex-lsp/tree-sitter-latex"
+hash = "2ae2021"
+aliases = ["tex"]
+
+[[languages]]
+name = "llvm"
+repo = "https://github.com/benwilliamgraham/tree-sitter-llvm"
+hash = "1b96e58"
+
+[[languages]]
+name = "lua"
+repo = "https://github.com/tjdevries/tree-sitter-lua"
+hash = "a99b610"
+helix_override = true
+
+[[languages]]
+name = "make"
+repo = "https://github.com/alemuller/tree-sitter-make"
+hash = "a4b9187"
+aliases = ["mk", "makefile"]
+
+[[languages]]
+name = "matlab"
+repo = "https://github.com/acristoffers/tree-sitter-matlab"
+hash = "6071891"
+aliases = ["m"]
+
+[[languages]]
+name = "meson"
+repo = "https://github.com/Decodetalkers/tree-sitter-meson"
+hash = "3d6dfbd"
+helix_override = true
+
+[[languages]]
+name = "nim"
+repo = "https://github.com/aMOPel/tree-sitter-nim"
+hash = "4900b68"
+helix_override = true
+
+[[languages]]
+name = "nix"
+repo = "https://github.com/nix-community/tree-sitter-nix"
+hash = "66e3e9c"
+
+[[languages]]
+name = "ocaml"
+repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
+hash = "694c577"
+command = '''
+set -euxo pipefail &&
+git clone https://github.com/tree-sitter/tree-sitter-ocaml languages/temp/ocaml &&
+cp languages/temp/ocaml/common/scanner.h languages/temp/ocaml/ocaml/src &&
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml/ocaml/src/scanner.c &&
+cp -r languages/temp/ocaml/ocaml/src languages/temp/ocaml
+'''
+aliases = ["ml"]
+helix_override = true
+
+[[languages]]
+name = "ocaml_interface"
+pretty_name = "OcamlInterface"
+helix_path = "ocaml-interface"
+repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
+hash = "694c577"
+command = '''
+set -euxo pipefail &&
+git clone https://github.com/tree-sitter/tree-sitter-ocaml languages/temp/ocaml_interface &&
+cp languages/temp/ocaml_interface/common/scanner.h languages/temp/ocaml_interface/interface/src &&
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml_interface/interface/src/scanner.c &&
+cp -r languages/temp/ocaml_interface/interface/src languages/temp/ocaml_interface
+'''
+aliases = ["mli"]
+
+[[languages]]
+name = "openscad"
+pretty_name = "OpenScad"
+repo = "https://github.com/bollian/tree-sitter-openscad"
+hash = "a07497e"
+aliases = ["scad"]
+
+[[languages]]
+name = "pascal"
+repo = "https://github.com/Isopod/tree-sitter-pascal"
+hash = "9e99540"
+
+# [[languages]]
+# name = "perl"
+# repo = "https://github.com/tree-sitter-perl/tree-sitter-perl"
+# aliases = ["pl"]
+
+[[languages]]
+name = "php"
+repo = "https://github.com/tree-sitter/tree-sitter-php"
+hash = "92a98ad"
+
+[[languages]]
+name = "plaintext"
+repo = "https://github.com/the-mikedavis/tree-sitter-diff"
+hash = "c165725"
+aliases = ["none", "nolang"]
+command = '''
+set -euxo pipefail &&
+git clone https://github.com/the-mikedavis/tree-sitter-diff languages/temp/plaintext &&
+sed -i -e 's/\<tree_sitter_diff\>/tree_sitter_plaintext/' languages/temp/plaintext/src/parser.c &&
+rm languages/temp/plaintext/queries/highlights.scm
+'''
+helix_override = true
+
+[[languages]]
+name = "proto"
+pretty_name = "ProtoBuf"
+helix_path = "protobuf"
+repo = "https://github.com/treywood/tree-sitter-proto"
+hash = "e9f6b43"
+aliases = ["protobuf"]
+helix_override = true
+
+[[languages]]
+name = "python"
+repo = "https://github.com/tree-sitter/tree-sitter-python"
+hash = "a901729"
+aliases = ["py"]
+
+[[languages]]
+name = "r"
+repo = "https://github.com/r-lib/tree-sitter-r/"
+hash = "c55f8b4"
+
+[[languages]]
+name = "racket"
+repo = "https://github.com/6cdh/tree-sitter-racket"
+hash = "e4ba1a9"
+aliases = ["rkt"]
+
+[[languages]]
+name = "regex"
+repo = "https://github.com/tree-sitter/tree-sitter-regex"
+hash = "2354482"
+helix_override = true
+
+[[languages]]
+name = "ruby"
+repo = "https://github.com/tree-sitter/tree-sitter-ruby"
+hash = "f257f3f"
+aliases = ["rb"]
+
+[[languages]]
+name = "rust"
+repo = "https://github.com/tree-sitter/tree-sitter-rust"
+hash = "48e0533"
+aliases = ["rs"]
+
+[[languages]]
+name = "scala"
+hash = "1b4c2fa"
+repo = "https://github.com/tree-sitter/tree-sitter-scala"
+
+[[languages]]
+name = "scheme"
+repo = "https://github.com/6cdh/tree-sitter-scheme"
+hash = "85b6188"
+aliases = ["scm", "ss"]
+
+[[languages]]
+name = "scss"
+repo = "https://github.com/serenadeai/tree-sitter-scss"
+hash = "c478c68"
+
+[[languages]]
+name = "sql"
+repo = "https://github.com/DerekStride/tree-sitter-sql/tree/gh-pages"
+hash = "4c2eeb1"
+command = "git clone --branch gh-pages https://github.com/DerekStride/tree-sitter-sql languages/temp/sql"
+helix_override = true
+
+[[languages]]
+name = "swift"
+repo = "https://github.com/alex-pinkus/tree-sitter-swift"
+# The repository doesn't check in their parser.c, but it IS available via Github Actions
+# So I uploaded the zip to the first filedrop site that came up on Google LOL
+# I would do this for other languages that don't check in parser.c, but they're all niche (unlike Swift)
+command = '''
+git clone https://github.com/alex-pinkus/tree-sitter-swift languages/temp/swift &&
+rm languages/temp/swift/src/scanner.c &&
+wget -P languages/temp/ https://files.catbox.moe/c5u7u2.zip &&
+unzip languages/temp/c5u7u2.zip -d languages/temp/swift/src
+'''
+
+[[languages]]
+name = "toml"
+repo = "https://github.com/tree-sitter/tree-sitter-toml"
+hash = "342d9be"
+
+[[languages]]
+name = "typescript"
+repo = "https://github.com/tree-sitter/tree-sitter-typescript"
+hash = "b1bf482"
+helix_path = "_typescript"
+# Disgusting hack to extract the non-TSX grammar, relocate the scanner header and patch the source file appropriately
+# Words cannot describe how much I hate this, but it works
+command = '''
+set -euxo pipefail &&
+git clone https://github.com/tree-sitter/tree-sitter-typescript languages/temp/typescript &&
+cp languages/temp/typescript/common/scanner.h languages/temp/typescript/typescript/src &&
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/typescript/typescript/src/scanner.c &&
+cp -r languages/temp/typescript/typescript/src languages/temp/typescript/
+'''
+aliases = ["ts"]
+
+[[languages]]
+name = "wast"
+repo = "https://github.com/wasm-lsp/tree-sitter-wasm"
+hash = "2ca28a9"
+command = '''
+set euxo pipefail &&
+git clone https://github.com/wasm-lsp/tree-sitter-wasm languages/temp/wast &&
+cp -r languages/temp/wast/wast/src languages/temp/wast/src
+'''
+
+[[languages]]
+name = "wat"
+repo = "https://github.com/wasm-lsp/tree-sitter-wasm"
+hash = "2ca28a9"
+command = '''
+set euxo pipefail &&
+git clone https://github.com/wasm-lsp/tree-sitter-wasm languages/temp/wat &&
+cp -r languages/temp/wat/wat/src languages/temp/wat/src
+'''
+aliases = ["wasm"]
+
+[[languages]]
+name = "x86asm"
+repo = "https://github.com/bearcove/tree-sitter-x86asm"
+hash = "ca72933"
+aliases = ["x86"]
+helix_override = true
+
+[[languages]]
+name = "wgsl"
+repo = "https://github.com/szebniok/tree-sitter-wgsl"
+hash = "40259f3"
+helix_override = true
+
+[[languages]]
+name = "yaml"
+repo = "https://github.com/ikatyang/tree-sitter-yaml"
+hash = "0e36bed"
+
+[[languages]]
+name = "zig"
+repo = "https://github.com/maxxnino/tree-sitter-zig"
+hash = "0d08703"

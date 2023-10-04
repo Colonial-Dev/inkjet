@@ -153,6 +153,7 @@
   (keyword_columns)
   (keyword_cross)
   (keyword_lateral)
+  (keyword_natural)
   (keyword_alter)
   (keyword_drop)
   (keyword_add)
@@ -262,6 +263,7 @@
   (keyword_until)
   (keyword_user)
   (keyword_valid)
+  (keyword_action)
 ] @keyword
 
 [

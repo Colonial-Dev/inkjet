@@ -94,7 +94,9 @@ pub const HIGHLIGHT_NAMES: &[&str] = &[
     "diff.delta.moved"
 ];
 
-/// The same as [`HIGHLIGHT-NAMES`], but with all dots replaced with spaces.
+/// The same as [`HIGHLIGHT-NAMES`](crate::constants::HIGHLIGHT_NAMES), but with all dots replaced with spaces.
+/// 
+/// These names are used for CSS classes in the builtin [HTML formatter](crate::formatter::Html).
 pub const HIGHLIGHT_CLASS_NAMES: &[&str] = &[
     "attribute",
     "type",

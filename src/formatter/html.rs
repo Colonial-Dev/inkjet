@@ -5,7 +5,8 @@ use super::{Formatter, HighlightEvent};
 
 /// Formatter implementation for highlighting into HTML with class names.
 /// 
-/// Note: you will need to wrap the output in a `<pre>` tag for correct whitespacing.
+/// Note: you will need to wrap the output in a `<pre>` tag for correct whitespacing. 
+/// This formatter implementation deliberately avoids emitting the tag in order to keep its output as generic as possible.
 pub struct Html;
 
 impl Formatter for Html {
