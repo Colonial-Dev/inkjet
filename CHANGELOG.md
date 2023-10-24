@@ -1,3 +1,7 @@
+### 0.10.1
+- (Bugfix) - Fix Javascript and Typescript highlighting (thanks @leandrop!)
+- Updated Haskell grammar.
+
 ### 0.10.0
 - (Bugfix, **breaking**) - The `ThemedHtml` formatter is now feature-gated behind `theme` instead of `html`.
 - (Improvement) - Remove `rayon` and `indoc` from build dependencies, replacing them with `std::thread::spawn` and `format!`. This should speed up build times by a few seconds.
