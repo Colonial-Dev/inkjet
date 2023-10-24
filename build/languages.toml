@@ -237,6 +237,7 @@ helix_override = true
 [[languages]]
 name = "javascript"
 repo = "https://github.com/tree-sitter/tree-sitter-javascript"
+hash = "f1e5a09"
 helix_override = true
 aliases = ["js"]
 
@@ -462,6 +463,7 @@ hash = "342d9be"
 [[languages]]
 name = "typescript"
 repo = "https://github.com/tree-sitter/tree-sitter-typescript"
+hash = "d847898"
 # Disgusting hack to extract the non-TSX grammar, relocate the scanner header and patch the source file appropriately
 # Words cannot describe how much I hate this, but it works
 helix_override = true
