@@ -1793,7 +1793,9 @@ pub mod javascript {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/javascript/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/javascript/queries/injections.scm"
+    );
     pub const LOCALS_QUERY: &str = include_str!(
         "../languages/javascript/queries/locals.scm"
     );
