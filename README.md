@@ -66,6 +66,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | INI | `ini` |
 | JavaScript | `javascript`, `js` |
 | JSON | `json` |
+| JSX | `jsx` |
 | Kotlin | `kotlin`, `kt`, `kts` |
 | LaTeX | `latex`, `tex` |
 | LLVM | `llvm` |
@@ -93,6 +94,8 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | Swift | `swift` |
 | TOML | `toml` |
 | TypeScript | `typescript`, `ts` |
+| TSX | `tsx` |
+| Vimscript | `vimscript`, `vim` |
 | WAST (WebAssembly Script) | `wast` |
 | WAT (WebAssembly Text) | `wat`, `wasm` |
 | x86 Assembly | `x86asm`, `x86` |

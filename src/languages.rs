@@ -1864,6 +1864,53 @@ pub mod json {
         }
     }
 }
+#[cfg(feature = "language-jsx")]
+pub mod jsx {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_jsx() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_jsx() },
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'jsx'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/jsx/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/jsx/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = include_str!("../languages/jsx/queries/locals.scm");
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { tree_sitter_jsx() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
 #[cfg(feature = "language-kotlin")]
 pub mod kotlin {
     use once_cell::sync::Lazy;
@@ -3211,6 +3258,98 @@ pub mod typescript {
         }
     }
 }
+#[cfg(feature = "language-tsx")]
+pub mod tsx {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_tsx() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_tsx() },
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'tsx'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/tsx/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = include_str!("../languages/tsx/queries/locals.scm");
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { tree_sitter_tsx() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
+#[cfg(feature = "language-vim")]
+pub mod vim {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_vim() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_vim() },
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'vim'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/vim/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/vim/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = "";
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { tree_sitter_vim() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
 #[cfg(feature = "language-wast")]
 pub mod wast {
     use once_cell::sync::Lazy;
@@ -3602,6 +3741,8 @@ pub enum Language {
     Javascript,
     #[cfg(feature = "language-json")]
     Json,
+    #[cfg(feature = "language-jsx")]
+    Jsx,
     #[cfg(feature = "language-kotlin")]
     Kotlin,
     #[cfg(feature = "language-latex")]
@@ -3658,6 +3799,10 @@ pub enum Language {
     Toml,
     #[cfg(feature = "language-typescript")]
     Typescript,
+    #[cfg(feature = "language-tsx")]
+    Tsx,
+    #[cfg(feature = "language-vim")]
+    Vimscript,
     #[cfg(feature = "language-wast")]
     Wast,
     #[cfg(feature = "language-wat")]
@@ -3754,6 +3899,8 @@ impl Language {
         Self::Javascript,
         #[cfg(feature = "language-json")]
         Self::Json,
+        #[cfg(feature = "language-jsx")]
+        Self::Jsx,
         #[cfg(feature = "language-kotlin")]
         Self::Kotlin,
         #[cfg(feature = "language-latex")]
@@ -3812,6 +3959,10 @@ impl Language {
         Self::Toml,
         #[cfg(feature = "language-typescript")]
         Self::Typescript,
+        #[cfg(feature = "language-tsx")]
+        Self::Tsx,
+        #[cfg(feature = "language-vim")]
+        Self::Vimscript,
         #[cfg(feature = "language-wast")]
         Self::Wast,
         #[cfg(feature = "language-wat")]
@@ -3998,6 +4149,8 @@ impl Language {
             "js" => Some(Self::Javascript),
             #[cfg(feature = "language-json")]
             "json" => Some(Self::Json),
+            #[cfg(feature = "language-jsx")]
+            "jsx" => Some(Self::Jsx),
             #[cfg(feature = "language-kotlin")]
             "kotlin" => Some(Self::Kotlin),
             #[cfg(feature = "language-kotlin")]
@@ -4094,6 +4247,12 @@ impl Language {
             "typescript" => Some(Self::Typescript),
             #[cfg(feature = "language-typescript")]
             "ts" => Some(Self::Typescript),
+            #[cfg(feature = "language-tsx")]
+            "tsx" => Some(Self::Tsx),
+            #[cfg(feature = "language-vim")]
+            "vim" => Some(Self::Vimscript),
+            #[cfg(feature = "language-vim")]
+            "vimscript" => Some(Self::Vimscript),
             #[cfg(feature = "language-wast")]
             "wast" => Some(Self::Wast),
             #[cfg(feature = "language-wat")]
@@ -4196,6 +4355,8 @@ impl Language {
             Self::Javascript => &javascript::CONFIG,
             #[cfg(feature = "language-json")]
             Self::Json => &json::CONFIG,
+            #[cfg(feature = "language-jsx")]
+            Self::Jsx => &jsx::CONFIG,
             #[cfg(feature = "language-kotlin")]
             Self::Kotlin => &kotlin::CONFIG,
             #[cfg(feature = "language-latex")]
@@ -4254,6 +4415,10 @@ impl Language {
             Self::Toml => &toml::CONFIG,
             #[cfg(feature = "language-typescript")]
             Self::Typescript => &typescript::CONFIG,
+            #[cfg(feature = "language-tsx")]
+            Self::Tsx => &tsx::CONFIG,
+            #[cfg(feature = "language-vim")]
+            Self::Vimscript => &vim::CONFIG,
             #[cfg(feature = "language-wast")]
             Self::Wast => &wast::CONFIG,
             #[cfg(feature = "language-wat")]

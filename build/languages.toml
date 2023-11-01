@@ -252,6 +252,17 @@ name = "json"
 repo = "https://github.com/tree-sitter/tree-sitter-json"
 hash = "ca3f891"
 
+[[languages]]
+name = "jsx"
+repo = "https://github.com/tree-sitter/tree-sitter-javascript"
+hash = "f1e5a09"
+helix_override = true
+command = '''
+cp languages/temp/jsx/queries/highlights-jsx.scm languages/temp/jsx/queries/highlights.scm &&
+sed -i -e 's/tree_sitter_javascript/tree_sitter_jsx/g' languages/temp/jsx/src/parser.c &&
+sed -i -e 's/tree_sitter_javascript/tree_sitter_jsx/g' languages/temp/jsx/src/scanner.c
+'''
+
 # [[languages]]
 # name = "julia"
 # repo = "https://github.com/tree-sitter/tree-sitter-julia"
@@ -371,7 +382,7 @@ hash = "c165725"
 aliases = ["none", "nolang"]
 command = '''
 set -euxo pipefail &&
-sed -i -e 's/\<tree_sitter_diff\>/tree_sitter_plaintext/' languages/temp/plaintext/src/parser.c &&
+sed -i -e 's/tree_sitter_diff/tree_sitter_plaintext/' languages/temp/plaintext/src/parser.c &&
 rm languages/temp/plaintext/queries/highlights.scm
 '''
 helix_override = true
@@ -474,6 +485,26 @@ sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/typescript
 cp -r languages/temp/typescript/typescript/src languages/temp/typescript/
 '''
 aliases = ["ts"]
+
+[[languages]]
+name = "tsx"
+repo = "https://github.com/tree-sitter/tree-sitter-typescript"
+hash = "d847898"
+helix_override = true
+command = '''
+set -euxo pipefail &&
+cp languages/temp/typescript/common/scanner.h languages/temp/typescript/tsx/src &&
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/typescript/tsx/src/scanner.c &&
+cp -r languages/temp/typescript/tsx/src languages/temp/tsx/
+'''
+
+[[languages]]
+name = "vim"
+pretty_name = "Vimscript"
+repo = "https://github.com/neovim/tree-sitter-vim"
+hash = "32c76f1"
+helix_override = true
+aliases = ["vimscript"]
 
 [[languages]]
 name = "wast"

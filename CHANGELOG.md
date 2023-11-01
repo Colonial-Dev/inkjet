@@ -1,3 +1,7 @@
+### 0.10.2
+- Added Vimscript, TSX and JSX languages.
+- Update TOML dependency to `0.8`.
+
 ### 0.10.1
 - (Bugfix) - Fix Javascript and Typescript highlighting (thanks @leandrop!)
 - Updated Haskell grammar.

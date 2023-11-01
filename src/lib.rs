@@ -50,8 +50,8 @@
 //! | IEx | `iex` |
 //! | INI | `ini` |
 //! | JavaScript | `javascript`, `js` |
-//! | JSX | `jsx` |
 //! | JSON | `json` |
+//! | JSX | `jsx` |
 //! | Kotlin | `kotlin`, `kt`, `kts` |
 //! | LaTeX | `latex`, `tex` |
 //! | LLVM | `llvm` |
@@ -79,7 +79,8 @@
 //! | Swift | `swift` |
 //! | TOML | `toml` |
 //! | TypeScript | `typescript`, `ts` |
-//! | TSX | `tsx |
+//! | TSX | `tsx` |
+//! | Vimscript | `vimscript`, `vim` |
 //! | WAST (WebAssembly Script) | `wast` |
 //! | WAT (WebAssembly Text) | `wat`, `wasm` |
 //! | x86 Assembly | `x86asm`, `x86` |
