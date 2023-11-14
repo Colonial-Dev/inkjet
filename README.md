@@ -133,7 +133,7 @@ However, after the first build, these artifacts will be cached and subsequent bu
 
 Under the hood, Inkjet creates a `tree-sitter` highlighter/parser object, which in turn dynamically allocates a chunk of working memory. Using the same highlighter for multiple simultaneous jobs would therefore cause all sorts of nasty UB.
 
-If you want to highlight in parallel, you'll have to create a clone of the highlighter for each thread.
+If you want to highlight in parallel, you'll have to create a clone of the highlighter for each thread. I recommend [`thread_local!`](https://doc.rust-lang.org/std/macro.thread_local.html) and `RefCell` if you need a quick and easy solution.
 
 ### *"A language I want to highlight isn't bundled with Inkjet!"*
 
