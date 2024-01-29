@@ -1,3 +1,6 @@
+### 0.10.3
+- Added Svelte language.
+
 ### 0.10.2
 - Added Vimscript, TSX and JSX languages.
 - Update TOML dependency to `0.8`.
