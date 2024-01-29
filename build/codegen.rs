@@ -70,7 +70,7 @@ pub fn languages_impl_def(languages: &[Language]) -> TokenStream {
 
     let all_langs = quote! {
         /// Array containing all (statically known) language variants.
-        pub const ALL_LANGS: &[Self] = &[
+        pub const ALL_LANGS: &'static [Self] = &[
             #(#[cfg(feature = #features)] Self::#variants),*
         ];
     };

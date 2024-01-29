@@ -3818,7 +3818,7 @@ pub enum Language {
 }
 impl Language {
     /// Array containing all (statically known) language variants.
-    pub const ALL_LANGS: &[Self] = &[
+    pub const ALL_LANGS: &'static [Self] = &[
         #[cfg(feature = "language-ada")]
         Self::Ada,
         #[cfg(feature = "language-asm")]
