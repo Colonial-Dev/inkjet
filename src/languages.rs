@@ -3117,6 +3117,53 @@ pub mod sql {
         }
     }
 }
+#[cfg(feature = "language-svelte")]
+pub mod svelte {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_svelte() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_svelte() },
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'svelte'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/svelte/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/svelte/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = "";
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { tree_sitter_svelte() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
 #[cfg(feature = "language-swift")]
 pub mod swift {
     use once_cell::sync::Lazy;
@@ -3793,6 +3840,8 @@ pub enum Language {
     Scss,
     #[cfg(feature = "language-sql")]
     Sql,
+    #[cfg(feature = "language-svelte")]
+    Svelte,
     #[cfg(feature = "language-swift")]
     Swift,
     #[cfg(feature = "language-toml")]
@@ -3953,6 +4002,8 @@ impl Language {
         Self::Scss,
         #[cfg(feature = "language-sql")]
         Self::Sql,
+        #[cfg(feature = "language-svelte")]
+        Self::Svelte,
         #[cfg(feature = "language-swift")]
         Self::Swift,
         #[cfg(feature = "language-toml")]
@@ -4239,6 +4290,8 @@ impl Language {
             "scss" => Some(Self::Scss),
             #[cfg(feature = "language-sql")]
             "sql" => Some(Self::Sql),
+            #[cfg(feature = "language-svelte")]
+            "svelte" => Some(Self::Svelte),
             #[cfg(feature = "language-swift")]
             "swift" => Some(Self::Swift),
             #[cfg(feature = "language-toml")]
@@ -4409,6 +4462,8 @@ impl Language {
             Self::Scss => &scss::CONFIG,
             #[cfg(feature = "language-sql")]
             Self::Sql => &sql::CONFIG,
+            #[cfg(feature = "language-svelte")]
+            Self::Svelte => &svelte::CONFIG,
             #[cfg(feature = "language-swift")]
             Self::Swift => &swift::CONFIG,
             #[cfg(feature = "language-toml")]
