@@ -444,6 +444,11 @@ branch = "gh-pages"
 helix_override = true
 
 [[languages]]
+name = "svelte"
+repo = "https://github.com/Himujjal/tree-sitter-svelte"
+hash = "697bb5"
+
+[[languages]]
 name = "swift"
 repo = "https://github.com/alex-pinkus/tree-sitter-swift"
 # The repository doesn't check in their parser.c, but it IS available via Github Actions
