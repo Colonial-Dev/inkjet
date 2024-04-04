@@ -182,7 +182,7 @@ aliases = ["gd"]
 [[languages]]
 name = "gleam"
 repo = "https://github.com/gleam-lang/tree-sitter-gleam"
-hash = "32c8f1e"
+hash = "bcf9c45"
 
 [[languages]]
 name = "glsl"
@@ -294,8 +294,12 @@ hash = "1b96e58"
 [[languages]]
 name = "lua"
 repo = "https://github.com/tjdevries/tree-sitter-lua"
-hash = "a99b610"
+hash = "acb3f36"
 helix_override = true
+command = '''
+mv languages/temp/lua/queries/lua/*.scm languages/temp/lua/queries/ &&
+rmdir languages/temp/lua/queries/lua
+'''
 
 [[languages]]
 name = "make"
