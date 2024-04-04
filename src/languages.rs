@@ -1325,7 +1325,9 @@ pub mod gleam {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/gleam/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/gleam/queries/injections.scm"
+    );
     pub const LOCALS_QUERY: &str = include_str!("../languages/gleam/queries/locals.scm");
     #[cfg(test)]
     mod tests {
