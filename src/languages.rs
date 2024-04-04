@@ -2072,9 +2072,13 @@ pub mod lua {
         config.configure(HIGHLIGHT_NAMES);
         config
     });
-    pub const HIGHLIGHT_QUERY: &str = "";
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/lua/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/lua/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = include_str!("../languages/lua/queries/locals.scm");
     #[cfg(test)]
     mod tests {
         use super::*;
