@@ -297,7 +297,8 @@ repo = "https://github.com/tjdevries/tree-sitter-lua"
 hash = "acb3f36"
 helix_override = true
 command = '''
-cp languages/temp/lua/queries/lua/*.scm languages/temp/lua/queries/
+mv languages/temp/lua/queries/lua/*.scm languages/temp/lua/queries/ &&
+rmdir languages/temp/lua/queries/lua
 '''
 
 [[languages]]
