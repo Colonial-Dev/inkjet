@@ -1,3 +1,19 @@
+### 0.10.4
+All thanks to @leandrocp.
+- (Bugfix) - Fixed Lua not highlighting correctly.
+- Updated languages:
+  - Elixir
+  - Erlang
+  - Gleam
+  - HEEx
+  - Lua
+  - CSS
+  - HTML
+  - Javascript
+  - Python
+  - Ruby
+  - SQL
+
 ### 0.10.3
 - Added Svelte language.
 
