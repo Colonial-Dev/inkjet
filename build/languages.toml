@@ -331,6 +331,14 @@ repo = "https://github.com/nix-community/tree-sitter-nix"
 hash = "66e3e9c"
 
 [[languages]]
+name = "objc"
+pretty_name = "ObjectiveC"
+repo = "https://github.com/tree-sitter-grammars/tree-sitter-objc"
+hash = "62e61b6"
+aliases = ["objective_c"]
+helix_override = true
+
+[[languages]]
 name = "ocaml"
 repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
 hash = "694c577"
@@ -403,7 +411,7 @@ helix_override = true
 [[languages]]
 name = "python"
 repo = "https://github.com/tree-sitter/tree-sitter-python"
-hash = "b8a4c64"
+hash = "a227610"
 aliases = ["py"]
 
 [[languages]]
@@ -432,7 +440,7 @@ aliases = ["rb"]
 [[languages]]
 name = "rust"
 repo = "https://github.com/tree-sitter/tree-sitter-rust"
-hash = "48e0533"
+hash = "0435214"
 aliases = ["rs"]
 
 [[languages]]
@@ -461,7 +469,7 @@ helix_override = true
 [[languages]]
 name = "svelte"
 repo = "https://github.com/Himujjal/tree-sitter-svelte"
-hash = "697bb5"
+hash = "ea528fc"
 
 [[languages]]
 name = "swift"

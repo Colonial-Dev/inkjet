@@ -1,3 +1,7 @@
+### 0.10.5
+- Add Objective C language.
+- Updated Rust, Svelte, and Python languages.
+
 ### 0.10.4
 All thanks to @leandrocp.
 - (Bugfix) - Fixed Lua not highlighting correctly.

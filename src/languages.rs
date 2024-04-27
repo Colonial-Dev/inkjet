@@ -2330,6 +2330,53 @@ pub mod nix {
         }
     }
 }
+#[cfg(feature = "language-objc")]
+pub mod objc {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_objc() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_objc() },
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'objc'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/objc/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/objc/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = include_str!("../languages/objc/queries/locals.scm");
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { tree_sitter_objc() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
 #[cfg(feature = "language-ocaml")]
 pub mod ocaml {
     use once_cell::sync::Lazy;
@@ -3814,6 +3861,8 @@ pub enum Language {
     Nim,
     #[cfg(feature = "language-nix")]
     Nix,
+    #[cfg(feature = "language-objc")]
+    ObjectiveC,
     #[cfg(feature = "language-ocaml")]
     Ocaml,
     #[cfg(feature = "language-ocaml-interface")]
@@ -3974,6 +4023,8 @@ impl Language {
         Self::Nim,
         #[cfg(feature = "language-nix")]
         Self::Nix,
+        #[cfg(feature = "language-objc")]
+        Self::ObjectiveC,
         #[cfg(feature = "language-ocaml")]
         Self::Ocaml,
         #[cfg(feature = "language-ocaml-interface")]
@@ -4238,6 +4289,10 @@ impl Language {
             "nim" => Some(Self::Nim),
             #[cfg(feature = "language-nix")]
             "nix" => Some(Self::Nix),
+            #[cfg(feature = "language-objc")]
+            "objc" => Some(Self::ObjectiveC),
+            #[cfg(feature = "language-objc")]
+            "objective_c" => Some(Self::ObjectiveC),
             #[cfg(feature = "language-ocaml")]
             "ocaml" => Some(Self::Ocaml),
             #[cfg(feature = "language-ocaml")]
@@ -4434,6 +4489,8 @@ impl Language {
             Self::Nim => &nim::CONFIG,
             #[cfg(feature = "language-nix")]
             Self::Nix => &nix::CONFIG,
+            #[cfg(feature = "language-objc")]
+            Self::ObjectiveC => &objc::CONFIG,
             #[cfg(feature = "language-ocaml")]
             Self::Ocaml => &ocaml::CONFIG,
             #[cfg(feature = "language-ocaml-interface")]

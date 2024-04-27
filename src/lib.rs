@@ -24,7 +24,7 @@
 //! | Cap'N Proto | `capnp` |
 //! | Clojure | `clojure`, `clj`, `cljc` |
 //! | C# | `c_sharp`, `c#`, `csharp`, `cs` |
-//! | Common Lisp | `commonlisp`, `common-list`, `cl`, `lisp` |
+//! | Common Lisp | `commonlisp`, `common-lisp`, `cl`, `lisp` |
 //! | C++ | `c++`, `cpp`, `hpp`, `h++`, `cc`, `hh` |
 //! | CSS | `css` |
 //! | Cue | `cue` |
@@ -61,9 +61,11 @@
 //! | Meson | `meson` |
 //! | Nim | `nim` |
 //! | Nix | `nix` |
+//! | Objective C | `objective_c`, `objc` |
 //! | OCaml | `ocaml`, `ml` |
 //! | OCaml Interface | `ocaml_interface`, `mli` |
 //! | OpenSCAD | `openscad`, `scad` |
+//! | Pascal | `pascal` |
 //! | PHP | `php` |
 //! | ProtoBuf | `protobuf`, `proto` |
 //! | Python | `python`, `py` |

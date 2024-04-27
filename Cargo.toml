@@ -1,6 +1,6 @@
 [package]
 name = "inkjet"
-version = "0.10.4"
+version = "0.10.5"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/Colonial-Dev/inkjet/"
@@ -79,6 +79,7 @@ all_languages = [
     "language-meson",
     "language-nim",
     "language-nix",
+    "language-objc",
     "language-ocaml",
     "language-ocaml-interface",
     "language-openscad",
@@ -160,6 +161,7 @@ language-matlab = []
 language-meson = []
 language-nim = []
 language-nix = []
+language-objc = []
 language-ocaml = []
 language-ocaml-interface = []
 language-openscad = []
