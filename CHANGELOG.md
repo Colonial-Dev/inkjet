@@ -1,3 +1,26 @@
+### 0.10.5
+- Add Objective C language.
+- Updated Rust, Svelte, and Python languages.
+
+### 0.10.4
+All thanks to @leandrocp.
+- (Bugfix) - Fixed Lua not highlighting correctly.
+- Updated languages:
+  - Elixir
+  - Erlang
+  - Gleam
+  - HEEx
+  - Lua
+  - CSS
+  - HTML
+  - Javascript
+  - Python
+  - Ruby
+  - SQL
+
+### 0.10.3
+- Added Svelte language.
+
 ### 0.10.2
 - Added Vimscript, TSX and JSX languages.
 - Update TOML dependency to `0.8`.

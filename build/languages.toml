@@ -94,7 +94,7 @@ helix_override = true
 [[languages]]
 name = "css"
 repo = "https://github.com/tree-sitter/tree-sitter-css"
-hash = "fec7d37"
+hash = "02b4ee7"
 
 [[languages]]
 name = "cue"
@@ -140,7 +140,7 @@ helix_override = true
 [[languages]]
 name = "elixir"
 repo = "https://github.com/elixir-lang/tree-sitter-elixir"
-hash = "a2861e8"
+hash = "868620e"
 aliases = ["ex", "exs", "leex"]
 
 [[languages]]
@@ -151,7 +151,7 @@ hash = "0694058"
 [[languages]]
 name = "erlang"
 repo = "https://github.com/WhatsApp/tree-sitter-erlang"
-hash = "4a0ec79"
+hash = "20ce5a9"
 aliases = ["erl", "hrl", "es", "escript"]
 helix_override = true
 
@@ -182,7 +182,7 @@ aliases = ["gd"]
 [[languages]]
 name = "gleam"
 repo = "https://github.com/gleam-lang/tree-sitter-gleam"
-hash = "32c8f1e"
+hash = "bcf9c45"
 
 [[languages]]
 name = "glsl"
@@ -192,7 +192,7 @@ hash = "ec6100d"
 [[languages]]
 name = "go"
 repo = "https://github.com/tree-sitter/tree-sitter-go"
-hash = "ff86c7f"
+hash = "fd577c4"
 aliases = ["golang"]
 
 [[languages]]
@@ -210,12 +210,12 @@ aliases = ["terraform"]
 [[languages]]
 name = "heex"
 repo = "https://github.com/phoenixframework/tree-sitter-heex"
-hash = "4a36c9a"
+hash = "b5ad6e3"
 
 [[languages]]
 name = "html"
 repo = "https://github.com/tree-sitter/tree-sitter-html"
-hash = "d742025"
+hash = "bfa075d"
 aliases = ["htm"]
 
 [[languages]]
@@ -237,7 +237,7 @@ helix_override = true
 [[languages]]
 name = "javascript"
 repo = "https://github.com/tree-sitter/tree-sitter-javascript"
-hash = "f1e5a09"
+hash = "de1e682"
 helix_override = true
 aliases = ["js"]
 
@@ -294,8 +294,12 @@ hash = "1b96e58"
 [[languages]]
 name = "lua"
 repo = "https://github.com/tjdevries/tree-sitter-lua"
-hash = "a99b610"
+hash = "acb3f36"
 helix_override = true
+command = '''
+mv languages/temp/lua/queries/lua/*.scm languages/temp/lua/queries/ &&
+rmdir languages/temp/lua/queries/lua
+'''
 
 [[languages]]
 name = "make"
@@ -325,6 +329,14 @@ helix_override = true
 name = "nix"
 repo = "https://github.com/nix-community/tree-sitter-nix"
 hash = "66e3e9c"
+
+[[languages]]
+name = "objc"
+pretty_name = "ObjectiveC"
+repo = "https://github.com/tree-sitter-grammars/tree-sitter-objc"
+hash = "62e61b6"
+aliases = ["objective_c"]
+helix_override = true
 
 [[languages]]
 name = "ocaml"
@@ -399,7 +411,7 @@ helix_override = true
 [[languages]]
 name = "python"
 repo = "https://github.com/tree-sitter/tree-sitter-python"
-hash = "a901729"
+hash = "a227610"
 aliases = ["py"]
 
 [[languages]]
@@ -422,13 +434,13 @@ helix_override = true
 [[languages]]
 name = "ruby"
 repo = "https://github.com/tree-sitter/tree-sitter-ruby"
-hash = "f257f3f"
+hash = "9d86f37"
 aliases = ["rb"]
 
 [[languages]]
 name = "rust"
 repo = "https://github.com/tree-sitter/tree-sitter-rust"
-hash = "48e0533"
+hash = "0435214"
 aliases = ["rs"]
 
 [[languages]]
@@ -450,9 +462,14 @@ hash = "c478c68"
 [[languages]]
 name = "sql"
 repo = "https://github.com/DerekStride/tree-sitter-sql"
-hash = "9fe5aea"
+hash = "cdb7cde"
 branch = "gh-pages"
 helix_override = true
+
+[[languages]]
+name = "svelte"
+repo = "https://github.com/Himujjal/tree-sitter-svelte"
+hash = "ea528fc"
 
 [[languages]]
 name = "swift"

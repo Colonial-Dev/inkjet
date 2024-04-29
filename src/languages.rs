@@ -1325,7 +1325,9 @@ pub mod gleam {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/gleam/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/gleam/queries/injections.scm"
+    );
     pub const LOCALS_QUERY: &str = include_str!("../languages/gleam/queries/locals.scm");
     #[cfg(test)]
     mod tests {
@@ -2070,9 +2072,13 @@ pub mod lua {
         config.configure(HIGHLIGHT_NAMES);
         config
     });
-    pub const HIGHLIGHT_QUERY: &str = "";
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/lua/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/lua/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = include_str!("../languages/lua/queries/locals.scm");
     #[cfg(test)]
     mod tests {
         use super::*;
@@ -2313,6 +2319,53 @@ pub mod nix {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { tree_sitter_nix() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
+#[cfg(feature = "language-objc")]
+pub mod objc {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_objc() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_objc() },
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'objc'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/objc/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/objc/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = include_str!("../languages/objc/queries/locals.scm");
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { tree_sitter_objc() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3117,6 +3170,53 @@ pub mod sql {
         }
     }
 }
+#[cfg(feature = "language-svelte")]
+pub mod svelte {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_svelte() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_svelte() },
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'svelte'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/svelte/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/svelte/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = "";
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { tree_sitter_svelte() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
 #[cfg(feature = "language-swift")]
 pub mod swift {
     use once_cell::sync::Lazy;
@@ -3761,6 +3861,8 @@ pub enum Language {
     Nim,
     #[cfg(feature = "language-nix")]
     Nix,
+    #[cfg(feature = "language-objc")]
+    ObjectiveC,
     #[cfg(feature = "language-ocaml")]
     Ocaml,
     #[cfg(feature = "language-ocaml-interface")]
@@ -3793,6 +3895,8 @@ pub enum Language {
     Scss,
     #[cfg(feature = "language-sql")]
     Sql,
+    #[cfg(feature = "language-svelte")]
+    Svelte,
     #[cfg(feature = "language-swift")]
     Swift,
     #[cfg(feature = "language-toml")]
@@ -3818,7 +3922,7 @@ pub enum Language {
 }
 impl Language {
     /// Array containing all (statically known) language variants.
-    pub const ALL_LANGS: &[Self] = &[
+    pub const ALL_LANGS: &'static [Self] = &[
         #[cfg(feature = "language-ada")]
         Self::Ada,
         #[cfg(feature = "language-asm")]
@@ -3919,6 +4023,8 @@ impl Language {
         Self::Nim,
         #[cfg(feature = "language-nix")]
         Self::Nix,
+        #[cfg(feature = "language-objc")]
+        Self::ObjectiveC,
         #[cfg(feature = "language-ocaml")]
         Self::Ocaml,
         #[cfg(feature = "language-ocaml-interface")]
@@ -3953,6 +4059,8 @@ impl Language {
         Self::Scss,
         #[cfg(feature = "language-sql")]
         Self::Sql,
+        #[cfg(feature = "language-svelte")]
+        Self::Svelte,
         #[cfg(feature = "language-swift")]
         Self::Swift,
         #[cfg(feature = "language-toml")]
@@ -4181,6 +4289,10 @@ impl Language {
             "nim" => Some(Self::Nim),
             #[cfg(feature = "language-nix")]
             "nix" => Some(Self::Nix),
+            #[cfg(feature = "language-objc")]
+            "objc" => Some(Self::ObjectiveC),
+            #[cfg(feature = "language-objc")]
+            "objective_c" => Some(Self::ObjectiveC),
             #[cfg(feature = "language-ocaml")]
             "ocaml" => Some(Self::Ocaml),
             #[cfg(feature = "language-ocaml")]
@@ -4239,6 +4351,8 @@ impl Language {
             "scss" => Some(Self::Scss),
             #[cfg(feature = "language-sql")]
             "sql" => Some(Self::Sql),
+            #[cfg(feature = "language-svelte")]
+            "svelte" => Some(Self::Svelte),
             #[cfg(feature = "language-swift")]
             "swift" => Some(Self::Swift),
             #[cfg(feature = "language-toml")]
@@ -4375,6 +4489,8 @@ impl Language {
             Self::Nim => &nim::CONFIG,
             #[cfg(feature = "language-nix")]
             Self::Nix => &nix::CONFIG,
+            #[cfg(feature = "language-objc")]
+            Self::ObjectiveC => &objc::CONFIG,
             #[cfg(feature = "language-ocaml")]
             Self::Ocaml => &ocaml::CONFIG,
             #[cfg(feature = "language-ocaml-interface")]
@@ -4409,6 +4525,8 @@ impl Language {
             Self::Scss => &scss::CONFIG,
             #[cfg(feature = "language-sql")]
             Self::Sql => &sql::CONFIG,
+            #[cfg(feature = "language-svelte")]
+            Self::Svelte => &svelte::CONFIG,
             #[cfg(feature = "language-swift")]
             Self::Swift => &swift::CONFIG,
             #[cfg(feature = "language-toml")]

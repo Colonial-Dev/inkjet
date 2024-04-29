@@ -39,7 +39,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | Cap'N Proto | `capnp` |
 | Clojure | `clojure`, `clj`, `cljc` |
 | C# | `c_sharp`, `c#`, `csharp`, `cs` |
-| Common Lisp | `commonlisp`, `common-list`, `cl`, `lisp` |
+| Common Lisp | `commonlisp`, `common-lisp`, `cl`, `lisp` |
 | C++ | `c++`, `cpp`, `hpp`, `h++`, `cc`, `hh` |
 | CSS | `css` |
 | Cue | `cue` |
@@ -76,9 +76,11 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | Meson | `meson` |
 | Nim | `nim` |
 | Nix | `nix` |
+| Objective C | `objective_c`, `objc` |
 | OCaml | `ocaml`, `ml` |
 | OCaml Interface | `ocaml_interface`, `mli` |
 | OpenSCAD | `openscad`, `scad` |
+| Pascal | `pascal` |
 | PHP | `php` |
 | ProtoBuf | `protobuf`, `proto` |
 | Python | `python`, `py` |
@@ -110,8 +112,8 @@ In addition to these languages, Inkjet also offers the [`Runtime`](https://docs.
 - `Plaintext` enables cheap no-op highlighting. It loads the `diff` grammar under the hood, but provides no highlighting queries. It's aliased to `none` and `nolang`.
 
 ## Cargo Features
-- (Default) `html` - enables the bundled HTML formatter, which depends on `v_htmlescape` and the `theme` feature.
-- (Default) `theme` - enables the theme API, which depends on the `html` feature, `ahash`, `toml` and `serde`.
+- (Default) `html` - enables the bundled HTML formatter, which depends on `v_htmlescape`.
+- (Default) `theme` - enables the theme API, which depends on `ahash`, `toml` and `serde`.
 - (Default) `all-languages` - enables all languages.
 - `language-{name}` - enables the specified language.
     - If you want to only enable a subset of the included languages, you'll have to set `default-features=false` and manually re-add each language you want to use.
