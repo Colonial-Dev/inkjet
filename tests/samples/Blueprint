@@ -1,0 +1,13 @@
+using Gtk 4.0;
+
+template MyAppWindow : Gtk.ApplicationWindow {
+  title: _("My App Title");
+
+  [titlebar]
+  HeaderBar header_bar {}
+
+  Label {
+    styles ["heading"]
+    label: _("Hello, world!");
+  }
+}

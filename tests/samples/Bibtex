@@ -1,0 +1,9 @@
+@Book{Knuth:TAOCP1,
+    author={Knuth, Donald E.},
+    title={The Art of Computer Programming, Volume 1: Fundamental Algorithms},
+    shorttitle={The Art of Computer Programming I},
+    location={Upper Saddle River, NJ},
+    publisher={Addison-Wesley},
+    year=1997,
+    keywords={computer science, programming, mathematics, algorithms}
+}
