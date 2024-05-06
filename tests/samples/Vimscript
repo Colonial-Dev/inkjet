@@ -1,0 +1,15 @@
+function! FizzBuzz(from, to)
+    for num in range(a:from, a:to)
+        let out_string = num . " "
+        if num % 3 == 0
+            let out_string .= "Fizz"
+        endif
+        if num % 5 == 0
+            let out_string .= "Buzz"
+        endif
+        " Add our current line to the buffer
+        call append(line("."), out_string)
+        " Move the cursor to the next line
+        call setpos(".", [0, line(".") + 1, 1, 0])
+    endfor
+endfunction 

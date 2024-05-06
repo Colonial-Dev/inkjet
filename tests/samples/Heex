@@ -1,0 +1,7 @@
+<div class="card">
+<.card_header title={@title} class={@title_class} />
+<.card_body>
+    <%= render_slot(@inner_block) %>
+</.card_body>
+<.card_footer on_close={@on_close} />
+</div>

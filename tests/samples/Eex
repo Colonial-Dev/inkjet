@@ -1,0 +1,9 @@
+<!-- single line expression -->
+<span><%= @user.name %></span>
+
+<!-- block expression -->
+<ul>
+  <%= for user <- @users do %>
+    <li><%= user.name %></li>
+  <% end %>
+</ul>

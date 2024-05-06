@@ -1,0 +1,24 @@
+START := 1
+END := 15
+NUMS := $(shell seq $(START) $(END))
+
+fizzbuzz: $(NUMS)
+
+mod = $(shell echo $$(( $1 % $2 )))
+
+define fb
+$1:
+ifeq "$(call mod, $1, 15)" '0'
+	@echo FizzBuzz
+else ifeq "$(call mod, $1, 3)" '0'
+	@echo Fizz
+else ifeq "$(call mod, $1, 5)" '0'
+	@echo Buzz
+else
+	@echo $1
+endif
+endef
+
+$(foreach _,${NUMS},$(eval $(call fb,$_)))
+
+.PHONY: fizzbuzz $(NUMS)
