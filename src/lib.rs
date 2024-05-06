@@ -16,7 +16,7 @@
 //! | Assembly (generic) | `asm` |
 //! | Astro | `astro` |
 //! | Awk | `awk` |
-//! | Bash | `bash` |
+//! | Bash | `bash`, `sh`, `shell` |
 //! | BibTeX | `bibtex`, `bib` |
 //! | Bicep | `bicep` |
 //! | Blueprint | `blueprint`, `blp` |

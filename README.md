@@ -31,7 +31,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | Assembly (generic) | `asm` |
 | Astro | `astro` |
 | Awk | `awk` |
-| Bash | `bash` |
+| Bash | `bash`, `sh`, `shell` |
 | BibTeX | `bibtex`, `bib` |
 | Bicep | `bicep` |
 | Blueprint | `blueprint`, `blp` |
@@ -151,17 +151,17 @@ Other notes:
 ## Building
 For normal use, Inkjet will compile automatically just like any other crate.
 
-However, if you have forked the repository and want to update the bundled languages, you'll need to set some environment variables:
-- `INKJET_REDOWNLOAD_LANGS` will wipe the `languages/` directory and redownload everything from scratch.
+However, if you have forked the repository and want to update the bundled languages, you'll need to use GNU Make with the included `Makefile`:
+- `make redownload` will wipe the `languages/` directory and redownload everything from scratch.
   - Currently, this only works on *nix. You will need `git`, `sed` and `wget` installed. (Git clones the grammar repositories, while `sed` and `wget` are used in miniature setup scripts for some languages.)
-- `INKJET_REBUILD_LANGS_MODULE` will wipe `src/languages.rs` and regenerate it from scratch.
-- `INKJET_REBUILD_FEATURES` will generate a file called `features` in the crate root, containing all the individual language features (ready to be pasted into `Cargo.toml`.)
+- `make regenerate` will wipe `src/languages.rs` and regenerate it from scratch.
+- `make features` will generate a file called `features` in the crate root, containing all the individual language features (ready to be pasted into `Cargo.toml`.)
 
-The value of these variables doesn't matter - they just have to be set. 
-
-Additionally:
-- You will need to pass the `--all-features` flag to `cargo` for these to work - by default, the development parts of the build script are not compiled.
-- I recommend running `cargo build -vv` when redownloading languages, so the script's progress is visible.
+If, for whatever reason, you don't have GNU Make available: you can also perform these actions manually by setting the appropriate environment variables and Cargo flags:
+- `INKJET_REDOWNLOAD_LANGS=true` for `make redownload`.
+- `INKJET_REBUILD_LANGS_MODULE=true` for `make regenerate`.
+- `INKJET_REBUILD_FEATURES=true` for `make features`.
+Run `cargo build --all-features` with these set. (The development portions of the build script are feature gated by default.)
 
 ## Acknowledgements
 - Inkjet would not be possible without `tree-sitter` and the ecosystem of grammars surrounding it.

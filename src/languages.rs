@@ -4117,6 +4117,8 @@ impl Language {
             "bash" => Some(Self::Bash),
             #[cfg(feature = "language-bash")]
             "sh" => Some(Self::Bash),
+            #[cfg(feature = "language-bash")]
+            "shell" => Some(Self::Bash),
             #[cfg(feature = "language-bibtex")]
             "bibtex" => Some(Self::Bibtex),
             #[cfg(feature = "language-bibtex")]
