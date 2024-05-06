@@ -7,13 +7,14 @@ mod language;
 use language::*;
 
 fn main() -> anyhow::Result<()> {
-    let languages = std::fs::read_to_string("build/languages.toml")?;
-    let languages = toml::from_str::<Languages>(&languages)?.languages;
+    let config = std::fs::read_to_string("build/languages.toml")?;
+    let config = toml::from_str::<Config>(&config)?;
 
     #[cfg(feature = "development")]
-    dev::check(&languages)?;
+    dev::check(&config)?;
 
-    let handles: Vec<_> = languages
+    let handles: Vec<_> = config
+        .languages
         .into_iter()
         .filter(|lang| {
             let name = lang.name.to_uppercase().replace('-', "_");

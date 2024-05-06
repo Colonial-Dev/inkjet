@@ -5,33 +5,43 @@ use std::process::Command;
 use anyhow::Result;
 use fs_extra::dir::{self, CopyOptions};
 
-use crate::codegen;
+use crate::{codegen, Config};
 use crate::Language;
 
-pub fn check(languages: &[Language]) -> Result<()> {
+pub fn check(config: &Config) -> Result<()> {
     if std::env::var("INKJET_REDOWNLOAD_LANGS").is_ok() {
-        download_langs(languages)?;
+        download_langs(config)?;
     }
 
     if std::env::var("INKJET_REBUILD_LANGS_MODULE").is_ok() {
-        generate_langs_module(languages)?;
+        generate_langs_module(&config.languages)?;
     }
 
     if std::env::var("INKJET_REBUILD_FEATURES").is_ok() {
-        generate_features_list(languages)?;
+        generate_features_list(&config.languages)?;
     }
 
     Ok(())
 } 
 
-pub fn download_langs(languages: &[Language]) -> Result<()> {
+pub fn download_langs(config: &Config) -> Result<()> {
     fs::remove_dir_all("languages")?;
     fs::create_dir_all("languages/temp/helix_queries")?;
+
+    let languages = &config.languages;
 
     Command::new("git")
         .arg("clone")
         .arg("https://github.com/helix-editor/helix")
         .arg("languages/temp/helix_all")
+        .spawn()?
+        .wait()?;
+
+    Command::new("git")
+        .args(["reset", "--hard", &config.helix_sum])
+        .current_dir(
+            std::fs::canonicalize("./languages/temp/helix_all")?
+        )
         .spawn()?
         .wait()?;
 

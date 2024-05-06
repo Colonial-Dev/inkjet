@@ -1,3 +1,6 @@
+# Used to pin the Helix repository to a specific commit, for the benefit of build reproducibility.
+helix_sum = "beb5afc"
+
 [[languages]]
 name = "ada"
 repo = "https://github.com/briot/tree-sitter-ada"
