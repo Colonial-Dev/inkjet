@@ -61,23 +61,6 @@ impl Formatter for TerminalFormatter {
         }
         Ok(())
     }
-
-    fn start<W>(&self, _: &str, _writer: &mut W) -> Result<()>
-    where
-        W: std::fmt::Write,
-    {
-        // No special start formatting needed for terminal output
-        Ok(())
-    }
-
-    fn finish<W>(&self, _: &str, _writer: &mut W) -> Result<()>
-    where
-        W: std::fmt::Write,
-    {
-        // Ensure all colors are reset at the end
-        self.stdout.borrow_mut().reset()?;
-        Ok(())
-    }
 }
 
 fn color_from_hex(hex: &str) -> Option<(u8, u8, u8)> {
