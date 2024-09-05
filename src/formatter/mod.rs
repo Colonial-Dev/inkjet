@@ -6,6 +6,8 @@ mod html;
 mod html_themed;
 #[cfg(feature = "theme")]
 mod theme;
+#[cfg(feature = "theme")]
+mod new_theme;
 
 use tree_sitter_highlight::HighlightEvent;
 
