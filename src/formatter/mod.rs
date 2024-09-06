@@ -5,7 +5,7 @@ mod html;
 #[cfg(feature = "theme")]
 mod html_themed;
 #[cfg(feature = "theme")]
-mod terminal_themed;
+mod terminal;
 #[cfg(feature = "theme")]
 mod theme;
 
@@ -18,7 +18,7 @@ pub use html::*;
 #[cfg(feature = "theme")]
 pub use html_themed::*;
 #[cfg(feature = "theme")]
-pub use terminal_themed::*;
+pub use terminal::*;
 #[cfg(feature = "theme")]
 pub use theme::*;
 
@@ -133,4 +133,3 @@ where
         self.0.write_all(s.as_bytes()).map_err(|_| std::fmt::Error)
     }
 }
-

@@ -1,7 +1,6 @@
 use std::cell::RefCell;
 use std::io::Write;
-use std::sync::Arc;
-use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
+use termcolor::{Color, ColorSpec, StandardStream, WriteColor};
 
 use super::{Formatter, HighlightEvent, Theme};
 use crate::constants::HIGHLIGHT_NAMES;
@@ -11,21 +10,17 @@ use crate::Result;
 ///
 /// - The primary color of each style is used for the text color.
 /// - The secondary color is not used in this formatter.
-///
-/// This formatter holds theme data in an [`Arc<Theme>`], making it cheap to clone and usable
-/// from multiple threads.
-#[derive(Debug)]
-pub struct TerminalFormatter {
-    theme: Arc<Theme>,
-    stdout: RefCell<StandardStream>,
+pub struct Terminal {
+    theme: Theme,
+    stream: RefCell<StandardStream>,
 }
 
-impl TerminalFormatter {
-    /// Create a new [`TerminalFormatter`] with the given theme.
-    pub fn new(theme: Theme) -> Self {
+impl Terminal {
+    /// Create a new [`Terminal`] with the given theme and stream.
+    pub fn new(theme: Theme, stream: StandardStream) -> Self {
         Self {
-            theme: Arc::new(theme),
-            stdout: RefCell::new(StandardStream::stdout(ColorChoice::Always)),
+            theme,
+            stream: RefCell::new(stream),
         }
     }
 
@@ -35,7 +30,7 @@ impl TerminalFormatter {
     }
 }
 
-impl Formatter for TerminalFormatter {
+impl Formatter for Terminal {
     fn write<W>(&self, source: &str, _writer: &mut W, event: HighlightEvent) -> Result<()>
     where
         W: std::fmt::Write,
@@ -43,22 +38,28 @@ impl Formatter for TerminalFormatter {
         match event {
             HighlightEvent::Source { start, end } => {
                 let text = &source[start..end];
-                let mut stdout = self.stdout.borrow_mut();
-                stdout.write_all(text.as_bytes())?;
-                stdout.flush()?;
+                self.stream.borrow_mut().write_all(text.as_bytes())?;
             }
             HighlightEvent::HighlightStart(highlight) => {
                 let style_name = HIGHLIGHT_NAMES[highlight.0];
                 let style = self.theme.get_style(style_name);
                 let color = self.color_from_hex(&style.primary_color);
-                self.stdout
+                self.stream
                     .borrow_mut()
                     .set_color(ColorSpec::new().set_fg(Some(color)))?;
             }
             HighlightEvent::HighlightEnd => {
-                self.stdout.borrow_mut().reset()?;
+                self.stream.borrow_mut().reset()?;
             }
         }
+        Ok(())
+    }
+
+    fn finish<W>(&self, _source: &str, _writer: &mut W) -> Result<()>
+    where
+        W: std::fmt::Write,
+    {
+        self.stream.borrow_mut().flush()?;
         Ok(())
     }
 }
