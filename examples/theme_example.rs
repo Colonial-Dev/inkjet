@@ -7,7 +7,7 @@ fn main() {
     );
 }
 
-fn create_theme() -> Theme {
+pub fn create_theme() -> Theme {
     let mut theme = Theme::new(Style {
         primary_color: "#FFFFFF".to_string(),
         secondary_color: "#1E1E1E".to_string(),
