@@ -30,7 +30,7 @@ pub enum InkjetError {
     #[cfg(feature = "theme")]
     #[error("malformed hex byte: {0}")]
     InvalidHexByte(#[from] std::num::ParseIntError),
-    /// Generated when a [`Style`](crate::formatter::theme::Style) points to a palette color that does not exist.
+    /// Generated when a [`Style`](crate::formatter::Style) points to a palette color that does not exist.
     #[cfg(feature = "theme")]
     #[error("dangling color reference: {0}")]
     DanglingColorReference(String),

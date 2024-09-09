@@ -3,7 +3,7 @@
 BUILD=cargo build --all-features -vv
 
 must_specify:
-	@echo "Must specify redownload [languages], regenerate [languages], or [regenerate] features"
+	@echo "Must specify redownload [languages], regenerate [languages], [regenerate] features, or regenerate [themes]"
 
 redownload:
 	INKJET_REDOWNLOAD_LANGS=true $(BUILD)
@@ -13,3 +13,6 @@ regenerate:
 
 features:
 	INKJET_REBUILD_FEATURES=true $(BUILD)
+
+themes:
+	INKJET_REBUILD_THEMES=true $(BUILD)

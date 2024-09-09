@@ -1,7 +1,10 @@
+pub mod vendored;
+
 use ahash::{
     HashMap, HashMapExt,
     HashSet, HashSetExt,
 };
+
 use serde::Deserialize;
 
 use crate::constants::HIGHLIGHT_NAMES; 
