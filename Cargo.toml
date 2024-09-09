@@ -8,12 +8,7 @@ description = "A batteries-included syntax highlighting library for Rust, based 
 keywords = ["tree-sitter", "syntax", "highlighting", "highlight"]
 categories = ["text-processing"]
 
-include  = [
-	"/config",
-	"/languages/*",
-	"/src",
-	"/build"
-]
+include = ["/config", "/languages/*", "/src", "/build"]
 
 build = "build/main.rs"
 
@@ -26,89 +21,95 @@ default = ["html", "theme", "all_languages"]
 
 html = ["dep:v_htmlescape"]
 theme = ["html", "dep:ahash", "dep:toml", "dep:serde"]
-development = ["dep:syn", "dep:proc-macro2", "dep:quote", "dep:prettyplease", "dep:fs_extra"]
+development = [
+  "dep:syn",
+  "dep:proc-macro2",
+  "dep:quote",
+  "dep:prettyplease",
+  "dep:fs_extra",
+]
 
 all_languages = [
-    "language-ada",
-    "language-asm",
-    "language-astro",
-    "language-awk",
-    "language-bash",
-    "language-bibtex",
-    "language-bicep",
-    "language-blueprint",
-    "language-c",
-    "language-capnp",
-    "language-clojure",
-    "language-c-sharp",
-    "language-commonlisp",
-    "language-cpp",
-    "language-css",
-    "language-cue",
-    "language-d",
-    "language-dart",
-    "language-diff",
-    "language-dockerfile",
-    "language-eex",
-    "language-elisp",
-    "language-elixir",
-    "language-elm",
-    "language-erlang",
-    "language-forth",
-    "language-fortran",
-    "language-gdscript",
-    "language-gleam",
-    "language-glsl",
-    "language-go",
-    "language-haskell",
-    "language-hcl",
-    "language-heex",
-    "language-html",
-    "language-iex",
-    "language-ini",
-    "language-java",
-    "language-javascript",
-    "language-json",
-    "language-jsx",
-    "language-kotlin",
-    "language-latex",
-    "language-llvm",
-    "language-lua",
-    "language-make",
-    "language-matlab",
-    "language-meson",
-    "language-nim",
-    "language-nix",
-    "language-objc",
-    "language-ocaml",
-    "language-ocaml-interface",
-    "language-openscad",
-    "language-pascal",
-    "language-php",
-    "language-plaintext",
-    "language-proto",
-    "language-python",
-    "language-r",
-    "language-racket",
-    "language-regex",
-    "language-ruby",
-    "language-rust",
-    "language-scala",
-    "language-scheme",
-    "language-scss",
-    "language-sql",
-    "language-svelte",
-    "language-swift",
-    "language-toml",
-    "language-typescript",
-    "language-tsx",
-    "language-vim",
-    "language-wast",
-    "language-wat",
-    "language-x86asm",
-    "language-wgsl",
-    "language-yaml",
-    "language-zig",
+  "language-ada",
+  "language-asm",
+  "language-astro",
+  "language-awk",
+  "language-bash",
+  "language-bibtex",
+  "language-bicep",
+  "language-blueprint",
+  "language-c",
+  "language-capnp",
+  "language-clojure",
+  "language-c-sharp",
+  "language-commonlisp",
+  "language-cpp",
+  "language-css",
+  "language-cue",
+  "language-d",
+  "language-dart",
+  "language-diff",
+  "language-dockerfile",
+  "language-eex",
+  "language-elisp",
+  "language-elixir",
+  "language-elm",
+  "language-erlang",
+  "language-forth",
+  "language-fortran",
+  "language-gdscript",
+  "language-gleam",
+  "language-glsl",
+  "language-go",
+  "language-haskell",
+  "language-hcl",
+  "language-heex",
+  "language-html",
+  "language-iex",
+  "language-ini",
+  "language-java",
+  "language-javascript",
+  "language-json",
+  "language-jsx",
+  "language-kotlin",
+  "language-latex",
+  "language-llvm",
+  "language-lua",
+  "language-make",
+  "language-matlab",
+  "language-meson",
+  "language-nim",
+  "language-nix",
+  "language-objc",
+  "language-ocaml",
+  "language-ocaml-interface",
+  "language-openscad",
+  "language-pascal",
+  "language-php",
+  "language-plaintext",
+  "language-proto",
+  "language-python",
+  "language-r",
+  "language-racket",
+  "language-regex",
+  "language-ruby",
+  "language-rust",
+  "language-scala",
+  "language-scheme",
+  "language-scss",
+  "language-sql",
+  "language-svelte",
+  "language-swift",
+  "language-toml",
+  "language-typescript",
+  "language-tsx",
+  "language-vim",
+  "language-wast",
+  "language-wat",
+  "language-x86asm",
+  "language-wgsl",
+  "language-yaml",
+  "language-zig",
 ]
 
 language-ada = []
@@ -200,11 +201,12 @@ tree-sitter-highlight = "0.23.0"
 
 ahash = { version = "0.8.3", optional = true }
 toml = { version = "0.7", optional = true }
-serde = { version = "1.0", features = ["derive"], optional = true}
+serde = { version = "1.0", features = ["derive"], optional = true }
 v_htmlescape = { version = "0.15.8", optional = true }
+termcolor = "1.4.1"
 
 [build-dependencies]
-syn = { version = "2.0.37", features = ["full", "parsing"], optional = true}
+syn = { version = "2.0.37", features = ["full", "parsing"], optional = true }
 proc-macro2 = { version = "1.0.67", optional = true }
 quote = { version = "1.0.33", optional = true }
 prettyplease = { version = "0.2.15", optional = true }
@@ -214,3 +216,7 @@ anyhow = "1.0.75"
 cc = "1.0.83"
 serde = { version = "1.0", features = ["derive"] }
 toml = "0.8.6"
+
+[[example]]
+name = "terminal_highlight"
+required-features = ["theme"]
