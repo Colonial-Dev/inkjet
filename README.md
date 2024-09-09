@@ -14,6 +14,7 @@
 
 - Language grammars are linked into the executable as C functions - no need to load anything at runtime!
 - Pluggable formatters. Inkjet includes a formatter for HTML, and writing your own is easy.
+- Support for [Helix editor themes](https://docs.helix-editor.com/themes.html#modifiers), including a large collection of vendored themes to get you started.
 - Highlight into a new `String` or a `std::io::Write`/`std::fmt::Write`, depending on your use case.
 - Specify languages explicitly (from an `enum`) or look them up using a token like `"rs"` or `"rust"`.
 - ~~Extremely cursed `build.rs`~~
@@ -156,11 +157,13 @@ However, if you have forked the repository and want to update the bundled langua
   - Currently, this only works on *nix. You will need `git`, `sed` and `wget` installed. (Git clones the grammar repositories, while `sed` and `wget` are used in miniature setup scripts for some languages.)
 - `make regenerate` will wipe `src/languages.rs` and regenerate it from scratch.
 - `make features` will generate a file called `features` in the crate root, containing all the individual language features (ready to be pasted into `Cargo.toml`.)
+- `make themes` will regenerate the `mod.rs` file in `src/theme/vendored` using the contents of the `data/` directory.
 
 If, for whatever reason, you don't have GNU Make available: you can also perform these actions manually by setting the appropriate environment variables and Cargo flags:
 - `INKJET_REDOWNLOAD_LANGS=true` for `make redownload`.
 - `INKJET_REBUILD_LANGS_MODULE=true` for `make regenerate`.
 - `INKJET_REBUILD_FEATURES=true` for `make features`.
+- `INKJET_REBUILD_THEMES=true` for `make themes`.
 Run `cargo build --all-features` with these set. (The development portions of the build script are feature gated by default.)
 
 ## Acknowledgements

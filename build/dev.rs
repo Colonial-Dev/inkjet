@@ -196,7 +196,7 @@ pub fn generate_themes_module() -> Result<()> {
 
     let mut themes = vec![];
 
-    for entry in std::fs::read_dir("src/formatter/theme/vendored/data")? {
+    for entry in std::fs::read_dir("src/theme/vendored/data")? {
         let entry = entry?;
         let path  = entry.path();
 
@@ -213,7 +213,7 @@ pub fn generate_themes_module() -> Result<()> {
         themes.push(stem)
     }
 
-    let mut file = File::create("src/formatter/theme/vendored/mod.rs")?;
+    let mut file = File::create("src/theme/vendored/mod.rs")?;
 
     let include_path = |query| -> TokenStream {
         let path = format!("./data/{query}.toml");

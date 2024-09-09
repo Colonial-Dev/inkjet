@@ -21,8 +21,7 @@ pub enum InkjetError {
     #[error("TOML deserialization error: {0}")]
     Toml(#[from] toml::de::Error),
     #[cfg(feature = "theme")]
-    /// Generated when a theme contains a malformed hex code
-    /// - (e.g. too short or containing non-ASCII characters.)
+    /// Generated when a theme contains a malformed hex code - e.g. too short or containing non-ASCII characters.
     #[error("malformed hex code: {0}")]
     InvalidHexCode(String),
     /// Generated when an individual byte in a hex code (such as `FF`)
@@ -30,7 +29,7 @@ pub enum InkjetError {
     #[cfg(feature = "theme")]
     #[error("malformed hex byte: {0}")]
     InvalidHexByte(#[from] std::num::ParseIntError),
-    /// Generated when a [`Style`](crate::formatter::Style) points to a palette color that does not exist.
+    /// Generated when a [`Style`](crate::theme::Style) points to a palette color that does not exist.
     #[cfg(feature = "theme")]
     #[error("dangling color reference: {0}")]
     DanglingColorReference(String),

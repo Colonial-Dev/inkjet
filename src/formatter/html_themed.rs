@@ -1,7 +1,8 @@
 use std::sync::Arc;
 
-use super::{Theme, Formatter, HighlightEvent};
+use super::{Formatter, HighlightEvent};
 
+use crate::theme::Theme;
 use crate::constants::HIGHLIGHT_NAMES;
 use crate::Result;
 

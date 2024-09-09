@@ -1,3 +1,13 @@
+### 0.11.0
+- (Improvement, **breaking**) - the `Theme` API has been rebuilt to work with [Helix editor themes](https://docs.helix-editor.com/themes.html#modifiers) instead of the previous bespoke implementation.
+  - The `theme` module has been hoisted out of the `formatter` module, and now lives at the crate root.
+  - The new `theme::vendored` module includes a large collection of themes (in TOML definition format) vendored from the Helix project.
+  - The `ThemedHtml` formatter has been reworked to use the new `Theme` API.
+- (Improvement) - a new `Terminal` formatter (using the `termcolor` crate) has been added. (@guilhermeprokisch)
+- Updated `tree-sitter` to `0.23.0`. (@leandrocp)
+- Updated languages:
+  - ?
+
 ### 0.10.5
 - Add Objective C language.
 - Updated Rust, Svelte, and Python languages.

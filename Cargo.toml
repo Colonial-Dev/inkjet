@@ -25,7 +25,7 @@ rustdoc-args = ["--cfg", "docsrs"]
 default = ["html", "theme", "all_languages"]
 
 html = ["dep:v_htmlescape"]
-theme = ["html", "dep:ahash", "dep:toml", "dep:serde"]
+theme = ["dep:ahash", "dep:toml", "dep:serde"]
 development = ["dep:syn", "dep:proc-macro2", "dep:quote", "dep:prettyplease", "dep:fs_extra"]
 
 all_languages = [

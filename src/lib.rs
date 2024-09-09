@@ -98,7 +98,7 @@
 //! 
 //! ## Cargo Features
 //! - (Default) `html` - enables the bundled HTML formatter, which depends on `v_htmlescape` and the `theme` feature.
-//! - (Default) `theme` - enables the theme API, which depends on the `html` feature, `ahash`, `toml` and `serde`.
+//! - (Default) `theme` - enables the theme API, which depends on `ahash`, `toml` and `serde`.
 //! - (Default) `all-languages` - enables all languages.
 //! - `language-{name}` - enables the specified language.
 //!   - If you want to only enable a subset of the included languages, you'll have to set `default-features=false` and manually re-add each language you want to use.
@@ -112,6 +112,8 @@ mod error;
 mod languages;
 pub mod constants;
 pub mod formatter;
+#[cfg(feature = "theme")]
+pub mod theme;
 
 use tree_sitter_highlight::{
     Highlighter as TSHighlighter,
