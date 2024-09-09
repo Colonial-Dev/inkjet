@@ -2,12 +2,12 @@
 
 #[cfg(feature = "html")]
 mod html;
-#[cfg(feature = "theme")]
+#[cfg(all(
+    feature = "html", feature = "theme")
+)]
 mod html_themed;
 #[cfg(feature = "theme")]
 mod theme;
-#[cfg(feature = "theme")]
-mod new_theme;
 
 use tree_sitter_highlight::HighlightEvent;
 
@@ -15,7 +15,9 @@ use crate::error::InkjetResult as Result;
 
 #[cfg(feature = "html")]
 pub use html::*;
-#[cfg(feature = "theme")]
+#[cfg(all(
+    feature = "html", feature = "theme")
+)]
 pub use html_themed::*;
 #[cfg(feature = "theme")]
 pub use theme::*;

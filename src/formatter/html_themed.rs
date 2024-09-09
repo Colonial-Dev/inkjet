@@ -5,9 +5,10 @@ use super::{Theme, Formatter, HighlightEvent};
 use crate::constants::HIGHLIGHT_NAMES;
 use crate::Result;
 
+// TODO respect modifiers and underlines
 /// A formatter for highlighting into HTML with inline styles.
 /// 
-/// - The secondary color of the default style is used for the background.
+/// - The default background of the theme is used for the background.
 /// - The primary color of each style is used for the text.
 /// 
 /// Example output:
@@ -42,12 +43,17 @@ impl Formatter for ThemedHtml {
             },
             HighlightEvent::HighlightStart(idx) => {
                 let name = HIGHLIGHT_NAMES[idx.0];
-                let style = self.0.get_style(name);
+
+                let color = self
+                    .0
+                    .get_style(name)
+                    .and_then(|s| s.fg )
+                    .unwrap_or(self.0.fg);
 
                 write!(
                     writer,
                     "<span style=\"color:{}\">",
-                    style.primary_color
+                    color.into_hex()
                 )?;
             },
             HighlightEvent::HighlightEnd => {
@@ -65,7 +71,7 @@ impl Formatter for ThemedHtml {
         writeln!(
             writer,
             "<pre style=\"background-color: {};\">",
-            self.0.default_style.secondary_color,
+            self.0.bg.into_hex(),
         )?;
 
         Ok(())
@@ -83,4 +89,3 @@ impl Formatter for ThemedHtml {
         Ok(())
     }
 }
-
