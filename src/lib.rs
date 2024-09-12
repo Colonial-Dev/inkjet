@@ -40,6 +40,7 @@
 //! | Erlang | `erl`, `hrl`, `es`, `escript` |
 //! | Forth | `forth`, `fth` |
 //! | Fortran | `fortran`, `for` |
+//! | Fish | `fish` |
 //! | GDScript | `gdscript`, `gd` |
 //! | Gleam | `gleam` |
 //! | GLSL | `glsl` |
@@ -129,9 +130,11 @@ pub use crate::languages::Language;
 
 pub use crate::error::{
     InkjetError,
-    ThemeError,
     InkjetResult as Result
 };
+
+#[cfg(feature = "theme")]
+pub use crate::error::ThemeError;
 
 /// A type for highlighting code.
 /// 

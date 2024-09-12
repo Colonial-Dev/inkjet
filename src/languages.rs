@@ -1280,6 +1280,52 @@ pub mod fortran {
         }
     }
 }
+#[cfg(feature = "language-fish")]
+pub mod fish {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_fish() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_fish() },
+                "fish",
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'fish'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/fish/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { &tree_sitter_fish() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
 #[cfg(feature = "language-gdscript")]
 pub mod gdscript {
     use once_cell::sync::Lazy;
@@ -3895,6 +3941,8 @@ pub enum Language {
     Forth,
     #[cfg(feature = "language-fortran")]
     Fortran,
+    #[cfg(feature = "language-fish")]
+    Fish,
     #[cfg(feature = "language-gdscript")]
     Gdscript,
     #[cfg(feature = "language-gleam")]
@@ -4057,6 +4105,8 @@ impl Language {
         Self::Forth,
         #[cfg(feature = "language-fortran")]
         Self::Fortran,
+        #[cfg(feature = "language-fish")]
+        Self::Fish,
         #[cfg(feature = "language-gdscript")]
         Self::Gdscript,
         #[cfg(feature = "language-gleam")]
@@ -4301,6 +4351,8 @@ impl Language {
             "fortran" => Some(Self::Fortran),
             #[cfg(feature = "language-fortran")]
             "for" => Some(Self::Fortran),
+            #[cfg(feature = "language-fish")]
+            "fish" => Some(Self::Fish),
             #[cfg(feature = "language-gdscript")]
             "gdscript" => Some(Self::Gdscript),
             #[cfg(feature = "language-gdscript")]
@@ -4525,6 +4577,8 @@ impl Language {
             Self::Forth => &forth::CONFIG,
             #[cfg(feature = "language-fortran")]
             Self::Fortran => &fortran::CONFIG,
+            #[cfg(feature = "language-fish")]
+            Self::Fish => &fish::CONFIG,
             #[cfg(feature = "language-gdscript")]
             Self::Gdscript => &gdscript::CONFIG,
             #[cfg(feature = "language-gleam")]

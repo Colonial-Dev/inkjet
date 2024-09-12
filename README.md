@@ -55,6 +55,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | Erlang | `erl`, `hrl`, `es`, `escript` |
 | Forth | `forth`, `fth` |
 | Fortran | `fortran`, `for` |
+| Fish | `fish` |
 | GDScript | `gdscript`, `gd` |
 | Gleam | `gleam` |
 | GLSL | `glsl` |

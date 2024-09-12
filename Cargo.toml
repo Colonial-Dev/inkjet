@@ -53,6 +53,7 @@ all_languages = [
   "language-erlang",
   "language-forth",
   "language-fortran",
+  "language-fish",
   "language-gdscript",
   "language-gleam",
   "language-glsl",
@@ -135,6 +136,7 @@ language-elm = []
 language-erlang = []
 language-forth = []
 language-fortran = []
+language-fish = []
 language-gdscript = []
 language-gleam = []
 language-glsl = []

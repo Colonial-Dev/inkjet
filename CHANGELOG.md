@@ -6,6 +6,7 @@
   - The `theme` and `html` features are no longer mutually dependent.
 - (Improvement) - a new `Terminal` formatter (using the `termcolor` crate) has been added. (@guilhermeprokisch)
 - Updated `tree-sitter` to `0.23.0`. (@leandrocp)
+- Added Fish (shell) language.
 - Updated languages:
   - ?
 

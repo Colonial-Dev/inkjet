@@ -171,6 +171,12 @@ hash = "f73d473"
 aliases = ["for"]
 helix_override = true
 
+[[languages]]
+name = "fish"
+repo = "https://github.com/ram02z/tree-sitter-fish"
+hash = "a78aef9"
+helix_override = true
+
 # [[languages]]
 # name = "fsharp"
 # repo = "https://github.com/Nsidorenco/tree-sitter-fsharp"
