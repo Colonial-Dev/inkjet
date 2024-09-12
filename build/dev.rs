@@ -5,33 +5,47 @@ use std::process::Command;
 use anyhow::Result;
 use fs_extra::dir::{self, CopyOptions};
 
-use crate::codegen;
+use crate::{codegen, Config};
 use crate::Language;
 
-pub fn check(languages: &[Language]) -> Result<()> {
+pub fn check(config: &Config) -> Result<()> {
     if std::env::var("INKJET_REDOWNLOAD_LANGS").is_ok() {
-        download_langs(languages)?;
+        download_langs(config)?;
     }
 
     if std::env::var("INKJET_REBUILD_LANGS_MODULE").is_ok() {
-        generate_langs_module(languages)?;
+        generate_langs_module(&config.languages)?;
     }
 
     if std::env::var("INKJET_REBUILD_FEATURES").is_ok() {
-        generate_features_list(languages)?;
+        generate_features_list(&config.languages)?;
+    }
+
+    if std::env::var("INKJET_REBUILD_THEMES").is_ok() {
+        generate_themes_module()?;
     }
 
     Ok(())
 } 
 
-pub fn download_langs(languages: &[Language]) -> Result<()> {
+pub fn download_langs(config: &Config) -> Result<()> {
     fs::remove_dir_all("languages")?;
     fs::create_dir_all("languages/temp/helix_queries")?;
+
+    let languages = &config.languages;
 
     Command::new("git")
         .arg("clone")
         .arg("https://github.com/helix-editor/helix")
         .arg("languages/temp/helix_all")
+        .spawn()?
+        .wait()?;
+
+    Command::new("git")
+        .args(["reset", "--hard", &config.helix_sum])
+        .current_dir(
+            std::fs::canonicalize("./languages/temp/helix_all")?
+        )
         .spawn()?
         .wait()?;
 
@@ -170,6 +184,75 @@ pub fn generate_features_list(languages: &[Language]) -> Result<()> {
             {features_buffer}
         "
     )?;
+
+    Ok(())
+}
+
+pub fn generate_themes_module() -> Result<()> {
+    use std::ffi::OsStr;
+    use std::path::Path;
+
+    use proc_macro2::TokenStream;
+
+    let mut themes = vec![];
+
+    for entry in std::fs::read_dir("src/theme/vendored/data")? {
+        let entry = entry?;
+        let path  = entry.path();
+
+        if path.extension() != Some( OsStr::new("toml") ) {
+            continue;
+        }
+
+        let stem = path
+            .file_stem()
+            .expect("File should have a stem")
+            .to_string_lossy()
+            .to_string();
+
+        themes.push(stem)
+    }
+
+    let mut file = File::create("src/theme/vendored/mod.rs")?;
+
+    let include_path = |query| -> TokenStream {
+        let path = format!("./data/{query}.toml");
+
+        let query = format!("include_str!(\"{}\")", &path);
+
+        query.parse().unwrap()
+    };
+
+    let module_start = quote::quote! {
+        //! A collection of theme definitions vendored from the Helix editor project. View previews [here](https://github.com/helix-editor/helix/wiki/Themes).
+        #![allow(dead_code)]
+    };
+
+    let themes = themes
+        .into_iter()
+        .map(|t| {
+            let name = quote::format_ident!(
+                "{}",
+                t.replace('-', "_").to_uppercase()
+            );
+
+            let path = include_path(t);
+
+            quote::quote! {
+                pub const #name: &str = #path;
+            }
+        });
+
+    let combined = quote::quote!{
+        #module_start
+        #(#themes)*
+    };
+
+    let combined = format!("{combined}");
+    let combined = syn::parse_file(&combined).unwrap();
+    let combined = prettyplease::unparse(&combined);
+
+    write!(&mut file, "{}", combined)?;
 
     Ok(())
 }

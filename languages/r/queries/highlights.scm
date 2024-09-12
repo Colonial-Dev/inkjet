@@ -1,128 +1,112 @@
 ; highlights.scm
 
-
 ; Literals
 
-(integer) @constant.numeric.integer
-
-(float) @constant.numeric.float
-
-(complex) @constant.numeric.integer
+(integer) @number
+(float) @number
+(complex) @number
 
 (string) @string
-(string (escape_sequence) @constant.character.escape)
+(string (string_content (escape_sequence) @string.escape))
+
+; Comments
 
 (comment) @comment
 
-(formal_parameters (identifier) @variable.parameter)
-(formal_parameters (default_parameter (identifier) @variable.parameter))
-
 ; Operators
+
 [
- "="
- "<-"
- "<<-"
- "->>"
- "->"
+  "?" ":=" "=" "<-" "<<-" "->" "->>"
+  "~" "|>" "||" "|" "&&" "&"
+  "<" "<=" ">" ">=" "==" "!="
+  "+" "-" "*" "/" "::" ":::"
+  "**" "^" "$" "@" ":"
+  "special"
 ] @operator
 
-(unary operator: [
-  "-"
-  "+"
-  "!"
-  "~"
-] @operator)
-
-(binary operator: [
-  "-"
-  "+"
-  "*"
-  "/"
-  "^"
-  "<"
-  ">"
-  "<="
-  ">="
-  "=="
-  "!="
-  "||"
-  "|"
-  "&&"
-  "&"
-  ":"
-  "~"
-] @operator)
+; Punctuation
 
 [
-  "|>"
-  (special)
-] @operator
-
-(lambda_function "\\" @operator)
-
-[
- "("
- ")"
- "["
- "]"
- "{"
- "}"
+  "("  ")"
+  "{"  "}"
+  "["  "]"
+  "[[" "]]"
 ] @punctuation.bracket
 
-(dollar "$" @operator)
+(comma) @punctuation.delimiter
 
-(subset2
- [
-  "[["
-  "]]"
- ] @punctuation.bracket)
+; Variables
+
+(identifier) @variable
+
+; Functions
+
+(binary_operator
+    lhs: (identifier) @function
+    operator: "<-"
+    rhs: (function_definition)
+)
+
+(binary_operator
+    lhs: (identifier) @function
+    operator: "="
+    rhs: (function_definition)
+)
+
+; Calls
+
+(call function: (identifier) @function)
+
+; Parameters
+
+(parameters (parameter name: (identifier) @variable.parameter))
+(arguments (argument name: (identifier) @variable.parameter))
+
+; Namespace
+
+(namespace_operator lhs: (identifier) @namespace)
+
+(call
+    function: (namespace_operator rhs: (identifier) @function)
+)
+
+; Keywords
+
+(function_definition name: "function" @keyword.function)
+(function_definition name: "\\" @operator)
 
 [
- "in"
- (dots)
- (break)
- (next)
- (inf)
+  "in"
+  (return)
+  (next)
+  (break)
 ] @keyword
-
-[
-  (nan)
-  (na)
-  (null)
-] @type.builtin
 
 [
   "if"
   "else"
-  "switch"
-] @keyword.control.conditional
+] @conditional
 
 [
   "while"
   "repeat"
   "for"
-] @keyword.control.repeat
+] @repeat
 
 [
   (true)
   (false)
-] @constant.builtin.boolean
+] @boolean
 
-"function" @keyword.function
-
-(call function: (identifier) @function)
-(default_argument name: (identifier) @variable.parameter)
-
-
-(namespace_get namespace: (identifier) @namespace
- "::" @operator)
-(namespace_get_internal namespace: (identifier) @namespace
- ":::" @operator)
-
-(namespace_get function: (identifier) @function.method)
-(namespace_get_internal function: (identifier) @function.method)
-
-(identifier) @variable
+[
+  (null)
+  (inf)
+  (nan)
+  (na)
+  (dots)
+  (dot_dot_i)
+] @constant.builtin
 
 ; Error
+
 (ERROR) @error

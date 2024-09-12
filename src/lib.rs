@@ -3,6 +3,7 @@
 //! ## Getting Started
 //! 
 //! - To get started with highlighting, take a look at the [`Highlighter`] type.
+//! - See the [`formatter`] module for the output options bundled with Inkjet, and the [`theme`] module for the optional theming API.
 //! - If you'd like to write your own formatter, see the [`Formatter`] trait.
 //! 
 //! ## Included Languages
@@ -16,7 +17,7 @@
 //! | Assembly (generic) | `asm` |
 //! | Astro | `astro` |
 //! | Awk | `awk` |
-//! | Bash | `bash` |
+//! | Bash | `bash`, `sh`, `shell` |
 //! | BibTeX | `bibtex`, `bib` |
 //! | Bicep | `bicep` |
 //! | Blueprint | `blueprint`, `blp` |
@@ -39,6 +40,7 @@
 //! | Erlang | `erl`, `hrl`, `es`, `escript` |
 //! | Forth | `forth`, `fth` |
 //! | Fortran | `fortran`, `for` |
+//! | Fish | `fish` |
 //! | GDScript | `gdscript`, `gd` |
 //! | Gleam | `gleam` |
 //! | GLSL | `glsl` |
@@ -52,6 +54,7 @@
 //! | JavaScript | `javascript`, `js` |
 //! | JSON | `json` |
 //! | JSX | `jsx` |
+//! | Julia | `julia`, `jl` |
 //! | Kotlin | `kotlin`, `kt`, `kts` |
 //! | LaTeX | `latex`, `tex` |
 //! | LLVM | `llvm` |
@@ -98,7 +101,7 @@
 //! 
 //! ## Cargo Features
 //! - (Default) `html` - enables the bundled HTML formatter, which depends on `v_htmlescape` and the `theme` feature.
-//! - (Default) `theme` - enables the theme API, which depends on the `html` feature, `ahash`, `toml` and `serde`.
+//! - (Default) `theme` - enables the theme API, which depends on `ahash`, `toml` and `serde`.
 //! - (Default) `all-languages` - enables all languages.
 //! - `language-{name}` - enables the specified language.
 //!   - If you want to only enable a subset of the included languages, you'll have to set `default-features=false` and manually re-add each language you want to use.
@@ -112,6 +115,8 @@ mod error;
 mod languages;
 pub mod constants;
 pub mod formatter;
+#[cfg(feature = "theme")]
+pub mod theme;
 
 use tree_sitter_highlight::{
     Highlighter as TSHighlighter,
@@ -128,6 +133,9 @@ pub use crate::error::{
     InkjetError,
     InkjetResult as Result
 };
+
+#[cfg(feature = "theme")]
+pub use crate::error::ThemeError;
 
 /// A type for highlighting code.
 /// 

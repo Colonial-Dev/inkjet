@@ -13,7 +13,7 @@ pub fn languages_enum_def(languages: &[Language]) -> TokenStream {
         .iter()
         .filter(|lang| lang.name != "plaintext")
         .map(Language::feature);
-    
+
     quote! {
         /// The set of all languages supported by Inkjet.
         #[non_exhaustive]
@@ -22,7 +22,7 @@ pub fn languages_enum_def(languages: &[Language]) -> TokenStream {
             /// A language resolved at runtime using the provided function pointer.
             ///
             /// This allows languages not statically known to Inkjet to be used in formatting.
-            /// 
+            ///
             /// # Examples
             /// ```rust
             /// # use inkjet::tree_sitter_highlight::HighlightConfiguration;
@@ -32,15 +32,15 @@ pub fn languages_enum_def(languages: &[Language]) -> TokenStream {
             /// fn rust_config() -> &'static HighlightConfiguration {
             ///     Language::Rust.config()
             /// }
-            /// 
+            ///
             /// let code = r#"
             ///     fn main() {
             ///         println!("Hello, world!");
             ///     }
             /// "#;
-            /// 
+            ///
             /// let mut highlighter = Highlighter::new();
-            /// 
+            ///
             /// let _string = highlighter.highlight_to_string(
             ///     Language::Runtime(rust_config),
             ///     &formatter::Html,
@@ -62,7 +62,7 @@ pub fn languages_impl_def(languages: &[Language]) -> TokenStream {
         .iter()
         .map(Language::pretty_name)
         .collect();
-    
+
     let features: Vec<_> = languages
         .iter()
         .map(Language::feature)
@@ -94,12 +94,12 @@ pub fn languages_impl_def(languages: &[Language]) -> TokenStream {
 
     let from_token = quote! {
         /// Attempts to convert a string token (such as `rust` or `rs`) into the corresponding language.
-        /// 
+        ///
         /// Returns [`None`] if the language was not found.
-        /// 
+        ///
         /// The tokens for each language are sourced from its `name` and `aliases` keys in
         /// `build/languages.toml`.
-        /// 
+        ///
         /// # Example
         /// ```rust
         /// # use inkjet::Language;
@@ -164,6 +164,7 @@ pub fn language_module_def(lang: &Language) -> TokenStream {
 
     let feature = lang.feature();
     let name = quote::format_ident!("{name}");
+    let hl_config_name = format!("{name}");
     let ts_ffi = quote::format_ident!("tree_sitter_{name}");
     let error = format!("\"Failed to load highlight configuration for language '{name}'\"");
 
@@ -183,6 +184,7 @@ pub fn language_module_def(lang: &Language) -> TokenStream {
             pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
                 let mut config = HighlightConfiguration::new(
                     unsafe { #ts_ffi() },
+                    #hl_config_name,
                     HIGHLIGHT_QUERY,
                     INJECTIONS_QUERY,
                     LOCALS_QUERY,
@@ -206,7 +208,7 @@ pub fn language_module_def(lang: &Language) -> TokenStream {
                 fn grammar_loading() {
                     let mut parser = tree_sitter::Parser::new();
                     parser
-                        .set_language(unsafe { #ts_ffi() })
+                        .set_language(unsafe { &#ts_ffi() })
                         .expect("Grammar should load successfully.");
                 }
 

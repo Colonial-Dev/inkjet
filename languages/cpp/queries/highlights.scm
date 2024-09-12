@@ -18,10 +18,6 @@
     name: (identifier) @function))
 
 (function_declarator
-  declarator: (qualified_identifier
-    name: (identifier) @function))
-
-(function_declarator
   declarator: (field_identifier) @function)
 
 ; Types
@@ -64,9 +60,9 @@
  "try"
  "typename"
  "using"
- "virtual"
  "concept"
  "requires"
+ "virtual"
 ] @keyword
 
 ; Strings

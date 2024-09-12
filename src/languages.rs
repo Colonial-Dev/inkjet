@@ -14,6 +14,7 @@ pub mod ada {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_ada() },
+                "ada",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -35,7 +36,7 @@ pub mod ada {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_ada() })
+                .set_language(unsafe { &tree_sitter_ada() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -59,6 +60,7 @@ pub mod asm {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_asm() },
+                "asm",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -78,7 +80,7 @@ pub mod asm {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_asm() })
+                .set_language(unsafe { &tree_sitter_asm() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -102,6 +104,7 @@ pub mod astro {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_astro() },
+                "astro",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -125,7 +128,7 @@ pub mod astro {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_astro() })
+                .set_language(unsafe { &tree_sitter_astro() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -149,6 +152,7 @@ pub mod awk {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_awk() },
+                "awk",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -172,7 +176,7 @@ pub mod awk {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_awk() })
+                .set_language(unsafe { &tree_sitter_awk() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -196,6 +200,7 @@ pub mod bash {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_bash() },
+                "bash",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -217,7 +222,7 @@ pub mod bash {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_bash() })
+                .set_language(unsafe { &tree_sitter_bash() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -241,6 +246,7 @@ pub mod bibtex {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_bibtex() },
+                "bibtex",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -264,7 +270,7 @@ pub mod bibtex {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_bibtex() })
+                .set_language(unsafe { &tree_sitter_bibtex() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -288,6 +294,7 @@ pub mod bicep {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_bicep() },
+                "bicep",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -311,7 +318,7 @@ pub mod bicep {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_bicep() })
+                .set_language(unsafe { &tree_sitter_bicep() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -335,6 +342,7 @@ pub mod blueprint {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_blueprint() },
+                "blueprint",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -358,7 +366,7 @@ pub mod blueprint {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_blueprint() })
+                .set_language(unsafe { &tree_sitter_blueprint() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -382,6 +390,7 @@ pub mod c {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_c() },
+                "c",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -405,7 +414,7 @@ pub mod c {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_c() })
+                .set_language(unsafe { &tree_sitter_c() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -429,6 +438,7 @@ pub mod capnp {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_capnp() },
+                "capnp",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -452,7 +462,7 @@ pub mod capnp {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_capnp() })
+                .set_language(unsafe { &tree_sitter_capnp() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -476,6 +486,7 @@ pub mod clojure {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_clojure() },
+                "clojure",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -499,7 +510,7 @@ pub mod clojure {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_clojure() })
+                .set_language(unsafe { &tree_sitter_clojure() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -523,6 +534,7 @@ pub mod c_sharp {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_c_sharp() },
+                "c_sharp",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -544,7 +556,7 @@ pub mod c_sharp {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_c_sharp() })
+                .set_language(unsafe { &tree_sitter_c_sharp() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -568,6 +580,7 @@ pub mod commonlisp {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_commonlisp() },
+                "commonlisp",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -593,7 +606,7 @@ pub mod commonlisp {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_commonlisp() })
+                .set_language(unsafe { &tree_sitter_commonlisp() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -617,6 +630,7 @@ pub mod cpp {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_cpp() },
+                "cpp",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -640,7 +654,7 @@ pub mod cpp {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_cpp() })
+                .set_language(unsafe { &tree_sitter_cpp() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -664,6 +678,7 @@ pub mod css {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_css() },
+                "css",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -687,7 +702,7 @@ pub mod css {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_css() })
+                .set_language(unsafe { &tree_sitter_css() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -711,6 +726,7 @@ pub mod cue {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_cue() },
+                "cue",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -734,7 +750,7 @@ pub mod cue {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_cue() })
+                .set_language(unsafe { &tree_sitter_cue() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -758,6 +774,7 @@ pub mod d {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_d() },
+                "d",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -781,7 +798,7 @@ pub mod d {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_d() })
+                .set_language(unsafe { &tree_sitter_d() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -805,6 +822,7 @@ pub mod dart {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_dart() },
+                "dart",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -826,7 +844,7 @@ pub mod dart {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_dart() })
+                .set_language(unsafe { &tree_sitter_dart() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -850,6 +868,7 @@ pub mod diff {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_diff() },
+                "diff",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -871,7 +890,7 @@ pub mod diff {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_diff() })
+                .set_language(unsafe { &tree_sitter_diff() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -895,6 +914,7 @@ pub mod dockerfile {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_dockerfile() },
+                "dockerfile",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -920,7 +940,7 @@ pub mod dockerfile {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_dockerfile() })
+                .set_language(unsafe { &tree_sitter_dockerfile() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -944,6 +964,7 @@ pub mod eex {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_eex() },
+                "eex",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -967,7 +988,7 @@ pub mod eex {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_eex() })
+                .set_language(unsafe { &tree_sitter_eex() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -991,6 +1012,7 @@ pub mod elisp {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_elisp() },
+                "elisp",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1012,7 +1034,7 @@ pub mod elisp {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_elisp() })
+                .set_language(unsafe { &tree_sitter_elisp() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1036,6 +1058,7 @@ pub mod elixir {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_elixir() },
+                "elixir",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1059,7 +1082,7 @@ pub mod elixir {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_elixir() })
+                .set_language(unsafe { &tree_sitter_elixir() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1083,6 +1106,7 @@ pub mod elm {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_elm() },
+                "elm",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1106,7 +1130,7 @@ pub mod elm {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_elm() })
+                .set_language(unsafe { &tree_sitter_elm() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1130,6 +1154,7 @@ pub mod erlang {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_erlang() },
+                "erlang",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1151,7 +1176,7 @@ pub mod erlang {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_erlang() })
+                .set_language(unsafe { &tree_sitter_erlang() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1175,6 +1200,7 @@ pub mod forth {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_forth() },
+                "forth",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1196,7 +1222,7 @@ pub mod forth {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_forth() })
+                .set_language(unsafe { &tree_sitter_forth() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1220,6 +1246,7 @@ pub mod fortran {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_fortran() },
+                "fortran",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1241,7 +1268,53 @@ pub mod fortran {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_fortran() })
+                .set_language(unsafe { &tree_sitter_fortran() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
+#[cfg(feature = "language-fish")]
+pub mod fish {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_fish() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_fish() },
+                "fish",
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'fish'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/fish/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { &tree_sitter_fish() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1265,6 +1338,7 @@ pub mod gdscript {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_gdscript() },
+                "gdscript",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1290,7 +1364,7 @@ pub mod gdscript {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_gdscript() })
+                .set_language(unsafe { &tree_sitter_gdscript() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1314,6 +1388,7 @@ pub mod gleam {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_gleam() },
+                "gleam",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1337,7 +1412,7 @@ pub mod gleam {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_gleam() })
+                .set_language(unsafe { &tree_sitter_gleam() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1361,6 +1436,7 @@ pub mod glsl {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_glsl() },
+                "glsl",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1384,7 +1460,7 @@ pub mod glsl {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_glsl() })
+                .set_language(unsafe { &tree_sitter_glsl() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1408,6 +1484,7 @@ pub mod go {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_go() },
+                "go",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1419,10 +1496,8 @@ pub mod go {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/go/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = include_str!(
-        "../languages/go/queries/injections.scm"
-    );
-    pub const LOCALS_QUERY: &str = include_str!("../languages/go/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
     #[cfg(test)]
     mod tests {
         use super::*;
@@ -1431,7 +1506,7 @@ pub mod go {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_go() })
+                .set_language(unsafe { &tree_sitter_go() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1455,6 +1530,7 @@ pub mod haskell {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_haskell() },
+                "haskell",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1480,7 +1556,7 @@ pub mod haskell {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_haskell() })
+                .set_language(unsafe { &tree_sitter_haskell() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1504,6 +1580,7 @@ pub mod hcl {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_hcl() },
+                "hcl",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1527,7 +1604,7 @@ pub mod hcl {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_hcl() })
+                .set_language(unsafe { &tree_sitter_hcl() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1551,6 +1628,7 @@ pub mod heex {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_heex() },
+                "heex",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1574,7 +1652,7 @@ pub mod heex {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_heex() })
+                .set_language(unsafe { &tree_sitter_heex() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1598,6 +1676,7 @@ pub mod html {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_html() },
+                "html",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1621,7 +1700,7 @@ pub mod html {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_html() })
+                .set_language(unsafe { &tree_sitter_html() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1645,6 +1724,7 @@ pub mod iex {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_iex() },
+                "iex",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1668,7 +1748,7 @@ pub mod iex {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_iex() })
+                .set_language(unsafe { &tree_sitter_iex() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1692,6 +1772,7 @@ pub mod ini {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_ini() },
+                "ini",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1713,7 +1794,7 @@ pub mod ini {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_ini() })
+                .set_language(unsafe { &tree_sitter_ini() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1737,6 +1818,7 @@ pub mod java {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_java() },
+                "java",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1758,7 +1840,7 @@ pub mod java {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_java() })
+                .set_language(unsafe { &tree_sitter_java() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1782,6 +1864,7 @@ pub mod javascript {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_javascript() },
+                "javascript",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1809,7 +1892,7 @@ pub mod javascript {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_javascript() })
+                .set_language(unsafe { &tree_sitter_javascript() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1833,6 +1916,7 @@ pub mod json {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_json() },
+                "json",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1854,7 +1938,7 @@ pub mod json {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_json() })
+                .set_language(unsafe { &tree_sitter_json() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1878,6 +1962,7 @@ pub mod jsx {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_jsx() },
+                "jsx",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1901,7 +1986,53 @@ pub mod jsx {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_jsx() })
+                .set_language(unsafe { &tree_sitter_jsx() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
+#[cfg(feature = "language-julia")]
+pub mod julia {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_julia() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_julia() },
+                "julia",
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'julia'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/julia/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { &tree_sitter_julia() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1925,6 +2056,7 @@ pub mod kotlin {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_kotlin() },
+                "kotlin",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1946,7 +2078,7 @@ pub mod kotlin {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_kotlin() })
+                .set_language(unsafe { &tree_sitter_kotlin() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1970,6 +2102,7 @@ pub mod latex {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_latex() },
+                "latex",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -1993,7 +2126,7 @@ pub mod latex {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_latex() })
+                .set_language(unsafe { &tree_sitter_latex() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2017,6 +2150,7 @@ pub mod llvm {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_llvm() },
+                "llvm",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2040,7 +2174,7 @@ pub mod llvm {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_llvm() })
+                .set_language(unsafe { &tree_sitter_llvm() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2064,6 +2198,7 @@ pub mod lua {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_lua() },
+                "lua",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2087,7 +2222,7 @@ pub mod lua {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_lua() })
+                .set_language(unsafe { &tree_sitter_lua() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2111,6 +2246,7 @@ pub mod make {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_make() },
+                "make",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2134,7 +2270,7 @@ pub mod make {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_make() })
+                .set_language(unsafe { &tree_sitter_make() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2158,6 +2294,7 @@ pub mod matlab {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_matlab() },
+                "matlab",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2183,7 +2320,7 @@ pub mod matlab {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_matlab() })
+                .set_language(unsafe { &tree_sitter_matlab() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2207,6 +2344,7 @@ pub mod meson {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_meson() },
+                "meson",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2228,7 +2366,7 @@ pub mod meson {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_meson() })
+                .set_language(unsafe { &tree_sitter_meson() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2252,6 +2390,7 @@ pub mod nim {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_nim() },
+                "nim",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2271,7 +2410,7 @@ pub mod nim {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_nim() })
+                .set_language(unsafe { &tree_sitter_nim() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2295,6 +2434,7 @@ pub mod nix {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_nix() },
+                "nix",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2318,7 +2458,7 @@ pub mod nix {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_nix() })
+                .set_language(unsafe { &tree_sitter_nix() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2342,6 +2482,7 @@ pub mod objc {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_objc() },
+                "objc",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2365,7 +2506,7 @@ pub mod objc {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_objc() })
+                .set_language(unsafe { &tree_sitter_objc() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2389,6 +2530,7 @@ pub mod ocaml {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_ocaml() },
+                "ocaml",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2410,7 +2552,7 @@ pub mod ocaml {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_ocaml() })
+                .set_language(unsafe { &tree_sitter_ocaml() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2434,6 +2576,7 @@ pub mod ocaml_interface {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_ocaml_interface() },
+                "ocaml_interface",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2459,7 +2602,7 @@ pub mod ocaml_interface {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_ocaml_interface() })
+                .set_language(unsafe { &tree_sitter_ocaml_interface() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2483,6 +2626,7 @@ pub mod openscad {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_openscad() },
+                "openscad",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2496,8 +2640,12 @@ pub mod openscad {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/openscad/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/openscad/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = include_str!(
+        "../languages/openscad/queries/locals.scm"
+    );
     #[cfg(test)]
     mod tests {
         use super::*;
@@ -2506,7 +2654,7 @@ pub mod openscad {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_openscad() })
+                .set_language(unsafe { &tree_sitter_openscad() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2530,6 +2678,7 @@ pub mod pascal {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_pascal() },
+                "pascal",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2553,7 +2702,7 @@ pub mod pascal {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_pascal() })
+                .set_language(unsafe { &tree_sitter_pascal() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2577,6 +2726,7 @@ pub mod php {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_php() },
+                "php",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2600,7 +2750,7 @@ pub mod php {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_php() })
+                .set_language(unsafe { &tree_sitter_php() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2624,6 +2774,7 @@ pub mod plaintext {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_plaintext() },
+                "plaintext",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2645,7 +2796,7 @@ pub mod plaintext {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_plaintext() })
+                .set_language(unsafe { &tree_sitter_plaintext() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2669,6 +2820,7 @@ pub mod proto {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_proto() },
+                "proto",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2690,7 +2842,7 @@ pub mod proto {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_proto() })
+                .set_language(unsafe { &tree_sitter_proto() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2714,6 +2866,7 @@ pub mod python {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_python() },
+                "python",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2739,7 +2892,7 @@ pub mod python {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_python() })
+                .set_language(unsafe { &tree_sitter_python() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2763,6 +2916,7 @@ pub mod r {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_r() },
+                "r",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2774,9 +2928,7 @@ pub mod r {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/r/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = include_str!(
-        "../languages/r/queries/injections.scm"
-    );
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/r/queries/locals.scm");
     #[cfg(test)]
     mod tests {
@@ -2786,7 +2938,7 @@ pub mod r {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_r() })
+                .set_language(unsafe { &tree_sitter_r() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2810,6 +2962,7 @@ pub mod racket {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_racket() },
+                "racket",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2833,7 +2986,7 @@ pub mod racket {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_racket() })
+                .set_language(unsafe { &tree_sitter_racket() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2857,6 +3010,7 @@ pub mod regex {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_regex() },
+                "regex",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2878,7 +3032,7 @@ pub mod regex {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_regex() })
+                .set_language(unsafe { &tree_sitter_regex() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2902,6 +3056,7 @@ pub mod ruby {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_ruby() },
+                "ruby",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2925,7 +3080,7 @@ pub mod ruby {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_ruby() })
+                .set_language(unsafe { &tree_sitter_ruby() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2949,6 +3104,7 @@ pub mod rust {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_rust() },
+                "rust",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -2972,7 +3128,7 @@ pub mod rust {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_rust() })
+                .set_language(unsafe { &tree_sitter_rust() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2996,6 +3152,7 @@ pub mod scala {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_scala() },
+                "scala",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3019,7 +3176,7 @@ pub mod scala {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_scala() })
+                .set_language(unsafe { &tree_sitter_scala() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3043,6 +3200,7 @@ pub mod scheme {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_scheme() },
+                "scheme",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3066,7 +3224,7 @@ pub mod scheme {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_scheme() })
+                .set_language(unsafe { &tree_sitter_scheme() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3090,6 +3248,7 @@ pub mod scss {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_scss() },
+                "scss",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3113,7 +3272,7 @@ pub mod scss {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_scss() })
+                .set_language(unsafe { &tree_sitter_scss() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3137,6 +3296,7 @@ pub mod sql {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_sql() },
+                "sql",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3158,7 +3318,7 @@ pub mod sql {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_sql() })
+                .set_language(unsafe { &tree_sitter_sql() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3182,6 +3342,7 @@ pub mod svelte {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_svelte() },
+                "svelte",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3205,7 +3366,7 @@ pub mod svelte {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_svelte() })
+                .set_language(unsafe { &tree_sitter_svelte() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3229,6 +3390,7 @@ pub mod swift {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_swift() },
+                "swift",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3250,7 +3412,7 @@ pub mod swift {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_swift() })
+                .set_language(unsafe { &tree_sitter_swift() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3274,6 +3436,7 @@ pub mod toml {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_toml() },
+                "toml",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3297,7 +3460,7 @@ pub mod toml {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_toml() })
+                .set_language(unsafe { &tree_sitter_toml() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3321,6 +3484,7 @@ pub mod typescript {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_typescript() },
+                "typescript",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3346,7 +3510,7 @@ pub mod typescript {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_typescript() })
+                .set_language(unsafe { &tree_sitter_typescript() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3370,6 +3534,7 @@ pub mod tsx {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_tsx() },
+                "tsx",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3391,7 +3556,7 @@ pub mod tsx {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_tsx() })
+                .set_language(unsafe { &tree_sitter_tsx() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3415,6 +3580,7 @@ pub mod vim {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_vim() },
+                "vim",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3438,7 +3604,7 @@ pub mod vim {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_vim() })
+                .set_language(unsafe { &tree_sitter_vim() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3462,6 +3628,7 @@ pub mod wast {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_wast() },
+                "wast",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3483,7 +3650,7 @@ pub mod wast {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_wast() })
+                .set_language(unsafe { &tree_sitter_wast() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3507,6 +3674,7 @@ pub mod wat {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_wat() },
+                "wat",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3528,7 +3696,7 @@ pub mod wat {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_wat() })
+                .set_language(unsafe { &tree_sitter_wat() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3552,6 +3720,7 @@ pub mod x86asm {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_x86asm() },
+                "x86asm",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3573,7 +3742,7 @@ pub mod x86asm {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_x86asm() })
+                .set_language(unsafe { &tree_sitter_x86asm() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3597,6 +3766,7 @@ pub mod wgsl {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_wgsl() },
+                "wgsl",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3618,7 +3788,7 @@ pub mod wgsl {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_wgsl() })
+                .set_language(unsafe { &tree_sitter_wgsl() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3642,6 +3812,7 @@ pub mod yaml {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_yaml() },
+                "yaml",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3665,7 +3836,7 @@ pub mod yaml {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_yaml() })
+                .set_language(unsafe { &tree_sitter_yaml() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3689,6 +3860,7 @@ pub mod zig {
     pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_zig() },
+                "zig",
                 HIGHLIGHT_QUERY,
                 INJECTIONS_QUERY,
                 LOCALS_QUERY,
@@ -3712,7 +3884,7 @@ pub mod zig {
         fn grammar_loading() {
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(unsafe { tree_sitter_zig() })
+                .set_language(unsafe { &tree_sitter_zig() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -3815,6 +3987,8 @@ pub enum Language {
     Forth,
     #[cfg(feature = "language-fortran")]
     Fortran,
+    #[cfg(feature = "language-fish")]
+    Fish,
     #[cfg(feature = "language-gdscript")]
     Gdscript,
     #[cfg(feature = "language-gleam")]
@@ -3843,6 +4017,8 @@ pub enum Language {
     Json,
     #[cfg(feature = "language-jsx")]
     Jsx,
+    #[cfg(feature = "language-julia")]
+    Julia,
     #[cfg(feature = "language-kotlin")]
     Kotlin,
     #[cfg(feature = "language-latex")]
@@ -3977,6 +4153,8 @@ impl Language {
         Self::Forth,
         #[cfg(feature = "language-fortran")]
         Self::Fortran,
+        #[cfg(feature = "language-fish")]
+        Self::Fish,
         #[cfg(feature = "language-gdscript")]
         Self::Gdscript,
         #[cfg(feature = "language-gleam")]
@@ -4005,6 +4183,8 @@ impl Language {
         Self::Json,
         #[cfg(feature = "language-jsx")]
         Self::Jsx,
+        #[cfg(feature = "language-julia")]
+        Self::Julia,
         #[cfg(feature = "language-kotlin")]
         Self::Kotlin,
         #[cfg(feature = "language-latex")]
@@ -4117,6 +4297,8 @@ impl Language {
             "bash" => Some(Self::Bash),
             #[cfg(feature = "language-bash")]
             "sh" => Some(Self::Bash),
+            #[cfg(feature = "language-bash")]
+            "shell" => Some(Self::Bash),
             #[cfg(feature = "language-bibtex")]
             "bibtex" => Some(Self::Bibtex),
             #[cfg(feature = "language-bibtex")]
@@ -4219,6 +4401,8 @@ impl Language {
             "fortran" => Some(Self::Fortran),
             #[cfg(feature = "language-fortran")]
             "for" => Some(Self::Fortran),
+            #[cfg(feature = "language-fish")]
+            "fish" => Some(Self::Fish),
             #[cfg(feature = "language-gdscript")]
             "gdscript" => Some(Self::Gdscript),
             #[cfg(feature = "language-gdscript")]
@@ -4259,6 +4443,10 @@ impl Language {
             "json" => Some(Self::Json),
             #[cfg(feature = "language-jsx")]
             "jsx" => Some(Self::Jsx),
+            #[cfg(feature = "language-julia")]
+            "julia" => Some(Self::Julia),
+            #[cfg(feature = "language-julia")]
+            "jl" => Some(Self::Julia),
             #[cfg(feature = "language-kotlin")]
             "kotlin" => Some(Self::Kotlin),
             #[cfg(feature = "language-kotlin")]
@@ -4443,6 +4631,8 @@ impl Language {
             Self::Forth => &forth::CONFIG,
             #[cfg(feature = "language-fortran")]
             Self::Fortran => &fortran::CONFIG,
+            #[cfg(feature = "language-fish")]
+            Self::Fish => &fish::CONFIG,
             #[cfg(feature = "language-gdscript")]
             Self::Gdscript => &gdscript::CONFIG,
             #[cfg(feature = "language-gleam")]
@@ -4471,6 +4661,8 @@ impl Language {
             Self::Json => &json::CONFIG,
             #[cfg(feature = "language-jsx")]
             Self::Jsx => &jsx::CONFIG,
+            #[cfg(feature = "language-julia")]
+            Self::Julia => &julia::CONFIG,
             #[cfg(feature = "language-kotlin")]
             Self::Kotlin => &kotlin::CONFIG,
             #[cfg(feature = "language-latex")]

@@ -40,7 +40,7 @@
 (string) @string
 ["@"] @keyword
 
-(experession_statement
+(expression_statement
 	object: (identifier) @variable)
 (normal_command
 	command: (identifier) @function)

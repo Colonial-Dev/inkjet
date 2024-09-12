@@ -1,25 +1,10 @@
-((text) @injection.content
- (#set! injection.language "html")
- (#set! injection.combined))
-
 ((comment) @injection.content
- (#set! injection.language "comment"))
+  (#set! injection.language "phpdoc"))
 
-((function_call_expression
- function: (name) @_function
- arguments: (arguments . (argument (_ (string_value) @injection.content))))
- (#match? @_function "^preg_")
- (#set! injection.language "regex"))
+(heredoc
+  (heredoc_body) @injection.content
+  (heredoc_end) @injection.language)
 
-((function_call_expression
- function: (name) @_function
- arguments: (arguments (_) (argument (_ (string_value) @injection.content))))
- (#match? @_function "^mysqli_")
- (#set! injection.language "sql"))
-
-((member_call_expression
- object: (_)
- name: (name) @_function
- arguments: (arguments . (argument (_ (string_value) @injection.content))))
- (#match? @_function "^(prepare|query)$")
- (#set! injection.language "sql"))
+(nowdoc
+  (nowdoc_body) @injection.content
+  (heredoc_end) @injection.language)

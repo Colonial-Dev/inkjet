@@ -6,12 +6,14 @@ use std::process::{Command, Child};
 use anyhow::{Result, Error};
 use serde::Deserialize;
 
-// See https://stackoverflow.com/questions/59794375
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
-pub struct Languages {
+pub struct Config {
+    pub helix_sum: String,
     pub languages: Vec<Language>,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Language {
     pub name: String,
