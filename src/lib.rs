@@ -3,6 +3,7 @@
 //! ## Getting Started
 //! 
 //! - To get started with highlighting, take a look at the [`Highlighter`] type.
+//! - See the [`formatter`] module for the output options bundled with Inkjet, and the [`theme`] module for the optional theming API.
 //! - If you'd like to write your own formatter, see the [`Formatter`] trait.
 //! 
 //! ## Included Languages

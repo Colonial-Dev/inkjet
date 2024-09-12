@@ -2,15 +2,11 @@ use std::sync::Arc;
 
 use super::{Formatter, HighlightEvent};
 
-use crate::theme::Theme;
+use crate::theme::*;
 use crate::constants::HIGHLIGHT_NAMES;
 use crate::Result;
 
-// TODO respect modifiers and underlines
 /// A formatter for highlighting into HTML with inline styles.
-/// 
-/// - The default background of the theme is used for the background.
-/// - The primary color of each style is used for the text.
 /// 
 /// Example output:
 /// ```html
@@ -45,17 +41,77 @@ impl Formatter for ThemedHtml {
             HighlightEvent::HighlightStart(idx) => {
                 let name = HIGHLIGHT_NAMES[idx.0];
 
-                let color = self
+                let style = self
                     .0
-                    .get_style(name)
-                    .and_then(|s| s.fg )
-                    .unwrap_or(self.0.fg);
+                    .get_style(name);
 
-                write!(
-                    writer,
-                    "<span style=\"color:{}\">",
-                    color.into_hex()
-                )?;
+                match style {
+                    Some(s) => {
+                        write!(
+                            writer,
+                            "<span style=\""
+                        )?;
+
+                        let fg = s
+                            .fg
+                            .unwrap_or(self.0.fg);
+
+                        let bg = s
+                            .bg
+                            .unwrap_or(self.0.bg);
+
+                        write!(
+                            writer,
+                            "color: {}; background-color: {};",
+                            fg.into_hex(), bg.into_hex()
+                        )?;
+                        
+                        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
+                        if let Some(ul) = &s.underline {
+                            let style = match ul.style.as_str() {
+                                "line"        => "solid",
+                                "curl"        => "wavy",
+                                "dashed"      => "dashed",
+                                "dotted"      => "dotted",
+                                "double-line" => "double",
+                                _             => "solid"
+                            };
+
+                            write!(
+                                writer,
+                                "text-decoration: underline {} {};",
+                                ul.color.into_hex(), style
+                            )?;
+                        }
+
+                        for modifier in &s.modifiers {
+                            // Blinking, dimming, flipping and hiding don't make sense
+                            // in HTML.
+                            match modifier.as_str() {
+                                "bold"        => write!(writer, "font-weight: bold;")?,
+                                "italic"      => write!(writer, "font-style: italic;")?,
+                                "underlined"  => write!(writer, "text-decoration: underline;")?,
+                                "crossed-out" => write!(writer, "text-decoration: line-through;")?,
+                                _ => ()
+                            }
+                        }
+
+                        write!(
+                            writer,
+                            "\">"
+                        )?;
+                    },
+                    // No style found; simply use the default foreground color.
+                    None => {
+                        let color = self.0.fg;
+
+                        write!(
+                            writer,
+                            "<span style=\"color: {}\">",
+                            color.into_hex()
+                        )?;
+                    }
+                }
             },
             HighlightEvent::HighlightEnd => {
                 writer.write_str("</span>")?;

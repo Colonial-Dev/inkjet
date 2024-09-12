@@ -1,4 +1,7 @@
 //! Types for highlighting themes.
+//! 
+//! Inkjet's theming API is derived from the TOML-based [Helix editor theme format](https://docs.helix-editor.com/themes.html).
+//! A large collection of pre-made themes are included in the [`vendored`] module.
 pub mod vendored;
 
 use ahash::{
@@ -13,7 +16,7 @@ use crate::{InkjetError as Error, Result};
 
 /// A theme for highlighting.
 /// 
-/// Themes can be deserialized from a [Helix](https://docs.helix-editor.com/themes.html) theme definition, or created programatically.
+/// Themes can be deserialized from a [Helix](https://docs.helix-editor.com/themes.html) theme definition - see the [`vendored`] module - or created programatically.
 #[derive(Debug, Clone)]
 pub struct Theme {
     /// A map of [highlight names](crate::constants::HIGHLIGHT_NAMES) to their corresponding [`Style`].
@@ -50,37 +53,56 @@ pub struct Style {
 #[derive(Debug, Clone, Copy, Deserialize)]
 #[serde(try_from = "String")]
 pub struct Color {
+    /// Red byte.
     pub r: u8,
+    /// Green byte.
     pub g: u8,
+    /// Blue byte.
     pub b: u8,
 }
 
 impl Color {
-    const BLACK: Self = Self::new(0, 0, 0);
-    const WHITE: Self = Self::new(255, 255, 255);
+    pub const BLACK: Self = Self::new(0, 0, 0);
+    pub const WHITE: Self = Self::new(255, 255, 255);
 
-    const LIGHT_RED     : Self = Self::new(255, 85, 85);
-    const LIGHT_GREEN   : Self = Self::new(85, 255, 85);
-    const LIGHT_YELLOW  : Self = Self::new(255, 255, 85);
-    const LIGHT_BLUE    : Self = Self::new(85, 85, 255);
-    const LIGHT_MAGENTA : Self = Self::new(255, 85, 255);
-    const LIGHT_CYAN    : Self = Self::new(85, 255, 255);
-    const LIGHT_GRAY    : Self = Self::new(128, 128, 128);
+    pub const LIGHT_RED     : Self = Self::new(255, 85, 85);
+    pub const LIGHT_GREEN   : Self = Self::new(85, 255, 85);
+    pub const LIGHT_YELLOW  : Self = Self::new(255, 255, 85);
+    pub const LIGHT_BLUE    : Self = Self::new(85, 85, 255);
+    pub const LIGHT_MAGENTA : Self = Self::new(255, 85, 255);
+    pub const LIGHT_CYAN    : Self = Self::new(85, 255, 255);
+    pub const LIGHT_GRAY    : Self = Self::new(128, 128, 128);
 
-    const RED     : Self = Self::new(170, 0, 0);
-    const GREEN   : Self = Self::new(0, 170, 0);
-    const YELLOW  : Self = Self::new(170, 170, 0);
-    const BLUE    : Self = Self::new(0, 0, 170);
-    const MAGENTA : Self = Self::new(170, 0, 170);
-    const CYAN    : Self = Self::new(0, 170, 170);
-    const GRAY    : Self = Self::new(128, 128, 128);
+    pub const RED     : Self = Self::new(170, 0, 0);
+    pub const GREEN   : Self = Self::new(0, 170, 0);
+    pub const YELLOW  : Self = Self::new(170, 170, 0);
+    pub const BLUE    : Self = Self::new(0, 0, 170);
+    pub const MAGENTA : Self = Self::new(170, 0, 170);
+    pub const CYAN    : Self = Self::new(0, 170, 170);
+    pub const GRAY    : Self = Self::new(128, 128, 128);
 
     /// Create a new [`Color`] with the provided byte values.
+    /// 
+    /// # Example
+    /// 
+    /// ```rust
+    /// # use inkjet::theme::*;
+    /// let c = Color::new(0, 255, 0);
+    /// ```
     pub const fn new(r: u8, g: u8, b: u8) -> Self {
         Self { r, g, b }
     }
 
     /// Create a new [`Color`] from a hexadecimal string (`#RRGGBB` or `RRGGBB`.)
+    /// 
+    /// # Example
+    /// 
+    /// ```rust
+    /// # use inkjet::theme::*;
+    /// let c = Color::from_hex("#00FF00").unwrap();
+    /// // A leading '#' is not required.
+    /// let c = Color::from_hex("00FF00").unwrap();
+    /// ```
     pub fn from_hex(src: impl AsRef<str>) -> Result<Self> {
         let src = src.as_ref();
 
@@ -104,9 +126,24 @@ impl Color {
     }
 
     /// Format the color as a hexadecimal string with the format `#RRGGBB`.
+    /// 
+    /// # Example
+    /// 
+    /// ```rust
+    /// # use inkjet::theme::*;
+    /// let c = Color::from_hex("#00FF00").unwrap();
+    /// 
+    /// assert!(c.r == 0);
+    /// assert!(c.g == 255);
+    /// assert!(c.b == 0);
+    /// 
+    /// let h = c.into_hex();
+    /// 
+    /// assert!(h == "#00FF00");
+    /// ```
     pub fn into_hex(&self) -> String {
         format!(
-            "#{:X}{:X}{:X}",
+            "#{:02X}{:02X}{:02X}",
             self.r, self.g, self.b
         )
     }
@@ -122,11 +159,24 @@ impl TryFrom<String> for Color {
 
 impl Theme {
     /// Get the [`Style`] corresponding to the given [`name`](crate::constants::HIGHLIGHT_NAMES), if any.
+    /// 
+    /// # Example
+    /// ```rust
+    /// # use inkjet::theme::*;
+    /// # let theme = Theme::from_helix(vendored::ADWAITA_DARK).unwrap();
+    /// let style = theme.get_style("type.enum");
+    /// ```
     pub fn get_style(&self, name: &str) -> Option<&Style> {
         self.styles.get(name)
     }
 
     /// Deserialize a new [`Theme`] from a [Helix theme definition](https://docs.helix-editor.com/themes.html).
+    /// 
+    /// # Example
+    /// ```rust
+    /// # use inkjet::theme::*;
+    /// let theme = Theme::from_helix(vendored::ADWAITA_DARK).unwrap();
+    /// ```
     pub fn from_helix(data: &str) -> Result<Self> {
         #[derive(Debug, Clone, Deserialize)]
         struct RawUnderline {
