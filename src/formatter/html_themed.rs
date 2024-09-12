@@ -1,14 +1,12 @@
 use std::sync::Arc;
 
-use super::{Theme, Formatter, HighlightEvent};
+use super::{Formatter, HighlightEvent};
 
+use crate::theme::*;
 use crate::constants::HIGHLIGHT_NAMES;
 use crate::Result;
 
 /// A formatter for highlighting into HTML with inline styles.
-/// 
-/// - The secondary color of the default style is used for the background.
-/// - The primary color of each style is used for the text.
 /// 
 /// Example output:
 /// ```html
@@ -42,13 +40,79 @@ impl Formatter for ThemedHtml {
             },
             HighlightEvent::HighlightStart(idx) => {
                 let name = HIGHLIGHT_NAMES[idx.0];
-                let style = self.0.get_style(name);
 
-                write!(
-                    writer,
-                    "<span style=\"color:{}\">",
-                    style.primary_color
-                )?;
+                let style = self
+                    .0
+                    .get_style(name);
+
+                match style {
+                    Some(s) => {
+                        write!(
+                            writer,
+                            "<span style=\""
+                        )?;
+
+                        let fg = s
+                            .fg
+                            .unwrap_or(self.0.fg);
+
+                        let bg = s
+                            .bg
+                            .unwrap_or(self.0.bg);
+
+                        write!(
+                            writer,
+                            "color: {}; background-color: {};",
+                            fg.into_hex(), bg.into_hex()
+                        )?;
+                        
+                        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
+                        if let Some(ul) = &s.underline {
+                            use UnderlineStyle::*;
+                            let style = match ul.style {
+                                Line        => "solid",
+                                Curl        => "wavy",
+                                Dashed      => "dashed",
+                                Dotted      => "dotted",
+                                Double      => "double",
+                            };
+
+                            write!(
+                                writer,
+                                "text-decoration: underline {} {};",
+                                ul.color.into_hex(), style
+                            )?;
+                        }
+
+                        for modifier in &s.modifiers {
+                            use Modifier::*;
+                            // Blinking, dimming, flipping and hiding don't make sense
+                            // in HTML.
+                            match modifier {
+                                Bold          => write!(writer, "font-weight: bold;")?,
+                                Italic        => write!(writer, "font-style: italic;")?,
+                                Underlined    => write!(writer, "text-decoration: underline;")?,
+                                Strikethrough => write!(writer, "text-decoration: line-through;")?,
+                                _ => ()
+                            }
+                        }
+
+                        write!(
+                            writer,
+                            "\">"
+                        )?;
+                    },
+                    // No style found; simply use the default foreground color.
+                    None => {
+                        let color = self.0.fg;
+
+                        write!(
+                            writer,
+                            "<span style=\"color: {}\">",
+                            color.into_hex()
+                        )?;
+                    }
+                }
             },
             HighlightEvent::HighlightEnd => {
                 writer.write_str("</span>")?;
@@ -65,7 +129,7 @@ impl Formatter for ThemedHtml {
         writeln!(
             writer,
             "<pre style=\"background-color: {};\">",
-            self.0.default_style.secondary_color,
+            self.0.bg.into_hex(),
         )?;
 
         Ok(())
@@ -83,4 +147,3 @@ impl Formatter for ThemedHtml {
         Ok(())
     }
 }
-

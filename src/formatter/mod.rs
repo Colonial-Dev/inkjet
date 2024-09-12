@@ -2,12 +2,14 @@
 
 #[cfg(feature = "html")]
 mod html;
-#[cfg(feature = "theme")]
+#[cfg(all(
+    feature = "html", feature = "theme")
+)]
 mod html_themed;
-#[cfg(feature = "theme")]
+#[cfg(all(
+    feature = "terminal", feature = "theme")
+)]
 mod terminal;
-#[cfg(feature = "theme")]
-mod theme;
 
 use tree_sitter_highlight::HighlightEvent;
 
@@ -15,12 +17,14 @@ use crate::error::InkjetResult as Result;
 
 #[cfg(feature = "html")]
 pub use html::*;
-#[cfg(feature = "theme")]
+#[cfg(all(
+    feature = "html", feature = "theme")
+)]
 pub use html_themed::*;
-#[cfg(feature = "theme")]
+#[cfg(all(
+    feature = "terminal", feature = "theme")
+)]
 pub use terminal::*;
-#[cfg(feature = "theme")]
-pub use theme::*;
 
 /// Pluggable trait for formatting the output of a highlighter.
 ///

@@ -21,6 +21,10 @@ pub fn check(config: &Config) -> Result<()> {
         generate_features_list(&config.languages)?;
     }
 
+    if std::env::var("INKJET_REBUILD_THEMES").is_ok() {
+        generate_themes_module()?;
+    }
+
     Ok(())
 } 
 
@@ -180,6 +184,75 @@ pub fn generate_features_list(languages: &[Language]) -> Result<()> {
             {features_buffer}
         "
     )?;
+
+    Ok(())
+}
+
+pub fn generate_themes_module() -> Result<()> {
+    use std::ffi::OsStr;
+    use std::path::Path;
+
+    use proc_macro2::TokenStream;
+
+    let mut themes = vec![];
+
+    for entry in std::fs::read_dir("src/theme/vendored/data")? {
+        let entry = entry?;
+        let path  = entry.path();
+
+        if path.extension() != Some( OsStr::new("toml") ) {
+            continue;
+        }
+
+        let stem = path
+            .file_stem()
+            .expect("File should have a stem")
+            .to_string_lossy()
+            .to_string();
+
+        themes.push(stem)
+    }
+
+    let mut file = File::create("src/theme/vendored/mod.rs")?;
+
+    let include_path = |query| -> TokenStream {
+        let path = format!("./data/{query}.toml");
+
+        let query = format!("include_str!(\"{}\")", &path);
+
+        query.parse().unwrap()
+    };
+
+    let module_start = quote::quote! {
+        //! A collection of theme definitions vendored from the Helix editor project. View previews [here](https://github.com/helix-editor/helix/wiki/Themes).
+        #![allow(dead_code)]
+    };
+
+    let themes = themes
+        .into_iter()
+        .map(|t| {
+            let name = quote::format_ident!(
+                "{}",
+                t.replace('-', "_").to_uppercase()
+            );
+
+            let path = include_path(t);
+
+            quote::quote! {
+                pub const #name: &str = #path;
+            }
+        });
+
+    let combined = quote::quote!{
+        #module_start
+        #(#themes)*
+    };
+
+    let combined = format!("{combined}");
+    let combined = syn::parse_file(&combined).unwrap();
+    let combined = prettyplease::unparse(&combined);
+
+    write!(&mut file, "{}", combined)?;
 
     Ok(())
 }
