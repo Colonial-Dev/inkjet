@@ -3,6 +3,7 @@
   - The `theme` module has been hoisted out of the `formatter` module, and now lives at the crate root.
   - The new `theme::vendored` module includes a large collection of themes (in TOML definition format) vendored from the Helix project.
   - The `ThemedHtml` formatter has been reworked to use the new `Theme` API.
+  - The `theme` and `html` features are no longer mutually dependent.
 - (Improvement) - a new `Terminal` formatter (using the `termcolor` crate) has been added. (@guilhermeprokisch)
 - Updated `tree-sitter` to `0.23.0`. (@leandrocp)
 - Updated languages:

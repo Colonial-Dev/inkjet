@@ -129,6 +129,7 @@ pub use crate::languages::Language;
 
 pub use crate::error::{
     InkjetError,
+    ThemeError,
     InkjetResult as Result
 };
 

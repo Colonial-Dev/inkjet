@@ -12,7 +12,9 @@ use ahash::{
 use serde::Deserialize;
 
 use crate::constants::HIGHLIGHT_NAMES; 
-use crate::{InkjetError as Error, Result};
+use crate::error::ThemeError as Error;
+
+type Result<T> = std::result::Result<T, Error>;
 
 /// A theme for highlighting.
 /// 
@@ -27,17 +29,8 @@ pub struct Theme {
     pub bg: Color,
 }
 
-/// Describes underline appearance within a [`Style`].
-#[derive(Debug, Clone, Deserialize)]
-pub struct Underline {
-    /// The color of the underline (not the text itself.)
-    pub color: Color,
-    /// The style of the underline (such as `curl` or `line` - see [here](https://docs.helix-editor.com/themes.html#underline-style) for the standard list.)
-    pub style: String,
-}
-
 /// Styling information for a highlight query.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone)]
 pub struct Style {
     /// The foreground (text) color, if any.
     pub fg: Option<Color>,
@@ -45,12 +38,85 @@ pub struct Style {
     pub bg: Option<Color>,
     /// Underling styling information, if any.
     pub underline: Option<Underline>,
-    /// Any modifiers, such as `bold` or `italic` - see [here](https://docs.helix-editor.com/themes.html#modifiers) for the standard list.
-    pub modifiers: HashSet<String>,
+    /// Any modifiers, such as [`Bold`](crate::theme::Modifier::Bold) or [`Italic`](crate::theme::Modifier::Italic).
+    pub modifiers: HashSet<Modifier>,
+}
+
+/// Describes underline appearance within a [`Style`].
+#[derive(Debug, Clone)]
+pub struct Underline {
+    /// The color of the underline (not the text itself.)
+    pub color: Color,
+    /// The style of the underline (such as [`Curl`](crate::theme::UnderlineStyle::Curl) or [`Line`](crate::theme::UnderlineStyle::Line).)
+    pub style: UnderlineStyle,
+}
+
+#[derive(Debug, Clone, Copy, Deserialize)]
+#[serde(try_from = "String")]
+/// Possible underline styles, such as wavy or dotted.
+pub enum UnderlineStyle {
+    Line,
+    Curl,
+    Dashed,
+    Dotted,
+    Double,
+}
+
+impl TryFrom<String> for UnderlineStyle {
+    type Error = Error;
+
+    fn try_from(value: String) -> Result<Self> {
+        match value.as_str() {
+            "line"        => Ok(Self::Line),
+            "curl"        => Ok(Self::Curl),
+            "dashed"      => Ok(Self::Dotted),
+            "dotted"      => Ok(Self::Dashed),
+            "double_line" => Ok(Self::Double),
+            _ => Err(
+                Error::InvalidUnderlineStyle( value.to_string() )
+            )
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize)]
+#[serde(try_from = "String")]
+/// Possible text modifiers, such as bold or italic.
+pub enum Modifier {
+    Bold,
+    Dim,
+    Italic,
+    Underlined,
+    SlowBlink,
+    FastBlink,
+    Reversed,
+    Hidden,
+    Strikethrough,
+}
+
+impl TryFrom<String> for Modifier {
+    type Error = Error;
+
+    fn try_from(value: String) -> Result<Self> {
+        match value.as_str() {
+            "bold"        => Ok(Self::Bold),
+            "dim"         => Ok(Self::Dim),
+            "italic"      => Ok(Self::Italic),
+            "underlined"  => Ok(Self::Underlined),
+            "slow_blink"  => Ok(Self::SlowBlink),
+            "rapid_blink" => Ok(Self::FastBlink),
+            "reversed"    => Ok(Self::Reversed),
+            "hidden"      => Ok(Self::Strikethrough),
+            "crossed_out" => Ok(Self::Strikethrough),
+            _ => Err(
+                Error::InvalidModifier( value.to_string() )
+            )
+        }
+    }
 }
 
 /// A 24-bit RGB color.
-#[derive(Debug, Clone, Copy, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize)]
 #[serde(try_from = "String")]
 pub struct Color {
     /// Red byte.
@@ -152,7 +218,7 @@ impl Color {
 impl TryFrom<String> for Color {
     type Error = Error;
     
-    fn try_from(value: String) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: String) -> Result<Self> {
         Self::from_hex(value)
     }
 }
@@ -181,7 +247,7 @@ impl Theme {
         #[derive(Debug, Clone, Deserialize)]
         struct RawUnderline {
             pub color: String,
-            pub style: String,
+            pub style: UnderlineStyle,
         }
         
         #[derive(Debug, Clone, Deserialize)]
@@ -193,7 +259,7 @@ impl Theme {
                 bg: Option<String>,
                 underline: Option<RawUnderline>,
                 #[serde(default)]
-                modifiers: HashSet<String>
+                modifiers: HashSet<Modifier>
             },
         }
 

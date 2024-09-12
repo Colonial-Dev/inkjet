@@ -68,13 +68,13 @@ impl Formatter for ThemedHtml {
                         
                         // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
                         if let Some(ul) = &s.underline {
-                            let style = match ul.style.as_str() {
-                                "line"        => "solid",
-                                "curl"        => "wavy",
-                                "dashed"      => "dashed",
-                                "dotted"      => "dotted",
-                                "double-line" => "double",
-                                _             => "solid"
+                            use UnderlineStyle::*;
+                            let style = match ul.style {
+                                Line        => "solid",
+                                Curl        => "wavy",
+                                Dashed      => "dashed",
+                                Dotted      => "dotted",
+                                Double      => "double",
                             };
 
                             write!(
@@ -85,13 +85,14 @@ impl Formatter for ThemedHtml {
                         }
 
                         for modifier in &s.modifiers {
+                            use Modifier::*;
                             // Blinking, dimming, flipping and hiding don't make sense
                             // in HTML.
-                            match modifier.as_str() {
-                                "bold"        => write!(writer, "font-weight: bold;")?,
-                                "italic"      => write!(writer, "font-style: italic;")?,
-                                "underlined"  => write!(writer, "text-decoration: underline;")?,
-                                "crossed-out" => write!(writer, "text-decoration: line-through;")?,
+                            match modifier {
+                                Bold          => write!(writer, "font-weight: bold;")?,
+                                Italic        => write!(writer, "font-style: italic;")?,
+                                Underlined    => write!(writer, "text-decoration: underline;")?,
+                                Strikethrough => write!(writer, "text-decoration: line-through;")?,
                                 _ => ()
                             }
                         }
