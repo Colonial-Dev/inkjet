@@ -1,63 +1,134 @@
-(number) @constant.numeric
-(string) @string
-(boolean) @constant.builtin.boolean
-(include_path) @string.special.path
+; Includes
 
-(parameters_declaration (identifier) @variable.parameter)
-(function_declaration name: (identifier) @function)
+"include" @keyword.import
 
-(function_call function: (identifier) @function)
-(module_call name: (identifier) @function)
+(include_path) @string
+
+; Functions
+
+(function_call function: (identifier) @function (#set! "priority" 105))
+(module_call name: (identifier) @function (#set! "priority" 105))
+
+; Variables
 
 (identifier) @variable
+
 (special_variable) @variable.builtin
 
-[
-  "function"
-  "let"
-  "assign"
-] @keyword
+; TODO: Types/Properties/
+
+; Keywords
 
 [
-  "for"
-  "each"
-  "intersection_for"
-] @keyword.control.repeat
+ "module"
+ "function"
+ "let"
+ "assign"
+ "use"
+ "each"
+ ] @keyword
+
+; Operators
 
 [
-  "if"
-] @keyword.control.conditional
+ "||"
+ "&&"
+ "=="
+ "!="
+ "<"
+ ">"
+ "<="
+ ">="
+ "+"
+ "-"
+ "*"
+ "/"
+ "%"
+ "^"
+ "!"
+ ":"
+ ] @operator
+
+; Builtins
+
+((identifier) @function.builtin
+			  (#any-of? @function.builtin
+			   "union"
+			   "difference"
+			   "intersection"
+			   "circle"
+			   "square"
+			   "polygon"
+			   "text"
+			   "import"
+			   "projection"
+			   "sphere"
+			   "cube"
+			   "cylinder"
+			   "polyhedron"
+			   "linear_extrude"
+			   "rotate_extrude"
+			   "surface"
+			   "translate"
+			   "rotate"
+			   "scale"
+			   "resize"
+			   "mirror"
+			   "multmatrix"
+			   "color"
+			   "offset"
+			   "hull"
+			   "minkowski"
+			   ))
+
+((identifier) @identifier
+			  (#eq? @identifier "PI")) @constant.builtin
+
+; Conditionals
 
 [
-  "module"
-  "use"
-  "include"
-] @keyword.control.import
+ "if"
+ "else"
+ ] @keyword.conditional
+
+(ternary_expression
+  ["?" ":"] @keyword.conditional.ternary)
+
+; Repeats
 
 [
-  "||"
-  "&&"
-  "=="
-  "!="
-  "<"
-  ">"
-  "<="
-  ">="
-  "+"
-  "-"
-  "*"
-  "/"
-  "%"
-  "^"
-  "?"
-  "!"
-  ":"
-] @operator
+ "for"
+ "intersection_for"
+ ] @keyword.repeat
+
+; Literals
+
+(decimal) @number
+
+(float) @number.float
+
+(string) @string
+
+(boolean) @boolean
+
+; Misc
 
 [
-  ";"
-  ","
-  "."
-] @punctuation.delimiter
+ "#"
+ ] @punctuation.special
 
-(comment) @comment
+["{" "}"] @punctuation.bracket
+
+["(" ")"] @punctuation.bracket
+
+["[" "]"] @punctuation.bracket
+
+[
+ ";"
+ ","
+ "."
+ ] @punctuation.delimiter
+
+; Comments
+
+(comment) @comment @spell

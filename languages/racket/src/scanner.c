@@ -19,8 +19,10 @@ typedef struct {
 
 static void check_alloc(void *ptr) {
     if (ptr == NULL) {
-        fprintf(stderr, "Scanner: Failed to allocate memory\n");
-        exit(EXIT_FAILURE);
+        #ifndef __wasm32__
+            fprintf(stderr, "Scanner: Failed to allocate memory\n");
+        #endif
+        abort();
     }
 }
 

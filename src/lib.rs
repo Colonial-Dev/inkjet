@@ -54,6 +54,7 @@
 //! | JavaScript | `javascript`, `js` |
 //! | JSON | `json` |
 //! | JSX | `jsx` |
+//! | Julia | `julia`, `jl` |
 //! | Kotlin | `kotlin`, `kt`, `kts` |
 //! | LaTeX | `latex`, `tex` |
 //! | LLVM | `llvm` |

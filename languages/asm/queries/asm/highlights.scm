@@ -1,17 +1,29 @@
 ; General
-(label (ident) @label)
+(label
+  [(ident) (word)] @label)
+
 (reg) @variable.builtin
+
 (meta
   kind: (_) @function.builtin)
+
 (instruction
-  kind: (_) @function.call)
+  kind: (_) @function.builtin)
+
+(const
+  name: (word) @constant)
 
 ; Comments
-(line_comment) @comment @spell
+[
+  (line_comment)
+  (block_comment)
+] @comment @spell
 
 ; Literals
 (int) @number
-(float) @number
+
+(float) @number.float
+
 (string) @string
 
 ; Keywords
@@ -22,11 +34,30 @@
   "qword"
   "ptr"
   "rel"
+  "label"
+  "const"
 ] @keyword
 
 ; Operators & Punctuation
-["+" "-" "*"] @operator
+[
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  "|"
+  "^"
+  "&"
+] @operator
 
-["(" ")" "[" "]"]  @punctuation.bracket
+[
+  "("
+  ")"
+  "["
+  "]"
+] @punctuation.bracket
 
-["," ":"] @punctuation.delimiter
+[
+  ","
+  ":"
+] @punctuation.delimiter

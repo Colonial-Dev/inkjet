@@ -69,6 +69,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | JavaScript | `javascript`, `js` |
 | JSON | `json` |
 | JSX | `jsx` |
+| Julia | `julia`, `jl` |
 | Kotlin | `kotlin`, `kt`, `kts` |
 | LaTeX | `latex`, `tex` |
 | LLVM | `llvm` |
@@ -119,6 +120,7 @@ In addition to these languages, Inkjet also offers the [`Runtime`](https://docs.
 - (Default) `all-languages` - enables all languages.
 - `language-{name}` - enables the specified language.
     - If you want to only enable a subset of the included languages, you'll have to set `default-features=false` and manually re-add each language you want to use.
+- `terminal` - enables the `termcolor`-based terminal formatter, which depends on the `theme` feature.
 ## FAQ
 
 ### *"Why is Inkjet so large?"*

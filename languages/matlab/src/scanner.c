@@ -21,7 +21,8 @@ enum TokenType {
     ERROR_SENTINEL,
 };
 
-typedef struct {
+typedef struct
+{
     bool is_inside_command;
     bool line_continuation;
     bool is_shell_scape;
@@ -29,49 +30,23 @@ typedef struct {
 } Scanner;
 
 static const char* const keywords[] = {
-    "arguments",
-    "break",
-    "case",
-    "catch",
-    "classdef",
-    "continue",
-    "else",
-    "elseif",
-    "end",
-    "enumeration",
-    "events",
-    "false",
-    "for",
-    "function",
-    "global",
-    "if",
-    "methods",
-    "otherwise",
-    "parfor",
-    "persistent",
-    "properties",
-    "return",
-    "spmd",
-    "switch",
-    "true",
-    "try",
-    "while",
+    "arguments", "break", "case",        "catch",     "classdef", "continue",   "else",
+    "elseif",    "end",   "enumeration", "events",    "false",    "for",        "function",
+    "global",    "if",    "methods",     "otherwise", "parfor",   "persistent", "properties",
+    "return",    "spmd",  "switch",      "true",      "try",      "while",
 };
 
-static inline void
-advance(TSLexer* lexer)
+static inline void advance(TSLexer* lexer)
 {
     lexer->advance(lexer, false);
 }
 
-static inline void
-skip(TSLexer* lexer)
+static inline void skip(TSLexer* lexer)
 {
     lexer->advance(lexer, true);
 }
 
-static inline bool
-consume_char(char chr, TSLexer* lexer)
+static inline bool consume_char(char chr, TSLexer* lexer)
 {
     if (lexer->lookahead != chr) {
         return false;
@@ -80,20 +55,17 @@ consume_char(char chr, TSLexer* lexer)
     return true;
 }
 
-static inline bool
-is_eol(const uint32_t chr)
+static inline bool is_eol(const uint32_t chr)
 {
     return chr == '\n' || chr == '\r' || chr == ',' || chr == ';';
 }
 
-static inline bool
-iswspace_matlab(const uint32_t chr)
+static inline bool iswspace_matlab(const uint32_t chr)
 {
     return iswspace(chr) && chr != '\n' && chr != '\r';
 }
 
-static inline bool
-is_identifier(const uint32_t chr, const bool start)
+static inline bool is_identifier(const uint32_t chr, const bool start)
 {
     // isalpha or isdigit is SIGSEGVing os some UTF-8 chars, like U+10C6BD
     // (0xF48C9ABD), a file with just those bytes shows the problem.
@@ -108,19 +80,18 @@ is_identifier(const uint32_t chr, const bool start)
     return alpha || numeric || special;
 }
 
-static inline void
-consume_identifier(TSLexer* lexer, char* buffer)
+static inline void consume_identifier(TSLexer* lexer, char* buffer)
 {
     size_t size = 0;
     if (is_identifier(lexer->lookahead, true)) {
-        buffer[size] = (char)lexer->lookahead;
+        buffer[size] = (char) lexer->lookahead;
         advance(lexer);
         while (is_identifier(lexer->lookahead, false)) {
             if (size == 255) {
                 buffer[0] = 0;
                 return;
             }
-            buffer[++size] = (char)lexer->lookahead;
+            buffer[++size] = (char) lexer->lookahead;
             advance(lexer);
         }
         return;
@@ -128,8 +99,7 @@ consume_identifier(TSLexer* lexer, char* buffer)
     buffer[0] = 0;
 }
 
-static inline int
-skip_whitespaces(TSLexer* lexer)
+static inline int skip_whitespaces(TSLexer* lexer)
 {
     int skipped = 0;
     while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
@@ -142,8 +112,7 @@ skip_whitespaces(TSLexer* lexer)
     return skipped;
 }
 
-static inline void
-consume_whitespaces(TSLexer* lexer)
+static inline void consume_whitespaces(TSLexer* lexer)
 {
     while (iswspace(lexer->lookahead)) {
         advance(lexer);
@@ -158,24 +127,27 @@ void* tree_sitter_matlab_external_scanner_create()
 
 void tree_sitter_matlab_external_scanner_destroy(void* payload)
 {
+    if (payload != NULL) {
+        free(payload);
+    }
 }
 
-unsigned
-tree_sitter_matlab_external_scanner_serialize(void* payload, char* buffer)
+unsigned tree_sitter_matlab_external_scanner_serialize(void* payload, char* buffer)
 {
-    Scanner* scanner = (Scanner*)payload;
-    buffer[0] = (char)scanner->is_inside_command;
-    buffer[1] = (char)scanner->line_continuation;
-    buffer[2] = (char)scanner->is_shell_scape;
+    Scanner* scanner = (Scanner*) payload;
+    buffer[0] = (char) scanner->is_inside_command;
+    buffer[1] = (char) scanner->line_continuation;
+    buffer[2] = (char) scanner->is_shell_scape;
     buffer[3] = scanner->string_delimiter;
     return 4;
 }
 
-void tree_sitter_matlab_external_scanner_deserialize(void* payload,
+void tree_sitter_matlab_external_scanner_deserialize(
+    void* payload,
     const char* buffer,
     unsigned length)
 {
-    Scanner* scanner = (Scanner*)payload;
+    Scanner* scanner = (Scanner*) payload;
     if (length == 4) {
         scanner->is_inside_command = buffer[0];
         scanner->line_continuation = buffer[1];
@@ -197,7 +169,8 @@ static bool scan_comment(TSLexer* lexer, bool entry_delimiter)
 
     const bool percent = lexer->lookahead == '%';
     const bool block = percent && consume_char('%', lexer) && consume_char('{', lexer);
-    const bool line_continuation = lexer->lookahead == '.' && consume_char('.', lexer) && consume_char('.', lexer) && consume_char('.', lexer);
+    const bool line_continuation = lexer->lookahead == '.' && consume_char('.', lexer)
+                                   && consume_char('.', lexer) && consume_char('.', lexer);
 
     // Since we cannot look multiple chars ahead in the main function, this
     // ended up being handled here. It allows the correct detection of numbers
@@ -284,7 +257,7 @@ static bool scan_command(Scanner* scanner, TSLexer* lexer)
         return false;
     }
 
-    char buffer[256] = { 0 };
+    char buffer[256] = {0};
     consume_identifier(lexer, buffer);
     if (buffer[0] != 0) {
         for (int i = 0; i < 27; i++) {
@@ -413,18 +386,18 @@ static bool scan_command(Scanner* scanner, TSLexer* lexer)
         }
 
         const char operators[][2] = {
-            { '&', '&' },
-            { '|', '|' },
-            { '=', '=' },
-            { '~', '=' },
-            { '<', '=' },
-            { '>', '=' },
-            { '.', '+' },
-            { '.', '-' },
-            { '.', '*' },
-            { '.', '/' },
-            { '.', '\\' },
-            { '.', '^' },
+            {'&', '&'},
+            {'|', '|'},
+            {'=', '='},
+            {'~', '='},
+            {'<', '='},
+            {'>', '='},
+            {'.', '+'},
+            {'.', '-'},
+            {'.', '*'},
+            {'.', '/'},
+            {'.', '\\'},
+            {'.', '^'},
         };
 
         for (int i = 0; i < 12; i++) {
@@ -477,7 +450,8 @@ static bool scan_command_argument(Scanner* scanner, TSLexer* lexer)
         // No matter what, found new line
         const bool cond1 = lexer->lookahead == '\n' || lexer->lookahead == '\r';
         // No quotes, no parens, found $._end_of_line or space
-        const bool cond2 = !quote && parens == 0 && (is_eol(lexer->lookahead) || iswspace_matlab(lexer->lookahead));
+        const bool cond2 = !quote && parens == 0
+                           && (is_eol(lexer->lookahead) || iswspace_matlab(lexer->lookahead));
         // Inside parens, no quotes, found ;
         const bool cond3 = !quote && parens != 0 && lexer->lookahead == ';';
         if (cond1 || cond2 || cond3) {
@@ -588,7 +562,8 @@ static bool scan_string_close(Scanner* scanner, TSLexer* lexer)
             lexer->result_symbol = STRING_CONTENT;
             goto content;
         }
-        lexer->result_symbol = scanner->string_delimiter == '"' ? DOUBLE_QUOTE_STRING_END : SINGLE_QUOTE_STRING_END;
+        lexer->result_symbol = scanner->string_delimiter == '"' ? DOUBLE_QUOTE_STRING_END
+                                                                : SINGLE_QUOTE_STRING_END;
         lexer->mark_end(lexer);
         scanner->string_delimiter = 0;
         return true;
@@ -597,7 +572,8 @@ static bool scan_string_close(Scanner* scanner, TSLexer* lexer)
     // This means this string is not properly terminated. Finish it here to
     // make it easier for the user to find the problem.
     if (lexer->lookahead == '\n' || lexer->lookahead == '\r' || lexer->eof(lexer)) {
-        lexer->result_symbol = scanner->string_delimiter == '"' ? DOUBLE_QUOTE_STRING_END : SINGLE_QUOTE_STRING_END;
+        lexer->result_symbol = scanner->string_delimiter == '"' ? DOUBLE_QUOTE_STRING_END
+                                                                : SINGLE_QUOTE_STRING_END;
         lexer->mark_end(lexer);
         scanner->string_delimiter = 0;
         return true;
@@ -765,8 +741,15 @@ static inline bool scan_multioutput_var_start(TSLexer* lexer)
 
     advance(lexer);
 
-    while (!lexer->eof(lexer) && iswspace_matlab(lexer->lookahead)) {
-        advance(lexer);
+    while (!lexer->eof(lexer)) {
+        if (consume_char('.', lexer) && consume_char('.', lexer) && consume_char('.', lexer)) {
+            consume_comment_line(lexer);
+            advance(lexer);
+        } else if (iswspace_matlab(lexer->lookahead)) {
+            advance(lexer);
+        } else {
+            break;
+        }
     }
 
     if (lexer->lookahead == '=') {
@@ -812,7 +795,7 @@ static bool scan_entry_delimiter(TSLexer* lexer, int skipped)
     // These chars mean we cannot end the cell here, as the expression will
     // surely continue OR we need to just leave the char there and the internal
     // parser will do the rest.
-    const char no_end[] = { ']', '}', '&', '|', '=', '<', '>', '*', '/', '\\', '^', ';', ':' };
+    const char no_end[] = {']', '}', '&', '|', '=', '<', '>', '*', '/', '\\', '^', ';', ':'};
     for (int i = 0; i < sizeof(no_end); i++) {
         if (no_end[i] == lexer->lookahead) {
             return false;
@@ -824,7 +807,7 @@ static bool scan_entry_delimiter(TSLexer* lexer, int skipped)
         return lexer->lookahead != '=';
     }
 
-    const char maybe_end[] = { '+', '-' };
+    const char maybe_end[] = {'+', '-'};
     for (int i = 0; i < sizeof(maybe_end); i++) {
         if (maybe_end[i] == lexer->lookahead) {
             advance(lexer);
@@ -838,17 +821,13 @@ static bool scan_entry_delimiter(TSLexer* lexer, int skipped)
     return skipped != 0;
 }
 
-bool tree_sitter_matlab_external_scanner_scan(void* payload,
-    TSLexer* lexer,
-    const bool* valid_symbols)
+bool tree_sitter_matlab_external_scanner_scan(void* payload, TSLexer* lexer, const bool* valid_symbols)
 {
-    Scanner* scanner = (Scanner*)payload;
+    Scanner* scanner = (Scanner*) payload;
     if (scanner->string_delimiter == 0) {
         int skipped = skip_whitespaces(lexer);
 
-        if (
-            (scanner->line_continuation || !scanner->is_inside_command)
-            && valid_symbols[COMMENT]
+        if ((scanner->line_continuation || !scanner->is_inside_command) && valid_symbols[COMMENT]
             && (lexer->lookahead == '%' || lexer->lookahead == '.')) {
             return scan_comment(lexer, valid_symbols[ENTRY_DELIMITER]);
         }
@@ -880,7 +859,8 @@ bool tree_sitter_matlab_external_scanner_scan(void* payload,
             }
         }
     } else {
-        if (valid_symbols[DOUBLE_QUOTE_STRING_END] || valid_symbols[SINGLE_QUOTE_STRING_END] || valid_symbols[FORMATTING_SEQUENCE]) {
+        if (valid_symbols[DOUBLE_QUOTE_STRING_END] || valid_symbols[SINGLE_QUOTE_STRING_END]
+            || valid_symbols[FORMATTING_SEQUENCE]) {
             return scan_string_close(scanner, lexer);
         }
     }

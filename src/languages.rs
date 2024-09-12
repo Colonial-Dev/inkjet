@@ -1496,10 +1496,8 @@ pub mod go {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/go/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = include_str!(
-        "../languages/go/queries/injections.scm"
-    );
-    pub const LOCALS_QUERY: &str = include_str!("../languages/go/queries/locals.scm");
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
     #[cfg(test)]
     mod tests {
         use super::*;
@@ -1989,6 +1987,52 @@ pub mod jsx {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { &tree_sitter_jsx() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
+#[cfg(feature = "language-julia")]
+pub mod julia {
+    use once_cell::sync::Lazy;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_julia() -> Language;
+    }
+    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_julia() },
+                "julia",
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect("\"Failed to load highlight configuration for language 'julia'\"");
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/julia/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = "";
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { &tree_sitter_julia() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -2596,8 +2640,12 @@ pub mod openscad {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/openscad/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/openscad/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = include_str!(
+        "../languages/openscad/queries/locals.scm"
+    );
     #[cfg(test)]
     mod tests {
         use super::*;
@@ -2880,9 +2928,7 @@ pub mod r {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/r/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = include_str!(
-        "../languages/r/queries/injections.scm"
-    );
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = include_str!("../languages/r/queries/locals.scm");
     #[cfg(test)]
     mod tests {
@@ -3971,6 +4017,8 @@ pub enum Language {
     Json,
     #[cfg(feature = "language-jsx")]
     Jsx,
+    #[cfg(feature = "language-julia")]
+    Julia,
     #[cfg(feature = "language-kotlin")]
     Kotlin,
     #[cfg(feature = "language-latex")]
@@ -4135,6 +4183,8 @@ impl Language {
         Self::Json,
         #[cfg(feature = "language-jsx")]
         Self::Jsx,
+        #[cfg(feature = "language-julia")]
+        Self::Julia,
         #[cfg(feature = "language-kotlin")]
         Self::Kotlin,
         #[cfg(feature = "language-latex")]
@@ -4393,6 +4443,10 @@ impl Language {
             "json" => Some(Self::Json),
             #[cfg(feature = "language-jsx")]
             "jsx" => Some(Self::Jsx),
+            #[cfg(feature = "language-julia")]
+            "julia" => Some(Self::Julia),
+            #[cfg(feature = "language-julia")]
+            "jl" => Some(Self::Julia),
             #[cfg(feature = "language-kotlin")]
             "kotlin" => Some(Self::Kotlin),
             #[cfg(feature = "language-kotlin")]
@@ -4607,6 +4661,8 @@ impl Language {
             Self::Json => &json::CONFIG,
             #[cfg(feature = "language-jsx")]
             Self::Jsx => &jsx::CONFIG,
+            #[cfg(feature = "language-julia")]
+            Self::Julia => &julia::CONFIG,
             #[cfg(feature = "language-kotlin")]
             Self::Kotlin => &kotlin::CONFIG,
             #[cfg(feature = "language-latex")]

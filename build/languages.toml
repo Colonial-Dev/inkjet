@@ -4,30 +4,31 @@ helix_sum = "beb5afc"
 [[languages]]
 name = "ada"
 repo = "https://github.com/briot/tree-sitter-ada"
-hash = "f21f13a"
+hash = "e8e2515"
 helix_override = true
 
 [[languages]]
 name = "asm"
 repo = "https://github.com/rush-rs/tree-sitter-asm"
-hash = "36dc26a"
+hash = "55b2b91"
 helix_override = true
 aliases = ["assembly", "assembler"]
 
 [[languages]]
 name = "astro"
 repo = "https://github.com/virchau13/tree-sitter-astro"
-hash = "e122a8f"
+hash = "4be1807"
+helix_override = true
 
 [[languages]]
 name = "awk"
 repo = "https://github.com/Beaglefoot/tree-sitter-awk"
-hash = "374da90"
+hash = "553fdc4"
 
 [[languages]]
 name = "bash"
 repo = "https://github.com/tree-sitter/tree-sitter-bash"
-hash = "1479a40"
+hash = "c8713e5"
 aliases = ["sh", "shell"]
 helix_override = true
 
@@ -40,30 +41,30 @@ aliases = ["bib"]
 [[languages]]
 name = "bicep"
 repo = "https://github.com/amaanq/tree-sitter-bicep"
-hash = "3604d8c"
+hash = "0092c7d"
 helix_override = true
 
 [[languages]]
 name = "blueprint"
 repo = "https://gitlab.com/gabmus/tree-sitter-blueprint"
-hash = "863cea9f"
+hash = "60ba7373"
 aliases = ["blp"]
 
 [[languages]]
 name = "c"
 repo = "https://github.com/tree-sitter/tree-sitter-c"
-hash = "a2b7bac"
+hash = "bc85948"
 aliases = ["h"]
 
 [[languages]]
 name = "capnp"
 repo = "https://github.com/amaanq/tree-sitter-capnp"
-hash = "dc28c9f"
+hash = "7b0883c"
 
 [[languages]]
 name = "clojure"
 repo = "https://github.com/sogaiu/tree-sitter-clojure"
-hash = "6e41628"
+hash = "f4236d4"
 aliases = ["clj", "cljc"]
 
 # [[languages]]
@@ -75,7 +76,7 @@ name = "c_sharp"
 pretty_name = "CSharp"
 helix_path = "c-sharp"
 repo = "https://github.com/tree-sitter/tree-sitter-c-sharp"
-hash = "1648e21"
+hash = "fd7f740"
 aliases = ["c#", "csharp", "cs"]
 helix_override = true
 
@@ -84,48 +85,48 @@ name = "commonlisp"
 pretty_name = "CommonLisp"
 helix_path = "common-lisp"
 repo = "https://github.com/theHamsta/tree-sitter-commonlisp"
-hash = "5153dbb"
+hash = "bf2a65b"
 aliases = ["cl", "lisp", "common-lisp"]
 
 [[languages]]
 name = "cpp"
 repo = "https://github.com/tree-sitter/tree-sitter-cpp"
-hash = "a90f170"
+hash = "30f973c"
 aliases = ["c++", "hpp", "h++", "cc", "hh"]
 helix_override = true
 
 [[languages]]
 name = "css"
 repo = "https://github.com/tree-sitter/tree-sitter-css"
-hash = "02b4ee7"
+hash = "a68fcd1"
 
 [[languages]]
 name = "cue"
 repo = "https://github.com/eonpatapon/tree-sitter-cue"
-hash = "2df92e6"
+hash = "8a5f273"
 helix_override = true
 
 [[languages]]
 name = "d"
 repo = "https://github.com/gdamore/tree-sitter-d"
-hash = "9120816"
+hash = "ac58458"
 aliases = ["dlang"]
 
 [[languages]]
 name = "dart"
 repo = "https://github.com/UserNobody14/tree-sitter-dart"
-hash = "7e447dc"
+hash = "9ac03bb"
 helix_override = true
 
 [[languages]]
 name = "diff"
 repo = "https://github.com/the-mikedavis/tree-sitter-diff"
-hash = "c165725"
+hash = "19dd5aa"
 
 [[languages]]
 name = "dockerfile"
 repo = "https://github.com/camdencheek/tree-sitter-dockerfile"
-hash = "1800d5a"
+hash = "087daa2"
 aliases = ["docker"]
 
 [[languages]]
@@ -136,38 +137,38 @@ hash = "f742f2f"
 [[languages]]
 name = "elisp"
 repo = "https://github.com/Wilfred/tree-sitter-elisp"
-hash = "e5524fd"
+hash = "12b547b"
 aliases = ["el", "emacs-lisp"]
 helix_override = true
 
 [[languages]]
 name = "elixir"
 repo = "https://github.com/elixir-lang/tree-sitter-elixir"
-hash = "868620e"
+hash = "2c6e931"
 aliases = ["ex", "exs", "leex"]
 
 [[languages]]
 name = "elm"
 repo = "https://github.com/elm-tooling/tree-sitter-elm"
-hash = "0694058"
+hash = "09dbf22"
 
 [[languages]]
 name = "erlang"
 repo = "https://github.com/WhatsApp/tree-sitter-erlang"
-hash = "20ce5a9"
+hash = "0dfcdf1"
 aliases = ["erl", "hrl", "es", "escript"]
 helix_override = true
 
 [[languages]]
 name = "forth"
 repo = "https://github.com/AlexanderBrevig/tree-sitter-forth"
-hash = "e7d1f8a"
+hash = "9018923"
 aliases = ["fth"]
 
 [[languages]]
 name = "fortran"
 repo = "https://github.com/stadelmanma/tree-sitter-fortran"
-hash = "f73d473"
+hash = "8f84294"
 aliases = ["for"]
 helix_override = true
 
@@ -185,46 +186,48 @@ helix_override = true
 [[languages]]
 name = "gdscript"
 repo = "https://github.com/PrestonKnopp/tree-sitter-gdscript"
-hash = "03f20b9"
+hash = "1f1e782"
 aliases = ["gd"]
 
 [[languages]]
 name = "gleam"
 repo = "https://github.com/gleam-lang/tree-sitter-gleam"
-hash = "bcf9c45"
+hash = "9586f38"
 
 [[languages]]
 name = "glsl"
 repo = "https://github.com/theHamsta/tree-sitter-glsl"
-hash = "ec6100d"
+hash = "66aec57"
 
 [[languages]]
 name = "go"
 repo = "https://github.com/tree-sitter/tree-sitter-go"
-hash = "fd577c4"
+hash = "81a11f8"
 aliases = ["golang"]
+helix_override = true
 
 [[languages]]
 name = "haskell"
 repo = "https://github.com/tree-sitter/tree-sitter-haskell"
-hash = "ca10c43"
+hash = "558b997"
 aliases = ["hs"]
+helix_override = true
 
 [[languages]]
 name = "hcl"
 repo = "https://github.com/MichaHoffmann/tree-sitter-hcl"
-hash = "b553906"
+hash = "9e3ec98"
 aliases = ["terraform"]
 
 [[languages]]
 name = "heex"
 repo = "https://github.com/phoenixframework/tree-sitter-heex"
-hash = "b5ad6e3"
+hash = "6dd0303"
 
 [[languages]]
 name = "html"
 repo = "https://github.com/tree-sitter/tree-sitter-html"
-hash = "bfa075d"
+hash = "14bdaf0"
 aliases = ["htm"]
 
 [[languages]]
@@ -235,18 +238,18 @@ hash = "39f20bb"
 [[languages]]
 name = "ini"
 repo = "https://github.com/justinmk/tree-sitter-ini"
-hash = "7f11a02"
+hash = "962568c"
 
 [[languages]]
 name = "java"
 repo = "https://github.com/tree-sitter/tree-sitter-java"
-hash = "83044af"
+hash = "245b05c"
 helix_override = true
 
 [[languages]]
 name = "javascript"
 repo = "https://github.com/tree-sitter/tree-sitter-javascript"
-hash = "de1e682"
+hash = "b6f0624"
 helix_override = true
 aliases = ["js"]
 
@@ -259,12 +262,12 @@ aliases = ["js"]
 [[languages]]
 name = "json"
 repo = "https://github.com/tree-sitter/tree-sitter-json"
-hash = "ca3f891"
+hash = "8bfdb43"
 
 [[languages]]
 name = "jsx"
 repo = "https://github.com/tree-sitter/tree-sitter-javascript"
-hash = "f1e5a09"
+hash = "b6f0624"
 helix_override = true
 command = '''
 cp languages/temp/jsx/queries/highlights-jsx.scm languages/temp/jsx/queries/highlights.scm &&
@@ -272,10 +275,12 @@ sed -i -e 's/tree_sitter_javascript/tree_sitter_jsx/g' languages/temp/jsx/src/pa
 sed -i -e 's/tree_sitter_javascript/tree_sitter_jsx/g' languages/temp/jsx/src/scanner.c
 '''
 
-# [[languages]]
-# name = "julia"
-# repo = "https://github.com/tree-sitter/tree-sitter-julia"
-# aliases = ["jl"]
+[[languages]]
+name = "julia"
+repo = "https://github.com/tree-sitter/tree-sitter-julia"
+hash = "3520b57"
+aliases = ["jl"]
+helix_override = true
 
 # [[languages]]
 # name = "just"
@@ -285,7 +290,7 @@ sed -i -e 's/tree_sitter_javascript/tree_sitter_jsx/g' languages/temp/jsx/src/sc
 [[languages]]
 name = "kotlin"
 repo = "https://github.com/fwcd/tree-sitter-kotlin"
-hash = "7587b4a"
+hash = "ec98567"
 aliases = ["kt", "kts"]
 helix_override = true
 
@@ -319,13 +324,13 @@ aliases = ["mk", "makefile"]
 [[languages]]
 name = "matlab"
 repo = "https://github.com/acristoffers/tree-sitter-matlab"
-hash = "6071891"
+hash = "306c43a"
 aliases = ["m"]
 
 [[languages]]
 name = "meson"
 repo = "https://github.com/Decodetalkers/tree-sitter-meson"
-hash = "3d6dfbd"
+hash = "bd17c82"
 helix_override = true
 
 [[languages]]
@@ -337,7 +342,7 @@ helix_override = true
 [[languages]]
 name = "nix"
 repo = "https://github.com/nix-community/tree-sitter-nix"
-hash = "66e3e9c"
+hash = "537095d"
 
 [[languages]]
 name = "objc"
@@ -350,12 +355,12 @@ helix_override = true
 [[languages]]
 name = "ocaml"
 repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
-hash = "694c577"
+hash = "14beb5e"
 command = '''
 set -euxo pipefail &&
-cp languages/temp/ocaml/common/scanner.h languages/temp/ocaml/ocaml/src &&
-sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml/ocaml/src/scanner.c &&
-cp -r languages/temp/ocaml/ocaml/src languages/temp/ocaml
+cp languages/temp/ocaml/common/scanner.h languages/temp/ocaml/grammars/ocaml/src &&
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml/grammars/ocaml/src/scanner.c &&
+cp -r languages/temp/ocaml/grammars/ocaml/src languages/temp/ocaml
 '''
 aliases = ["ml"]
 helix_override = true
@@ -365,12 +370,12 @@ name = "ocaml_interface"
 pretty_name = "OcamlInterface"
 helix_path = "ocaml-interface"
 repo = "https://github.com/tree-sitter/tree-sitter-ocaml"
-hash = "694c577"
+hash = "14beb5e"
 command = '''
 set -euxo pipefail &&
-cp languages/temp/ocaml_interface/common/scanner.h languages/temp/ocaml_interface/interface/src &&
-sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml_interface/interface/src/scanner.c &&
-cp -r languages/temp/ocaml_interface/interface/src languages/temp/ocaml_interface
+cp languages/temp/ocaml_interface/common/scanner.h languages/temp/ocaml_interface/grammars/interface/src &&
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/ocaml_interface/grammars/interface/src/scanner.c &&
+cp -r languages/temp/ocaml_interface/grammars/interface/src languages/temp/ocaml_interface
 '''
 aliases = ["mli"]
 
@@ -378,13 +383,14 @@ aliases = ["mli"]
 name = "openscad"
 pretty_name = "OpenScad"
 repo = "https://github.com/bollian/tree-sitter-openscad"
-hash = "a07497e"
+hash = "bb1e120"
 aliases = ["scad"]
+helix_override = true
 
 [[languages]]
 name = "pascal"
 repo = "https://github.com/Isopod/tree-sitter-pascal"
-hash = "9e99540"
+hash = "d0ebabe"
 
 # [[languages]]
 # name = "perl"
@@ -394,12 +400,19 @@ hash = "9e99540"
 [[languages]]
 name = "php"
 repo = "https://github.com/tree-sitter/tree-sitter-php"
-hash = "92a98ad"
+hash = "74c6b0d"
+command = '''
+set -euxo pipefail &&
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/php/php/src/scanner.c &&
+cp -r languages/temp/php/php/src languages/temp/php &&
+cp languages/temp/php/common/scanner.h languages/temp/php/src
+'''
+helix_override = true
 
 [[languages]]
 name = "plaintext"
 repo = "https://github.com/the-mikedavis/tree-sitter-diff"
-hash = "c165725"
+hash = "19dd5aa"
 aliases = ["none", "nolang"]
 command = '''
 set -euxo pipefail &&
@@ -420,47 +433,48 @@ helix_override = true
 [[languages]]
 name = "python"
 repo = "https://github.com/tree-sitter/tree-sitter-python"
-hash = "a227610"
+hash = "8c65e25"
 aliases = ["py"]
 
 [[languages]]
 name = "r"
 repo = "https://github.com/r-lib/tree-sitter-r/"
-hash = "c55f8b4"
+hash = "c8b6e5f"
+helix_override = true
 
 [[languages]]
 name = "racket"
 repo = "https://github.com/6cdh/tree-sitter-racket"
-hash = "e4ba1a9"
+hash = "5b211bf"
 aliases = ["rkt"]
 
 [[languages]]
 name = "regex"
 repo = "https://github.com/tree-sitter/tree-sitter-regex"
-hash = "2354482"
+hash = "f70251e"
 helix_override = true
 
 [[languages]]
 name = "ruby"
 repo = "https://github.com/tree-sitter/tree-sitter-ruby"
-hash = "9d86f37"
+hash = "a66579f"
 aliases = ["rb"]
 
 [[languages]]
 name = "rust"
 repo = "https://github.com/tree-sitter/tree-sitter-rust"
-hash = "0435214"
+hash = "6b7d1fc"
 aliases = ["rs"]
 
 [[languages]]
 name = "scala"
-hash = "1b4c2fa"
+hash = "ec13dd6"
 repo = "https://github.com/tree-sitter/tree-sitter-scala"
 
 [[languages]]
 name = "scheme"
 repo = "https://github.com/6cdh/tree-sitter-scheme"
-hash = "85b6188"
+hash = "63e25a4"
 aliases = ["scm", "ss"]
 
 [[languages]]
@@ -471,14 +485,14 @@ hash = "c478c68"
 [[languages]]
 name = "sql"
 repo = "https://github.com/DerekStride/tree-sitter-sql"
-hash = "cdb7cde"
+hash = "a8b10c7"
 branch = "gh-pages"
 helix_override = true
 
 [[languages]]
 name = "svelte"
 repo = "https://github.com/Himujjal/tree-sitter-svelte"
-hash = "ea528fc"
+hash = "60ea1d6"
 
 [[languages]]
 name = "swift"
@@ -488,8 +502,8 @@ repo = "https://github.com/alex-pinkus/tree-sitter-swift"
 # I would do this for other languages that don't check in parser.c, but they're all niche (unlike Swift)
 command = '''
 rm languages/temp/swift/src/scanner.c &&
-wget -P languages/temp/ https://files.catbox.moe/c5u7u2.zip &&
-unzip languages/temp/c5u7u2.zip -d languages/temp/swift/src
+wget -P languages/temp/ https://files.catbox.moe/ns4xlr.zip &&
+unzip languages/temp/ns4xlr.zip -d languages/temp/swift/src
 '''
 
 [[languages]]
@@ -500,7 +514,7 @@ hash = "342d9be"
 [[languages]]
 name = "typescript"
 repo = "https://github.com/tree-sitter/tree-sitter-typescript"
-hash = "d847898"
+hash = "9951831"
 # Disgusting hack to extract the non-TSX grammar, relocate the scanner header and patch the source file appropriately
 # Words cannot describe how much I hate this, but it works
 helix_override = true
@@ -515,7 +529,7 @@ aliases = ["ts"]
 [[languages]]
 name = "tsx"
 repo = "https://github.com/tree-sitter/tree-sitter-typescript"
-hash = "d847898"
+hash = "9951831"
 helix_override = true
 command = '''
 set -euxo pipefail &&
@@ -528,9 +542,13 @@ cp -r languages/temp/typescript/tsx/src languages/temp/tsx/
 name = "vim"
 pretty_name = "Vimscript"
 repo = "https://github.com/neovim/tree-sitter-vim"
-hash = "32c76f1"
+hash = "f3cd62d"
 helix_override = true
 aliases = ["vimscript"]
+command = '''
+set -euxo pipefail &&
+cp languages/temp/vim/queries/vim/* languages/temp/vim/queries
+'''
 
 [[languages]]
 name = "wast"
@@ -552,7 +570,7 @@ aliases = ["wasm"]
 [[languages]]
 name = "x86asm"
 repo = "https://github.com/bearcove/tree-sitter-x86asm"
-hash = "ca72933"
+hash = "9d02829"
 aliases = ["x86"]
 helix_override = true
 
@@ -570,4 +588,4 @@ hash = "0e36bed"
 [[languages]]
 name = "zig"
 repo = "https://github.com/maxxnino/tree-sitter-zig"
-hash = "0d08703"
+hash = "2bac4cc"

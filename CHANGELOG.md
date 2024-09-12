@@ -6,9 +6,72 @@
   - The `theme` and `html` features are no longer mutually dependent.
 - (Improvement) - a new `Terminal` formatter (using the `termcolor` crate) has been added. (@guilhermeprokisch)
 - Updated `tree-sitter` to `0.23.0`. (@leandrocp)
-- Added Fish (shell) language.
+- Added languages:
+  - Fish (shell)
+  - Julia
 - Updated languages:
-  - ?
+  - Ada
+  - Assembly (generic)
+  - Astro
+  - Awk
+  - Bash
+  - Bicep
+  - Blueprint
+  - C
+  - Cap'n Proto
+  - Clojure
+  - C#
+  - Common Lisp
+  - C++
+  - CSS
+  - Cue
+  - D
+  - Dart
+  - Diff
+  - Dockerfile
+  - Emacs Lisp
+  - Elixir
+  - Elm
+  - Erlang
+  - Forth
+  - Fortran
+  - GDScript
+  - Gleam
+  - GLSL
+  - Go
+  - Haskell
+  - HCL
+  - Heex
+  - HTML
+  - INI
+  - Java
+  - JS
+  - JSON
+  - Kotlin
+  - Matlab
+  - Meson
+  - Nix
+  - OCaml
+  - OpenSCAD
+  - Pascal
+  - PHP
+  - Python
+  - R
+  - Racket
+  - Regex
+  - Ruby
+  - Rust
+  - Scala
+  - Scheme
+  - SQL (generic)
+  - Svelte
+  - Swift
+  - TS
+  - TSX
+  - Vimscript
+  - x86 Assembly
+  - Zig
+
 
 ### 0.10.5
 - Add Objective C language.

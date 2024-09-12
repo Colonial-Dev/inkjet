@@ -7,7 +7,8 @@ enum TokenType
 {
   CONCATENATING_SPACE,
   IF_ELSE_SEPARATOR,
-  NO_SPACE
+  NO_SPACE,
+  FUNC_CALL
 };
 
 static void tsawk_debug(TSLexer *lexer)
@@ -163,8 +164,6 @@ static bool tsawk_is_concatenating_space(TSLexer *lexer)
   case ';':
   case '\n':
     return false;
-  case '(':
-    return had_whitespace;
   case 'i':
     lexer->advance(lexer, true);
 
@@ -206,6 +205,15 @@ bool tree_sitter_awk_external_scanner_scan(void *payload, TSLexer *lexer,
     if (!tsawk_is_whitespace(lexer->lookahead))
     {
       lexer->result_symbol = NO_SPACE;
+      return true;
+    }
+  }
+
+  if (valid_symbols[FUNC_CALL])
+  {
+    if (!tsawk_is_whitespace(lexer->lookahead) && lexer->lookahead == '(')
+    {
+      lexer->result_symbol = FUNC_CALL;
       return true;
     }
   }

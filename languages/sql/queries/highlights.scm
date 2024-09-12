@@ -1,3 +1,6 @@
+(object_reference
+  name: (identifier) @type)
+
 (invocation
   (object_reference
     name: (identifier) @function.call))
@@ -11,9 +14,6 @@
   (keyword_brin)
   (keyword_array)
 ] @function.call
-
-(object_reference
-  name: (identifier) @type)
 
 (relation
   alias: (identifier) @variable)
@@ -304,6 +304,24 @@
   (keyword_statement)
   (keyword_execute)
   (keyword_procedure)
+  (keyword_copy)
+  (keyword_delimiter)
+  (keyword_encoding)
+  (keyword_escape)
+  (keyword_force_not_null)
+  (keyword_force_null)
+  (keyword_force_quote)
+  (keyword_freeze)
+  (keyword_header)
+  (keyword_match)
+  (keyword_program)
+  (keyword_quote)
+  (keyword_stdin)
+  (keyword_extended)
+  (keyword_main)
+  (keyword_plain)
+  (keyword_storage)
+  (keyword_compression)
 ] @keyword
 
 [

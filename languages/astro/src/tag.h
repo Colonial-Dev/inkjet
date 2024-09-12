@@ -1,14 +1,11 @@
-#include <string>
-#include <map>
+#include "tree_sitter/parser.h"
+#include "tree_sitter/array.h"
 
-using std::string;
-using std::map;
+#include <string.h>
 
-enum TagType {
+typedef enum {
     AREA,
     BASE,
-    BASEFONT,
-    BGSOUND,
     BR,
     COL,
     COMMAND,
@@ -132,263 +129,270 @@ enum TagType {
     UL,
     VAR,
     VIDEO,
-    // Technically not a 'tag' as such, but rather Astro's curly brace interpolations.
+    // Technically not a 'tag' as such, but rather Astro's curly brace
+    // HTML interpolations.
     INTERPOLATION,
 
+    // Fragment tags,
+    // e.g. <> </>.
+    FRAGMENT,
+
     CUSTOM,
+
+    END_,
+} TagType;
+
+typedef Array(char) String;
+
+typedef struct {
+    char tag_name[16];
+    TagType tag_type;
+} TagMapEntry;
+
+typedef struct {
+    TagType type;
+    String custom_tag_name;
+} Tag;
+
+static const TagMapEntry TAG_TYPES_BY_TAG_NAME[126] = {
+    {"area",       AREA      },
+    {"base",       BASE      },
+    {"br",         BR        },
+    {"col",        COL       },
+    {"command",    COMMAND   },
+    {"embed",      EMBED     },
+    {"frame",      FRAME     },
+    {"hr",         HR        },
+    {"image",      IMAGE     },
+    {"img",        IMG       },
+    {"input",      INPUT     },
+    {"isindex",    ISINDEX   },
+    {"keygen",     KEYGEN    },
+    {"link",       LINK      },
+    {"menuitem",   MENUITEM  },
+    {"meta",       META      },
+    {"nextid",     NEXTID    },
+    {"param",      PARAM     },
+    {"source",     SOURCE    },
+    {"track",      TRACK     },
+    {"wbr",        WBR       },
+    {"a",          A         },
+    {"abbr",       ABBR      },
+    {"address",    ADDRESS   },
+    {"article",    ARTICLE   },
+    {"aside",      ASIDE     },
+    {"audio",      AUDIO     },
+    {"b",          B         },
+    {"bdi",        BDI       },
+    {"bdo",        BDO       },
+    {"blockquote", BLOCKQUOTE},
+    {"body",       BODY      },
+    {"button",     BUTTON    },
+    {"canvas",     CANVAS    },
+    {"caption",    CAPTION   },
+    {"cite",       CITE      },
+    {"code",       CODE      },
+    {"colgroup",   COLGROUP  },
+    {"data",       DATA      },
+    {"datalist",   DATALIST  },
+    {"dd",         DD        },
+    {"del",        DEL       },
+    {"details",    DETAILS   },
+    {"dfn",        DFN       },
+    {"dialog",     DIALOG    },
+    {"div",        DIV       },
+    {"dl",         DL        },
+    {"dt",         DT        },
+    {"em",         EM        },
+    {"fieldset",   FIELDSET  },
+    {"figcaption", FIGCAPTION},
+    {"figure",     FIGURE    },
+    {"footer",     FOOTER    },
+    {"form",       FORM      },
+    {"h1",         H1        },
+    {"h2",         H2        },
+    {"h3",         H3        },
+    {"h4",         H4        },
+    {"h5",         H5        },
+    {"h6",         H6        },
+    {"head",       HEAD      },
+    {"header",     HEADER    },
+    {"hgroup",     HGROUP    },
+    {"html",       HTML      },
+    {"i",          I         },
+    {"iframe",     IFRAME    },
+    {"ins",        INS       },
+    {"kbd",        KBD       },
+    {"label",      LABEL     },
+    {"legend",     LEGEND    },
+    {"li",         LI        },
+    {"main",       MAIN      },
+    {"map",        MAP       },
+    {"mark",       MARK      },
+    {"math",       MATH      },
+    {"menu",       MENU      },
+    {"meter",      METER     },
+    {"nav",        NAV       },
+    {"noscript",   NOSCRIPT  },
+    {"object",     OBJECT    },
+    {"ol",         OL        },
+    {"optgroup",   OPTGROUP  },
+    {"option",     OPTION    },
+    {"output",     OUTPUT    },
+    {"p",          P         },
+    {"picture",    PICTURE   },
+    {"pre",        PRE       },
+    {"progress",   PROGRESS  },
+    {"q",          Q         },
+    {"rb",         RB        },
+    {"rp",         RP        },
+    {"rt",         RT        },
+    {"rtc",        RTC       },
+    {"ruby",       RUBY      },
+    {"s",          S         },
+    {"samp",       SAMP      },
+    {"script",     SCRIPT    },
+    {"section",    SECTION   },
+    {"select",     SELECT    },
+    {"slot",       SLOT      },
+    {"small",      SMALL     },
+    {"span",       SPAN      },
+    {"strong",     STRONG    },
+    {"style",      STYLE     },
+    {"sub",        SUB       },
+    {"summary",    SUMMARY   },
+    {"sup",        SUP       },
+    {"svg",        SVG       },
+    {"table",      TABLE     },
+    {"tbody",      TBODY     },
+    {"td",         TD        },
+    {"template",   TEMPLATE  },
+    {"textarea",   TEXTAREA  },
+    {"tfoot",      TFOOT     },
+    {"th",         TH        },
+    {"thead",      THEAD     },
+    {"time",       TIME      },
+    {"title",      TITLE     },
+    {"tr",         TR        },
+    {"u",          U         },
+    {"ul",         UL        },
+    {"var",        VAR       },
+    {"video",      VIDEO     },
+    {"custom",     CUSTOM    },
+    // INTERPOLATION is deliberately excluded from this list,
+    // as it has no name.
 };
-
-static const std::string toLower(std::string str) {
-    for(char &a: str) {
-        a = std::tolower(a);
-    }
-    return str;
-}
-
-static const map<string, TagType> get_tag_map() {
-    map<string, TagType> result;
-#define TAG(name) result[toLower(#name)] = name
-    TAG(AREA);
-    TAG(BASE);
-    TAG(BASEFONT);
-    TAG(BGSOUND);
-    TAG(BR);
-    TAG(COL);
-    TAG(COMMAND);
-    TAG(EMBED);
-    TAG(FRAME);
-    TAG(HR);
-    TAG(IMAGE);
-    TAG(IMG);
-    TAG(INPUT);
-    TAG(ISINDEX);
-    TAG(KEYGEN);
-    TAG(LINK);
-    TAG(MENUITEM);
-    TAG(META);
-    TAG(NEXTID);
-    TAG(PARAM);
-    TAG(SOURCE);
-    TAG(TRACK);
-    TAG(WBR);
-    TAG(A);
-    TAG(ABBR);
-    TAG(ADDRESS);
-    TAG(ARTICLE);
-    TAG(ASIDE);
-    TAG(AUDIO);
-    TAG(B);
-    TAG(BDI);
-    TAG(BDO);
-    TAG(BLOCKQUOTE);
-    TAG(BODY);
-    TAG(BUTTON);
-    TAG(CANVAS);
-    TAG(CAPTION);
-    TAG(CITE);
-    TAG(CODE);
-    TAG(COLGROUP);
-    TAG(DATA);
-    TAG(DATALIST);
-    TAG(DD);
-    TAG(DEL);
-    TAG(DETAILS);
-    TAG(DFN);
-    TAG(DIALOG);
-    TAG(DIV);
-    TAG(DL);
-    TAG(DT);
-    TAG(EM);
-    TAG(FIELDSET);
-    TAG(FIGCAPTION);
-    TAG(FIGURE);
-    TAG(FOOTER);
-    TAG(FORM);
-    TAG(H1);
-    TAG(H2);
-    TAG(H3);
-    TAG(H4);
-    TAG(H5);
-    TAG(H6);
-    TAG(HEAD);
-    TAG(HEADER);
-    TAG(HGROUP);
-    TAG(HTML);
-    TAG(I);
-    TAG(IFRAME);
-    TAG(INS);
-    TAG(KBD);
-    TAG(LABEL);
-    TAG(LEGEND);
-    TAG(LI);
-    TAG(MAIN);
-    TAG(MAP);
-    TAG(MARK);
-    TAG(MATH);
-    TAG(MENU);
-    TAG(METER);
-    TAG(NAV);
-    TAG(NOSCRIPT);
-    TAG(OBJECT);
-    TAG(OL);
-    TAG(OPTGROUP);
-    TAG(OPTION);
-    TAG(OUTPUT);
-    TAG(P);
-    TAG(PICTURE);
-    TAG(PRE);
-    TAG(PROGRESS);
-    TAG(Q);
-    TAG(RB);
-    TAG(RP);
-    TAG(RT);
-    TAG(RTC);
-    TAG(RUBY);
-    TAG(S);
-    TAG(SAMP);
-    TAG(SCRIPT);
-    TAG(SECTION);
-    TAG(SELECT);
-    TAG(SLOT);
-    TAG(SMALL);
-    TAG(SPAN);
-    TAG(STRONG);
-    TAG(STYLE);
-    TAG(SUB);
-    TAG(SUMMARY);
-    TAG(SUP);
-    TAG(SVG);
-    TAG(TABLE);
-    TAG(TBODY);
-    TAG(TD);
-    TAG(TEMPLATE);
-    TAG(TEXTAREA);
-    TAG(TFOOT);
-    TAG(TH);
-    TAG(THEAD);
-    TAG(TIME);
-    TAG(TITLE);
-    TAG(TR);
-    TAG(U);
-    TAG(UL);
-    TAG(VAR);
-    TAG(VIDEO);
-    // INTERPOLATION is deliberately excluded from this list.
-    #undef TAG
-    return result;
-}
-
-static const map<string, TagType> TAG_TYPES_BY_TAG_NAME = get_tag_map();
 
 static const TagType TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS[] = {
-    ADDRESS,
-    ARTICLE,
-    ASIDE,
-    BLOCKQUOTE,
-    DETAILS,
-    DIV,
-    DL,
-    FIELDSET,
-    FIGCAPTION,
-    FIGURE,
-    FOOTER,
-    FORM,
-    H1,
-    H2,
-    H3,
-    H4,
-    H5,
-    H6,
-    HEADER,
-    HR,
-    MAIN,
-    NAV,
-    OL,
-    P,
-    PRE,
-    SECTION,
+    ADDRESS,  ARTICLE,    ASIDE,  BLOCKQUOTE, DETAILS, DIV, DL,
+    FIELDSET, FIGCAPTION, FIGURE, FOOTER,     FORM,    H1,  H2,
+    H3,       H4,         H5,     H6,         HEADER,  HR,  MAIN,
+    NAV,      OL,         P,      PRE,        SECTION,
 };
 
-static const TagType *TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS_END = (
-    TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS +
-    sizeof(TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS) /
-    sizeof(TagType)
-);
+static TagType tag_type_for_name(const String *tag_name) {
+    for (int i = 0; i < 126; i++) {
+        const TagMapEntry *entry = &TAG_TYPES_BY_TAG_NAME[i];
+        if (
+            strlen(entry->tag_name) == tag_name->size &&
+            memcmp(tag_name->contents, entry->tag_name, tag_name->size) == 0
+        ) {
+            return entry->tag_type;
+        }
+    }
+    return CUSTOM;
+}
 
-struct Tag {
-    TagType type;
-    string custom_tag_name;
+static inline Tag tag_new() {
+    Tag tag;
+    tag.type = END_;
+    tag.custom_tag_name = (String) array_new();
+    return tag;
+}
 
-    // This default constructor is used in the case where there is not enough space
-    // in the serialization buffer to store all of the tags. In that case, tags
-    // that cannot be serialized will be treated as having an unknown type. These
-    // tags will be closed via implicit end tags regardless of the next closing
-    // tag is encountered.
-    Tag() : type(END_OF_VOID_TAGS) {}
+static inline Tag tag_for_name(String name) {
+    Tag tag = tag_new();
+    tag.type = tag_type_for_name(&name);
+    if (tag.type == CUSTOM) {
+        tag.custom_tag_name = name;
+    } else {
+        array_delete(&name);
+    }
+    return tag;
+}
 
-    Tag(TagType type, const string &name) : type(type), custom_tag_name(name) {}
+static inline void tag_free(Tag *tag) {
+    if (tag->type == CUSTOM) {
+        array_delete(&tag->custom_tag_name);
+    }
+}
 
-    bool operator==(const Tag &other) const {
-        if (type != other.type) return false;
-        if (type == CUSTOM && custom_tag_name != other.custom_tag_name) return false;
+static inline bool tag_is_void(const Tag *self) {
+    return self->type < END_OF_VOID_TAGS;
+}
+
+static inline bool tag_eq(const Tag *self, const Tag *other) {
+    if (self->type != other->type) return false;
+    if (self->type == CUSTOM) {
+        if (self->custom_tag_name.size != other->custom_tag_name.size) {
+            return false;
+        }
+        if (memcmp(
+            self->custom_tag_name.contents,
+            other->custom_tag_name.contents,
+            self->custom_tag_name.size
+        ) != 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+static bool tag_can_contain(Tag *self, const Tag *other) {
+    TagType child = other->type;
+
+    if (child == INTERPOLATION) {
+        // can be contained anywhere
         return true;
     }
 
-    inline bool is_void() const {
-        return type < END_OF_VOID_TAGS;
-    }
+    switch (self->type) {
+        case LI:
+            return child != LI;
 
-    inline bool can_contain(const Tag &tag) {
-        TagType child = tag.type;
+        case DT:
+        case DD:
+            return child != DT && child != DD;
 
-        if(child == INTERPOLATION) {
-            // can be contained anywhere
+        case P:
+            for (int i = 0; i < sizeof(TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS) /
+                                    sizeof(TagType);
+                 i++) {
+                if (child == TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS[i]) {
+                    return false;
+                }
+            }
             return true;
-        }
 
-        switch (type) {
-            case LI: return child != LI;
+        case COLGROUP:
+            return child == COL;
 
-            case DT:
-            case DD:
-                return child != DT && child != DD;
+        case RB:
+        case RT:
+        case RP:
+            return child != RB && child != RT && child != RP;
 
-            case P:
-                return std::find(
-                    TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS,
-                    TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS_END,
-                    tag.type
-                ) == TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS_END;
+        case OPTGROUP:
+            return child != OPTGROUP;
 
-            case COLGROUP:
-                return child == COL;
+        case TR:
+            return child != TR;
 
-            case RB:
-            case RT:
-            case RP:
-                return child != RB && child != RT && child != RP;
+        case TD:
+        case TH:
+            return child != TD && child != TH && child != TR;
 
-            case OPTGROUP:
-                return child != OPTGROUP;
-
-            case TR:
-                return child != TR;
-
-            case TD:
-            case TH:
-                return child != TD && child != TH && child != TR;
-
-            default:
-                return true;
-        }
+        default:
+            return true;
     }
-
-static inline Tag for_name(const string &name) {
-        map<string, TagType>::const_iterator type = TAG_TYPES_BY_TAG_NAME.find(name);
-        if (type != TAG_TYPES_BY_TAG_NAME.end()) {
-            return Tag(type->second, string());
-        } else {
-            return Tag(CUSTOM, name);
-        }
-    }
-};
+}

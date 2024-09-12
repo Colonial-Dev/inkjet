@@ -68,6 +68,7 @@ all_languages = [
   "language-javascript",
   "language-json",
   "language-jsx",
+  "language-julia",
   "language-kotlin",
   "language-latex",
   "language-llvm",
@@ -151,6 +152,7 @@ language-java = []
 language-javascript = []
 language-json = []
 language-jsx = []
+language-julia = []
 language-kotlin = []
 language-latex = []
 language-llvm = []
