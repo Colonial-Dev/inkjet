@@ -20,7 +20,9 @@ rustdoc-args = ["--cfg", "docsrs"]
 default = ["html", "theme", "all_languages"]
 
 html = ["dep:v_htmlescape"]
+terminal = ["dep:termcolor"]
 theme = ["dep:ahash", "dep:toml", "dep:serde"]
+
 development = ["dep:syn", "dep:proc-macro2", "dep:quote", "dep:prettyplease", "dep:fs_extra"]
 
 all_languages = [
@@ -193,11 +195,16 @@ thiserror = "1.0.44"
 tree-sitter = "0.23.0"
 tree-sitter-highlight = "0.23.0"
 
+# Theme API
 ahash = { version = "0.8.3", optional = true }
 toml = { version = "0.7", optional = true }
 serde = { version = "1.0", features = ["derive"], optional = true }
+
+# HTML formatters
 v_htmlescape = { version = "0.15.8", optional = true }
-termcolor = "1.4.1"
+
+# Terminal formatter
+termcolor = { version = "1.4.1", optional = true }
 
 [build-dependencies]
 syn = { version = "2.0.37", features = ["full", "parsing"], optional = true }
@@ -213,4 +220,4 @@ toml = "0.8.6"
 
 [[example]]
 name = "terminal_highlight"
-required-features = ["theme"]
+required-features = ["theme", "terminal"]

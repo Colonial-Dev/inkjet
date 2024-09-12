@@ -6,11 +6,10 @@ mod html;
     feature = "html", feature = "theme")
 )]
 mod html_themed;
-
-#[cfg(feature = "theme")]
+#[cfg(all(
+    feature = "terminal", feature = "theme")
+)]
 mod terminal;
-#[cfg(feature = "theme")]
-mod theme;
 
 use tree_sitter_highlight::HighlightEvent;
 
@@ -22,11 +21,10 @@ pub use html::*;
     feature = "html", feature = "theme")
 )]
 pub use html_themed::*;
-
-#[cfg(feature = "theme")]
+#[cfg(all(
+    feature = "terminal", feature = "theme")
+)]
 pub use terminal::*;
-#[cfg(feature = "theme")]
-pub use theme::*;
 
 /// Pluggable trait for formatting the output of a highlighter.
 ///
