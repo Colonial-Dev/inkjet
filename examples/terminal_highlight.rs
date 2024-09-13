@@ -19,6 +19,15 @@ fn main() -> Result<(), InkjetError> {
     // Read the source code from a file or use a sample
     let source = read_file("example.rs").unwrap_or_else(|_| {
         r#"
+
+#[derive(Debug, Clone, Copy)]
+pub enum Direction {
+    N,
+    S,
+    E,
+    W
+}
+
 fn main() {
     println!("Hello, world!");
     let x = 5;
@@ -32,7 +41,7 @@ fn main() {
     let lang = "rust"; // You can change this to test different languages
     let mut highlighter = Highlighter::new();
     let language = Language::from_token(lang).unwrap_or(Language::Plaintext);
-    let theme: Theme = Theme::from_helix(vendored::GITHUB_DARK)?;
+    let theme: Theme = Theme::from_helix(vendored::AYU_DARK)?;
 
     // Create a StandardStream for stdout
     let stream = StandardStream::stdout(ColorChoice::Always);
