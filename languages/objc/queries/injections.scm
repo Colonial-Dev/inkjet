@@ -1,4 +1,5 @@
-; inherits: c
+((comment) @injection.content
+ (#set! injection.language "comment"))
 
 ; TODO(amaanq): uncomment/add when I add asm support
 ; (ms_asm_block "{" _ @asm "}")

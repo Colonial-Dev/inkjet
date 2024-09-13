@@ -45,10 +45,10 @@ pub struct Style {
 /// Describes underline appearance within a [`Style`].
 #[derive(Debug, Clone)]
 pub struct Underline {
-    /// The color of the underline (not the text itself.)
-    pub color: Color,
-    /// The style of the underline (such as [`Curl`](crate::theme::UnderlineStyle::Curl) or [`Line`](crate::theme::UnderlineStyle::Line).)
-    pub style: UnderlineStyle,
+    /// The color of the underline, if any.
+    pub color: Option<Color>,
+    /// The style of the underline (such as [`Curl`](crate::theme::UnderlineStyle::Curl) or [`Line`](crate::theme::UnderlineStyle::Line)), if any.
+    pub style: Option<UnderlineStyle>,
 }
 
 #[derive(Debug, Clone, Copy, Deserialize)]
@@ -92,6 +92,9 @@ pub enum Modifier {
     Reversed,
     Hidden,
     Strikethrough,
+    // This one isn't in the official Helix spec, but two of the themes vendored from the project
+    // use it, so... yeah.
+    Normal,
 }
 
 impl TryFrom<String> for Modifier {
@@ -108,6 +111,7 @@ impl TryFrom<String> for Modifier {
             "reversed"    => Ok(Self::Reversed),
             "hidden"      => Ok(Self::Strikethrough),
             "crossed_out" => Ok(Self::Strikethrough),
+            "normal"      => Ok(Self::Normal),
             _ => Err(
                 Error::InvalidModifier( value.to_string() )
             )
@@ -176,7 +180,9 @@ impl Color {
             .trim_start_matches('#')
             .trim();
 
-        if hex.len() != 6 || !hex.is_ascii() {
+        // Hex codes up to eight characters in length are technically valid - 
+        // the fourth byte is usually an alpha channel, which we silently ignore.
+        if hex.len() < 6 || hex.len() > 8 || !hex.is_ascii() {
             let err = src.to_owned();
 
             return Err(
@@ -246,8 +252,8 @@ impl Theme {
     pub fn from_helix(data: &str) -> Result<Self> {
         #[derive(Debug, Clone, Deserialize)]
         struct RawUnderline {
-            pub color: String,
-            pub style: UnderlineStyle,
+            pub color: Option<String>,
+            pub style: Option<UnderlineStyle>,
         }
         
         #[derive(Debug, Clone, Deserialize)]
@@ -265,6 +271,7 @@ impl Theme {
 
         #[derive(Debug, Clone, Deserialize)]
         struct RawTheme {
+            #[serde(default = "default_palette")]
             palette : HashMap<String, Color>,
             #[serde(flatten)]
             styles  : HashMap<String, RawStyle>,
@@ -281,7 +288,7 @@ impl Theme {
 
         let mut raw = toml::from_str::<RawTheme>(data)?;
 
-        raw.palette = default_palette()
+        raw.palette = default_palette_colors()
             .chain(raw.palette)
             .collect();
         
@@ -303,9 +310,14 @@ impl Theme {
 
                     let underline = match underline {
                         Some(r) => {
+                            let color = match r.color.as_deref() {
+                                Some(c) => raw.dereference_color(c)?.into(),
+                                None => None
+                            };
+
                             Underline {
-                                color: raw.dereference_color(&r.color)?,
-                                style: r.style.to_owned() 
+                                color,
+                                style: r.style
                             }.into()
                         },
                         None => None
@@ -335,7 +347,7 @@ impl Theme {
         };
         
         let bg = match raw.styles.get("ui.background") {
-            Some(r) => to_style(r)?.fg.unwrap_or(Color::BLACK),
+            Some(r) => to_style(r)?.bg.unwrap_or(Color::BLACK),
             None => Color::BLACK
         };
 
@@ -360,7 +372,7 @@ impl From<Color> for Style {
     }
 }
 
-fn default_palette() -> impl Iterator<Item = (String, Color)> {
+fn default_palette_colors() -> impl Iterator<Item = (String, Color)> {
     [
         ("default", Color::WHITE),
         ("black", Color::BLACK),
@@ -384,6 +396,10 @@ fn default_palette() -> impl Iterator<Item = (String, Color)> {
     .map(|(k, v)| {
         (k.to_string(), v)
     })
+}
+
+fn default_palette() -> HashMap<String, Color> {
+    default_palette_colors().collect()
 }
 
 #[cfg(test)]

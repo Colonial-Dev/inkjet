@@ -15,7 +15,6 @@
 //! | ---- | ------- |
 //! | Ada  | `ada`   |
 //! | Assembly (generic) | `asm` |
-//! | Astro | `astro` |
 //! | Awk | `awk` |
 //! | Bash | `bash`, `sh`, `shell` |
 //! | BibTeX | `bibtex`, `bib` |
@@ -25,7 +24,6 @@
 //! | Cap'N Proto | `capnp` |
 //! | Clojure | `clojure`, `clj`, `cljc` |
 //! | C# | `c_sharp`, `c#`, `csharp`, `cs` |
-//! | Common Lisp | `commonlisp`, `common-lisp`, `cl`, `lisp` |
 //! | C++ | `c++`, `cpp`, `hpp`, `h++`, `cc`, `hh` |
 //! | CSS | `css` |
 //! | Cue | `cue` |
@@ -49,7 +47,6 @@
 //! | HCL | `hcl`, `terraform` |
 //! | HEEx | `heex` |
 //! | HTML | `html`, `htm` |
-//! | IEx | `iex` |
 //! | INI | `ini` |
 //! | JavaScript | `javascript`, `js` |
 //! | JSON | `json` |

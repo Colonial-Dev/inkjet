@@ -228,8 +228,8 @@ pub fn generate_themes_module() -> Result<()> {
         #![allow(dead_code)]
     };
 
-    let themes = themes
-        .into_iter()
+    let consts = themes
+        .iter()
         .map(|t| {
             let name = quote::format_ident!(
                 "{}",
@@ -243,9 +243,37 @@ pub fn generate_themes_module() -> Result<()> {
             }
         });
 
+    let tests = themes
+        .iter()
+        .map(|t| {
+            let name = quote::format_ident!(
+                "{}",
+                t.replace('-', "_").to_uppercase()
+            );
+
+            let path = include_path(t);
+
+            quote::quote! {
+                #[test]
+                fn #name() {
+                    let data = #path;
+
+                    Theme::from_helix(data).unwrap();
+                }
+            }
+        });
+
     let combined = quote::quote!{
         #module_start
-        #(#themes)*
+        #(#consts)*
+
+        #[cfg(test)]
+        #[allow(non_snake_case)]
+        mod tests {
+            use crate::theme::*;
+
+            #(#tests)*
+        }
     };
 
     let combined = format!("{combined}");

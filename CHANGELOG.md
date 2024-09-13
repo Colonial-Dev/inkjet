@@ -71,6 +71,10 @@
   - Vimscript
   - x86 Assembly
   - Zig
+- Removed languages due to a lack of working highlight queries:
+  - Astro
+  - Common Lisp
+  - Iex
 
 
 ### 0.10.5

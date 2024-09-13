@@ -69,7 +69,12 @@ impl Formatter for ThemedHtml {
                         // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
                         if let Some(ul) = &s.underline {
                             use UnderlineStyle::*;
-                            let style = match ul.style {
+
+                            let style = ul
+                                .style
+                                .unwrap_or(UnderlineStyle::Line);
+
+                            let style = match style {
                                 Line        => "solid",
                                 Curl        => "wavy",
                                 Dashed      => "dashed",
@@ -77,15 +82,21 @@ impl Formatter for ThemedHtml {
                                 Double      => "double",
                             };
 
+                            let color = match ul.color {
+                                Some(c) => c.into_hex(),
+                                None => fg.into_hex()
+                            };
+
                             write!(
                                 writer,
                                 "text-decoration: underline {} {};",
-                                ul.color.into_hex(), style
+                                color, style
                             )?;
                         }
 
                         for modifier in &s.modifiers {
                             use Modifier::*;
+
                             // Blinking, dimming, flipping and hiding don't make sense
                             // in HTML.
                             match modifier {
@@ -128,8 +139,9 @@ impl Formatter for ThemedHtml {
     {
         writeln!(
             writer,
-            "<pre style=\"background-color: {};\">",
+            "<pre style=\"background-color: {}; color: {};\">",
             self.0.bg.into_hex(),
+            self.0.fg.into_hex(),
         )?;
 
         Ok(())

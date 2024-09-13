@@ -13,12 +13,16 @@ repo = "https://github.com/rush-rs/tree-sitter-asm"
 hash = "55b2b91"
 helix_override = true
 aliases = ["assembly", "assembler"]
+command = '''
+set -euxo pipefail &&
+cp languages/temp/asm/queries/asm/* languages/temp/asm/queries
+'''
 
-[[languages]]
-name = "astro"
-repo = "https://github.com/virchau13/tree-sitter-astro"
-hash = "4be1807"
-helix_override = true
+# [[languages]]
+# name = "astro"
+# repo = "https://github.com/virchau13/tree-sitter-astro"
+# hash = "4be1807"
+# helix_override = true
 
 [[languages]]
 name = "awk"
@@ -80,20 +84,21 @@ hash = "fd7f740"
 aliases = ["c#", "csharp", "cs"]
 helix_override = true
 
-[[languages]]
-name = "commonlisp"
-pretty_name = "CommonLisp"
-helix_path = "common-lisp"
-repo = "https://github.com/theHamsta/tree-sitter-commonlisp"
-hash = "bf2a65b"
-aliases = ["cl", "lisp", "common-lisp"]
+# [[languages]]
+# name = "commonlisp"
+# pretty_name = "CommonLisp"
+# helix_path = "common-lisp"
+# repo = "https://github.com/theHamsta/tree-sitter-commonlisp"
+# hash = "bf2a65b"
+# aliases = ["cl", "lisp", "common-lisp"]
 
+# Note - must manually comment out the (nullptr) @constant.builtin line in the highlights.scm for this to work
 [[languages]]
 name = "cpp"
 repo = "https://github.com/tree-sitter/tree-sitter-cpp"
 hash = "30f973c"
 aliases = ["c++", "hpp", "h++", "cc", "hh"]
-helix_override = true
+
 
 [[languages]]
 name = "css"
@@ -230,10 +235,10 @@ repo = "https://github.com/tree-sitter/tree-sitter-html"
 hash = "14bdaf0"
 aliases = ["htm"]
 
-[[languages]]
-name = "iex"
-repo = "https://github.com/elixir-lang/tree-sitter-iex"
-hash = "39f20bb"
+# [[languages]]
+# name = "iex"
+# repo = "https://github.com/elixir-lang/tree-sitter-iex"
+# hash = "39f20bb"
 
 [[languages]]
 name = "ini"
@@ -270,7 +275,7 @@ repo = "https://github.com/tree-sitter/tree-sitter-javascript"
 hash = "b6f0624"
 helix_override = true
 command = '''
-cp languages/temp/jsx/queries/highlights-jsx.scm languages/temp/jsx/queries/highlights.scm &&
+cat languages/temp/jsx/queries/highlights-jsx.scm >> languages/temp/jsx/queries/highlights.scm &&
 sed -i -e 's/tree_sitter_javascript/tree_sitter_jsx/g' languages/temp/jsx/src/parser.c &&
 sed -i -e 's/tree_sitter_javascript/tree_sitter_jsx/g' languages/temp/jsx/src/scanner.c
 '''
@@ -335,7 +340,7 @@ helix_override = true
 
 [[languages]]
 name = "nim"
-repo = "https://github.com/aMOPel/tree-sitter-nim"
+repo = "https://github.com/alaviss/tree-sitter-nim"
 hash = "4900b68"
 helix_override = true
 
@@ -403,9 +408,11 @@ repo = "https://github.com/tree-sitter/tree-sitter-php"
 hash = "74c6b0d"
 command = '''
 set -euxo pipefail &&
-sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/php/php/src/scanner.c &&
-cp -r languages/temp/php/php/src languages/temp/php &&
-cp languages/temp/php/common/scanner.h languages/temp/php/src
+sed -i -e 's/#include "\(.*\)"/#include "scanner.h"/g' languages/temp/php/php_only/src/scanner.c &&
+cp -r languages/temp/php/php_only/src languages/temp/php &&
+cp languages/temp/php/common/scanner.h languages/temp/php/src &&
+sed -i -e 's/tree_sitter_php_only/tree_sitter_php/g' languages/temp/php/src/parser.c &&
+sed -i -e 's/tree_sitter_php_only/tree_sitter_php/g' languages/temp/php/src/scanner.c
 '''
 helix_override = true
 
@@ -447,6 +454,7 @@ name = "racket"
 repo = "https://github.com/6cdh/tree-sitter-racket"
 hash = "5b211bf"
 aliases = ["rkt"]
+helix_override = true
 
 [[languages]]
 name = "regex"
@@ -476,6 +484,7 @@ name = "scheme"
 repo = "https://github.com/6cdh/tree-sitter-scheme"
 hash = "63e25a4"
 aliases = ["scm", "ss"]
+helix_override = true
 
 [[languages]]
 name = "scss"

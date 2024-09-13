@@ -1,0 +1,29 @@
+function filter_unchanged
+    # Initialize a new hash table.
+    set -l path_hash (table make)
+
+    # Read path -> hash mappings from existing containers into the table.
+    for id in (enumerate_imgs)
+        set -l path (img_annotation $id "fishtank.path")
+        set -l hash (img_annotation $id "fishtank.hash")
+
+        $path_hash add $path $hash
+    end
+
+    for path in $argv
+        if set -l hash ($path_hash get $path)
+            # If the path maps to a hash, check if the current file has a different hash.
+            # If yes, we know there has been a change.
+            if [ (md5 $path) != $hash ]
+                echo $path
+            end
+        else
+            # If the path does not map to a hash, assume the file is new and therefore
+            # functionally 'has changed.'
+            echo $path
+        end
+    end
+
+    # Drop the hash table. 
+    $path_hash drop
+end

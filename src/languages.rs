@@ -69,8 +69,12 @@ pub mod asm {
         config.configure(HIGHLIGHT_NAMES);
         config
     });
-    pub const HIGHLIGHT_QUERY: &str = "";
-    pub const INJECTIONS_QUERY: &str = "";
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/asm/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/asm/queries/injections.scm"
+    );
     pub const LOCALS_QUERY: &str = "";
     #[cfg(test)]
     mod tests {
@@ -81,54 +85,6 @@ pub mod asm {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { &tree_sitter_asm() })
-                .expect("Grammar should load successfully.");
-        }
-        #[test]
-        fn config_loading() {
-            let mut highlighter = Highlighter::new();
-            let _events = highlighter
-                .highlight(&CONFIG, b"", None, |_| None)
-                .expect("Highlighter should generate events successfully.");
-        }
-    }
-}
-#[cfg(feature = "language-astro")]
-pub mod astro {
-    use once_cell::sync::Lazy;
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-    use crate::constants::HIGHLIGHT_NAMES;
-    extern "C" {
-        pub fn tree_sitter_astro() -> Language;
-    }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
-        let mut config = HighlightConfiguration::new(
-                unsafe { tree_sitter_astro() },
-                "astro",
-                HIGHLIGHT_QUERY,
-                INJECTIONS_QUERY,
-                LOCALS_QUERY,
-            )
-            .expect("\"Failed to load highlight configuration for language 'astro'\"");
-        config.configure(HIGHLIGHT_NAMES);
-        config
-    });
-    pub const HIGHLIGHT_QUERY: &str = include_str!(
-        "../languages/astro/queries/highlights.scm"
-    );
-    pub const INJECTIONS_QUERY: &str = include_str!(
-        "../languages/astro/queries/injections.scm"
-    );
-    pub const LOCALS_QUERY: &str = "";
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-        use crate::tree_sitter_highlight::Highlighter;
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { &tree_sitter_astro() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -557,56 +513,6 @@ pub mod c_sharp {
             let mut parser = tree_sitter::Parser::new();
             parser
                 .set_language(unsafe { &tree_sitter_c_sharp() })
-                .expect("Grammar should load successfully.");
-        }
-        #[test]
-        fn config_loading() {
-            let mut highlighter = Highlighter::new();
-            let _events = highlighter
-                .highlight(&CONFIG, b"", None, |_| None)
-                .expect("Highlighter should generate events successfully.");
-        }
-    }
-}
-#[cfg(feature = "language-commonlisp")]
-pub mod commonlisp {
-    use once_cell::sync::Lazy;
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-    use crate::constants::HIGHLIGHT_NAMES;
-    extern "C" {
-        pub fn tree_sitter_commonlisp() -> Language;
-    }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
-        let mut config = HighlightConfiguration::new(
-                unsafe { tree_sitter_commonlisp() },
-                "commonlisp",
-                HIGHLIGHT_QUERY,
-                INJECTIONS_QUERY,
-                LOCALS_QUERY,
-            )
-            .expect(
-                "\"Failed to load highlight configuration for language 'commonlisp'\"",
-            );
-        config.configure(HIGHLIGHT_NAMES);
-        config
-    });
-    pub const HIGHLIGHT_QUERY: &str = include_str!(
-        "../languages/commonlisp/queries/highlights.scm"
-    );
-    pub const INJECTIONS_QUERY: &str = include_str!(
-        "../languages/commonlisp/queries/injections.scm"
-    );
-    pub const LOCALS_QUERY: &str = "";
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-        use crate::tree_sitter_highlight::Highlighter;
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { &tree_sitter_commonlisp() })
                 .expect("Grammar should load successfully.");
         }
         #[test]
@@ -1712,54 +1618,6 @@ pub mod html {
         }
     }
 }
-#[cfg(feature = "language-iex")]
-pub mod iex {
-    use once_cell::sync::Lazy;
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-    use crate::constants::HIGHLIGHT_NAMES;
-    extern "C" {
-        pub fn tree_sitter_iex() -> Language;
-    }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
-        let mut config = HighlightConfiguration::new(
-                unsafe { tree_sitter_iex() },
-                "iex",
-                HIGHLIGHT_QUERY,
-                INJECTIONS_QUERY,
-                LOCALS_QUERY,
-            )
-            .expect("\"Failed to load highlight configuration for language 'iex'\"");
-        config.configure(HIGHLIGHT_NAMES);
-        config
-    });
-    pub const HIGHLIGHT_QUERY: &str = include_str!(
-        "../languages/iex/queries/highlights.scm"
-    );
-    pub const INJECTIONS_QUERY: &str = include_str!(
-        "../languages/iex/queries/injections.scm"
-    );
-    pub const LOCALS_QUERY: &str = "";
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-        use crate::tree_sitter_highlight::Highlighter;
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { &tree_sitter_iex() })
-                .expect("Grammar should load successfully.");
-        }
-        #[test]
-        fn config_loading() {
-            let mut highlighter = Highlighter::new();
-            let _events = highlighter
-                .highlight(&CONFIG, b"", None, |_| None)
-                .expect("Highlighter should generate events successfully.");
-        }
-    }
-}
 #[cfg(feature = "language-ini")]
 pub mod ini {
     use once_cell::sync::Lazy;
@@ -2399,7 +2257,9 @@ pub mod nim {
         config.configure(HIGHLIGHT_NAMES);
         config
     });
-    pub const HIGHLIGHT_QUERY: &str = "";
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/nim/queries/highlights.scm"
+    );
     pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
     #[cfg(test)]
@@ -2974,10 +2834,10 @@ pub mod racket {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/racket/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = include_str!(
-        "../languages/racket/queries/injections.scm"
+    pub const INJECTIONS_QUERY: &str = "";
+    pub const LOCALS_QUERY: &str = include_str!(
+        "../languages/racket/queries/locals.scm"
     );
-    pub const LOCALS_QUERY: &str = "";
     #[cfg(test)]
     mod tests {
         use super::*;
@@ -3212,9 +3072,7 @@ pub mod scheme {
     pub const HIGHLIGHT_QUERY: &str = include_str!(
         "../languages/scheme/queries/highlights.scm"
     );
-    pub const INJECTIONS_QUERY: &str = include_str!(
-        "../languages/scheme/queries/injections.scm"
-    );
+    pub const INJECTIONS_QUERY: &str = "";
     pub const LOCALS_QUERY: &str = "";
     #[cfg(test)]
     mod tests {
@@ -3937,8 +3795,6 @@ pub enum Language {
     Ada,
     #[cfg(feature = "language-asm")]
     Asm,
-    #[cfg(feature = "language-astro")]
-    Astro,
     #[cfg(feature = "language-awk")]
     Awk,
     #[cfg(feature = "language-bash")]
@@ -3957,8 +3813,6 @@ pub enum Language {
     Clojure,
     #[cfg(feature = "language-c-sharp")]
     CSharp,
-    #[cfg(feature = "language-commonlisp")]
-    CommonLisp,
     #[cfg(feature = "language-cpp")]
     Cpp,
     #[cfg(feature = "language-css")]
@@ -4005,8 +3859,6 @@ pub enum Language {
     Heex,
     #[cfg(feature = "language-html")]
     Html,
-    #[cfg(feature = "language-iex")]
-    Iex,
     #[cfg(feature = "language-ini")]
     Ini,
     #[cfg(feature = "language-java")]
@@ -4103,8 +3955,6 @@ impl Language {
         Self::Ada,
         #[cfg(feature = "language-asm")]
         Self::Asm,
-        #[cfg(feature = "language-astro")]
-        Self::Astro,
         #[cfg(feature = "language-awk")]
         Self::Awk,
         #[cfg(feature = "language-bash")]
@@ -4123,8 +3973,6 @@ impl Language {
         Self::Clojure,
         #[cfg(feature = "language-c-sharp")]
         Self::CSharp,
-        #[cfg(feature = "language-commonlisp")]
-        Self::CommonLisp,
         #[cfg(feature = "language-cpp")]
         Self::Cpp,
         #[cfg(feature = "language-css")]
@@ -4171,8 +4019,6 @@ impl Language {
         Self::Heex,
         #[cfg(feature = "language-html")]
         Self::Html,
-        #[cfg(feature = "language-iex")]
-        Self::Iex,
         #[cfg(feature = "language-ini")]
         Self::Ini,
         #[cfg(feature = "language-java")]
@@ -4289,8 +4135,6 @@ impl Language {
             "assembly" => Some(Self::Asm),
             #[cfg(feature = "language-asm")]
             "assembler" => Some(Self::Asm),
-            #[cfg(feature = "language-astro")]
-            "astro" => Some(Self::Astro),
             #[cfg(feature = "language-awk")]
             "awk" => Some(Self::Awk),
             #[cfg(feature = "language-bash")]
@@ -4329,14 +4173,6 @@ impl Language {
             "csharp" => Some(Self::CSharp),
             #[cfg(feature = "language-c-sharp")]
             "cs" => Some(Self::CSharp),
-            #[cfg(feature = "language-commonlisp")]
-            "commonlisp" => Some(Self::CommonLisp),
-            #[cfg(feature = "language-commonlisp")]
-            "cl" => Some(Self::CommonLisp),
-            #[cfg(feature = "language-commonlisp")]
-            "lisp" => Some(Self::CommonLisp),
-            #[cfg(feature = "language-commonlisp")]
-            "common-lisp" => Some(Self::CommonLisp),
             #[cfg(feature = "language-cpp")]
             "cpp" => Some(Self::Cpp),
             #[cfg(feature = "language-cpp")]
@@ -4429,8 +4265,6 @@ impl Language {
             "html" => Some(Self::Html),
             #[cfg(feature = "language-html")]
             "htm" => Some(Self::Html),
-            #[cfg(feature = "language-iex")]
-            "iex" => Some(Self::Iex),
             #[cfg(feature = "language-ini")]
             "ini" => Some(Self::Ini),
             #[cfg(feature = "language-java")]
@@ -4581,8 +4415,6 @@ impl Language {
             Self::Ada => &ada::CONFIG,
             #[cfg(feature = "language-asm")]
             Self::Asm => &asm::CONFIG,
-            #[cfg(feature = "language-astro")]
-            Self::Astro => &astro::CONFIG,
             #[cfg(feature = "language-awk")]
             Self::Awk => &awk::CONFIG,
             #[cfg(feature = "language-bash")]
@@ -4601,8 +4433,6 @@ impl Language {
             Self::Clojure => &clojure::CONFIG,
             #[cfg(feature = "language-c-sharp")]
             Self::CSharp => &c_sharp::CONFIG,
-            #[cfg(feature = "language-commonlisp")]
-            Self::CommonLisp => &commonlisp::CONFIG,
             #[cfg(feature = "language-cpp")]
             Self::Cpp => &cpp::CONFIG,
             #[cfg(feature = "language-css")]
@@ -4649,8 +4479,6 @@ impl Language {
             Self::Heex => &heex::CONFIG,
             #[cfg(feature = "language-html")]
             Self::Html => &html::CONFIG,
-            #[cfg(feature = "language-iex")]
-            Self::Iex => &iex::CONFIG,
             #[cfg(feature = "language-ini")]
             Self::Ini => &ini::CONFIG,
             #[cfg(feature = "language-java")]
