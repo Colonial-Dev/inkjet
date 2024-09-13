@@ -74,7 +74,6 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | GNU Make | `make`, `makefile`, `mk` |
 | MatLab | `matlab`, `m` |
 | Meson | `meson` |
-| Nim | `nim` |
 | Nix | `nix` |
 | Objective C | `objective_c`, `objc` |
 | OCaml | `ocaml`, `ml` |

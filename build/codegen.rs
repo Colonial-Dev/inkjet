@@ -171,7 +171,7 @@ pub fn language_module_def(lang: &Language) -> TokenStream {
     quote::quote! {
         #[cfg(feature = #feature)]
         pub mod #name {
-            use once_cell::sync::Lazy;
+            use std::sync::LazyLock;
             use tree_sitter::Language;
             use tree_sitter_highlight::HighlightConfiguration;
 
@@ -181,7 +181,7 @@ pub fn language_module_def(lang: &Language) -> TokenStream {
                 pub fn #ts_ffi() -> Language;
             }
 
-            pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+            pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
                 let mut config = HighlightConfiguration::new(
                     unsafe { #ts_ffi() },
                     #hl_config_name,

@@ -4,14 +4,14 @@
 use tree_sitter_highlight::HighlightConfiguration;
 #[cfg(feature = "language-ada")]
 pub mod ada {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_ada() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_ada() },
                 "ada",
@@ -50,14 +50,14 @@ pub mod ada {
 }
 #[cfg(feature = "language-asm")]
 pub mod asm {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_asm() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_asm() },
                 "asm",
@@ -98,14 +98,14 @@ pub mod asm {
 }
 #[cfg(feature = "language-awk")]
 pub mod awk {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_awk() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_awk() },
                 "awk",
@@ -146,14 +146,14 @@ pub mod awk {
 }
 #[cfg(feature = "language-bash")]
 pub mod bash {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_bash() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_bash() },
                 "bash",
@@ -192,14 +192,14 @@ pub mod bash {
 }
 #[cfg(feature = "language-bibtex")]
 pub mod bibtex {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_bibtex() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_bibtex() },
                 "bibtex",
@@ -240,14 +240,14 @@ pub mod bibtex {
 }
 #[cfg(feature = "language-bicep")]
 pub mod bicep {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_bicep() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_bicep() },
                 "bicep",
@@ -288,14 +288,14 @@ pub mod bicep {
 }
 #[cfg(feature = "language-blueprint")]
 pub mod blueprint {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_blueprint() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_blueprint() },
                 "blueprint",
@@ -336,14 +336,14 @@ pub mod blueprint {
 }
 #[cfg(feature = "language-c")]
 pub mod c {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_c() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_c() },
                 "c",
@@ -384,14 +384,14 @@ pub mod c {
 }
 #[cfg(feature = "language-capnp")]
 pub mod capnp {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_capnp() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_capnp() },
                 "capnp",
@@ -432,14 +432,14 @@ pub mod capnp {
 }
 #[cfg(feature = "language-clojure")]
 pub mod clojure {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_clojure() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_clojure() },
                 "clojure",
@@ -480,14 +480,14 @@ pub mod clojure {
 }
 #[cfg(feature = "language-c-sharp")]
 pub mod c_sharp {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_c_sharp() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_c_sharp() },
                 "c_sharp",
@@ -526,14 +526,14 @@ pub mod c_sharp {
 }
 #[cfg(feature = "language-cpp")]
 pub mod cpp {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_cpp() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_cpp() },
                 "cpp",
@@ -574,14 +574,14 @@ pub mod cpp {
 }
 #[cfg(feature = "language-css")]
 pub mod css {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_css() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_css() },
                 "css",
@@ -622,14 +622,14 @@ pub mod css {
 }
 #[cfg(feature = "language-cue")]
 pub mod cue {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_cue() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_cue() },
                 "cue",
@@ -670,14 +670,14 @@ pub mod cue {
 }
 #[cfg(feature = "language-d")]
 pub mod d {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_d() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_d() },
                 "d",
@@ -718,14 +718,14 @@ pub mod d {
 }
 #[cfg(feature = "language-dart")]
 pub mod dart {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_dart() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_dart() },
                 "dart",
@@ -764,14 +764,14 @@ pub mod dart {
 }
 #[cfg(feature = "language-diff")]
 pub mod diff {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_diff() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_diff() },
                 "diff",
@@ -810,14 +810,14 @@ pub mod diff {
 }
 #[cfg(feature = "language-dockerfile")]
 pub mod dockerfile {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_dockerfile() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_dockerfile() },
                 "dockerfile",
@@ -860,14 +860,14 @@ pub mod dockerfile {
 }
 #[cfg(feature = "language-eex")]
 pub mod eex {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_eex() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_eex() },
                 "eex",
@@ -908,14 +908,14 @@ pub mod eex {
 }
 #[cfg(feature = "language-elisp")]
 pub mod elisp {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_elisp() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_elisp() },
                 "elisp",
@@ -954,14 +954,14 @@ pub mod elisp {
 }
 #[cfg(feature = "language-elixir")]
 pub mod elixir {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_elixir() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_elixir() },
                 "elixir",
@@ -1002,14 +1002,14 @@ pub mod elixir {
 }
 #[cfg(feature = "language-elm")]
 pub mod elm {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_elm() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_elm() },
                 "elm",
@@ -1050,14 +1050,14 @@ pub mod elm {
 }
 #[cfg(feature = "language-erlang")]
 pub mod erlang {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_erlang() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_erlang() },
                 "erlang",
@@ -1096,14 +1096,14 @@ pub mod erlang {
 }
 #[cfg(feature = "language-forth")]
 pub mod forth {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_forth() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_forth() },
                 "forth",
@@ -1142,14 +1142,14 @@ pub mod forth {
 }
 #[cfg(feature = "language-fortran")]
 pub mod fortran {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_fortran() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_fortran() },
                 "fortran",
@@ -1188,14 +1188,14 @@ pub mod fortran {
 }
 #[cfg(feature = "language-fish")]
 pub mod fish {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_fish() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_fish() },
                 "fish",
@@ -1234,14 +1234,14 @@ pub mod fish {
 }
 #[cfg(feature = "language-gdscript")]
 pub mod gdscript {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_gdscript() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_gdscript() },
                 "gdscript",
@@ -1284,14 +1284,14 @@ pub mod gdscript {
 }
 #[cfg(feature = "language-gleam")]
 pub mod gleam {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_gleam() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_gleam() },
                 "gleam",
@@ -1332,14 +1332,14 @@ pub mod gleam {
 }
 #[cfg(feature = "language-glsl")]
 pub mod glsl {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_glsl() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_glsl() },
                 "glsl",
@@ -1380,14 +1380,14 @@ pub mod glsl {
 }
 #[cfg(feature = "language-go")]
 pub mod go {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_go() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_go() },
                 "go",
@@ -1426,14 +1426,14 @@ pub mod go {
 }
 #[cfg(feature = "language-haskell")]
 pub mod haskell {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_haskell() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_haskell() },
                 "haskell",
@@ -1476,14 +1476,14 @@ pub mod haskell {
 }
 #[cfg(feature = "language-hcl")]
 pub mod hcl {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_hcl() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_hcl() },
                 "hcl",
@@ -1524,14 +1524,14 @@ pub mod hcl {
 }
 #[cfg(feature = "language-heex")]
 pub mod heex {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_heex() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_heex() },
                 "heex",
@@ -1572,14 +1572,14 @@ pub mod heex {
 }
 #[cfg(feature = "language-html")]
 pub mod html {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_html() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_html() },
                 "html",
@@ -1620,14 +1620,14 @@ pub mod html {
 }
 #[cfg(feature = "language-ini")]
 pub mod ini {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_ini() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_ini() },
                 "ini",
@@ -1666,14 +1666,14 @@ pub mod ini {
 }
 #[cfg(feature = "language-java")]
 pub mod java {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_java() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_java() },
                 "java",
@@ -1712,14 +1712,14 @@ pub mod java {
 }
 #[cfg(feature = "language-javascript")]
 pub mod javascript {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_javascript() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_javascript() },
                 "javascript",
@@ -1764,14 +1764,14 @@ pub mod javascript {
 }
 #[cfg(feature = "language-json")]
 pub mod json {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_json() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_json() },
                 "json",
@@ -1810,14 +1810,14 @@ pub mod json {
 }
 #[cfg(feature = "language-jsx")]
 pub mod jsx {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_jsx() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_jsx() },
                 "jsx",
@@ -1858,14 +1858,14 @@ pub mod jsx {
 }
 #[cfg(feature = "language-julia")]
 pub mod julia {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_julia() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_julia() },
                 "julia",
@@ -1904,14 +1904,14 @@ pub mod julia {
 }
 #[cfg(feature = "language-kotlin")]
 pub mod kotlin {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_kotlin() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_kotlin() },
                 "kotlin",
@@ -1950,14 +1950,14 @@ pub mod kotlin {
 }
 #[cfg(feature = "language-latex")]
 pub mod latex {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_latex() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_latex() },
                 "latex",
@@ -1998,14 +1998,14 @@ pub mod latex {
 }
 #[cfg(feature = "language-llvm")]
 pub mod llvm {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_llvm() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_llvm() },
                 "llvm",
@@ -2046,14 +2046,14 @@ pub mod llvm {
 }
 #[cfg(feature = "language-lua")]
 pub mod lua {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_lua() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_lua() },
                 "lua",
@@ -2094,14 +2094,14 @@ pub mod lua {
 }
 #[cfg(feature = "language-make")]
 pub mod make {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_make() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_make() },
                 "make",
@@ -2142,14 +2142,14 @@ pub mod make {
 }
 #[cfg(feature = "language-matlab")]
 pub mod matlab {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_matlab() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_matlab() },
                 "matlab",
@@ -2192,14 +2192,14 @@ pub mod matlab {
 }
 #[cfg(feature = "language-meson")]
 pub mod meson {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_meson() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_meson() },
                 "meson",
@@ -2236,62 +2236,16 @@ pub mod meson {
         }
     }
 }
-#[cfg(feature = "language-nim")]
-pub mod nim {
-    use once_cell::sync::Lazy;
-    use tree_sitter::Language;
-    use tree_sitter_highlight::HighlightConfiguration;
-    use crate::constants::HIGHLIGHT_NAMES;
-    extern "C" {
-        pub fn tree_sitter_nim() -> Language;
-    }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
-        let mut config = HighlightConfiguration::new(
-                unsafe { tree_sitter_nim() },
-                "nim",
-                HIGHLIGHT_QUERY,
-                INJECTIONS_QUERY,
-                LOCALS_QUERY,
-            )
-            .expect("\"Failed to load highlight configuration for language 'nim'\"");
-        config.configure(HIGHLIGHT_NAMES);
-        config
-    });
-    pub const HIGHLIGHT_QUERY: &str = include_str!(
-        "../languages/nim/queries/highlights.scm"
-    );
-    pub const INJECTIONS_QUERY: &str = "";
-    pub const LOCALS_QUERY: &str = "";
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-        use crate::tree_sitter_highlight::Highlighter;
-        #[test]
-        fn grammar_loading() {
-            let mut parser = tree_sitter::Parser::new();
-            parser
-                .set_language(unsafe { &tree_sitter_nim() })
-                .expect("Grammar should load successfully.");
-        }
-        #[test]
-        fn config_loading() {
-            let mut highlighter = Highlighter::new();
-            let _events = highlighter
-                .highlight(&CONFIG, b"", None, |_| None)
-                .expect("Highlighter should generate events successfully.");
-        }
-    }
-}
 #[cfg(feature = "language-nix")]
 pub mod nix {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_nix() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_nix() },
                 "nix",
@@ -2332,14 +2286,14 @@ pub mod nix {
 }
 #[cfg(feature = "language-objc")]
 pub mod objc {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_objc() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_objc() },
                 "objc",
@@ -2380,14 +2334,14 @@ pub mod objc {
 }
 #[cfg(feature = "language-ocaml")]
 pub mod ocaml {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_ocaml() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_ocaml() },
                 "ocaml",
@@ -2426,14 +2380,14 @@ pub mod ocaml {
 }
 #[cfg(feature = "language-ocaml-interface")]
 pub mod ocaml_interface {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_ocaml_interface() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_ocaml_interface() },
                 "ocaml_interface",
@@ -2476,14 +2430,14 @@ pub mod ocaml_interface {
 }
 #[cfg(feature = "language-openscad")]
 pub mod openscad {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_openscad() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_openscad() },
                 "openscad",
@@ -2528,14 +2482,14 @@ pub mod openscad {
 }
 #[cfg(feature = "language-pascal")]
 pub mod pascal {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_pascal() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_pascal() },
                 "pascal",
@@ -2576,14 +2530,14 @@ pub mod pascal {
 }
 #[cfg(feature = "language-php")]
 pub mod php {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_php() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_php() },
                 "php",
@@ -2624,14 +2578,14 @@ pub mod php {
 }
 #[cfg(feature = "language-plaintext")]
 pub mod plaintext {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_plaintext() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_plaintext() },
                 "plaintext",
@@ -2670,14 +2624,14 @@ pub mod plaintext {
 }
 #[cfg(feature = "language-proto")]
 pub mod proto {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_proto() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_proto() },
                 "proto",
@@ -2716,14 +2670,14 @@ pub mod proto {
 }
 #[cfg(feature = "language-python")]
 pub mod python {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_python() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_python() },
                 "python",
@@ -2766,14 +2720,14 @@ pub mod python {
 }
 #[cfg(feature = "language-r")]
 pub mod r {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_r() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_r() },
                 "r",
@@ -2812,14 +2766,14 @@ pub mod r {
 }
 #[cfg(feature = "language-racket")]
 pub mod racket {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_racket() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_racket() },
                 "racket",
@@ -2860,14 +2814,14 @@ pub mod racket {
 }
 #[cfg(feature = "language-regex")]
 pub mod regex {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_regex() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_regex() },
                 "regex",
@@ -2906,14 +2860,14 @@ pub mod regex {
 }
 #[cfg(feature = "language-ruby")]
 pub mod ruby {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_ruby() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_ruby() },
                 "ruby",
@@ -2954,14 +2908,14 @@ pub mod ruby {
 }
 #[cfg(feature = "language-rust")]
 pub mod rust {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_rust() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_rust() },
                 "rust",
@@ -3002,14 +2956,14 @@ pub mod rust {
 }
 #[cfg(feature = "language-scala")]
 pub mod scala {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_scala() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_scala() },
                 "scala",
@@ -3050,14 +3004,14 @@ pub mod scala {
 }
 #[cfg(feature = "language-scheme")]
 pub mod scheme {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_scheme() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_scheme() },
                 "scheme",
@@ -3096,14 +3050,14 @@ pub mod scheme {
 }
 #[cfg(feature = "language-scss")]
 pub mod scss {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_scss() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_scss() },
                 "scss",
@@ -3144,14 +3098,14 @@ pub mod scss {
 }
 #[cfg(feature = "language-sql")]
 pub mod sql {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_sql() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_sql() },
                 "sql",
@@ -3190,14 +3144,14 @@ pub mod sql {
 }
 #[cfg(feature = "language-svelte")]
 pub mod svelte {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_svelte() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_svelte() },
                 "svelte",
@@ -3238,14 +3192,14 @@ pub mod svelte {
 }
 #[cfg(feature = "language-swift")]
 pub mod swift {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_swift() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_swift() },
                 "swift",
@@ -3284,14 +3238,14 @@ pub mod swift {
 }
 #[cfg(feature = "language-toml")]
 pub mod toml {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_toml() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_toml() },
                 "toml",
@@ -3332,14 +3286,14 @@ pub mod toml {
 }
 #[cfg(feature = "language-typescript")]
 pub mod typescript {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_typescript() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_typescript() },
                 "typescript",
@@ -3382,14 +3336,14 @@ pub mod typescript {
 }
 #[cfg(feature = "language-tsx")]
 pub mod tsx {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_tsx() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_tsx() },
                 "tsx",
@@ -3428,14 +3382,14 @@ pub mod tsx {
 }
 #[cfg(feature = "language-vim")]
 pub mod vim {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_vim() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_vim() },
                 "vim",
@@ -3476,14 +3430,14 @@ pub mod vim {
 }
 #[cfg(feature = "language-wast")]
 pub mod wast {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_wast() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_wast() },
                 "wast",
@@ -3522,14 +3476,14 @@ pub mod wast {
 }
 #[cfg(feature = "language-wat")]
 pub mod wat {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_wat() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_wat() },
                 "wat",
@@ -3568,14 +3522,14 @@ pub mod wat {
 }
 #[cfg(feature = "language-x86asm")]
 pub mod x86asm {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_x86asm() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_x86asm() },
                 "x86asm",
@@ -3614,14 +3568,14 @@ pub mod x86asm {
 }
 #[cfg(feature = "language-wgsl")]
 pub mod wgsl {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_wgsl() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_wgsl() },
                 "wgsl",
@@ -3660,14 +3614,14 @@ pub mod wgsl {
 }
 #[cfg(feature = "language-yaml")]
 pub mod yaml {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_yaml() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_yaml() },
                 "yaml",
@@ -3708,14 +3662,14 @@ pub mod yaml {
 }
 #[cfg(feature = "language-zig")]
 pub mod zig {
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use tree_sitter::Language;
     use tree_sitter_highlight::HighlightConfiguration;
     use crate::constants::HIGHLIGHT_NAMES;
     extern "C" {
         pub fn tree_sitter_zig() -> Language;
     }
-    pub static CONFIG: Lazy<HighlightConfiguration> = Lazy::new(|| {
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
         let mut config = HighlightConfiguration::new(
                 unsafe { tree_sitter_zig() },
                 "zig",
@@ -3885,8 +3839,6 @@ pub enum Language {
     Matlab,
     #[cfg(feature = "language-meson")]
     Meson,
-    #[cfg(feature = "language-nim")]
-    Nim,
     #[cfg(feature = "language-nix")]
     Nix,
     #[cfg(feature = "language-objc")]
@@ -4045,8 +3997,6 @@ impl Language {
         Self::Matlab,
         #[cfg(feature = "language-meson")]
         Self::Meson,
-        #[cfg(feature = "language-nim")]
-        Self::Nim,
         #[cfg(feature = "language-nix")]
         Self::Nix,
         #[cfg(feature = "language-objc")]
@@ -4307,8 +4257,6 @@ impl Language {
             "m" => Some(Self::Matlab),
             #[cfg(feature = "language-meson")]
             "meson" => Some(Self::Meson),
-            #[cfg(feature = "language-nim")]
-            "nim" => Some(Self::Nim),
             #[cfg(feature = "language-nix")]
             "nix" => Some(Self::Nix),
             #[cfg(feature = "language-objc")]
@@ -4505,8 +4453,6 @@ impl Language {
             Self::Matlab => &matlab::CONFIG,
             #[cfg(feature = "language-meson")]
             Self::Meson => &meson::CONFIG,
-            #[cfg(feature = "language-nim")]
-            Self::Nim => &nim::CONFIG,
             #[cfg(feature = "language-nix")]
             Self::Nix => &nix::CONFIG,
             #[cfg(feature = "language-objc")]

@@ -6,6 +6,8 @@
   - The `theme` and `html` features are no longer mutually dependent.
 - (Improvement) - a new `Terminal` formatter (using the `termcolor` crate) has been added. (@guilhermeprokisch)
 - Updated `tree-sitter` to `0.23.0`. (@leandrocp)
+- Replace `once_cell` dependency with `std::sync::LazyLock`.
+- Update `ahash` and `toml` dependencies.
 - Added languages:
   - Fish (shell)
   - Julia
@@ -75,6 +77,7 @@
   - Astro
   - Common Lisp
   - Iex
+- Removed the extremely bloated Nim parser due to `crates.io` size limits; if you need to highlight Nim, you can [add the bindings](https://github.com/alaviss/tree-sitter-nim/tree/main/bindings/rust) as a separate dependency and use `Language::Runtime` to load the grammar.
 
 
 ### 0.10.5

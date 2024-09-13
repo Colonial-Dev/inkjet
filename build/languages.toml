@@ -338,11 +338,11 @@ repo = "https://github.com/Decodetalkers/tree-sitter-meson"
 hash = "bd17c82"
 helix_override = true
 
-[[languages]]
-name = "nim"
-repo = "https://github.com/alaviss/tree-sitter-nim"
-hash = "4900b68"
-helix_override = true
+# [[languages]]
+# name = "nim"
+# repo = "https://github.com/alaviss/tree-sitter-nim"
+# hash = "4900b68"
+# helix_override = true
 
 [[languages]]
 name = "nix"

@@ -59,7 +59,6 @@
 //! | GNU Make | `make`, `makefile`, `mk` |
 //! | MatLab | `matlab`, `m` |
 //! | Meson | `meson` |
-//! | Nim | `nim` |
 //! | Nix | `nix` |
 //! | Objective C | `objective_c`, `objc` |
 //! | OCaml | `ocaml`, `ml` |
@@ -203,7 +202,7 @@ pub use crate::error::ThemeError;
 /// 
 /// This is a non-trivial operation, so you may seem some latency depending on the grammar and query complexity.
 /// 
-/// Fortunately, this only needs to be done once per language - the result is stored in a global [`Lazy`](once_cell::sync::Lazy).
+/// Fortunately, this only needs to be done once per language - the result is stored in a global [`LazyLock`](std::sync::LazyLock).
 pub struct Highlighter(TSHighlighter);
 
 impl Highlighter {
