@@ -40,12 +40,12 @@ fn main() {
     // Create the Terminal formatter with both theme and stream
     let formatter = Terminal::new(theme, stream);
 
-    for line in source.lines() {
-        highlighter
-            .highlight_to_writer(language, &formatter, line, &mut io::stdout())
-            .map_err(|e| io::Error::new(io::ErrorKind::Other, e.to_string()))?;
-        println!();
-    }
+    highlighter.highlight_to_writer(
+        language,
+        &formatter,
+        &source,
+        &mut io::sink()
+    );
 
     println!();
     

@@ -56,7 +56,7 @@ label = "scale.red.3"
 "ui.window" = { fg = "border.default" }
 "ui.help" = { fg = "fg.default", bg = "canvas.overlay" }
 
-"ui.text" = { fg = "fg.muted" }
+"ui.text" = { fg = "fg.default" }
 "ui.text.focus" = { fg = "fg.default" }
 "ui.text.inactive" = "fg.subtle"
 "ui.virtual" = { fg = "scale.gray.6" }

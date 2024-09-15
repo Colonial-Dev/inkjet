@@ -5,7 +5,6 @@ helix_sum = "beb5afc"
 name = "ada"
 repo = "https://github.com/briot/tree-sitter-ada"
 hash = "e8e2515"
-helix_override = true
 
 [[languages]]
 name = "asm"
@@ -473,6 +472,7 @@ name = "rust"
 repo = "https://github.com/tree-sitter/tree-sitter-rust"
 hash = "6b7d1fc"
 aliases = ["rs"]
+helix_override = true
 
 [[languages]]
 name = "scala"

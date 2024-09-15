@@ -1,4 +1,7 @@
 //! A collection of theme definitions vendored from the Helix editor project. View previews [here](https://github.com/helix-editor/helix/wiki/Themes).
+//! 
+//! Note that Helix is first and foremost a terminal text editor, and these themes are included as-is; you may see results slightly different from what you expect
+//! depending on your output format.
 #![allow(dead_code)]
 pub const ACME: &str = include_str!("./data/acme.toml");
 pub const ADWAITA_DARK: &str = include_str!("./data/adwaita-dark.toml");

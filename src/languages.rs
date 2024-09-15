@@ -2933,7 +2933,7 @@ pub mod rust {
     pub const INJECTIONS_QUERY: &str = include_str!(
         "../languages/rust/queries/injections.scm"
     );
-    pub const LOCALS_QUERY: &str = include_str!("../languages/rust/queries/locals.scm");
+    pub const LOCALS_QUERY: &str = "";
     #[cfg(test)]
     mod tests {
         use super::*;

@@ -1,33 +1,32 @@
-;;  Better highlighting by referencing to the definition, for variable
-;;  references. However, this is not yet supported by neovim
+;;  Better highlighting by referencing to the definition, for variable references.
 ;;  See https://tree-sitter.github.io/tree-sitter/syntax-highlighting#local-variables
 
-(compilation) @scope
-(package_declaration) @scope
-(package_body) @scope
-(subprogram_declaration) @scope
-(subprogram_body) @scope
-(block_statement) @scope
+(compilation) @local.scope
+(package_declaration) @local.scope
+(package_body) @local.scope
+(subprogram_declaration) @local.scope
+(subprogram_body) @local.scope
+(block_statement) @local.scope
 
-(with_clause (_) @definition.import)
-(procedure_specification name: (_) @definition.function)
-(function_specification name: (_) @definition.function)
-(package_declaration name: (_) @definition.var)
-(package_body name: (_) @definition.var)
-(generic_instantiation . name: (_) @definition.var)
-(component_declaration . (identifier) @definition.var)
-(exception_declaration . (identifier) @definition.var)
-(formal_object_declaration . (identifier) @definition.var)
-(object_declaration . (identifier) @definition.var)
-(parameter_specification . (identifier) @definition.var)
-(full_type_declaration . (identifier) @definition.type)
-(private_type_declaration . (identifier) @definition.type)
-(private_extension_declaration . (identifier) @definition.type)
-(incomplete_type_declaration . (identifier) @definition.type)
-(protected_type_declaration . (identifier) @definition.type)
-(formal_complete_type_declaration . (identifier) @definition.type)
-(formal_incomplete_type_declaration . (identifier) @definition.type)
-(task_type_declaration . (identifier) @definition.type)
-(subtype_declaration . (identifier) @definition.type)
+(with_clause (_) @local.definition)
+(procedure_specification name: (_) @local.definition)
+(function_specification name: (_) @local.definition)
+(package_declaration name: (_) @local.definition)
+(package_body name: (_) @local.definition)
+(generic_instantiation . name: (_) @local.definition)
+(component_declaration . (identifier) @local.definition)
+(exception_declaration . (identifier) @local.definition)
+(formal_object_declaration . (identifier) @local.definition)
+(object_declaration . (identifier) @local.definition)
+(parameter_specification . (identifier) @local.definition)
+(full_type_declaration . (identifier) @local.definition)
+(private_type_declaration . (identifier) @local.definition)
+(private_extension_declaration . (identifier) @local.definition)
+(incomplete_type_declaration . (identifier) @local.definition)
+(protected_type_declaration . (identifier) @local.definition)
+(formal_complete_type_declaration . (identifier) @local.definition)
+(formal_incomplete_type_declaration . (identifier) @local.definition)
+(task_type_declaration . (identifier) @local.definition)
+(subtype_declaration . (identifier) @local.definition)
 
-(identifier) @reference
+(identifier) @local.reference

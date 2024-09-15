@@ -351,6 +351,27 @@ impl Theme {
             None => Color::BLACK
         };
 
+        for name in HIGHLIGHT_NAMES {
+            if styles.contains_key(*name) {
+                continue;
+            }
+            
+            let mut p = name.to_string();
+
+            while let Some((ancestor, _)) = p.rsplit_once('.') {
+                if let Some(s) = styles.get(ancestor) {
+                    styles.insert(
+                        name.to_string(),
+                        s.clone()
+                    );
+
+                    break;
+                }
+
+                p = ancestor.to_string();
+            }
+        }
+
         Ok(Self { styles, fg, bg })
     }
 }

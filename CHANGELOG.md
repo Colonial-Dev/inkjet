@@ -1,3 +1,8 @@
+### 0.11.1
+- (Bugfix) - Helix themes now properly inherit from parent names when not defined (that is, if `ui.x.y` isn't defined but `ui.x` is, `ui.x.y` copies `ui.x`.) (Thanks @guilhermeprokisch for catching this one.)
+- (Bugfix) - example terminal highlighter now works properly.
+- (Bugfix) - updated Rust and Ada highlighting queries to behave properly.
+
 ### 0.11.0
 - (Improvement, **breaking**) - the `Theme` API has been rebuilt to work with [Helix editor themes](https://docs.helix-editor.com/themes.html#modifiers) instead of the previous bespoke implementation.
   - The `theme` module has been hoisted out of the `formatter` module, and now lives at the crate root.
