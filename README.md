@@ -72,6 +72,7 @@ Inkjet comes bundled with support for over seventy languages, and it's easy to a
 | LLVM | `llvm` |
 | Lua | `lua` |
 | GNU Make | `make`, `makefile`, `mk` |
+| Markdown | `markdown`, `md` |
 | MatLab | `matlab`, `m` |
 | Meson | `meson` |
 | Nix | `nix` |

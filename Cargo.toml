@@ -71,6 +71,7 @@ all_languages = [
   "language-llvm",
   "language-lua",
   "language-make",
+  "language-markdown",
   "language-matlab",
   "language-meson",
   "language-nix",
@@ -151,6 +152,7 @@ language-latex = []
 language-llvm = []
 language-lua = []
 language-make = []
+language-markdown = []
 language-matlab = []
 language-meson = []
 language-nix = []
