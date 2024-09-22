@@ -2140,6 +2140,56 @@ pub mod make {
         }
     }
 }
+#[cfg(feature = "language-markdown")]
+pub mod markdown {
+    use std::sync::LazyLock;
+    use tree_sitter::Language;
+    use tree_sitter_highlight::HighlightConfiguration;
+    use crate::constants::HIGHLIGHT_NAMES;
+    extern "C" {
+        pub fn tree_sitter_markdown() -> Language;
+    }
+    pub static CONFIG: LazyLock<HighlightConfiguration> = LazyLock::new(|| {
+        let mut config = HighlightConfiguration::new(
+                unsafe { tree_sitter_markdown() },
+                "markdown",
+                HIGHLIGHT_QUERY,
+                INJECTIONS_QUERY,
+                LOCALS_QUERY,
+            )
+            .expect(
+                "\"Failed to load highlight configuration for language 'markdown'\"",
+            );
+        config.configure(HIGHLIGHT_NAMES);
+        config
+    });
+    pub const HIGHLIGHT_QUERY: &str = include_str!(
+        "../languages/markdown/queries/highlights.scm"
+    );
+    pub const INJECTIONS_QUERY: &str = include_str!(
+        "../languages/markdown/queries/injections.scm"
+    );
+    pub const LOCALS_QUERY: &str = "";
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use crate::tree_sitter_highlight::Highlighter;
+        #[test]
+        fn grammar_loading() {
+            let mut parser = tree_sitter::Parser::new();
+            parser
+                .set_language(unsafe { &tree_sitter_markdown() })
+                .expect("Grammar should load successfully.");
+        }
+        #[test]
+        fn config_loading() {
+            let mut highlighter = Highlighter::new();
+            let _events = highlighter
+                .highlight(&CONFIG, b"", None, |_| None)
+                .expect("Highlighter should generate events successfully.");
+        }
+    }
+}
 #[cfg(feature = "language-matlab")]
 pub mod matlab {
     use std::sync::LazyLock;
@@ -3835,6 +3885,8 @@ pub enum Language {
     Lua,
     #[cfg(feature = "language-make")]
     Make,
+    #[cfg(feature = "language-markdown")]
+    Markdown,
     #[cfg(feature = "language-matlab")]
     Matlab,
     #[cfg(feature = "language-meson")]
@@ -3993,6 +4045,8 @@ impl Language {
         Self::Lua,
         #[cfg(feature = "language-make")]
         Self::Make,
+        #[cfg(feature = "language-markdown")]
+        Self::Markdown,
         #[cfg(feature = "language-matlab")]
         Self::Matlab,
         #[cfg(feature = "language-meson")]
@@ -4251,6 +4305,10 @@ impl Language {
             "mk" => Some(Self::Make),
             #[cfg(feature = "language-make")]
             "makefile" => Some(Self::Make),
+            #[cfg(feature = "language-markdown")]
+            "markdown" => Some(Self::Markdown),
+            #[cfg(feature = "language-markdown")]
+            "md" => Some(Self::Markdown),
             #[cfg(feature = "language-matlab")]
             "matlab" => Some(Self::Matlab),
             #[cfg(feature = "language-matlab")]
@@ -4449,6 +4507,8 @@ impl Language {
             Self::Lua => &lua::CONFIG,
             #[cfg(feature = "language-make")]
             Self::Make => &make::CONFIG,
+            #[cfg(feature = "language-markdown")]
+            Self::Markdown => &markdown::CONFIG,
             #[cfg(feature = "language-matlab")]
             Self::Matlab => &matlab::CONFIG,
             #[cfg(feature = "language-meson")]

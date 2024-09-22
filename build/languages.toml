@@ -326,6 +326,18 @@ hash = "a4b9187"
 aliases = ["mk", "makefile"]
 
 [[languages]]
+name = "markdown"
+repo = "https://github.com/tree-sitter-grammars/tree-sitter-markdown"
+hash = "d9287a6"
+aliases = ["md"]
+helix_override = true
+command = '''
+set -euxo pipefail &&
+mv languages/temp/markdown/tree-sitter-markdown/queries languages/temp/markdown/queries/ &&
+mv languages/temp/markdown/tree-sitter-markdown/src languages/temp/markdown/src/
+'''
+
+[[languages]]
 name = "matlab"
 repo = "https://github.com/acristoffers/tree-sitter-matlab"
 hash = "306c43a"
