@@ -16,10 +16,11 @@ impl Formatter for Html {
     {
         match event {
             HighlightEvent::Source { start, end } => {
-                let span = source.get(start..end).expect("Source bounds should be in bounds!");
-                let span = v_htmlescape::escape(span).to_string();
-                writer.write_str(&span)?;
-            },
+                let span = source
+                    .get(start..end)
+                    .expect("Source bounds should be in bounds!");
+                write!(writer, "{}", v_htmlescape::escape(span))?;
+            }
             HighlightEvent::HighlightStart(idx) => {
                 let name = HIGHLIGHT_CLASS_NAMES[idx.0];
                 write!(
