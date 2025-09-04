@@ -10,6 +10,8 @@
 <img src="https://img.shields.io/crates/l/inkjet">
 </p>
 
+**Notice:** Inkjet is no longer supported by me. Leandro Pereira (a past contributor to this crate) has created a much better implementation of the same "batteries included" concept in [`autumnus`]; I recommend you check that out!
+
 ## Features
 
 - Language grammars are linked into the executable as C functions - no need to load anything at runtime!
